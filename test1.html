@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자바스크립트 테스트용</title>
+
+  <!-- 슬라이드 CSS CDN-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+
+  <!-- 기본 CSS -->
+  <!-- <link rel="stylesheet" href="./css/main.css"> -->
+  <link rel="stylesheet" href="./css/common.css">
+
+  <style>
+
+
+#movie_slide_wrap {
+  margin-top: 100px;
+  height: 500px;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+ .swiper {
+  max-width: 1440px;
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide:hover {
+  z-index: 2;
+}
+
+.image-container {
+  position: relative;
+  width: auto;
+  height: auto;
+  transition: transform 0.3s;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+}
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 100%; 
+  transition: background 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+
+
+
+.zoom_image {
+  width: 100%;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.overlay button {
+  display: none;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.overlay:hover button {
+  display: block; /* 오버레이가 호버됐을 때 버튼을 보여줌 */
+  margin: 10px 0;
+}
+
+.movie_detail {
+  background-color: rgba(245, 244, 242, 0.7);
+  font-weight: bolder;
+  color: #383838;
+}
+
+.movie_ticketing {
+  background-color: rgba(251, 61, 40, 0.7);
+  font-weight: 700;
+  color: #F5F4F2;
+}
+  </style>
+</head>
+<body>
+  <!-- 헤더 영역 -->
+  <header>
+    <!-- 로고 -->
+    <div id="main_header">
+      <div class="logo">
+        <a href="#"><img src="./images/logo.jpg" alt="메인 로고"></a>
+      </div>
+      <!-- 로그인 성공 시 나타나는 부분 -->
+      <div class="login_user">
+        <p>{userName}님 환영합니다.</p>
+      </div>
+    </div>
+    
+
+    <!-- nav -->
+    <nav id="header_menu">
+      <div class="menu">
+        <ul class="menu_list">
+          <li><a href="#">영화</a></li>
+          <li><a href="#">매장정보</a></li>
+          <li><a href="#">예매</a></li>
+          <li><a href="#">푸드스토어</a></li>
+        </ul>
+        <ul class="login_list">
+          <li><a href="#">로그인</a></li>
+          <li><a href="#">회원가입</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 메인영역 -->
+  <main>
+    <section id="movie_slide_wrap">
+      <!-- Slider main container -->
+      <div class="swiper mySwiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+           <div class="swiper-slide">
+            <div class="image-container"> 
+              <img src="./images/poster_rank/20228819.jpg" alt="20228819" class="zoom_image">
+              <div class="overlay">
+                <button class="movie_detail">상세보기</button>
+                <button class="movie_ticketing">예매하기</button> 
+              </div>
+            </div>
+          </div>
+           <div class="swiper-slide">
+            <div class="image-container">
+              <img src="./images/poster_rank/20212667.jpg" alt="20212667" class="zoom_image">
+              <div class="overlay">
+                <button class="movie_detail">상세보기</button>
+                <button class="movie_ticketing">예매하기</button> 
+              </div>
+            </div>
+           </div>
+           <div class="swiper-slide">
+            <div class="image-container">
+              <img src="./images/poster_rank/20227626.jpg" alt="20227626" class="zoom_image">
+              <div class="overlay">
+                <button class="movie_detail">상세보기</button>
+                <button class="movie_ticketing">예매하기</button> 
+              </div>
+            </div>
+           </div>
+           <div class="swiper-slide">
+            <div class="image-container">
+              <img src="./images/poster_rank/20227410.jpg" alt="20227410" class="zoom_image">
+              <div class="overlay">
+                <button class="movie_detail">상세보기</button>
+                <button class="movie_ticketing">예매하기</button> 
+              </div>
+            </div>
+           </div>
+           <div class="swiper-slide">
+            <div class="image-container">
+              <img src="./images/poster_rank/20234663.jpg" alt="20234663" class="zoom_image">
+              <div class="overlay">
+                <button class="movie_detail">상세보기</button>
+                <button class="movie_ticketing">예매하기</button> 
+              </div>
+            </div>
+           </div>
+           <div class="swiper-slide">
+            <div class="image-container">
+              <img src="./images/poster_rank/20197122.jpg" alt="20197122" class="zoom_image">
+              <div class="overlay">
+                <button class="movie_detail">상세보기</button>
+                <button class="movie_ticketing">예매하기</button> 
+              </div>
+            </div>
+           </div>
+           <div class="swiper-slide">
+            <div class="image-container">
+              <img src="./images/poster_rank/20234277.jpg" alt="20234277" class="zoom_image">
+              <div class="overlay">
+                <button class="movie_detail">상세보기</button>
+                <button class="movie_ticketing">예매하기</button> 
+              </div>
+            </div>
+           </div>
+           <div class="swiper-slide">
+            <div class="image-container">
+              <img src="./images/poster_rank/20226798.jpg" alt="20226798" class="zoom_image">
+              <div class="overlay">
+                <button class="movie_detail">상세보기</button>
+                <button class="movie_ticketing">예매하기</button> 
+              </div>
+            </div>
+           </div>
+           <div class="swiper-slide">
+            <div class="image-container">
+              <img src="./images/poster_rank/20233743.jpg" alt="20233743" class="zoom_image">
+              <div class="overlay">
+                <button class="movie_detail">상세보기</button>
+                <button class="movie_ticketing">예매하기</button> 
+              </div>
+            </div>
+           </div>
+           <div class="swiper-slide">
+            <div class="image-container">
+              <img src="./images/poster_rank/20234155.jpg" alt="20234155" class="zoom_image">
+              <div class="overlay">
+                <button class="movie_detail">상세보기</button>
+                <button class="movie_ticketing">예매하기</button> 
+              </div>
+            </div>
+           </div>
+        </div>
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </section>
+
+    <article id="movie_info_wrap">
+      <div class="movie_reservation">
+        <p>영화 예매율</p>
+      </div>
+
+      <!-- 영화 포스터, 정보 부분 -->
+      <div class="movie_info">
+        <div class="movie_poster_arer">
+          <!-- 이미지 - 표에서 제목을 클릭하면 해당 영화 포스터로 변경 -->
+          <img src="./images/poster_rank/20228819.jpg" alt="20228819">
+          <div class="overlay">
+            <button class="movie_detail">상세보기</button>
+            <button class="movie_ticketing">예매하기</button> 
+          </div>
+        </div>
+        <div class="movie_poster_info">
+          <p>영화정보가 나타납니다</p>
+        </div>
+        <table>
+          <tr>
+            <th>영화명</th>
+            <th>관객수</th>
+            <th>예매율</th>
+            <th>증감율</th>
+          </tr>
+          <tr>
+            <td><a href="#">1 영화제목</a></td>
+            <td>154,410명</td>
+            <td>17.8%</td>
+            <td>-</td>  
+          </tr>
+          <tr>
+            <td><a href="#">2 영화제목</a></td>
+            <td>154,410명</td>
+            <td>17.8%</td>
+            <td>-</td>  
+          </tr>
+          <tr>
+            <td><a href="#">3 영화제목</a></td>
+            <td>154,410명</td>
+            <td>17.8%</td>
+            <td>-</td>  
+          </tr>
+          <tr>
+            <td><a href="#">4 영화제목</a></td>
+            <td>154,410명</td>
+            <td>17.8%</td>
+            <td>-</td>  
+          </tr>
+          <tr>
+            <td><a href="#">5 영화제목</a></td>
+            <td>154,410명</td>
+            <td>17.8%</td>
+            <td>-</td>  
+          </tr>
+          <tr>
+            <td><a href="#">6 영화제목</a></td>
+            <td>154,410명</td>
+            <td>17.8%</td>
+            <td>-</td>  
+          </tr>
+          <tr>
+            <td><a href="#">7 영화제목</a></td>
+            <td>154,410명</td>
+            <td>17.8%</td>
+            <td>-</td>  
+          </tr>
+          <tr>
+            <td><a href="#">8 영화제목</a></td>
+            <td>154,410명</td>
+            <td>17.8%</td>
+            <td>-</td>  
+          </tr>
+          <tr>
+            <td><a href="#">9 영화제목</a></td>
+            <td>154,410명</td>
+            <td>17.8%</td>
+            <td>-</td>   
+          </tr>
+          <tr>
+            <td><a href="#">10 영화제목</a></td>
+            <td>154,410명</td>
+            <td>17.8%</td>
+            <td>-</td>  
+          </tr>
+        </table>
+      </div>
+
+      <div class="more_movie_info">
+        <a href="#">더 많은 영화 보기</a>
+      </div>
+    </article>
+
+    <!-- 추천 검색 부분 -->
+    <section id="movie_search_wrap">
+      <div class="recommend_box">
+        <p>뭘 봐야 할 지 고민이라면?</p>
+      </div>
+      <div class="movie_recommend_search">
+        <input type="text" placeholder="#장진#크라임씬#조승우#2007">
+        <button><img src="./images/search.png" alt="검색버튼"></button>
+      </div>
+      <div class="recommend_tag">
+        <p>#를 붙여 감독, 배우, 제목 등 원하는 키워드로 검색하세요.</p>
+      </div>
+    </section>
+  </main>
+
+
+
+
+  <!-- 푸터 -->
+  <footer id="main_footer">
+    <section class="company_info_wrap">
+      <address>(21570)인천광역시 남동구 구월동 1126-7(인주대로 596) 기한빌딩 8층</address>
+      <dl class="company_info_list">
+        <dt>대표이사</dt>
+        <dd>HRW</dd>
+        <dt class="with_colon">사업자번호</dt>
+        <dd data-content>000-00-00000</dd>
+        <dt class="with_colon">통신판매업신고번호</dt>
+        <dd data-content>2023-인천구월-0000</dd>
+      </dl>
+      <dl class="company_info_list">
+        <dt>호스팅사업자</dt>
+        <dd data-content>HRW THEATER</dd>
+        <dt class="with_colon">대표이메일</dt>
+        <dd data-content>hrwmaster@hrw.net</dd>
+      </dl>
+      <p class="copyright">Copyright© HRW THEATER. All Rights Reserved</p>
+    </section>
+  </footer>
+
+
+
+  <!-- 슬라이드 js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+  <script src="./js/swiper.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>
