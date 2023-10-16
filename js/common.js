@@ -56,35 +56,6 @@ document.addEventListener("DOMContentLoaded", function() {
     updateMenuOnLogin();
 
 
-
-    // window.addEventListener("scroll", function() {
-    //     const scrollPosition = window.scrollY; 
-    //     const topButton = document.getElementById("go_top"); 
-
-    //     if (scrollPosition > 90) {
-    //         topButton.style.display = "block";
-    //     } else {
-    //         topButton.style.display = "none";
-    //     }
-    // });
-
-
-    // window.addEventListener("scroll", function() {
-    //     const scrollPosition = window.scrollY;
-    //     const headerMenu = document.getElementById("header_menu");
-    
-    //     if (scrollPosition > 203) {
-    //         headerMenu.style.position = "fixed";
-    //         headerMenu.style.top = "0";
-    //         headerMenu.style.backgroundColor = "white"; // 원하는 배경색 설정
-    //         headerMenu.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)"; // 원하는 그림자 설정
-    //     } else {
-    //         headerMenu.style.position = "static";
-    //         headerMenu.style.backgroundColor = "transparent"; // 초기 배경색으로 복원
-    //         headerMenu.style.boxShadow = "none"; // 그림자 제거
-    //     }
-    // });
-
     window.addEventListener("scroll", function() {
         const scrollPosition = window.scrollY; 
         const topButton = document.getElementById("go_top"); 
