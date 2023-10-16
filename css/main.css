@@ -201,16 +201,12 @@ button {
 }
 
 .overlay {
-  position: absolute; /* Change position to absolute */
+  position: absolute; 
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0); /* Set the initial background to transparent */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
+  background: rgba(0, 0, 0, 0); 
 }
 
 
@@ -306,7 +302,7 @@ thead {
 }
 
 .tbl_wrap table thead th {
-  padding: 8px 25px 18px 10px;
+  padding: 8px 25px 10px 10px;
   border-bottom: 2px solid #383838;
   text-align: right;
 
@@ -317,7 +313,7 @@ thead {
 }
 
 .tbl_wrap table td {
-  padding: 10px 25px 15px 10px;
+  padding: 15px 25px 15px 10px;
   border-bottom: 1px solid #848484;
   text-align: right;
 
@@ -325,6 +321,32 @@ thead {
   color: #848484;
   font-weight: 600;
 }
+
+.tbl_wrap table td .keep {
+  width: 8px;
+  height: 2px;
+  background-color: #848484;
+  font-size: 0;
+  display: inline-block;
+  margin: 10px;
+}
+
+.tbl_wrap table td img[alt="arrow_up"] {
+  width: 20px;
+  height: 20px;
+}
+
+.tbl_wrap table td img[alt="arrow_down"] {
+  width: 20px;
+  height: 20px;
+}
+
+.tbl_wrap table td img[alt="new_rank"] {
+  width: 30px;
+  height: 30px;
+  padding-left: 5px;
+}
+
 
 tbody .rank {
   text-align: center !important;
@@ -335,7 +357,8 @@ tbody .rank {
 }
 
 .tbl_wrap table td:last-child {
-  padding: 10px 42px 15px 10px !important;
+  text-align: center;
+  padding: 10px 0px 5px 10px !important;
 }
 
 table tr {

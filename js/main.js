@@ -47,6 +47,49 @@ document.addEventListener("DOMContentLoaded", function () {
   overlayEffect();
 
 
+//포스터 체인지 되는 부분
+  function changePoster(movieTitle) {
+    const moviePoster = document.getElementById("moviePoster");
+    const movieid = getMovieIdByTitle(movieTitle);
+
+    const posterPath = `./images/poster_rank/${movieid}.jpg`;
+  
+    // 포스터 이미지 변경
+    moviePoster.src = posterPath;
+  }
+  
+  // 영화 제목에 따라 movieid를 반환하는 함수
+  function getMovieIdByTitle(movieTitle) {
+    // posterMapping 객체를 사용하여 영화 제목에 해당하는 movieid 출력.
+    // 객체에 해당하는 제목이 없는 경우, 'unknown' 으로 설정 이건 필요한대로 바꿔주세요
+    return posterMapping[movieTitle] || 'unknown';
+  }
+  
+  //맵 형식으로 포스터 바뀌게 해놨는데, 테스트 구간이라 간략하게 3개만 집어넣었습니다.
+  //이 부분은 데이터 전부 가져온 후에 합시다
+  //순서는 테이블에 표시될제목:jpg id 입니다.
+  const posterMapping = {
+    '30일': '20228819',
+    '보스톤': '20197122',
+    'title': '20228819',
+
+  };
+  
+  const spanElements = document.querySelectorAll(".ellip");
+  spanElements.forEach(function (span) {
+    span.addEventListener("click", function () {
+      const movieTitle = span.textContent;
+      const movieId = getMovieIdByTitle(movieTitle);
+      const posterImage = document.getElementById("moviePoster");
+      //테이블 이미지에 준 movieId를 alt값에도 동적으로 적용
+      posterImage.alt = movieId;
+      changePoster(movieTitle);
+    });
+  });
+
+
+
+
 
 
 const searchInput = document.getElementById("searchInput");

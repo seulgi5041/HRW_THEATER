@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지변경 test</title>
+
+  <style>
+    .movie_poster_arer {
+      width: 350px;
+      height: auto;
+    }
+
+    .movie_poster_arer img {
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="movie_info">
+    <div class="movie_poster_arer">
+      <!-- 이미지 - 표에서 제목을 클릭하면 해당 영화 포스터로 변경 -->
+      <img id="moviePoster" src="./images/poster_rank/20228819.jpg" alt="20228819">
+      <div class="overlay">
+        <button class="movie_detail">상세보기</button>
+        <button class="movie_ticketing">예매하기</button> 
+      </div>
+    </div>
+
+    <div class="tbl_wrap">
+      <table class="tbl">
+        <colgroup>
+          <col width="30px">
+          <col width="145px">
+          <col width="135px">
+          <col width="100px">
+          <col wodth>
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col" class="rank">영화명</th>
+            <th scope="col">관객수</th>
+            <th scope="col">예매율</th>
+            <th scope="col">증감율</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rank" no="0">1</td>
+            <td>
+              <span class="ellip" onclick="changePoster('30일')">30일</span>
+            </td>
+            <td style="cursor: default;">154,410명</td>
+            <td style="cursor: default;">17.8%</td>
+            <td style="cursor: default;">-</td>  
+          </tr>
+          <tr>
+            <td class="rank" no="0">2</td>
+            <td>
+              <span class="ellip" onclick="changePoster('보스톤')">보스톤</span>
+            </td>
+            <td style="cursor: default;">154,410명</td>
+            <td style="cursor: default;">17.8%</td>
+            <td style="cursor: default;">-</td>  
+          </tr>
+          <tr>
+            <td class="rank" no="0">3</td>
+            <td>
+              <span class="ellip" onclick="changePoster('title')">title</span>
+            </td>
+            <td style="cursor: default;">154,410명</td>
+            <td style="cursor: default;">17.8%</td>
+            <td style="cursor: default;">-</td>  
+          </tr>
+          <tr>
+            <td class="rank" no="0">4</td>
+            <td>
+              <span class="ellip" onclick="changePoster('title')">title</span>
+            </td>
+            <td style="cursor: default;">154,410명</td>
+            <td style="cursor: default;">17.8%</td>
+            <td style="cursor: default;">-</td>  
+          </tr>
+          <tr>
+            <td class="rank" no="0">5</td>
+            <td>
+              <span class="ellip" onclick="changePoster('title')">title</span>
+            </td>
+            <td style="cursor: default;">154,410명</td>
+            <td style="cursor: default;">17.8%</td>
+            <td style="cursor: default;">-</td>  
+          </tr>
+          <tr>
+            <td class="rank" no="0">6</td>
+            <td>
+              <span class="ellip" onclick="changePoster('title')">title</span>
+            </td>
+            <td style="cursor: default;">154,410명</td>
+            <td style="cursor: default;">17.8%</td>
+            <td style="cursor: default;">-</td>  
+          </tr>
+          <tr>
+            <td class="rank" no="0">7</td>
+            <td>
+              <span class="ellip" onclick="changePoster('title')">title</span>
+            </td>
+            <td style="cursor: default;">154,410명</td>
+            <td style="cursor: default;">17.8%</td>
+            <td style="cursor: default;">-</td>  
+          </tr>
+          <tr>
+            <td class="rank" no="0">8</td>
+            <td>
+              <span class="ellip" onclick="changePoster('title')">title</span>
+            </td>
+            <td style="cursor: default;">154,410명</td>
+            <td style="cursor: default;">17.8%</td>
+            <td style="cursor: default;">-</td>  
+          </tr>
+          <tr>
+            <td class="rank" no="0">9</td>
+            <td>
+              <span class="ellip" onclick="changePoster('title')">title</span>
+            </td>
+            <td style="cursor: default;">154,410명</td>
+            <td style="cursor: default;">17.8%</td>
+            <td style="cursor: default;">-</td>  
+          </tr>
+          <tr>
+            <td class="rank" no="0">10</td>
+            <td>
+              <span class="ellip" onclick="changePoster('title')">title</span>
+            </td>
+            <td style="cursor: default;">154,410명</td>
+            <td style="cursor: default;">17.8%</td>
+            <td style="cursor: default;">-</td>  
+          </tr> 
+        </tbody>
+      </table>
+
+
+      <script>
+        // 이미지를 변경할 함수
+function changePoster(movieTitle) {
+  // 이미지를 변경할 이미지 태그를 가져옵니다.
+  var moviePoster = document.getElementById("moviePoster");
+
+  // posterMapping 객체를 사용하여 영화 제목에 해당하는 movieid를 가져옵니다.
+  var movieid = getMovieIdByTitle(movieTitle);
+
+  // 포스터 이미지 경로를 동적으로 생성합니다.
+  var posterPath = `./images/poster_rank/${movieid}.jpg`;
+
+  // 포스터 이미지를 변경합니다.
+  moviePoster.src = posterPath;
+}
+
+// 영화 제목에 따라 movieid를 반환하는 함수
+function getMovieIdByTitle(movieTitle) {
+  // posterMapping 객체를 사용하여 영화 제목에 해당하는 movieid를 반환합니다.
+  // 객체에 해당하는 제목이 없는 경우, 기본값으로 'unknown' 또는 다른 값을 반환하도록 설정할 수 있습니다.
+  return posterMapping[movieTitle] || 'unknown';
+}
+
+// 영화 제목과 포스터 이미지 경로를 매핑한 객체
+const posterMapping = {
+  '30일': '20228819',
+  '보스톤': '20197122',
+  'title': '20228819',
+  // 다른 영화 제목 및 포스터 이미지 경로를 추가할 수 있습니다.
+};
+
+// 각 <span> 요소에 대해 클릭 이벤트 리스너를 등록합니다.
+var spanElements = document.querySelectorAll(".ellip");
+spanElements.forEach(function (span) {
+  span.addEventListener("click", function () {
+    var movieTitle = span.textContent;
+    changePoster(movieTitle);
+  });
+});
+      </script>
+</body>
+</html>
