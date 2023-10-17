@@ -166,26 +166,15 @@
     color: #383838;
 }
 
-#popcorn_store .food_box .add button {
+#popcorn_store .food_box .add img {
     width: 25px;
     height: 25px;
-    background-image: url('../images/store/cart.png'); /* Initial image */
-    background-size: cover;
-    transition: background-image 0.3s ease-in-out; /* Add a smooth transition effect */
+    transition: transform 0.3s ease-in-out; 
 }
 
-#popcorn_store .food_box .add button:hover {
-    background-image: url('../images/store/cart_hover.png'); /* Change to your hover image URL */
-}
-
-#popcorn_store .food_box .add button img {
-    width: 25px;
-    height: 25px;
-    transition: transform 0.3s ease-in-out; /* Add a smooth transition effect for the image */
-}
-
-#popcorn_store .food_box .add button:hover img {
-    transform: scale(1.1); /* Optionally add a zoom effect on hover */
+#popcorn_store .food_box .add img:hover {
+    transform: scale(1.1); 
+    content: url('../images/store/cart_hover.png');
 }
 
 
