@@ -227,9 +227,15 @@ button {
   width: 200px; 
 }
 
+
 .ellip {
   display: block;
   overflow: hidden;
+  white-space: nowrap;
+  max-width: 135px;
+  text-align: left;
+  /* 설정 넓이보다 글씨가 길어지면 ... 으로 처리 */
+  text-overflow: ellipsis;
 }
 
 .movie_title strong {
@@ -281,7 +287,7 @@ button {
 
 /*  영화 순위 테이블 */
 .tbl_wrap {
-  width: 550px;
+  width: 530px;
   float: left;
 }
 
@@ -329,16 +335,17 @@ thead {
   font-size: 0;
   display: inline-block;
   margin: 10px;
+  margin-left: 13px;
 }
 
 .tbl_wrap table td img[alt="arrow_up"] {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 .tbl_wrap table td img[alt="arrow_down"] {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 .tbl_wrap table td img[alt="new_rank"] {
@@ -358,7 +365,7 @@ tbody .rank {
 
 .tbl_wrap table td:last-child {
   text-align: center;
-  padding: 10px 0px 5px 10px !important;
+  padding: 10px 0px 5px 0px !important;
 }
 
 table tr {
@@ -374,7 +381,7 @@ table tr {
 }
 
 
-/* 영화 테이블 부분 - more_movie */
+/* 영화 테이블 아래 - 더 보기 부분 */
 #movie_info_wrap .more_movie_info {
   display: block;
   margin-top: 40px;
@@ -387,6 +394,7 @@ table tr {
   font-weight: 700;
   color: #383838;
 }
+
 
 /* 영화 추천 박스 부분 */
 #movie_search_wrap {
