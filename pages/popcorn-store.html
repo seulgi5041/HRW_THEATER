@@ -64,29 +64,136 @@
 
   <!-- 푸드스토어 메인 구역 -->
   <section id="popcorn_store">
-    <div class="image_arer">
-      <article>
+    <div class="store_title">
+      <h4>콤보</h4>
+      <div class="block_color"></div>
+    </div>
+    <!-- 상품 목록 메인 박스 -->
+    <div class="store_content">
+      <article class="food_box">
         <div class="food_image">
-          <img src="../images/logo.jpg" alt="나중에 스낵 이미지로 바꿈">
+          <img src="../images/store/product/single_combo.png" alt="더블콤보">
         </div>
-        <div class="dis">
-          <p>더블콤보</p>
-          <p>팝콘(M)2+탄산(M)2</p>
-          <div id="shopping_basket">
-            <div div="sum">
-              <button id="decrement">-</button>
-              <span id="quantityValue">0</span>
-              <button id="increment">+</button>
+        <div class="product">  
+          <p>팝콘(M)2 + 탄산(M)2</p>
+          <div class="product_name">
+            <h4>더블콤보</h4>
+          </div>
+          <div class="shopping_basket">
+            <div class="sum">
+              <button class="minus-button">
+                <img src="../images/store/minus.png" alt="minus">
+              </button>
+              <span>0</span>
+              <button class="plus-button">
+                <img src="../images/store/plus.png" alt="plus">
+              </button>
+            </div>
+            <div class="price_wrap">
+              <span>10,000<em>원</em></span>
             </div>
             <div class="add">
-              <button><img src="" alt=""></button>
+              <button><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
             </div>
           </div>
-         
+        </div>
+      </article>
+
+      <article class="food_box">
+        <div class="food_image">
+          <img src="../images/store/product/double_combo.png" alt="라지콤보">
+        </div>
+        <div class="product">  
+          <p>팝콘(L)2 + 탄산(L)2</p>
+          <div class="product_name">
+            <h4>라지콤보</h4>
+          </div>
+          <div class="shopping_basket">
+            <div class="sum">
+              <button class="minus-button">
+                <img src="../images/store/minus.png" alt="minus">
+              </button>
+              <span>0</span>
+              <button class="plus-button">
+                <img src="../images/store/plus.png" alt="plus">
+              </button>
+            </div>
+            <div class="price_wrap">
+              <span>10,000<em>원</em></span>
+            </div>
+            <div class="add">
+              <button><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="food_box">
+        <div class="food_image">
+          <img src="../images/store/product/single_combo.png" alt="스몰콤보">
+        </div>
+        <div class="product">  
+          <p>팝콘(M)1 + 탄산(M)1</p>
+          <div class="product_name">
+            <h4>스몰콤보</h4>
+          </div>
+          <div class="shopping_basket">
+            <div class="sum">
+              <button class="minus-button">
+                <img src="../images/store/minus.png" alt="minus">
+              </button>
+              <span>0</span>
+              <button class="plus-button">
+                <img src="../images/store/plus.png" alt="plus">
+              </button>
+            </div>
+            <div class="price_wrap">
+              <span>10,000<em>원</em></span>
+            </div>
+            <div class="add">
+              <button><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="food_box">
+        <div class="food_image">
+          <img src="../images/store/product/double_combo.png" alt="HRW콤보">
+        </div>
+        <div class="product">  
+          <p>팝콘(M)1 + 탄산(M)1</p>
+          <div class="product_name">
+            <h4>HRW콤보</h4>
+          </div>
+          <div class="shopping_basket">
+            <div class="sum">
+              <button class="minus-button">
+                <img src="../images/store/minus.png" alt="minus">
+              </button>
+              <span>0</span>
+              <button class="plus-button">
+                <img src="../images/store/plus.png" alt="plus">
+              </button>
+            </div>
+            <div class="price_wrap">
+              <span>10,000<em>원</em></span>
+            </div>
+            <div class="add">
+              <button><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
+            </div>
+          </div>
         </div>
       </article>
     </div>
   </section>
+
+
+
+  <!-- 상단 이동 버튼 -->
+  <a class="topBtn" id="go_top" href="#">
+    <img src="../images/top.png" alt="누르면 홈페이지 상단으로 이동합니다.">
+  </a>
 
 
 
@@ -113,5 +220,6 @@
   </footer>
 
   <script src="../js/common.js"></script>
+  <script src="../js/store.js"></script>
 </body>
 </html>
