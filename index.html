@@ -161,7 +161,7 @@
       <div class="movie_info">
         <div class="movie_poster_arer">
           <!-- 이미지 - 표에서 제목을 클릭하면 해당 영화 포스터로 변경 -->
-          <img src="./images/poster_rank/20228819.jpg" alt="20228819">
+          <img id="moviePoster" src="./images/poster_rank/20228819.jpg" alt="20228819">
           <div class="overlay">
             <button class="movie_detail">상세보기</button>
             <button class="movie_ticketing">예매하기</button> 
@@ -205,7 +205,7 @@
           <table class="tbl">
             <colgroup>
               <col width="30px">
-              <col width="145px">
+              <col width="160px">
               <col width="135px">
               <col width="100px">
               <col wodth>
@@ -223,92 +223,100 @@
               <tr>
                 <td class="rank" no="0">1</td>
                 <td>
-                  <span class="ellip" onclick="mstView(20228819);">30일</span>
+                  <span class="ellip" onclick="changePoster('30일')">30일</span>
                 </td>
                 <td style="cursor: default;">154,410명</td>
                 <td style="cursor: default;">17.8%</td>
-                <td style="cursor: default;">-</td>  
+                <td style="cursor: default;">
+                  <img src="./images/arrow_up.png" alt="arrow_up">1
+                </td>  
               </tr>
               <tr>
                 <td class="rank" no="0">2</td>
                 <td>
-                  <span class="ellip" onclick="mstView(20228819);">title</span>
+                  <span class="ellip" onclick="changePoster('1947 보스톤')">1947 보스톤</span>
                 </td>
                 <td style="cursor: default;">154,410명</td>
                 <td style="cursor: default;">17.8%</td>
-                <td style="cursor: default;">-</td>  
+                <td style="cursor: default;">
+                  <img src="./images/arrow_up.png" alt="arrow_up">2
+                </td>   
               </tr>
               <tr>
                 <td class="rank" no="0">3</td>
                 <td>
-                  <span class="ellip" onclick="mstView(20228819);">title</span>
+                  <span class="ellip" onclick="changePoster('천박사 퇴마 연구소: 설경의 비밀')">천박사 퇴마 연구소: 설경의 비밀</span>
                 </td>
                 <td style="cursor: default;">154,410명</td>
                 <td style="cursor: default;">17.8%</td>
-                <td style="cursor: default;">-</td>  
+                <td style="cursor: default;">
+                  <img src="./images/arrow_down.png" alt="arrow_down">1
+                </td> 
               </tr>
               <tr>
                 <td class="rank" no="0">4</td>
                 <td>
-                  <span class="ellip" onclick="mstView(20228819);">title</span>
+                  <span class="ellip" onclick="changePoster('title')">title</span>
                 </td>
                 <td style="cursor: default;">154,410명</td>
                 <td style="cursor: default;">17.8%</td>
-                <td style="cursor: default;">-</td>  
+                <td style="cursor: default;">
+                  <img src="./images/new.png" alt="new_rank">
+                </td>   
               </tr>
               <tr>
                 <td class="rank" no="0">5</td>
                 <td>
-                  <span class="ellip" onclick="mstView(20228819);">title</span>
+                  <span class="ellip" onclick="changePoster('title')">title</span>
                 </td>
                 <td style="cursor: default;">154,410명</td>
                 <td style="cursor: default;">17.8%</td>
-                <td style="cursor: default;">-</td>  
+                <td style="cursor: default;"><span class="keep">keep</span></td>  
               </tr>
               <tr>
                 <td class="rank" no="0">6</td>
                 <td>
-                  <span class="ellip" onclick="mstView(20228819);">title</span>
+                  <span class="ellip" onclick="changePoster('title')">title</span>
                 </td>
                 <td style="cursor: default;">154,410명</td>
                 <td style="cursor: default;">17.8%</td>
-                <td style="cursor: default;">-</td>  
+                <td style="cursor: default;"><span class="keep">keep</span></td>  
               </tr>
               <tr>
                 <td class="rank" no="0">7</td>
                 <td>
-                  <span class="ellip" onclick="mstView(20228819);">title</span>
+                  <span class="ellip" onclick="changePoster('title')">title</span>
                 </td>
                 <td style="cursor: default;">154,410명</td>
                 <td style="cursor: default;">17.8%</td>
-                <td style="cursor: default;">-</td>  
+                <td style="cursor: default;"><span class="keep">keep</span></td>  
               </tr>
               <tr>
                 <td class="rank" no="0">8</td>
                 <td>
-                  <span class="ellip" onclick="mstView(20228819);">title</span>
+                  <span class="ellip" onclick="changePoster('title')">title</span>
                 </td>
                 <td style="cursor: default;">154,410명</td>
                 <td style="cursor: default;">17.8%</td>
-                <td style="cursor: default;">-</td>  
+                <td style="cursor: default;"><span class="keep">keep</span></td>  
               </tr>
               <tr>
                 <td class="rank" no="0">9</td>
                 <td>
-                  <span class="ellip" onclick="mstView(20228819);">title</span>
+                  <span class="ellip" onclick="changePoster('title')">title</span>
                 </td>
                 <td style="cursor: default;">154,410명</td>
                 <td style="cursor: default;">17.8%</td>
-                <td style="cursor: default;">-</td>  
+                <td style="cursor: default;"><span class="keep">keep</span></td>  
               </tr>
               <tr>
                 <td class="rank" no="0">10</td>
                 <td>
-                  <span class="ellip" onclick="mstView(20228819);">title</span>
+                  <span class="ellip" onclick="changePoster('title')">title</span>
                 </td>
                 <td style="cursor: default;">154,410명</td>
                 <td style="cursor: default;">17.8%</td>
-                <td style="cursor: default;">-</td>  
+                <td style="cursor: default;"><span class="keep">keep</span></td>  
               </tr> 
             </tbody>
           </table>

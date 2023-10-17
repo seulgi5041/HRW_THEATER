@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
-
-
 #store {
     max-width: 1240px;
     width: 100%;
@@ -50,16 +48,25 @@
     background-color: aqua;
 }
 
-.food_image .add {
-    border: 1px solid #383838;
-    display: inline-block;
+.dis {
+    margin: 10px 0;
     width: 250px;
-    padding: 10px; 
+    height: 100px;
 }
 
+.dis p {
+    padding: 5px 0;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #383838;
+    text-align: center;
+}
+
+
 button {
-    background-color: #0074D9;
-    color: #fff;
+    background-color: #F5F4F2;
+    color: #383838;
+    font-size: 2em;
     border: none;
     border-radius: 5px;
     cursor: pointer;

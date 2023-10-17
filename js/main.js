@@ -65,13 +65,14 @@ document.addEventListener("DOMContentLoaded", function () {
     return posterMapping[movieTitle] || 'unknown';
   }
   
-  //맵 형식으로 포스터 바뀌게 해놨는데, 테스트 구간이라 간략하게 3개만 집어넣었습니다.
+  //딕셔너리 형식으로 포스터 바뀌게 해놨는데, 테스트 구간이라 간략하게 3개만 집어넣었습니다.
   //이 부분은 데이터 전부 가져온 후에 합시다
-  //순서는 테이블에 표시될제목:jpg id 입니다.
+  //순서는 테이블에 적힌 제목과 포스터 id 입니다.
   const posterMapping = {
     '30일': '20228819',
-    '보스톤': '20197122',
-    'title': '20228819',
+    '1947 보스톤': '20197122',
+    '천박사 퇴마 연구소: 설경의 비밀': '20227410',
+    'title' : '20228819',
 
   };
   
@@ -81,8 +82,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const movieTitle = span.textContent;
       const movieId = getMovieIdByTitle(movieTitle);
       const posterImage = document.getElementById("moviePoster");
-      //테이블 이미지에 준 movieId를 alt값에도 동적으로 적용
+      //테이블 이미지 movieId를 alt값에도 적용
       posterImage.alt = movieId;
+
       changePoster(movieTitle);
     });
   });
@@ -90,8 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
+//검색부분
 const searchInput = document.getElementById("searchInput");
 const searchButton = document.getElementById("searchButton");
 
