@@ -69,14 +69,17 @@ document.addEventListener("DOMContentLoaded", function() {
     
         if (scrollPosition > 120) {
             headerMenu.style.width = "100%";
-            headerMenu.style.height = "50px";
+            // headerMenu.style.height = "70px";
             headerMenu.style.position = "fixed";
             headerMenu.style.zIndex = "999";
-            headerMenu.style.top = "0";
-            headerMenu.style.backgroundColor = "#F5F4F2"; // 원하는 배경색 설정
+            headerMenu.style.top = "0px";
+            // headerMenu.style.marginTop = "10px";
+            headerMenu.style.backgroundColor = "#F5F4F2"; 
+            headerMenu.style.borderBottom = "2px solid #FB3D28";
         } else {
             headerMenu.style.position = "static";
-            headerMenu.style.backgroundColor = "transparent"; // 초기 배경색으로 복원
+            headerMenu.style.backgroundColor = "transparent"; 
+            headerMenu.style.borderBottom = "transparent";
         }
     });
     
