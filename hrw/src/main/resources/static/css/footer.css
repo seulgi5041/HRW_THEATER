@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+/* 푸터매뉴 */
+#main_footer {
+
+  width: 100%;
+  height: 200px;
+
+  background-color: #FB3D28;
+}
+
+.company_info_wrap {
+  max-width: 1440px;
+  width: 100%;
+  align-items: center;
+  padding: 30px;
+  margin: 0 auto;
+}
+
+address {
+  font-size: 1.5em;
+  color: #ffff;
+}
+
+.company_info_list {
+  display: flex;
+  padding-top: 20px;
+  font-size: 1.4em;
+  color: #ffff;
+}
+
+.company_info_list. dt.with_colon::before {
+  content: '· ';
+  padding-left: 3.5px;
+
+}
+
+.company_info_list dt::after {
+  content: ' :';
+  padding-right: 3.5px;
+}
+
+.copyright {
+  padding-top: 20px;
+  font-size: 1.6em;
+  font-weight: 600;
+  color: #ffff;
+}
