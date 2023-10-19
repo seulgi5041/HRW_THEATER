@@ -466,21 +466,25 @@ li.depth1:first-child {
 }
 
 .ic_grade.gr_all:before {
+  content: "";
   background: #229c56 url(../images/ic_grade/grade_all.png) 0 0 no-repeat;
   background-size: 100%;
 }
 
 .ic_grade.gr_12:before {
+  content: "";
   background: #e9b630 url(../images/ic_grade/grade_12.png) 0 0 no-repeat;
   background-size: 100%;
 }
 
 .ic_grade.gr_15:before {
+  content: "";
   background: #dd7430 url(../images/ic_grade/grade_15.png) 0 0 no-repeat;
   background-size: 100%;
 }
 
 .ic_grade.gr_18:before {
+  content: "";
   background: #d92b36 url(../images/ic_grade/grade_18.png) 0 0 no-repeat;
   background-size: 100%;
 }
@@ -708,7 +712,7 @@ input[type="radio"], input[type="checkbox"] {
 
 /* 상영 시간 조회 = 조건 없음 */
 .tab_container.ty5 {
-  margin-top: -30px;
+  margin-top: 0px;
 }
 
 .tab_container {
@@ -737,7 +741,7 @@ input[type="radio"], input[type="checkbox"] {
 
 .wrap_reserve .section_step_con .article_layer.article_time > .inner .box_notice {
   clear: both;
-  margin-top: 360px;
+  margin-top: 300px;
   padding-top: 80px;
   text-align: center;
   background: url(../images/ticket/movie-time.png) no-repeat center 0px;
@@ -752,7 +756,143 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 
+/* 상영시간 - 조건 있음 */
+.group_time_select {
+  margin-top: 30px;
+}
 
+.time_select_title {
+  position: relative;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  height: 40px;
+}
+
+.time_select_title .ic_grade {
+  width: 85px;
+  margin-left: 10px;
+  height: 35px;
+}
+
+.time_select_title .ic_grade::before {
+  width: 35px;
+  height: 35px;
+}
+
+.time_select_title strong {
+  position: absolute;
+  margin-top: -28px;
+  padding: 0 8px;
+  font-size: 15px;
+}
+
+.time_select_wrap {
+  margin-top: 15px;
+}
+
+.time_select_wrap .list_time {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 10px;
+}
+
+.list_time li {
+  flex-basis: calc(33.33%-15px);
+  margin-left: 15px;
+  list-style: none;
+}
+
+.time_select_wrap ul.list_time li {
+  float: left;
+  width: 33.33%;
+  margin: 0px 0px 11px 0;
+}
+
+.time_select_wrap ul.list_time li:nth-child(3n+1) {
+  margin-left: 0;
+}
+
+.time_select_wrap ul.list_time li > a {
+  display: block;
+  position: relative;
+  height: 55px;
+  width: 90%;
+  /* padding: 8px 33px 5px; */
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  background: #f8f8f8;
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(248, 248, 248, 1) 100%);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(248, 248, 248, 1) 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(248, 248, 248, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#f8f8f8", GradientType=0);
+}
+
+
+/* .time_select_wrap ul.list_time li > a dl {
+  display: flex;
+  flex-direction: column;
+} */
+
+.time_select_wrap ul.list_time li > a dl dt {
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.time_select_wrap ul.list_time li > a dl dd.time {
+  margin-bottom: 5px;
+  font-size: 11px;
+}
+
+.time_select_wrap ul.list_time li > a dl dd.time strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.time_select_wrap ul.list_time li > a dl .tooltip {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: -41px;
+  height: 32px;
+  line-height: 34px;
+  margin-left: -38px;
+  padding: 0 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #FFF;
+  white-space: nowrap;
+  background-color: #333;
+}
+
+.time_select_wrap ul.list_time li > a dl dt {
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.time_select_wrap ul.list_time li > a dl dd.seat,
+.time_select_wrap ul.list_time li > a dl dd.hall {
+  display: inline-block;
+  font-size: 11px;
+  color: #666;
+  margin: 5px 10px;
+}
+
+.time_select_wrap ul.list_time li > a dl dd.hall {
+  right: 9px;
+  font-size: 13px;
+  margin-left: 13px;
+}
 
 
 

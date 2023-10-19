@@ -1,11 +1,11 @@
 
 document.addEventListener("DOMContentLoaded", function() {
   // 지역선택 후, 영화관을 나타내는 구현
-  const depth1Elements = document.querySelectorAll('.depth1');
-  const depth2Elements = document.querySelectorAll('.depth2 li');
+  const depth1Select = document.querySelectorAll('.depth1');
+  const depth2Select = document.querySelectorAll('.depth2 li');
 
   function handleDepth1Click(element) {
-    depth1Elements.forEach((el) => {
+    depth1Select.forEach((el) => {
       if (el !== element) {
         el.classList.remove('active');
         const depth2 = el.querySelector('.depth2');
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function handleDepth2Click(element) {
-    depth2Elements.forEach((el) => {
+    depth2Select.forEach((el) => {
       if (el !== element) {
         el.classList.remove('active');
       }
@@ -36,13 +36,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  depth1Elements.forEach((element) => {
+  depth1Select.forEach((element) => {
     element.addEventListener('click', () => {
       handleDepth1Click(element);
     });
   });
 
-  depth2Elements.forEach((element) => {
+  depth2Select.forEach((element) => {
     element.addEventListener('click', () => {
       handleDepth2Click(element);
     });
@@ -51,12 +51,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   //영화 클릭하면 스타일 속성주기
-  const liElements = document.querySelectorAll('.movie_select_wrap ul > li');
+  const liSelect = document.querySelectorAll('.movie_select_wrap ul > li');
 
-  liElements.forEach((element) => {
+  liSelect.forEach((element) => {
     element.addEventListener('click', () => {
       // Remove the 'active' class from all 'li' elements
-      liElements.forEach((el) => {
+      liSelect.forEach((el) => {
         el.classList.remove('active');
       });
 
