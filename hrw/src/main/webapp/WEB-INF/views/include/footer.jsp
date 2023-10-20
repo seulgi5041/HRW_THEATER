@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/include/footer.css">
   <!-- 상단 이동 버튼 -->
     <a class="topBtn" id="go_top" href="#">
       <img src="../images/top.png" alt="누르면 홈페이지 상단으로 이동합니다.">

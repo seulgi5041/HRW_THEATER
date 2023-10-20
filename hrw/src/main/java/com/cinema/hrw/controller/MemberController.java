@@ -20,19 +20,19 @@ public class MemberController {
 	
 	@GetMapping("/member/join")
 	public String joinForm() {
-		return "join";
+		return "/member/join";
 	}
 	
 	@PostMapping("/member/join")
 	public String join(@ModelAttribute MemberDTO memberDTO) {
 		
 		memberService.join(memberDTO);
-		return "login";
+		return "/member/login";
 	}
 	
 	@GetMapping("/member/login")
 	public String loginForm() {
-		return "login";
+		return "/member/login";
 	}
 	
 	@PostMapping("/member/login")
@@ -44,8 +44,18 @@ public class MemberController {
 			session.setAttribute("loginId", loginResult.getUserId());
 			return "main";
 		} else {
-			return "login"; // 실패
+			return "/member/login"; // 실패
 		}
+	}
+	
+	@GetMapping("/member/findPassword")
+	public String findPasswordForm() {
+		return "/member/find_password";
+	}
+	
+	@GetMapping("/member/findId")
+	public String findIdForm() {
+		return "/member/find_id";
 	}
 
 }
