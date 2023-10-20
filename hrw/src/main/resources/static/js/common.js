@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             //로그아웃을 했을때 원래의 메뉴로 되돌아감
             loginList.innerHTML = `
-                <li><a href="#" id="login_link">로그인</a></li>
-                <li><a href="#">회원가입</a></li>
+                <li><a href="/member/login" id="login_link">로그인</a></li>
+                <li><a href="/member/join">회원가입</a></li>
             `;
             userNameElement.textContent = "";
             login_user.style.display = "none";
