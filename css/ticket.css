@@ -62,7 +62,7 @@ li {
 }
 
 .wrap_reserve .section_step_title ul li {
-  /* position: relative; */
+  position: relative;
   height: 25%;
   box-sizing: border-box;
   border-bottom: 1px solid #383838;
@@ -84,6 +84,16 @@ li {
 }
 
 .wrap_reserve .section_step_title ul li.active > a {
+  color: #FFF;
+}
+
+.wrap_reserve .section_step_title ul li.prev {
+  border-color: #383838;
+  border-bottom-color: #DDD;
+  background-color: #383838;
+}
+
+.wrap_reserve .section_step_title ul li.prev > a {
   color: #FFF;
 }
 
