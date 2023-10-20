@@ -4,7 +4,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const depth1Select = document.querySelectorAll('.depth1');
   const depth2Select = document.querySelectorAll('.depth2 li');
 
+  //.depth1 클래스의 클릭 이벤트
   function handleDepth1Click(element) {
+    //depth1에 active가 없다면 depth2가 나타나지 않음
     depth1Select.forEach((el) => {
       if (el !== element) {
         el.classList.remove('active');
@@ -15,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
 
+    //depth1에 active가 있다면 depth2가 나타남
     element.classList.add('active');
     const depth2 = element.querySelector('.depth2');
     if (depth2) {
@@ -22,8 +25,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
+  //.depth2 li의 클릭 이벤트를 처리
   function handleDepth2Click(element) {
     depth2Select.forEach((el) => {
+      //depth2에 active가 없으면 li에서 active 제거
       if (el !== element) {
         el.classList.remove('active');
       }
@@ -31,17 +36,20 @@ document.addEventListener("DOMContentLoaded", function() {
   
     element.classList.add('active');
     const depth1 = element.closest('.depth1');
+    //depth2에 active가 있으면 li에서 active 추가
     if (depth1) {
       depth1.classList.add('active');
     }
   }
 
+  //depth1에 있는 요소를 반복하여 클릭된 것을 찾음
   depth1Select.forEach((element) => {
     element.addEventListener('click', () => {
       handleDepth1Click(element);
     });
   });
 
+  //depth2에 있는 요소를 반복하여 클릭된 것을 찾음
   depth2Select.forEach((element) => {
     element.addEventListener('click', () => {
       handleDepth2Click(element);
@@ -55,12 +63,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   liSelect.forEach((element) => {
     element.addEventListener('click', () => {
-      // Remove the 'active' class from all 'li' elements
+      // li에 있는 class에 active속성 삭제
       liSelect.forEach((el) => {
         el.classList.remove('active');
       });
 
-      // Add the 'active' class to the clicked 'li' element
+      // li에 있는 class에 active속성 활성화
       element.classList.add('active');
     });
   });
