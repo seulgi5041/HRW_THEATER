@@ -766,7 +766,6 @@ input[type="radio"], input[type="checkbox"] {
   display: flex;
   align-content: center;
   flex-direction: row;
-  height: 40px;
 }
 
 .time_select_title .ic_grade {
@@ -784,7 +783,7 @@ input[type="radio"], input[type="checkbox"] {
   position: absolute;
   margin-top: -28px;
   padding: 0 8px;
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .time_select_wrap {
@@ -809,6 +808,11 @@ input[type="radio"], input[type="checkbox"] {
   margin: 0px 0px 11px 0;
 }
 
+.time_select_wrap ul.list_time li > a.active {
+  border: 2px solid #FB3D28; 
+}
+
+
 .time_select_wrap ul.list_time li:nth-child(3n+1) {
   margin-left: 0;
 }
@@ -823,10 +827,6 @@ input[type="radio"], input[type="checkbox"] {
   border: 1px solid #ddd;
   cursor: pointer;
   background: #f8f8f8;
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(248, 248, 248, 1) 100%);
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(248, 248, 248, 1) 100%);
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(248, 248, 248, 1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#f8f8f8", GradientType=0);
 }
 
 
@@ -870,6 +870,10 @@ input[type="radio"], input[type="checkbox"] {
   color: #FFF;
   white-space: nowrap;
   background-color: #333;
+}
+
+.time_select_wrap ul.list_time li:hover > a dl .tooltip {
+  display: block;
 }
 
 .time_select_wrap ul.list_time li > a dl dt {
