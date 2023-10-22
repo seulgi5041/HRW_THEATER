@@ -21,15 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  var movie_ticketing = document.querySelectorAll(".movie_ticketing");
 
-  // 각 버튼에 대한 클릭 이벤트 핸들러를 추가합니다.
-  movie_ticketing.forEach(function(button) {
-      button.addEventListener("click", function() {
-          alert("확인");
-          console.log("버튼이 클릭되었습니다.");
-      });
-  });
 
 
 });

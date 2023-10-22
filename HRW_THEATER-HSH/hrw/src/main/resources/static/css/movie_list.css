@@ -73,7 +73,7 @@ main {
 
 .movielist_movieposter_cell img {
   width: 200px;
-  height: 300px;
+  height: 300px; 
 }
 
 /* 버튼을 눌러야 나오는 부분을 처리하기위한 태그*/
@@ -93,6 +93,7 @@ main {
     color: #666;
     font-size: 2em;
   }
+
 
   .movielist_movieposter_cell p{
     font-size: 2em;
@@ -148,3 +149,5 @@ main {
   font-size: 1.8em;
   color: #F5F4F2;
 }
+
+
