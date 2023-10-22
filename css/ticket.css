@@ -14,15 +14,16 @@
 
 #contents.contents_reserve {
   padding-bottom: 70px;
+  height: 125%;
 }
 
 
-#contents .wrap_reserve {
+/* #contents .wrap_reserve {
   position: relative;
   width: 1281px;
   height: 1100px;
   margin: 0 auto;
-}
+} */
 
 .wrap_reserve {
   overflow: hidden;
@@ -59,6 +60,8 @@ li {
     padding: 0; 
     margin: 0; 
     list-style: none;
+    display: flex;
+    flex-direction: column;
 }
 
 .wrap_reserve .section_step_title ul li {
@@ -73,18 +76,24 @@ li {
   flex: 1;
 }
 
+.wrap_reserve .section_step_title ul li > a {
+  display: block;
+  height: 100%;
+  color: #383838;
+}
+
 .wrap_reserve .section_step_title ul li:last-child {
   border-bottom: none;
 }
 
 .wrap_reserve .section_step_title ul li.active {
-  border-color: #FB3D28;
-  border-bottom-color: #383838;
-  background-color: #FB3D28;
+  border-color: #FB3D28 !important;;
+  border-bottom-color: 1px solid #383838;
+  background-color: #FB3D28 !important;
 }
 
 .wrap_reserve .section_step_title ul li.active > a {
-  color: #FFF;
+  color: #FFF !important;
 }
 
 .wrap_reserve .section_step_title ul li.prev {
@@ -94,14 +103,17 @@ li {
 }
 
 .wrap_reserve .section_step_title ul li.prev > a {
+  border-color: #383838;
+  border-bottom-color: #DDD;
+  background-color: #383838;
+}
+
+
+.wrap_reserve .section_step_title ul li.prev > a {
   color: #FFF;
 }
 
-.wrap_reserve .section_step_title ul li > a {
-  display: block;
-  height: 100%;
-  color: #383838;
-}
+
 
 .wrap_reserve .section_step_title ul li.active > a::before {
   content: "현재 단계";
@@ -112,16 +124,13 @@ li {
   overflow: hidden;
 }
 
-strong {
-  font-weight: bold;
-}
-
 .wrap_reserve .section_step_title ul li > a > strong {
   display: block;
   line-height: 1.5;
-  padding-top: 111px;
+  padding-top: 86px;
   font-size: 13px;
   text-align: center;
+  font-weight: bold;
 }
 
 .wrap_reserve .section_step_title ul li.active > a > strong {
@@ -133,7 +142,7 @@ strong {
   position: absolute;
   z-index: 1;
   left: 77px;
-  top: -1px;
+  top: 0;
   bottom: 0;
   width: 172px;
   padding-left: 20px;
@@ -141,9 +150,50 @@ strong {
   background-color: #333;
 }
 
-.wrap_reserve .section_step_title ul li.active > a .bx_con {
+.wrap_reserve .section_step_title ul li.active > a .box_con {
   background-color: #FB3D28;
 }
+
+
+.wrap_reserve .section_step_title ul li.active > a .box_con dl {
+  margin-top: 55px;
+}
+
+.wrap_reserve .section_step_title ul li.prev > a .box_con dl {
+  margin-top: 55px;
+}
+
+.wrap_reserve .section_step_title ul li > a .box_con dl dt {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.wrap_reserve .section_step_title ul li > a .box_con dl dd {
+  margin-bottom: 17px;
+}
+
+.wrap_reserve .section_step_title ul li > a .box_con dl:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.wrap_reserve .section_step_title ul li > a .box_con dl dd:before {
+  content: "";
+  overflow: hidden;
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  margin: 4px 5px 0 0;
+  border-radius: 3px;
+  vertical-align: top;
+  background: #fff;
+}
+
+
 
 /* 표 부분 */
 /* 영화선택 */

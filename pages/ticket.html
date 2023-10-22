@@ -46,10 +46,10 @@
 
 <main id="contents" class="contents_full contents_reserve" style="margin-top:30px;">
   <section class="wrap_reserve">
-    <div class="section_step_title">
+    <div id="reserveStep01" class="section_step_title">
       <ul>
         <!-- 상영시간 -->
-        <li class="active step01">
+        <li class="step01">
           <a href="#reverseStep01">
             <strong class="tit">
               <span>01</span>
@@ -57,9 +57,10 @@
               상영시간
             </strong>
             <div class="box_con">
-              <dl>선택한 영화 제목
-                <dt>title</dt>
-                <dd>선택한 상영관</dd>
+              <dl>
+                <dt>선택한 영화 정보</dt>
+                <dd>title</dd>
+                <dt>선택한 상영관</dt>
                 <dd>"지점 " 
                     "관"</dd>
                 <dt>선택한 상영 시간</dt>
@@ -459,7 +460,7 @@
           <div class="movie_select_wrap list movieSelect">
             <div class="mCustomScrollbar movieScroll _mCS_9 mCS-autoHide" style="position: relative; overflow: visible;">
               <div id="mCSB_9" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" tabindex="0" style="max-height: none;">
-                <div id="mCSB_9_container" class="mCSB_container" tyle="position: relative; top: 0px; left: 0px;">
+                <div id="mCSB_9_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" dir="ltr">
                   <ul>
                     <li class="disabled">
                       <a href="#none">
@@ -949,6 +950,7 @@
 <!-- 스크립트부분 -->
 <script src="../js/common.js"></script>
 <script src="../js/ticket_main.js"></script>
+<script src="../js/ticket_reverse.js"></script>
 <script src="../js/modal.js"></script>
 </body>
 </html>
