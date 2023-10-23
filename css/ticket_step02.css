@@ -218,9 +218,9 @@ li {
     position: relative;
     height: 55px;
     line-height: 55px;
-    border-right: 1px solid #222;
+    border-left: 1px solid #DDD;
     text-align: center;
-    background-color: #222;
+    background-color: #383838;
 }
 
 .wrap_reserve .section_step_con .article_layer .group_header .tit {
@@ -247,7 +247,7 @@ li {
     background: #666;
 }
 
-.wrap_reserve .section_step_con .article_layer.article_seat > .inner {
+.wrap_reserve .section_step_con .article_layer.article_stroe > .inner {
     overflow: hidden;
     height: 1046px;
 }
