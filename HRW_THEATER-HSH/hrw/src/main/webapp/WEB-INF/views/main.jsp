@@ -122,20 +122,20 @@
                   <td>
                     <span class="ellip" data-movie-code="${movie.code}" onclick="changePoster('${movie.code}')">${movie.title}</span>
                   </td>
-                  <td style="cursor: default;">${movie.cumulative_number_of_audience} 명</td>
-                  <td style="cursor: default;">${movie.advance_reservation_rate}%</td>
+                  <td style="cursor: default;">${movie.cumulativeNumberOfAudience} 명</td>
+                  <td style="cursor: default;">${movie.advanceReservationRate}%</td>
                   <td style="cursor: default;">
                     <c:choose>
-                      <c:when test="${movie.in_decrease==0}"> <!-- 0 : new / 1 : up / 2 : down / 3 : keep -->
+                      <c:when test="${movie.increaseDecreaseStatus==0}"> <!-- 0 : new / 1 : up / 2 : down / 3 : keep -->
                           <img src="../images/main/new.png" alt="new_rank">
                       </c:when>
-                      <c:when test="${movie.in_decrease==1}"> <!-- 0 : new / 1 : up / 2 : down / 3 : keep -->
-                          <img src="../images/main/arrow_up.png" alt="arrow_up">${movie.in_decrease_rate}
+                      <c:when test="${movie.increaseDecreaseStatus==1}"> <!-- 0 : new / 1 : up / 2 : down / 3 : keep -->
+                          <img src="../images/main/arrow_up.png" alt="arrow_up">${movie.increaseDecreaseRate}
                       </c:when>
-                      <c:when test="${movie.in_decrease==2}"> <!-- 0 : new / 1 : up / 2 : down / 3 : keep -->
-                          <img src="../images/main/arrow_down.png" alt="arrow_down">${movie.in_decrease_rate}
+                      <c:when test="${movie.increaseDecreaseStatus==2}"> <!-- 0 : new / 1 : up / 2 : down / 3 : keep -->
+                          <img src="../images/main/arrow_down.png" alt="arrow_down">${movie.increaseDecreaseRate}
                       </c:when>
-                      <c:when test="${movie.in_decrease==3}"> <!-- 0 : new / 1 : up / 2 : down / 3 : keep -->
+                      <c:when test="${movie.increaseDecreaseStatus==3}"> <!-- 0 : new / 1 : up / 2 : down / 3 : keep -->
                           <span class="keep">keep</span>
                       </c:when>
                   </c:choose>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/oder_confirmation.css"/>
+</head>
+<body>
+  <header>
+    <!-- 로고 -->
+    <div id="main_header">
+      <div class="logo">
+        <a href="#"><img src="../images/logo.jpg" alt="메인 로고"></a>
+      </div>
+      <!-- 로그인 성공 시 나타나는 부분 -->
+      <div class="login_user" id="login_user">
+        <p><span id="userName">username</span>님 환영합니다.</p>
+      </div>
+    </div>
+    
+    <!-- nav -->
+    <nav id="header_menu">
+      <div class="menu">
+        <ul class="menu_list">
+          <li><a href="#">영화</a></li>
+          <li><a href="#">매장정보</a></li>
+          <li><a href="#">예매</a></li>
+          <li><a href="#">푸드스토어</a></li>
+        </ul>
+        <ul class="login_list" id="login_list">
+          <li><a href="#" id="login_link">로그인</a></li>
+          <li><a href="#">회원가입</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+
+  <main>
+    <section id="oder_confirmation_wrap">
+      <div id="oder_confirmation_title"><h1>주문확인</h1></div>
+      
+      <article id="oder_movie_container"> 
+
+        <div class="oder_container_title">
+          <h2>영화 예매 정보</h2>
+        </div>
+
+        <div class="oder_movie_info_cell">
+
+          <div class="oder_movie_poster">
+            <img src="../images/poster_rank/20212667.jpg" alt="영화제목" >
+          </div>
+
+          <div class="oder_movie_info">
+            <h3>영화 제목</h3>
+            <h4>12세 연령가</h4>
+            <h4>2D 디지털</h4>
+          </div>
+
+          <div class="oder_cinema_info">
+            <table class="oder_movie_info_table">
+
+              <tr>
+                <th>극장</th>
+                <td>인천부평역점</td>
+              </tr>
+
+              <tr>
+                <th>일시</th>
+                <td>2023년10월10일 00:00~00:00</td>
+              </tr>
+
+              <tr>
+                <th>인원</th>
+                <td>일반 2명</td>
+              </tr>
+
+            </table>
+          </div>
+
+          <div class="oder_theater_info">
+            <table class="oder_movie_info_table">
+
+              <tr>
+                <th>상영관</th>
+                <td>10관 6층</td>
+              </tr>
+
+              <tr>
+                <th>좌석명</th>
+                <td>일반석</td>
+              </tr>
+
+              <tr>
+                <th>좌석번호</th>
+                <td>b11, b11, b11, b11</td>
+              </tr>
+
+              
+            </table>
+          </div>
+
+        </div>
+
+        <div class="oder_movie_info_cell hidden">
+          <div class="oder_movie_check">
+            <button class="oder_movie_check_btn "><img src="../images/oder/check_white.png" class="oder_movie_check_img"></button>
+          </div>
+
+          <div class="oder_movie_poster">
+            <img src="../images/poster_rank/20197122.jpg" alt="영화제목" >
+          </div>
+
+          <div class="oder_movie_info">
+            <h3>영화 제목</h3>
+            <h4>12세 연령가</h4>
+            <h4>2D 디지털</h4>
+          </div>
+
+          <div class="oder_cinema_info">
+            <table class="oder_movie_info_table">
+
+              <tr>
+                <th>극장</th>
+                <td>인천부평역점</td>
+              </tr>
+
+              <tr>
+                <th>일시</th>
+                <td>2023년10월10일 00:00~00:00</td>
+              </tr>
+
+              <tr>
+                <th>인원</th>
+                <td>일반 2명</td>
+              </tr>
+
+            </table>
+          </div>
+
+          <div class="oder_theater_info">
+            <table class="oder_movie_info_table">
+
+              <tr>
+                <th>상영관</th>
+                <td>10관 6층</td>
+              </tr>
+
+              <tr>
+                <th>좌석명</th>
+                <td>일반석</td>
+              </tr>
+
+              <tr>
+                <th>좌석번호</th>
+                <td>b11, b11, b11, b11</td>
+              </tr>
+
+              
+            </table>
+          </div>
+
+        </div>
+
+        <div class="oder_movie_info_sum">
+          <h3>합계</h3>
+          <P>35,000 원</P>
+        </div>
+
+
+      </article>
+
+      <div class="no_oder_result hidden">
+        <img src="../images/movie/no_data.png" alt="X"><h2> 주문정보 가 없습니다.</h2>
+      </div>
+
+      <article id="oder_food_container">
+        <div class="oder_container_title">
+          <h2>푸드 주문 정보</h2>
+        </div>
+
+        <!-- 주문한 음식별로 oder_food_container_cell생성-->
+
+        <div id="oder_food_container_info">
+
+          <div class="oder_food_container_cell hidden">
+            <div class="oder_food_container_cell_img">
+              <img src="../images/store/product/double_popcorn.png" alt="더블콤보">
+            </div>
+            <div class="oder_food_info">
+              <p>팝콘(M)2 + 탄산(M)2</p>
+              <div class="oder_food_name">
+                <h4>더블콤보</h4>
+              </div>
+              <div class="oder_food_basket hidden">
+                <div class="oder_food_quantity">
+                  <span>0</span>
+                </div>
+                <div class="oder_food_price">
+                  <span>13,000<em>원</em></span>
+                </div>
+              </div>
+              <div class="oder_food_basket_check ">
+                <div class="oder_food_quantity">
+                  <button class="oder_food_minusbutton">
+                    <img src="../images/store/minus.png" alt="minus">
+                  </button>
+                  <span>0</span>
+                  <button class="oder_food_plusbutton">
+                    <img src="../images/store/plus.png" alt="plus">
+                  </button>
+                </div>
+                <div class="oder_food_price">
+                  <span>10,000<em>원</em></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="oder_food_container_cell hidden">
+            <div class="oder_food_container_cell_img">
+              <img src="../images/store/product/coffee_ice.png" alt="팝콘_기본맛">
+            </div>
+            <div class="oder_food_info">
+              <p>팝콘(M)2 + 탄산(M)2</p>
+              <div class="oder_food_name">
+                <h4>더블콤보</h4>
+              </div>
+              <div class="oder_food_basket">
+                <div class="oder_food_quantity">
+                  <span>0</span>
+                </div>
+                <div class="oder_food_price">
+                  <span>13,000<em>원</em></span>
+                </div>
+              </div>
+              <div class="oder_food_basket_check hidden">
+                <div class="oder_food_quantity">
+                  <button class="oder_food_minusbutton">
+                    <img src="../images/store/minus.png" alt="minus">
+                  </button>
+                  <span>0</span>
+                  <button class="oder_food_plusbutton">
+                    <img src="../images/store/plus.png" alt="plus">
+                  </button>
+                </div>
+                <div class="oder_food_price">
+                  <span>10,000<em>원</em></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="oder_food_price_sum hidden">
+            <h3>합계</h3>
+            <P>35,000 원</P>
+          </div>
+
+        </div>
+        
+
+        <div class="no_oder_result">
+          <img src="../images/movie/no_data.png" alt="X"><h2> 주문정보 가 없습니다.</h2>
+        </div>
+
+      </article>
+
+      <article id="oder_price_container">
+        <div id="oder_price_content">
+          <h3>합계</h3>
+          <P>35,000 원</P>
+        </div>
+      </article>
+
+      <!-- 주문직후면 결제 하기 버튼이 보여야하고, 결제후 나중에 주문확인건결제 하기 버튼이 없어야함-->
+      <!--주문 직후-->
+      <article class="oder_butten_container"> 
+        <button id="oder_page_butten_submit">결제하기</button>
+      </article>
+
+      <div class="empty_place"></div>
+
+    </section>
+  </main>
+  
+<!-- 상단 이동 버튼 -->
+<a class="topBtn" id="go_top" href="#">
+  <img src="../images/top.png" alt="누르면 홈페이지 상단으로 이동합니다.">
+</a>
+
+<!-- 푸터 -->
+<footer id="main_footer">
+  <section class="company_info_wrap">
+    <address>(21570)인천광역시 남동구 구월동 1126-7(인주대로 596) 기한빌딩 8층</address>
+    <dl class="company_info_list">
+      <dt>대표이사</dt>
+      <dd>HRW</dd>
+      <dt class="with_colon">사업자번호</dt>
+      <dd data-content>000-00-00000</dd>
+      <dt class="with_colon">통신판매업신고번호</dt>
+      <dd data-content>2023-인천구월-0000</dd>
+    </dl>
+    <dl class="company_info_list">
+      <dt>호스팅사업자</dt>
+      <dd data-content>HRW THEATER</dd>
+      <dt class="with_colon">대표이메일</dt>
+      <dd data-content>hrwmaster@hrw.net</dd>
+    </dl>
+    <p class="copyright">Copyright© HRW THEATER. All Rights Reserved</p>
+  </section>
+</footer>
+
+
+  <script src="../js/oder_confirmation.js"></script>
+  <script src="../js/common.js"></script>
+</body>
+</html>

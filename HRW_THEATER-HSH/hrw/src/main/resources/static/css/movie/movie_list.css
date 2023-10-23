@@ -128,7 +128,14 @@ main {
 
 .movielist_movieposter_cell .movielist_movieposter_overlay p {
   color: #fff; 
+  font-size: 1.5em;
+  overflow: hidden ;          /* 넘치는 부분 감춤 */
+  text-overflow: ellipsis ;   /* 넘치는 부분에 "..." 표시 */
+  max-height: 270px;
+  padding: 0 15px ;
 }
+
+
 
 /*예매하기 버튼*/
 .ticketing_btn {

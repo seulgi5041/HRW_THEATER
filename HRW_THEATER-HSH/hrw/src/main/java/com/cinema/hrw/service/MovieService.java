@@ -24,7 +24,7 @@ public class MovieService {
             MovieDTO movieDTO = new MovieDTO();
             movieDTO.setTitle(movieEntity.getTitle());
             movieDTO.setCode(movieEntity.getCode());
-            movieDTO.setSummary(movieEntity.getSummary());
+            movieDTO.setSynopsis(movieEntity.getSynopsis());
             movieList.add(movieDTO);
         }
     
@@ -39,10 +39,10 @@ public class MovieService {
             MovieDTO movieDTO = new MovieDTO();
             movieDTO.setTitle(movieEntity.getTitle());
             movieDTO.setCode(movieEntity.getCode());
-            movieDTO.setAdvance_reservation_rate(movieEntity.getAdvanceReservationRate());
-            movieDTO.setCumulative_number_of_audience(movieEntity.getCumulativeNumberOfAudience());
-            movieDTO.setIn_decrease(movieEntity.getInDecrease()); /* 0 : new / 1 : up / 2 : down / 3 : keep */
-            movieDTO.setIn_decrease_rate(movieEntity.getInDecrease_rate()); 
+            movieDTO.setAdvanceReservationRate(movieEntity.getAdvanceReservationRate());
+            movieDTO.setCumulativeNumberOfAudience(movieEntity.getCumulativeNumberOfAudience());
+            movieDTO.setIncreaseDecreaseStatus(movieEntity.getIncreaseDecreaseStatus()); /* 0 : new / 1 : up / 2 : down / 3 : keep */
+            movieDTO.setIncreaseDecreaseRate(movieEntity.getIncreaseDecreaseRate()); 
             movieList.add(movieDTO);
         }
 

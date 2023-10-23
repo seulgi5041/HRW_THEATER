@@ -22,21 +22,21 @@
     <section id="movielist_postor_content">
         <c:forEach items="${allMovie}" var="movie" varStatus="status">
           <c:choose>
-            <c:when test="${status.index % 5 == 0 && status.index / 5 < 3}">
+            <c:when test="${status.index % 5 == 0 && status.index / 5 < 2}">
               <article class="movielist_movieposter_row">
             </c:when>
-            <c:when test="${status.index % 5 == 0 && status.index / 5 >= 3}">
+            <c:when test="${status.index % 5 == 0 && status.index / 5 >= 2}">
               <article class="movielist_movieposter_row hidden">
             </c:when>
             <c:otherwise></c:otherwise>
           </c:choose>
           <div class="movielist_movieposter_cell">
-            <div class="movielist_movieposter_cell">
+            <a class="movielist_movieposter_cell" href="#">
                 <img src="../images/poster_rank/${movie.code}.jpg" alt="${movie.title}">
                 <div class="movielist_movieposter_overlay">
-                  <p>${movie.summary}</p>
+                  <p>${movie.synopsis}</p>
                 </div>
-              </div> 
+              </a> 
             <p>${movie.title}</p>
             <div class="ticketing_btn">
               <a href="#" class="movie_ticketing">예매하기</a>
