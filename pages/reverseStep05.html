@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HRW 예매페이지</title>
+
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/ticket.css">
+  <link rel="stylesheet" href="../css/ticket_step05.css">
+</head>
+<body>
+  <!-- 헤더 영역 -->
+<header>
+  <!-- 로고 -->
+  <div id="main_header">
+    <div class="logo">
+      <a href="#"><img src="../images/logo.jpg" alt="메인 로고"></a>
+    </div>
+    <!-- 로그인 성공 시 나타나는 부분 -->
+    <div class="login_user" id="login_user">
+      <p><span id="userName">username</span>님 환영합니다.</p>
+    </div>
+  </div>
+  
+  <!-- nav -->
+  <nav id="header_menu">
+    <div class="menu">
+      <ul class="menu_list">
+        <li><a href="#">영화</a></li>
+        <li><a href="#">매장정보</a></li>
+        <li><a href="#">예매</a></li>
+        <li><a href="#">푸드스토어</a></li>
+      </ul>
+      <ul class="login_list" id="login_list">
+        <li><a href="#" id="login_link">로그인</a></li>
+        <li><a href="#">회원가입</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- 로그인을 하면 보여지는 메뉴부분 -->
+<!-- 자바스크립트로 구현 -->
+
+
+
+<main id="contents" class="contents_full contents_reserve" style="margin-top:30px;">
+  <section class="wrap_reserve">
+    <div id="reserveStep05" class="section_step_title">
+      <ul>
+        <!-- 상영시간 -->
+        <li class="step01 prev">
+          <a href="#reserveStep02">
+            <strong class="tit">
+              <span>01</span>
+              <br>
+              상영시간
+            </strong>
+            <div class="box_con">
+              <dl>
+                <dt>선택한 영화 정보</dt>
+                <dd>title</dd>
+                <dt>선택한 상영관</dt>
+                <dd>"지점 " 
+                    "관"</dd>
+                <dt>선택한 상영 시간</dt>
+                <dd>date(yyyy-mm-dd(요일))</dd>
+                <dt>선택한 시간</dt>
+                <dd>"00:00~" 
+                    "00:00"</dd>
+              </dl>
+            </div>
+          </a>
+        </li>
+
+        <!-- 인원,좌석 -->
+        <li class="step01 prev">
+          <a href="#reserveStep03">
+            <strong class="tit">
+              <span>02</span>
+              <br>
+              인원/좌석
+            </strong>
+            <div class="box_con">
+              <dl>
+                <dt>선택한 인원</dt>
+                <dd>
+                  <span id="preview_people_info"></span>
+                </dd>
+                <dt>선택한 좌석</dt>
+                <dd>
+                  <span id="preview_seat_info"></span>
+                </dd>
+              </dl>
+            </div>
+          </a>
+        </li>
+
+        <!-- 음식선택 -->
+        <li class="step01 prev">
+          <a href="#reserveStep04">
+            <strong class="tit">
+              <span>03</span>
+              <br>
+              음식선택
+            </strong>
+            <div class="box_con">
+              <dl>
+                <dt>선택한 음식</dt>
+                <dd>
+                  <span id="preview_store_info"></span>
+                </dd>
+                <dd>
+                  <span id="preview_store_info"></span>
+                </dd>
+                <dd>
+                  <span id="preview_store_info"></span>
+                </dd>
+              </dl>
+            </div>
+          </a>
+        </li>
+
+        <!-- 결제 -->
+        <li class="step01 prev">
+          <a href="#reserveStep04">
+            <strong class="tit">
+              <span>04</span>
+              <br>
+              결제
+            </strong>
+            <div class="box_con">
+              <dl>선택한 영화 제목
+                <dt>title</dt>
+                <dd>선택한 상영관</dd>
+                <dd>"지점 " 
+                    "관"</dd>
+                <dt>선택한 상영 시간</dt>
+                <dd>date(yyyy-mm-dd(요일))</dd>
+                <dt>선택한 시간</dt>
+                <dd>"00:00~" 
+                    "00:00"</dd>
+              </dl>
+            </div>
+          </a>
+        </li>
+
+        <!-- 결제완료 -->
+        <li class="step01 active">
+          <a style="cursor: default;">
+            <strong class="tit">
+              <span>05</span>
+              <br>
+              결제완료
+            </strong>
+            <div class="box_con">
+              <dl>
+                <dt>영화제목</dt>
+                <dd>선택한 영화 제목</dd>
+                <dd>"지점 " 
+                    "관"</dd>
+                <dt>선택한 음식</dt>
+                <dd>선택한 음식 이름들</dd>
+                <dt>선택한 상영 시간</dt>
+                <dd>date(yyyy-mm-dd(요일))</dd>
+                <dt>선택한 시간</dt>
+                <dd>"00:00~" 
+                    "00:00"</dd>
+                
+              </dl>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  <!-- 스낵선택 -->
+  <div id="reserveStep05" class="section_step_con step05 active">
+    <article class="article_layer article_complete">
+      <div class="group_header">
+        <h4 class="tit">결제 완료</h4>
+      </div>
+      <div class="inner">
+          <!-- 좌석 선택 부분 -->
+        <div class="container" class="complete_wrap">
+          <article class="m_complete_wrap">
+            <div class="m_complete_inner">
+              <div class="mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar" style="position: relative; overflow: visible; height: 470px;">
+                <div id="mCSB_1" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" tabindex="0" style="max-height: none;">
+                  <div id="mCSB_1_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" dir="ltr">
+                    <!-- 결제완료 -->
+
+                  </div>
+                </div>
+              </div>
+            </div> 
+          </article>
+        </div>
+      </div>
+
+      
+    </article>
+  </div>
+
+  </section>
+</main>
+
+
+
+<!-- 상단 이동 버튼 -->
+<a class="topBtn" id="go_top" href="#">
+  <img src="../images/top.png" alt="누르면 홈페이지 상단으로 이동합니다.">
+</a>
+
+<!-- 푸터 -->
+<footer id="main_footer">
+  <section class="company_info_wrap">
+    <address>(21570)인천광역시 남동구 구월동 1126-7(인주대로 596) 기한빌딩 8층</address>
+    <dl class="company_info_list">
+      <dt>대표이사</dt>
+      <dd>HRW</dd>
+      <dt class="with_colon">사업자번호</dt>
+      <dd data-content>000-00-00000</dd>
+      <dt class="with_colon">통신판매업신고번호</dt>
+      <dd data-content>2023-인천구월-0000</dd>
+    </dl>
+    <dl class="company_info_list">
+      <dt>호스팅사업자</dt>
+      <dd data-content>HRW THEATER</dd>
+      <dt class="with_colon">대표이메일</dt>
+      <dd data-content>hrwmaster@hrw.net</dd>
+    </dl>
+    <p class="copyright">Copyright© HRW THEATER. All Rights Reserved</p>
+  </section> 
+</footer>
+
+
+
+<!-- 자바스크립트 영역 -->
+<script src="../js/common.js"></script>
+<script src="../js/ticket_main.js"></script>
+<script src="../js/ticket_reverse.js"></script> 
+</body>
+</html>

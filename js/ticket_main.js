@@ -77,6 +77,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+  
+
   //상영시간 선택시 속성주기
   const groupTimeSelects = document.querySelectorAll('.group_time_select ul > li a');
   const strongElement = document.querySelector('.stepOnePopupHeader strong');

@@ -1,34 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
-  // Get the <div> element with id "reserveStep01"
-  const reserveStep01 = document.getElementById("reserveStep01");
-  
-  // Check if the <div> has the id "reserveStep01"
-  if (reserveStep01) {
-    // Get the <li> element with class "step01"
-    const step01Li = document.querySelector('.step01');
-  
-    // Add the "active" class to the <li> to make it active
-    step01Li.classList.add('active');
-  }
+  //<li class="step01 prev"> 에서 step 이 들어간 것을 모두 찾는다
+  const steps = document.querySelectorAll('[class^="step"]');
 
-  
+  //클래스 안의 .box_con을 찾아 마우스를 올리면 보여주고, 내리면 안 보여줌
+  steps.forEach((step) => {
+    const boxCon = step.querySelector('.box_con');
 
-
-
-    const step01Li = document.querySelector('.step01');
-
-    // Get the "box_con" element inside the <li>
-    const boxCon = step01Li.querySelector('.box_con');
-
-    // Add a mouse enter event listener
-    step01Li.addEventListener('mouseenter', function() {
-      // Show the "box_con" element
+    step.addEventListener('mouseenter', function() {
       boxCon.style.display = 'block';
     });
 
-    // Add a mouse leave event listener
-    step01Li.addEventListener('mouseleave', function() {
-      // Hide the "box_con" element
-    boxCon.style.display = 'none';
+    step.addEventListener('mouseleave', function() {
+      boxCon.style.display = 'none';
+    });
   });
 });

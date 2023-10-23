@@ -146,7 +146,6 @@ li {
   bottom: 0;
   width: 172px;
   padding-left: 20px;
-  border-top: 1px solid #383838;
   background-color: #333;
 }
 
@@ -154,9 +153,12 @@ li {
   background-color: #FB3D28;
 }
 
-
 .wrap_reserve .section_step_title ul li.active > a .box_con dl {
   margin-top: 55px;
+}
+
+.wrap_reserve .section_step_title ul li.prev > a .box_con {
+  background-color: #383838;
 }
 
 .wrap_reserve .section_step_title ul li.prev > a .box_con dl {
@@ -224,7 +226,7 @@ li {
   position: relative;
   height: 55px;
   line-height: 55px;
-  border-right: 1px solid #DDD;
+  border-left: 1px solid #DDD;
   text-align: center;
   background-color: #383838;
 }
@@ -412,33 +414,42 @@ li.depth1:first-child {
   background-color: #fff;
 }
 
-.wrap_reserve .section_step_con .article_layer.article_movie > .inner .mCustomScrollbar {
-  height: 960px;
+.movieSelect {
+  overflow-y: scroll; 
+  max-height: 950px; 
 }
 
-.mCustomScrollbar {
-  -ms-touch-action: pinch-zoom;
-  touch-action: pinch-zoom;
+.movieSelect::-webkit-scrollbar {
+  width: 6px;
 }
 
-.mCustomScrollBox {
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  max-width: 100%;
-  outline: none;
-  direction: ltr;
+.movieSelect::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
+.movieSelect::-webkit-scrollbar-thumb {
+  height: 15%;
+  border-radius: 3px;
+  background: #CCC;
+}
+
+.movieSelect::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+
+
+/* 
 .mCSB_container {
-  overflow: hidden;
+  overflow: scroll;
   width: auto;
   height: auto;
-}
+} */
 
-.wrap_reserve .section_step_con .article_layer.article_movie .inner .mCSB_container {
+/* .wrap_reserve .section_step_con .article_layer.article_movie .inner .mCSB_container {
   padding-bottom: 30px;
-}
+  height: 100%;
+} */
 
 .movie_select_wrap ul > li {
   box-sizing: border-box;
@@ -957,11 +968,6 @@ input[type="radio"], input[type="checkbox"] {
   font-size: 13px;
   margin-left: 13px;
 }
-
-
-
-
-
 
 
 /* 스크롤바 css */
