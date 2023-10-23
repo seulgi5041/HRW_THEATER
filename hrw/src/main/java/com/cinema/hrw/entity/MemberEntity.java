@@ -15,12 +15,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "member_table")	// Å×ÀÌºí »ı¼º (ÀÌ¸§)
+@Table(name = "member_table")	// í…Œì´ë¸” ìƒì„±.
 
 public class MemberEntity {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id	// pk ì§€ì •.
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	// auto_increment 
 	
 	private Long idx;
 	

@@ -13,7 +13,7 @@
 
     <div class="container">
     
-    <form method="post" action="#">
+    <form method="post" action="/member/findPassword">
     	<h3 class="title">비밀번호 찾기</h3>
     	
     	<h4 class="subtitle">본인 확인 이메일 인증 및 휴대전화 인증</h4>
