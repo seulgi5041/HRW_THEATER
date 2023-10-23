@@ -17,35 +17,35 @@ public class MemberService {
 	private final MemberRepository memberRepository;
 	
 	public void join(MemberDTO memberDTO) {
-		// 1. dto -> entity ·Î º¯È¯
+		// 1. dto -> entity ë¡œ ë³€í™˜.
 		MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
-		memberRepository.save(memberEntity);	//¿©±ä ¹«Á¶°Ç ¼¼ÀÌºê
+		memberRepository.save(memberEntity);	// ì—¬ê¸´ ë¬´ì¡°ê±´ ì„¸ì´ë¸Œ.
 		System.out.println(memberEntity);
-		// 2. repositorydÀÇ save È£Ãâ
+		// 2. repository ì˜ save í˜¸ì¶œ.(ì¡°ê±´. entity ê°ì²´ë¥¼ ë„˜ê²¨ì¤˜ì•¼ í•¨.)
 	}
 
 	public MemberDTO login(MemberDTO memberDTO) {
 		/*
-		 * 1. È¸¿øÀÌ ÀÔ·ÂÇÑ ÀÌ¸ŞÀÏ·Î DB¿¡¼­ Á¶È¸¸¦ ÇÔ
-		 * 2. DB¿¡¼­ Á¶È¸ÇÑ ºñ¹Ğ¹øÈ£ÀÇ »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏ´ÂÁö ÆÇ´Ü.
+		 * 1. íšŒì›ì´ ì…ë ¥í•œ ì´ë©”ì¼ë¡œ DBì—ì„œ ì¡°íšŒë¥¼ í•¨.
+		 * 2. DBì—ì„œ ì¡°íšŒí•œ ë¹„ë°€ë²ˆí˜¸ì˜ ì‚¬ìš©ìê°€ ì…ë ¥í•œ ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ëŠ”ì§€ íŒë‹¨.
 		 */
 		
 		Optional<MemberEntity> byUserId = memberRepository.findByUserId(memberDTO.getUserId());
 		
 		if (byUserId.isPresent()) {
-			// Á¶È¸ °á°ú°¡ ÀÖÀ½.( ÇØ´ç ÀÌ¸ŞÀÏ °¡Áø Á¤º¸°¡ ÀÖ´Ù.)
+			// ì¡°íšŒ ê²°ê³¼ê°€ ìˆìŒ.(í•´ë‹¹ ì•„ì´ë””ë¥¼ ê°€ì§„ ì •ë³´ê°€ ìˆë‹¤.)
 			MemberEntity memberEntity = byUserId.get();
 				if(memberEntity.getUserPassword().equals(memberDTO.getUserPassword())) {
-					// ºñ¹Ğ¹øÈ£ ÀÏÄ¡
-					// entity -> dto º¯È¯ ÈÄ ¸®ÅÏ
+					// ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜í•  ê²½ìš°.
+					// entity -> dto ë³€í™˜ í›„ ë¦¬í„´.
 					MemberDTO dto = memberDTO.toMemberDTO(memberEntity);
 					return dto;
 				} else {
-					// ºñ¹Ğ¹øÈ£ ºÒÀÏÄ¡(·Î±×ÀÎ ½ÇÆĞ)
+					// ë¹„ë°€ë²ˆí˜¸ ë¶ˆì¼ì¹˜(ë¡œê·¸ì¸ ì‹¤íŒ¨);
 					return null;
 				}
 				}else {
-				// Á¶È¸ °á°ú ¾øÀ½(ÇØ´ç ÀÌ¸ŞÀÏÀ» °¡Áø È¸¿øÀÌ ¾ø´Ù.)
+				//ì¡°íšŒ ê²°ê³¼ ì—†ìŒ(í•´ë‹¹  ì•„ì´ë””ë¥¼ ê°€ì§„ íšŒì›ì´ ì—†ë‹¤.)
 				return null;
 			}
 		}

@@ -4,11 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디 찾기 결과</title>
-<link rel="stylesheet" href="resources/css/form/find_id_ok.css" />
+    <link rel="stylesheet" href="../css/member/result/find_id_ok.css">
 </head>
 <body>
 
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="../include/header.jsp"/>
     
     <div class="container">
     
@@ -28,6 +28,6 @@
     
     </div>
     
-    <jsp:include page="footer.jsp"/>
+    <jsp:include page="../include/footer.jsp"/>
 </body>
 </html>

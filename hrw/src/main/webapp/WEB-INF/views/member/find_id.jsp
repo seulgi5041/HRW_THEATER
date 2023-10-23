@@ -13,7 +13,7 @@
 
     <div class="container">
     
-    <form method="post" action="find_id_ok.jsp">
+    <form method="post" action="/member/findId">
     	<h3 class="title">아이디 찾기</h3>
     	
     	<h4 class="subtitle">본인 확인 이메일 인증</h4>
