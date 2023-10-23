@@ -10,7 +10,7 @@
     <jsp:include page="../include/header.jsp"/>
 
     <div class="container">
-    	
+       
         <div class="word">
         
             <h2>회원 프로필</h2>
@@ -19,7 +19,7 @@
         
         <hr>
 
-        <form action="/member/userInfo" method="post">
+        <form action="" id = "userForm" method="post">
             <div class="input-container"> 
                 <div class="input-group">
                     <label for="userId">* 아이디</label>
@@ -60,16 +60,26 @@
                     <input type="text" id="userPhone" name="userPhone" placeholder="연락처(' -'포함하여 입력)" maxlength="20" required="required">
                 </div>
 
-                <div class="button-group">
-                    <input type="button" value="회원 수정" class="big-button" onclick="#"> 
-                    <input type="reset" value="회원 탈퇴" class="big-button">
-                </div>
+				<div class="button-group">
+				        <input type="button" value="회원 수정" class="big-button" onclick="submitForm('/member/update');">
+				        <input type="button" value="회원 탈퇴" class="big-button" onclick="submitForm('/member/delete');">
+				</div>
             </div>
         </form>
     </div>
 
     <jsp:include page="../include/footer.jsp"/>
-    
+    <script>
+    function submitForm(action) {
+        if (action === '/member/delete' && !confirm('정말 탈퇴하시겠습니까?')) {
+            return;
+        }
+
+        var form = document.getElementById('userForm');
+        form.action = action;
+        form.submit();
+    }
+    </script>
  
 </body>
 </html>

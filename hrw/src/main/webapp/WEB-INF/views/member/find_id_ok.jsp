@@ -20,8 +20,8 @@
     	    <div class="id-display">아이디: <!-- db에서 가져온 아이디 --></div>
     	
     	    <p>
-                <input type="button" value="로그인 하기" onclick="location.href='login_form.jsp'">
-                <input type="button" value="홈" onclick="location.href=main.jsp'"> 
+                <a href="/member/login"><input type="button" value="로그인 하기" class="#"> </a>
+                <a href="/"><input type="button" value="홈" class="#"></a>
             </p>
     	
         </form>

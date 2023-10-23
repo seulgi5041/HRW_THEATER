@@ -1,95 +1,118 @@
 package com.cinema.hrw.controller;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import com.cinema.hrw.dto.MemberDTO;
 import com.cinema.hrw.service.MemberService;
-
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
 	
-	//ìƒì„±ì ì£¼ì….
-	
+    // ¸â¹ö ¼­ºñ½º ÀÇÁ¸¼º ÁÖÀÔ
 	private final MemberService memberService;
 	
-	
-	// íšŒì›ê°€ì… í˜ì´ì§€ ì¶œë ¥ ìš”ì²­.
+	// È¸¿ø °¡ÀÔ ÆäÀÌÁö Ãâ·Â ¿äÃ»
 	@GetMapping("/member/join")
 	public String joinForm() {
 		return "/member/join";
 	}
 	
+	// È¸¿ø °¡ÀÔ Ã³¸®
 	@PostMapping("/member/join")
 	public String join(@ModelAttribute MemberDTO memberDTO) {
-		
 		memberService.join(memberDTO);
 		return "/member/login";
 	}
 	
+	// ·Î±×ÀÎ ÆäÀÌÁö Ãâ·Â ¿äÃ»
 	@GetMapping("/member/login")
 	public String loginForm() {
 		return "/member/login";
 	}
 	
+	// ·Î±×ÀÎ Ã³¸®
 	@PostMapping("/member/login")
 	public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
 	    MemberDTO loginResult = memberService.login(memberDTO);
 	    
+	    // ·Î±×ÀÎ ¼º°ø½Ã, ¼¼¼Ç¿¡ ID ÀúÀå
 	    if (loginResult != null) {
-	        session.setAttribute("loginId", loginResult.getUserName()); // ì˜ˆë¥¼ ë“¤ì–´, 'getId()'ëŠ” ì‚¬ìš©ìì˜ IDë¥¼ ë°˜í™˜í•œë‹¤ê³  ê°€ì •
+	        session.setAttribute("loginId", loginResult.getUserName()); 
 	        return "main";
 	    } else {
-	        return "/member/login"; // ì‹¤íŒ¨ 
+	        // ·Î±×ÀÎ ½ÇÆĞ½Ã
+	        return "/member/login";
 	    }
 	}
-
 	
+	// ºñ¹Ğ¹øÈ£ Ã£±â ÆäÀÌÁö Ãâ·Â ¿äÃ»
 	@GetMapping("/member/findPassword")
 	public String findPasswordForm() {
 		return "/member/find_password";
 	}
 	
+	// ºñ¹Ğ¹øÈ£ Ã£±â Ã³¸® (ÇöÀç ³í¸®°¡ ´©¶ôµÇ¾î ÀÖÀ½)
 	@PostMapping("/member/findPassword")
-	public String findPassword() {
-		// íšŒì› ì •ë³´ ìˆì„ì‹œ ë³´ì—¬ì£¼ëŠ” í˜ì´ì§€
-		return "/member/find_password_ok";
+	public String findPassword(@ModelAttribute MemberDTO memberDTO) {
+		MemberDTO foundMember = memberService.searchPw(memberDTO);
+		if (foundMember != null) {
+			// È¸¿ø Á¤º¸°¡ ÀÖÀ» °æ¿ì Ãâ·Â ÆäÀÌÁö	
+			return "/member/find_password_ok";
+		} else {
+			return "/member/find_password_ng";
+		}
 		
-		// íšŒì› ì •ë³´ ì—†ì„ ì‹œ ë³´ì—¬ì£¼ëŠ” í˜ì´ì§€
-		// return "/member/find_password_ng";
 	}
 	
+	// ID Ã£±â ÆäÀÌÁö Ãâ·Â ¿äÃ»
 	@GetMapping("/member/findId")
 	public String findIdForm() {
 		return "/member/find_id";
 	}
 	
+	// ID Ã£±â Ã³¸® (ÇöÀç ³í¸®°¡ ´©¶ôµÇ¾î ÀÖÀ½)
 	@PostMapping("/member/findId")
 	public String findId(@ModelAttribute MemberDTO memberDTO) {
-		// íšŒì› ì •ë³´ ìˆì„ì‹œ ë³´ì—¬ì£¼ëŠ” í˜ì´ì§€ 
-		
-		return "/member/find_id_ok";
-		
-		// íšŒì› ì •ë³´ ì—†ì„ì‹œ ë³´ì—¬ì£¼ëŠ” í˜ì´ì§€
-		// return "/member/find_id_ng";
+	    MemberDTO foundMember = memberService.searchId(memberDTO);
+
+	    if (foundMember != null) {
+	        // È¸¿ø Á¤º¸°¡ ÀÖÀ» °æ¿ì Ãâ·Â ÆäÀÌÁö
+	        return "/member/find_id_ok";
+	    } else {
+	        // È¸¿ø Á¤º¸°¡ ¾øÀ» °æ¿ì Ãâ·Â ÆäÀÌÁö
+	        return "/member/find_id_ng";
+	    }
 	}
+
 	
-	@GetMapping("/member/logout")		// ë¡œê·¸ì•„ì›ƒ ë²„íŠ¼ ëˆ„ë¥´ë©´ ì„¸ì…˜ ë¬´íš¨í™”.
+	// ·Î±×¾Æ¿ô Ã³¸® (¼¼¼Ç Á¾·á)
+	@GetMapping("/member/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "main";
 	}
 	
+	// »ç¿ëÀÚ Á¤º¸ ÆäÀÌÁö Ãâ·Â ¿äÃ»
 	@GetMapping("/member/userInfo")
 	public String userInfoForm() {
 		return "/member/userInfo";
+	}
+	
+	// »ç¿ëÀÚ ÇÁ·ÎÇÊ È¸¿ø ¼öÁ¤ ¿äÃ»
+	@PostMapping("/member/update")
+	public String userUpdate() {
+		return null;
+	}
+	
+	// »ç¿ëÀÚ Å»Åğ ¿äÃ»
+	@PostMapping("/mmeber/delete")
+	public String userDelete() {
+		return null;
 	}
 
 }

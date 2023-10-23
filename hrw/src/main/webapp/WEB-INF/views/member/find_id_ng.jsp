@@ -4,11 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
-<link rel="stylesheet" href="resources/css/form/find_id_ng.css" />
+    <link rel="stylesheet" href="../css/member/result/find_id_ng.css">
 </head>
 <body>
 
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="../include/header.jsp"/>
     
     <div class="container">
     
@@ -16,18 +16,18 @@
     	    <h3 class="title">아이디 찾기</h3>
     	
     	    <div class="result">
-    		    <img src="resources/img/forbidden.png" alt="금지 아이콘">입력하신 정보와 일치하는 회원정보가 없습니다.
+    		    <img src="../images/forbidden.png" alt="금지 아이콘">입력하신 정보와 일치하는 회원정보가 없습니다.
     	    </div>
     	
     	    <p>
-                <input type="button" value="로그인 하기" class="#" onclick="location.href='login_form.jsp'"> 
-                <input type="button" value="회원가입" class="#" onclick="location.href='create_account_form.jsp'">
+                <a href="/member/login"><input type="button" value="로그인 하기" class="#"> </a>
+                <a href="/member/join"><input type="button" value="회원가입" class="#"></a>
             </p>
     	
         </form>
     
     </div>
     
-    <jsp:include page="footer.jsp"/>
+    <jsp:include page="../include/footer.jsp"/>
 </body>
 </html>
