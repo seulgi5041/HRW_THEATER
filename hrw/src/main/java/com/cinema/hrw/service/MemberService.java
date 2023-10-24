@@ -16,7 +16,17 @@ public class MemberService {
 	
 	private final MemberRepository memberRepository;
 	
-	public void join(MemberDTO memberDTO) {
+	public void join(MemberDTO memberDTO) throws Exception {
+	    // 중복된 userId 확인
+	    if (memberRepository.existsByUserId(memberDTO.getUserId())) {
+	        throw new Exception("이미 존재하는 아이디입니다.");
+	    }
+
+	    // 중복된 userEmail 확인
+	    if (memberRepository.existsByUserEmail(memberDTO.getUserEmail())) {
+	        throw new Exception("이미 사용 중인 이메일입니다.");
+	    }
+		
 		// 1. dto -> entity로 변환.
 		MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
 		memberRepository.save(memberEntity);	// 저장 성공 여부 확인.
@@ -77,4 +87,43 @@ public class MemberService {
 		}
 		
 	}
+
+	public void deleteId(MemberDTO memberDTO) {
+		memberRepository.deleteById(memberDTO.getUserId());
+		
+	}
+	
+	public MemberDTO getCurrentUserInfo(String userId) {
+	    Optional<MemberEntity> userEntity = memberRepository.findByUserId(userId);
+	    if(userEntity.isPresent()) {
+	        return MemberDTO.toMemberDTO(userEntity.get());
+	    }
+	    return null;
+	}
+
+    public void updateUserInfo(MemberDTO memberDTO) throws Exception {
+        // 데이터베이스에서 현재 유저 정보를 가져옵니다.
+        Optional<MemberEntity> optMember = memberRepository.findByUserId(memberDTO.getUserId());
+        
+        // 해당 유저가 존재하지 않으면 예외를 발생시킵니다.
+        if (!optMember.isPresent()) {
+            throw new Exception("사용자 정보가 존재하지 않습니다.");
+        }
+        
+        MemberEntity member = optMember.get();
+        
+        // DTO로부터 가져온 정보를 사용하여 Entity의 값을 업데이트합니다.
+        member.setUserPassword(memberDTO.getUserPassword()); // 비밀번호 업데이트
+        member.setUserPasswordAgain(memberDTO.getUserPasswordAgain()); // 비밀번호 업데이트
+        member.setUserName(memberDTO.getUserName());         // 이름 업데이트
+        member.setUserGender(memberDTO.getUserGender());     // 성별 업데이트
+        member.setUserEmail(memberDTO.getUserEmail());       // 이메일 업데이트
+        member.setUserPhone(memberDTO.getUserPhone());       // 전화번호 업데이트
+        // (기타 필드들도 이와 같이 업데이트 가능)
+        
+        // 변경된 정보를 데이터베이스에 저장합니다.
+        memberRepository.save(member);
+    }
+
+
 }

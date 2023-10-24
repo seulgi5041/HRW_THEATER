@@ -15,16 +15,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "member_table")	// 테이블 생성.
+@Table(name = "member_table")	// �뀒�씠釉� �깮�꽦.
 
 public class MemberEntity {
 	
-	@Id	// pk 지정.
-	@GeneratedValue(strategy = GenerationType.IDENTITY)	// auto_increment 
-	
-	private Long idx;
-	
-	@Column (unique = true)
+	@Id	// pk 吏��젙.
+
 	private String userId;
 	
 	@Column
@@ -39,7 +35,7 @@ public class MemberEntity {
 	@Column
 	private String userGender;
 	
-	@Column 
+	@Column (unique = true)
 	private String userEmail;
 	
 	@Column
