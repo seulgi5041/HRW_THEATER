@@ -17,6 +17,7 @@ a {
 }
 img { border: 0; }
 ul { list-style: none; }
+em { font-style: normal; }
 
 
 /* 헤더 */
