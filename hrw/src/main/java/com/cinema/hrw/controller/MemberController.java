@@ -2,117 +2,144 @@ package com.cinema.hrw.controller;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.cinema.hrw.dto.MemberDTO;
 import com.cinema.hrw.service.MemberService;
 import lombok.RequiredArgsConstructor;
+
 
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
 	
-    // ¸â¹ö ¼­ºñ½º ÀÇÁ¸¼º ÁÖÀÔ
+    // ë©¤ë²„ ì„œë¹„ìŠ¤ ì£¼ì…
 	private final MemberService memberService;
 	
-	// È¸¿ø °¡ÀÔ ÆäÀÌÁö Ãâ·Â ¿äÃ»
+	// íšŒì› ê°€ì… í¼ ìš”ì²­
 	@GetMapping("/member/join")
 	public String joinForm() {
 		return "/member/join";
 	}
 	
-	// È¸¿ø °¡ÀÔ Ã³¸®
+	// íšŒì› ê°€ì… ì²˜ë¦¬
 	@PostMapping("/member/join")
-	public String join(@ModelAttribute MemberDTO memberDTO) {
-		memberService.join(memberDTO);
-		return "/member/login";
+	public String join(@ModelAttribute MemberDTO memberDTO, Model model) {
+	    try {
+	        memberService.join(memberDTO);
+	        return "redirect:/member/login";  // ê°€ì… ì„±ê³µ ì‹œ ë¦¬ë‹¤ì´ë ‰íŠ¸
+	    } catch (Exception e) {
+	        model.addAttribute("errorMessage", e.getMessage());
+	        return "/member/join";  // ì˜¤ë¥˜ ë°œìƒ ì‹œ, ë‹¤ì‹œ íšŒì› ê°€ì… í˜ì´ì§€ë¡œ ì´ë™
+	    }
 	}
+
 	
-	// ·Î±×ÀÎ ÆäÀÌÁö Ãâ·Â ¿äÃ»
+	// ë¡œê·¸ì¸ í¼ ìš”ì²­
 	@GetMapping("/member/login")
 	public String loginForm() {
 		return "/member/login";
 	}
 	
-	// ·Î±×ÀÎ Ã³¸®
+	// ë¡œê·¸ì¸ ì²˜ë¦¬
 	@PostMapping("/member/login")
 	public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
 	    MemberDTO loginResult = memberService.login(memberDTO);
 	    
-	    // ·Î±×ÀÎ ¼º°ø½Ã, ¼¼¼Ç¿¡ ID ÀúÀå
+	    // ë¡œê·¸ì¸ ì„±ê³µì‹œ, ì„¸ì…˜ì— ID ì €ì¥
 	    if (loginResult != null) {
-	        session.setAttribute("loginId", loginResult.getUserName()); 
+	        session.setAttribute("loginId", loginResult.getUserId()); 
 	        return "main";
 	    } else {
-	        // ·Î±×ÀÎ ½ÇÆĞ½Ã
+	        // ë¡œê·¸ì¸ ì‹¤íŒ¨
+	    	
 	        return "/member/login";
 	    }
 	}
 	
-	// ºñ¹Ğ¹øÈ£ Ã£±â ÆäÀÌÁö Ãâ·Â ¿äÃ»
+	// ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° í¼ ìš”ì²­
 	@GetMapping("/member/findPassword")
 	public String findPasswordForm() {
 		return "/member/find_password";
 	}
 	
-	// ºñ¹Ğ¹øÈ£ Ã£±â Ã³¸® (ÇöÀç ³í¸®°¡ ´©¶ôµÇ¾î ÀÖÀ½)
+	// ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ì²˜ë¦¬ (ë³´ì•ˆìƒ ì§ì ‘ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³´ì—¬ì£¼ëŠ” ê²ƒì€ ìœ„í—˜í•©ë‹ˆë‹¤.)
 	@PostMapping("/member/findPassword")
-	public String findPassword(@ModelAttribute MemberDTO memberDTO) {
-		MemberDTO foundMember = memberService.searchPw(memberDTO);
-		if (foundMember != null) {
-			// È¸¿ø Á¤º¸°¡ ÀÖÀ» °æ¿ì Ãâ·Â ÆäÀÌÁö	
-			return "/member/find_password_ok";
-		} else {
-			return "/member/find_password_ng";
-		}
-		
+	public String findPassword(@ModelAttribute MemberDTO memberDTO, Model model) {
+	    MemberDTO foundMember = memberService.searchPw(memberDTO);
+	    if (foundMember != null) {
+	        model.addAttribute("foundUserId", foundMember.getUserId());
+	        model.addAttribute("foundUserPassword", foundMember.getUserPassword());
+	        return "/member/find_password_ok";
+	    } else {
+	        return "/member/find_password_ng";
+	    }		
 	}
+
 	
-	// ID Ã£±â ÆäÀÌÁö Ãâ·Â ¿äÃ»
+	// ID ì°¾ê¸° í¼ ìš”ì²­
 	@GetMapping("/member/findId")
 	public String findIdForm() {
 		return "/member/find_id";
 	}
 	
-	// ID Ã£±â Ã³¸® (ÇöÀç ³í¸®°¡ ´©¶ôµÇ¾î ÀÖÀ½)
+	// ID ì°¾ê¸° ì²˜ë¦¬
 	@PostMapping("/member/findId")
-	public String findId(@ModelAttribute MemberDTO memberDTO) {
+	public ModelAndView findId(@ModelAttribute MemberDTO memberDTO) {
+	    ModelAndView mv = new ModelAndView();
 	    MemberDTO foundMember = memberService.searchId(memberDTO);
 
 	    if (foundMember != null) {
-	        // È¸¿ø Á¤º¸°¡ ÀÖÀ» °æ¿ì Ãâ·Â ÆäÀÌÁö
-	        return "/member/find_id_ok";
+	        mv.addObject("foundId", foundMember.getUserId());
+	        mv.setViewName("/member/find_id_ok");
 	    } else {
-	        // È¸¿ø Á¤º¸°¡ ¾øÀ» °æ¿ì Ãâ·Â ÆäÀÌÁö
-	        return "/member/find_id_ng";
+	        mv.setViewName("/member/find_id_ng");
 	    }
+	    return mv;
 	}
 
 	
-	// ·Î±×¾Æ¿ô Ã³¸® (¼¼¼Ç Á¾·á)
+	// ë¡œê·¸ì•„ì›ƒ ì²˜ë¦¬ (ì„¸ì…˜ ì¢…ë£Œ)
 	@GetMapping("/member/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "main";
 	}
 	
-	// »ç¿ëÀÚ Á¤º¸ ÆäÀÌÁö Ãâ·Â ¿äÃ»
+	// í˜„ì¬ ì‚¬ìš©ì ì •ë³´ í¼ ìš”ì²­
 	@GetMapping("/member/userInfo")
-	public String userInfoForm() {
-		return "/member/userInfo";
+	public String userInfoForm(HttpSession session, Model model) {
+	    String currentUserId = (String) session.getAttribute("loginId");
+	    System.out.println(currentUserId);
+	    if(currentUserId != null) {
+	        MemberDTO currentUserInfo = memberService.getCurrentUserInfo(currentUserId);
+	        model.addAttribute("userInfo", currentUserInfo);
+	    }
+	    return "/member/userInfo";
 	}
 	
-	// »ç¿ëÀÚ ÇÁ·ÎÇÊ È¸¿ø ¼öÁ¤ ¿äÃ»
+	// í˜„ì¬ ì‚¬ìš©ì ì •ë³´ ì—…ë°ì´íŠ¸ ìš”ì²­
 	@PostMapping("/member/update")
-	public String userUpdate() {
-		return null;
+	public String userUpdate(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+	    try {
+	        memberService.updateUserInfo(memberDTO); // ì •ë³´ ì—…ë°ì´íŠ¸ ë¡œì§ í˜¸ì¶œ
+	        session.setAttribute("message", "ì •ë³´ê°€ ì„±ê³µì ìœ¼ë¡œ ì—…ë°ì´íŠ¸ë˜ì—ˆìŠµë‹ˆë‹¤.");
+	        return "redirect:/member/userInfo";
+	    } catch (Exception e) {
+	        session.setAttribute("message", "ì •ë³´ ì—…ë°ì´íŠ¸ë¥¼ ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+	        return "/member/userInfo"; 
+	    }
 	}
 	
-	// »ç¿ëÀÚ Å»Åğ ¿äÃ»
-	@PostMapping("/mmeber/delete")
-	public String userDelete() {
-		return null;
+	// í˜„ì¬ ì‚¬ìš©ì ì‚­ì œ ìš”ì²­
+	@PostMapping("/member/delete")
+	public String userDelete(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+		memberService.deleteId(memberDTO);
+		session.invalidate();
+		return "redirect:/";
 	}
-
 }

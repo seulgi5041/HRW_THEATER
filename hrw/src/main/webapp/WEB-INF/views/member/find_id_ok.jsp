@@ -17,7 +17,8 @@
     	
     	    <h4 class="subtitle">고객님의 정보와 일치하는 아이디 목록입니다.</h4>
     	
-    	    <div class="id-display">아이디: <!-- db에서 가져온 아이디 --></div>
+    	    <div class="id-display">아이디: ${foundId}</div>
+
     	
     	    <p>
                 <a href="/member/login"><input type="button" value="로그인 하기" class="#"> </a>
