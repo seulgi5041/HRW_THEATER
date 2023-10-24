@@ -49,6 +49,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   /**영화 정보 변경 */
+  /*로드 한직후엔 첫번째 영화띄워주기*/
+  window.addEventListener('load', async function() {
+    const firstMovie = document.querySelector('[data-movie-code]'); // 첫 번째 영화 요소
+    const movieCode = firstMovie.getAttribute('data-movie-code'); // 영화 코드
+    const movieTitle = firstMovie.textContent; // 영화 제목
+  
+    changePoster(movieCode); // 포스터 이미지 변경
+    var movie_data = await box_office_info(movieCode); // 영화 정보
+    changeMovieInfo(movie_data, movieTitle); // 영화 코드에 맞는 정보로 변경
+  });
+
   function changeMovieInfo(movie_data, movieTitle){
     console.log(movie_data)
 
@@ -127,7 +138,26 @@ spanElements.forEach(function (span) {
   });
 });
 
+/*상세보기 , 예매 버튼클릭시 겟매핑으로 정보전달하여 링크*/
 
+const movie_detail_btn = document.querySelectorAll(".movie_detail");
+const movie_ticketing_btn = document.querySelectorAll(".movie_ticketing");
+
+movie_detail_btn.forEach(button => {
+    button.addEventListener("click", function () {
+        var movieCode = this.getAttribute("name");
+        var movie_detail_link = "/movieinfo?code="+movieCode;
+        window.location.href = movie_detail_link;
+    });
+});
+
+movie_ticketing_btn.forEach(button => {
+    button.addEventListener("click", function () {
+        var movieCode = this.getAttribute("data-movie-code");
+        var movie_ticketing_link = "/예매링크?code="+movieCode;
+        window.location.href = movie_ticketing_link;
+    });
+});
 
 
 
@@ -149,7 +179,20 @@ searchButton.addEventListener("click", function() {
 
 function performSearch() {
   const searchQuery = searchInput.value;
-  alert("검색결과(나중에 쿼리문 사용 수정) " + searchQuery);
+  //alert("검색결과(나중에 쿼리문 사용 수정) " + searchQuery);
+  let form = document.createElement('form');
+    
+    let obj;
+    obj = document.createElement('input');
+    obj.setAttribute('type', 'text');
+    obj.setAttribute('name', 'searchQuery');
+    obj.setAttribute('value', searchQuery);
+    
+    form.appendChild(obj);
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', '/movierecommend');
+    document.body.appendChild(form);
+    form.submit();
 }
 
 

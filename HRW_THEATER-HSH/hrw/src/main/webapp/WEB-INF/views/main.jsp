@@ -30,8 +30,8 @@
                         <div class="image_box"> 
                             <img src="../images/poster_rank/${movie.code}.jpg" alt="${movie.code}" class="zoom_image">
                             <div class="overlay">
-                                <button class="movie_detail">상세보기</button>
-                                <button class="movie_ticketing">예매하기</button> 
+                                <button class="movie_detail" name="${movie.code}">상세보기</button>
+                                <button class="movie_ticketing" name="${movie.code}">예매하기</button> 
                             </div>
                         </div>
                     </div>
@@ -62,34 +62,34 @@
           <!--영화정보 리스트있는부분-->
           <div class="movie_content_info">
             <div class="movie_title bdbtm">
-              <strong name="title" class="ellip" id="movieNm">30일</strong>
-              <span name="etitle" class="ellip" id="movieNmEn">Love Reset</span>
+              <strong name="title" class="ellip" id="movieNm">정보없음</strong>
+              <span name="etitle" class="ellip" id="movieNmEn">정보없음</span>
             </div>
             <div name="movie_data">
               <!-- bdbtm - borderbottom / pd15 - padding15 -->
               <dl class="dbmovie_info bdbtm pd15">
                 <dt class="strdt">개봉일</dt>
-                <dd class="strdd" id="openDt_api">2023-10-03</dd>
+                <dd class="strdd" id="openDt_api">정보없음</dd>
                 <dt class="strdt" >영화구분</dt>
-                <dd class="strdd" id="typeNm_api">일반영화</dd>
+                <dd class="strdd" id="typeNm_api">정보없음</dd>
                 <dt class="strdt" >출연진</dt>
-                <dd class="strdd" id="peopleNm_api">강하늘, 정소민, 조민수, 김선영</dd>
+                <dd class="strdd" id="peopleNm_api">정보없음</dd>
               </dl>
               <dl class="dbmovie_info bdbtm pd15">
                 <dt class="strdt" >관람등급</dt>
-                <dd class="strdd" id="watchGradeNm_api">12세이상관람가</dd>
+                <dd class="strdd" id="watchGradeNm_api">정보없음</dd>
                 <dt class="strdt" >상영시간</dt>
-                <dd class="strdd" id="showTm_api">119분</dd>  <!-- db에서 가져올 때 초 단위 제거-->
+                <dd class="strdd" id="showTm_api">정보없음</dd>  <!-- db에서 가져올 때 초 단위 제거-->
                 <dt class="strdt">제작국가</dt>
-                <dd class="strdd" id="nationNm_api">한국</dd>
+                <dd class="strdd" id="nationNm_api">정보없음</dd>
               </dl>
               <dl class="dbmovie_info pd15">
                 <dt class="strdt" >감독</dt>
-                <dd class="strdd" id="peopleNmEn_api">남대중</dd>
+                <dd class="strdd" id="peopleNmEn_api">정보없음</dd>
                 <dt class="strdt" >장르</dt>
-                <dd class="strdd" id="genreNm_api">코미디</dd>
+                <dd class="strdd" id="genreNm_api">정보없음</dd>
                 <dt class="strdt" >배급사</dt>
-                <dd class="strdd" id="companyNm_api">(주)마인드마크</dd>
+                <dd class="strdd" id="companyNm_api">정보없음</dd>
               </dl>
             </div>
           </div>
@@ -162,7 +162,7 @@
         </div>
         <div class="movie_recommend_search">
           <input type="text" id="searchInput" placeholder="#장진#크라임씬#조승우#2007">
-          <a href="#" class="recommend_btn" id="searchButton"><img src="../images/main/search.png" alt="검색버튼"></a>
+          <a href="javascript:void(0)" class="recommend_btn" id="searchButton"><img src="../images/main/search.png" alt="검색버튼"></a>
         </div>
         <div class="recommend_tag">
           <p>#를 붙여 감독, 배우, 제목 등 원하는 키워드로 검색하세요.</p>

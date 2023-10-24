@@ -71,11 +71,14 @@ public class MovieEntity {
     @Column(name = "cumulative_number_of_audience")
     private String cumulativeNumberOfAudience;
     
-    @Column(name = "increase_decrease_status")
+    @Column(name = "increase_decrease_status" ,columnDefinition = "INTEGER DEFAULT 0") /* 0 : new / 1 :up / 2 : down / 3 : keep */
     private Integer increaseDecreaseStatus;
     
     @Column(name = "increase_decrease_rate")
     private Integer increaseDecreaseRate;
+
+    @Column(name = "advance_reservation_rate_rank")
+    private Integer advance_reservation_rate_rank;
 
     @Column(name = "poster_url")
     private String posterUrl;

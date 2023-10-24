@@ -47,6 +47,23 @@ public class MovieService {
         }
 
         return movieList;
+    }
+
+    public MovieDTO selectMovieInfo(MovieDTO movieDTO) {
+        MovieEntity choicedMovieInfoEntity = movieRepository.findByCode(movieDTO.getCode());
+
+        MovieDTO choicedMovieInfo = movieDTO.toMovieDTO(choicedMovieInfoEntity);
+        return choicedMovieInfo; 
+    }
+
+    public List<MovieDTO> selectNowMovieList(String searchInputKeyword) {
+       List<MovieEntity> SearchNowMovieListEntity = movieRepository
+
+        return null;
+    }
+
+    public List<MovieDTO> selectPrevMovieList(String searchInputKeyword) {
+        return null;
     } 
     
     

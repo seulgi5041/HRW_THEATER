@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -31,7 +30,12 @@
             <c:otherwise></c:otherwise>
           </c:choose>
           <div class="movielist_movieposter_cell">
-            <a class="movielist_movieposter_cell" href="#">
+
+            <c:url value="/movieinfo" var="movieInfoUrl">
+              <c:param name="code" value="${movie.code}" /> <!--파라미터에 코드추가-->
+          </c:url>
+
+            <a class="movielist_movieposter_cell" href="${movieInfoUrl}"> <!--포스터쪽 div클릭시 영화 상세정보로 이동-->
                 <img src="../images/poster_rank/${movie.code}.jpg" alt="${movie.title}">
                 <div class="movielist_movieposter_overlay">
                   <p>${movie.synopsis}</p>

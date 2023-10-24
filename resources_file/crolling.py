@@ -4,6 +4,8 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import pymysql
+import pandas as pd
+from sqlalchemy import create_engine
 
 # 크롬 드라이버 경로 설정
 driver_path = r"C:\FileIO\chromedriver.exe"
@@ -38,7 +40,49 @@ def is_movie_exists(cursor, code):
     result = cursor.fetchone()
     return result[0] > 0
 
+# advance_reservation_rate_rank 에 순위지정
+def advance_reservation_rate_rank_update():
+    engine = create_engine('mysql+pymysql://root:1234@localhost/moviepjt?charset=utf8')
 
+    # 데이터베이스에서 영화 정보를 가져옴
+    sql_query = "SELECT * FROM movietbl ORDER BY advance_reservation_rate DESC"
+    data = pd.read_sql(sql_query, engine)
+
+    # advance_reservation_rate를 기준으로 순위를 매김
+    data['advance_reservation_rate_rank'] = data['advance_reservation_rate'].rank(ascending=False, method='first')
+
+    # 데이터를 다시 데이터베이스 테이블에 업데이트
+    data.to_sql(name='movietbl', con=engine, if_exists='replace', index=False)
+
+    print('랭크정보 변경완료')
+
+#순위증감률 변경
+
+def update_movie_info(movie_code, new_rank, old_rank):
+    conn = pymysql.connect(host='localhost', user='root', password='1234', db='moviepjt', charset='utf8')
+    try:
+        with conn.cursor() as cursor:
+            # 영화 정보 가져오기
+
+            if new_rank < old_rank:
+                # 순위가 오른 경우
+                increase_decrease_status = 1
+                increase_decrease_rate =  old_rank - movie_code
+            elif new_rank > old_rank:
+                # 순위가 내려간 경우
+                increase_decrease_status = 2
+                increase_decrease_rate = old_rank - movie_code
+            else:
+                # 순위가 그대로인 경우
+                increase_decrease_status = 3
+                increase_decrease_rate = 0
+                # 업데이트 SQL 실행
+            sql = "UPDATE movietbl SET increase_decrease_status = %s, increase_decrease_rate = %s WHERE code = %s"
+            cursor.execute(sql, (increase_decrease_status, increase_decrease_rate, movie_code))
+            conn.commit()
+            print(f"영화 코드 {movie_code} 정보 업데이트 완료")
+    finally:
+        conn.close()
 
 # 웹 페이지가 로드될 때까지 대기
 time.sleep(10)  # 필요에 따라 대기 시간 조정
@@ -46,6 +90,13 @@ time.sleep(10)  # 필요에 따라 대기 시간 조정
 # 웹 페이지의 HTML 가져오기
 main_HTML = driver.page_source
 main_HTML_soup = BeautifulSoup(main_HTML, 'html.parser')
+
+
+'''수정전 테이블정보 저장'''
+engine = create_engine('mysql+pymysql://root:1234@localhost/moviepjt?charset=utf8')
+sql_query = "SELECT code, advance_reservation_rate_rank FROM movietbl"
+movies_before_update = pd.read_sql(sql_query, engine)
+
 
 # 팝업 창을 클릭하고 정보 수집
 target_tr_tags = main_HTML_soup.find_all('tr', id="tr_")
@@ -92,8 +143,14 @@ for tr_tag in target_tr_tags:
             src = rating_tag['src']
             rating = src.split("/")[-1] #등급분류이미지
             rating = rating.replace("rating","gr" )
-            rating = rating.replace("jpg", "")
-            release_date = popup_soup.find('dt', string='개봉일').find_next('dd').get_text(strip=True)
+            rating = rating.replace(".jpg", "")
+            release_date_element = popup_soup.find('dt', string='개봉일')
+            if release_date_element:
+                release_date = release_date_element.find_next('dd').get_text(strip=True)
+            else:
+                release_date_element = popup_soup.find('dt', string='개봉(예정)일')
+                release_date = release_date_element.find_next('dd').get_text(strip=True)
+                release_date = release_date+" 개봉예정"
             production_year = popup_soup.find('dt', string='제작연도').find_next('dd').get_text(strip=True)
             production_condition = popup_soup.find('dt', string='제작상태').find_next('dd').get_text(strip=True)
             crank_in_up = popup_soup.find('dt', string='크랭크인/업').find_next('dd').get_text(strip=True)
@@ -126,15 +183,27 @@ for tr_tag in target_tr_tags:
                     actor += ' <br>'
 
             producer_element = popup_soup.find('dt', string='제작사')
-            producer = producer_element.find_next(
-                'dd').get_text(strip=True) if producer_element else "정보 없음"
-            distributor_element = popup_soup.find('dt', string='배급사')
-            distributor = producer_element.find_next(
-                'dd').get_text(strip=True) if producer_element else "정보 없음"
-            importer_element = popup_soup.find('dt', string='수입사')
-            importer = producer_element.find_next(
-                'dd').get_text(strip=True) if producer_element else "정보 없음"
+            producer = '정보없음'
+            if producer_element :
+                producer_dd_tag =producer_element.find_next( 'dd')
+                producer_a_tag = producer_dd_tag.find_all('a')
+                producer = ' | '.join(d.get_text(strip=True) for d in producer_a_tag)
 
+
+            distributor_element = popup_soup.find('dt', string='배급사')
+            distributor = '정보없음'
+            if distributor_element :
+                distributor_dd_tag =distributor_element.find_next( 'dd')
+                distributor_a_tag = distributor_dd_tag.find_all('a')
+                distributor = ' | '.join(d.get_text(strip=True) for d in distributor_a_tag)
+
+
+            importer_element = popup_soup.find('dt', string='수입사')
+            importer = '정보없음'
+            if importer_element :
+                importer_dd_tag =importer_element.find_next('dd')
+                importer_a_tag = importer_dd_tag.find_all('a')
+                importer = ' | '.join(d.get_text(strip=True) for d in importer_a_tag)
 
 
             # MySQL 데이터베이스에 정보 저장
@@ -175,6 +244,25 @@ for tr_tag in target_tr_tags:
             break
     if idx > 30:
         break
+advance_reservation_rate_rank_update()
+
+'''수정완료후 테이블 가져와서 수정전과 비교'''
+engine = create_engine('mysql+pymysql://root:1234@localhost/moviepjt?charset=utf8')
+sql_query = "SELECT code, advance_reservation_rate_rank FROM movietbl"
+movies_after_update = pd.read_sql(sql_query, engine)
+
+
+'''수정전후 비교'''
+for index, row in movies_after_update.iterrows():
+    movie_code = row['code']
+    new_rank = row['advance_reservation_rate_rank']
+    try:
+        old_rank = movies_before_update[movies_before_update['code'] == movie_code]['advance_reservation_rate_rank'].values[0]
+    except IndexError:
+        continue
+    update_movie_info(movie_code, new_rank, old_rank)
+
+
 
 # 크롬 브라우저 닫기
 driver.quit()

@@ -33,6 +33,13 @@ main {
     margin-bottom: 70px;
 }
 
+#basic_movie_info_title{
+  font-size: 2em;
+  color: #383838;
+padding-bottom: 30px;
+padding-left: 50px;
+}
+
 #basic_movie_info {
     display: flex;
     align-items: center;  /* 아이템들을 세로 가운데 정렬 */
