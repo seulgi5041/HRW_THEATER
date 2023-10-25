@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
 
+    // 유효성 검사 함수
     function validateForm() {
+        console.log("Validation form");
+
         // 아이디 검사: 영문, 숫자 6~20자
         var userId = document.getElementById("userId").value;
         var userIdPattern = /^[A-Za-z0-9]{6,20}$/;
@@ -32,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // 성별 검사
-        var userGender = document.querySelector("#u_m_gender").value;
+        var userGender = document.querySelector("#userGender").value;
         if (userGender === "") {
             alert("성별을 선택해주세요.");
             return false;
@@ -57,4 +60,25 @@ document.addEventListener("DOMContentLoaded", function() {
         return true; // 모든 검사를 통과했을 때
     }
 
+    // 폼 제출 이벤트에 유효성 검사 함수를 연결합니다.
+    var userForm = document.getElementById("userForm");
+    userForm.addEventListener("submit", function(event) {
+        if (!validateForm()) {
+            event.preventDefault(); // 유효성 검사에 실패하면 폼 제출을 막습니다.
+        } else {
+            // 유효성 검사를 통과하면 원하는 경로로 폼 제출 (예: '/member/update')
+            submitForm('/member/update');
+        }
+    });
+
+    // 기존의 JavaScript 코드
+    function submitForm(action) {
+        if (action === '/member/delete' && !confirm('정말 탈퇴하시겠습니까?')) {
+            return;
+        }
+
+        var form = document.getElementById('userForm');
+        form.action = action;
+        form.submit(); // 폼을 직접 제출
+    }
 });

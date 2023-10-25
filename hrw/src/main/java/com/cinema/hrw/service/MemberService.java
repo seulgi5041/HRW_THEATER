@@ -111,7 +111,6 @@ public class MemberService {
         }
         
         MemberEntity member = optMember.get();
-        
         // DTO로부터 가져온 정보를 사용하여 Entity의 값을 업데이트합니다.
         member.setUserPassword(memberDTO.getUserPassword()); // 비밀번호 업데이트
         member.setUserPasswordAgain(memberDTO.getUserPasswordAgain()); // 비밀번호 업데이트
@@ -120,7 +119,7 @@ public class MemberService {
         member.setUserEmail(memberDTO.getUserEmail());       // 이메일 업데이트
         member.setUserPhone(memberDTO.getUserPhone());       // 전화번호 업데이트
         // (기타 필드들도 이와 같이 업데이트 가능)
-        
+       
         // 변경된 정보를 데이터베이스에 저장합니다.
         memberRepository.save(member);
     }

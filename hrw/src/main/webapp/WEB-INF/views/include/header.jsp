@@ -15,7 +15,7 @@
         <% if(loggedInUserName != null) { %> <!-- 로그인 체크 -->
         <!-- 로그인 성공 시 나타나는 부분 -->
         <div class="login_user" id = "login_user">
-            <p><span id="userName"><%= loggedInUserName %></span>님 환영합니다.</p>
+            <p><span id="user_Name"><%= loggedInUserName %></span>님 환영합니다.</p>
 
         </div>
         <% } %>
