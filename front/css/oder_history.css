@@ -63,13 +63,14 @@ main {
 display: flex;
 flex-direction:column;
  margin: 50px;
+ padding: 0 50px;
  padding-bottom: 50px;
  border-bottom: 1px solid #d3d3d3;  
 }
 
 .oder_history_row h3{
   font-size: 2em;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   color: #383838;
 }
 
@@ -77,49 +78,37 @@ flex-direction:column;
   display: flex;
 }
 
-.oder_history_img_cell{
+/*주문일자, 주문번호*/
+
+.oder_history_title_cell{
   display: flex;
   flex:1 ;
-}
-.oder_history_img_cell img{
-  max-width: 135px;
-  width: 100%;
-  height: auto;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.oder_history_img_cell img:last-child{
-  max-width: 140px;
-  width: 100%;
-  height: auto;
+.oder_history_title_cell dl{
+  display: flex;
+  align-items: center;
 }
 
-.oder_history_img_cell img.hidden{ /*음식이나 영화중하나만주문시 없는이미지 가리기*/
-display: none;
+.oder_history_title_cell dt{
+  font-size: 1.5em;
+  color: #383838;
+  margin-right: 20px;
+  font-weight: 900;
 }
+
+.oder_history_title_cell dd{
+  font-size: 1.3em;
+  color: #848484;
+
+}
+
+/*정보표*/
 
 .oder_history_info_cell{
   flex: 1; 
-}
-.oder_history_ditail_btn_cell{
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-.oder_history_ditail_btn{
-  border: none;
-  color: #ffffff;
-  background-color: #ff1900e1;
-  width: 100px;
-  padding: 5px 0;
-  margin-left: 100px;
-}
-
-.oder_history_ditail_btn:hover{
-  border: 1px solid #848484;;
-  color: #383838;
-  background-color: transparent;
 }
 
 .oder_history_info_cell tr{
@@ -131,15 +120,40 @@ display: none;
 
 .oder_history_info_cell th{
   color: #383838;
-  font-size: 1.8em;
+  font-size: 1.5em;
   margin-right: 30px;
   white-space: nowrap;
 }
 
 .oder_history_info_cell td{
   color: #848484;
-  font-size: 1.5em;
+  font-size: 1.3em;
   white-space: nowrap;
+}
+
+/*자세히보기버튼*/
+
+.oder_history_ditail_btn_cell{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.oder_history_ditail_btn{
+  border: none;
+  color: #ffffff;
+  font-size: 1.5em;
+  background-color: #ff1900e1;
+  padding: 5px 0;
+  height: 35px;
+  margin-left: 50px;
+}
+
+.oder_history_ditail_btn:hover{
+  border: 1px solid #848484;
+  color: #383838;
+  background-color: transparent;
 }
 
 

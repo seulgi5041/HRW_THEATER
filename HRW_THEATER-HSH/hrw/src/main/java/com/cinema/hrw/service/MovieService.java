@@ -57,7 +57,7 @@ public class MovieService {
     }
 
     public List<MovieDTO> selectNowMovieList(String searchInputKeyword) {
-       List<MovieEntity> SearchNowMovieListEntity = movieRepository
+       List<MovieEntity> SearchNowMovieListEntity = movieRepository.findTop10ByOrderByAdvanceReservationRateDesc();//키워드 검색하여띄우는 것으로 변경
 
         return null;
     }

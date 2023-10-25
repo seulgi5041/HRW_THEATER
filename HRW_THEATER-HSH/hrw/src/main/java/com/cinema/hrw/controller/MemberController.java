@@ -40,11 +40,11 @@ public class MemberController {
 		MemberDTO loginResult = memberService.login(memberDTO);
 		
 		if (loginResult != null) {
-			//login ¼º°ø
+			//login ì„±ê³µ
 			session.setAttribute("loginId", loginResult.getUserId());
 			return "main";
 		} else {
-			return "/member/login"; // ½ÇÆÐ
+			return "/member/login"; // ì‹¤íŒ¨
 		}
 	}
 	
