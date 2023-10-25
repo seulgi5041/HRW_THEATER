@@ -1,0 +1,196 @@
+@charset "UTF-8";
+
+/* 초기화 */
+* { 
+    margin: 0; padding: 0; 
+    font-family: 'DM Sans', Arial, 'sans-serif';
+}
+html {
+    font-size:62.5%;
+    background-color: #F5F4F2;
+    color: #000;
+}
+body {overflow-x: hidden; }
+a { 
+    text-decoration: none !important; 
+    color: #383838;
+}
+img { border: 0; }
+ul { list-style: none; }
+
+
+/* 메인메뉴 */
+main {
+  max-width: 1440px;
+  width: 100%;
+  margin-top: 160px;
+  margin: 0 auto;
+}
+
+
+
+#oder_history_wrap{
+  padding: 0 50px;
+  margin: 0 50px;
+}
+
+#oder_history_title {
+  padding: 0 50px;
+}
+
+#oder_history_title h1{
+    padding: 20px 0;
+    font-size: 3em;
+    color: #383838;
+    font-weight: 600;
+    margin-bottom: 70px;
+}
+
+
+
+.oder_container_title{
+  font-size: 1.5em;
+  border-bottom: solid 2px #FB3D28;
+  border-left: solid 7px #FB3D28;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  margin-bottom: 50px;
+  }
+
+/*주문건 한건당 oder_history_row 생성*/
+
+.oder_history_row{
+display: flex;
+flex-direction:column;
+ margin: 50px;
+ padding-bottom: 50px;
+ border-bottom: 1px solid #d3d3d3;  
+}
+
+.oder_history_row h3{
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #383838;
+}
+
+.oder_history_info{
+  display: flex;
+}
+
+.oder_history_img_cell{
+  display: flex;
+  flex:1 ;
+}
+.oder_history_img_cell img{
+  max-width: 135px;
+  width: 100%;
+  height: auto;
+}
+
+.oder_history_img_cell img:last-child{
+  max-width: 140px;
+  width: 100%;
+  height: auto;
+}
+
+.oder_history_img_cell img.hidden{ /*음식이나 영화중하나만주문시 없는이미지 가리기*/
+display: none;
+}
+
+.oder_history_info_cell{
+  flex: 1; 
+}
+.oder_history_ditail_btn_cell{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.oder_history_ditail_btn{
+  border: none;
+  color: #ffffff;
+  background-color: #ff1900e1;
+  width: 100px;
+  padding: 5px 0;
+  margin-left: 100px;
+}
+
+.oder_history_ditail_btn:hover{
+  border: 1px solid #848484;;
+  color: #383838;
+  background-color: transparent;
+}
+
+.oder_history_info_cell tr{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.oder_history_info_cell th{
+  color: #383838;
+  font-size: 1.8em;
+  margin-right: 30px;
+  white-space: nowrap;
+}
+
+.oder_history_info_cell td{
+  color: #848484;
+  font-size: 1.5em;
+  white-space: nowrap;
+}
+
+
+/*검색결과 없음 창*/
+
+.no_oder_result {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 50px;
+  width: 100%;
+  gap: 30px;
+  margin-bottom: 120px;
+}
+
+.no_oder_result img {
+  margin-right: 10px; 
+  max-width: 50px;
+  
+}
+
+.no_oder_result h2 {
+  white-space: nowrap; 
+  text-overflow: ellipsis; 
+  color: #848484;
+  font-size: 2.5em;
+}
+
+.no_oder_result.hidden{
+  display: none;
+}
+
+/**/
+
+.oder_history_row.hidden{
+  display: none;
+  
+}
+
+/*더보기 버튼*/
+#oder_history_show_next_button{
+  display: block;
+  width: 100%;
+  margin: 10px;
+  margin-bottom: 90px;
+  padding: 0;
+  height: 60px;
+  border: 1px solid #b6b3b3;
+  background-color: transparent;
+  color: #666;
+  font-size: 2em;
+}
+
+

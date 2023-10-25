@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cinema.hrw.dto.MovieDTO;
 import com.cinema.hrw.service.MovieService;
@@ -34,11 +35,11 @@ public class MovieController {
     }
 
     @PostMapping("/movierecommend")
-    public String movierecommend(String searchInputKeyword, Model model){
-       List<MovieDTO> searchNowMovieList= movieService.selectNowMovieList(searchInputKeyword);
+    public String movierecommend(@RequestParam("searchQuery") String searchInputKeyword, Model model){
+       /*List<MovieDTO> searchNowMovieList= movieService.selectNowMovieList(searchInputKeyword);
        List<MovieDTO> searchPrevMovieList= movieService.selectPrevMovieList(searchInputKeyword);
        model.addAttribute("searchNowMovieList",searchNowMovieList);
-       model.addAttribute("searchPrevMovieList",searchPrevMovieList);
+       model.addAttribute("searchPrevMovieList",searchPrevMovieList);*/
         System.out.println(searchInputKeyword);
        return "movie/movie_recommend";
     }

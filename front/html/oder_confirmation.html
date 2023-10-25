@@ -40,7 +40,13 @@
 
   <main>
     <section id="oder_confirmation_wrap">
-      <div id="oder_confirmation_title"><h1>주문확인</h1></div>
+      <div id="oder_confirmation_title">
+        <h1>2023.10.23 주문</h1>
+         <dl>
+          <dt> 주문번호</dt>
+          <dd>aaa0120231025001</dd>
+         </dl>
+        </div>
       
       <article id="oder_movie_container"> 
 
@@ -269,9 +275,38 @@
 
       </article>
 
-      <article id="oder_price_container">
+      <article id="oder_paymen_container">
+        <div class="oder_container_title">
+          <h2>결제 정보</h2>
+        </div>
+
+          <div class="payment_info">
+            <table>
+
+              <tr>
+                <th>결제수단</th>
+                <td>카드</td> <!-- 카드, 무통장입금, 간편결제-->
+              </tr>
+
+              <tr>
+                <th>카드사</th><!--  무통장입금시 은행, 간편결제시 결제사-->
+                <td>현대</td>
+              </tr>
+
+              <tr>
+                <th>카드번호</th>
+                <td>000-00-000-00</td><!--  무통장입금시 입금계좌, 간편결제시 삭제-->
+              </tr>
+
+              <tr>
+                <th>할부</th>
+                <td>일시불</td><!--무통장입금시,입금기한: 상영 5시간이내 미입금시취소/ 간편결제시 삭제-->
+              </tr>
+            </table>
+          </div>
+
         <div id="oder_price_content">
-          <h3>합계</h3>
+          <h3>총 결제금액</h3>
           <P>35,000 원</P>
         </div>
       </article>
@@ -279,7 +314,7 @@
       <!-- 주문직후면 결제 하기 버튼이 보여야하고, 결제후 나중에 주문확인건결제 하기 버튼이 없어야함-->
       <!--주문 직후-->
       <article class="oder_butten_container"> 
-        <button id="oder_page_butten_submit">결제하기</button>
+        <button id="oder_page_butten_submit">환불신청</button>
       </article>
 
       <div class="empty_place"></div>
