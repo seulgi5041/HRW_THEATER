@@ -234,12 +234,22 @@ input {
   width: 200px;
 }
 
+.cont_box {
+  margin: 5px 0;
+}
+
+.cont_text:first-child {
+  margin-top: 0;
+}
+
 .cont_box:last-child {
   margin-bottom: 0;
 }
 
-.cont_box {
-  margin: 20px 0;
+b {
+  font-size: 16px;
+  font-weight: 700;
+  color: #383838;
 }
 
 .mpa_point_info {

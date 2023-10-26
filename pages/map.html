@@ -6,6 +6,11 @@
   <title>HRW THEATER</title>
 
   <!-- 카카오맵 api -->
+  <!-- 카카오API가져오기 -->
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=583e5f3b15974ca61d38b9c7eff38635&libraries=services,clusterer,drawing"></script>
+  <script src="../js/map.js"></script>
+  <!-- <script src="../js/map_search.js"></script> -->
+
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/map.css">
 </head>
@@ -78,6 +83,18 @@
             <div class="cont_list cont_list1 cont_list_small cont_list_small1">
               <ul class="cinema_search_list">
                 <div class="cinema_search_list_none">검색어가 없습니다.</div>
+                <li>
+                  <a onclick="panTo();">
+                    <div class="cont_text">
+                      <div class="cont_text_inner">
+                        <b></b>
+                      </div>
+                      <div class="cont_text_inner cont_text_info">
+
+                      </div>
+                    </div>
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -96,18 +113,17 @@
           <b></b>
         </div>
         <div class="cont_text_info cont_text_inner">
-          서울특별시 서대문구 연세로 50 지하1층 (신촌동 , 연세대학교 공학원)
+          
         </div>
         <div class="cont_text_info cont_text_inner">
-          1111-1111
+          
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 카카오API가져오기 -->
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=583e5f3b15974ca61d38b9c7eff38635&libraries=services,clusterer,drawing"></script>
-  <script src="../js/map.js"></script>
+  
+  <!-- <script src="../js/mapTest.js"></script> -->
 
   
 
@@ -140,5 +156,6 @@
   
   
   <script src="../js/common.js"></script>
+  
 </body>
 </html>
