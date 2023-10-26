@@ -53,10 +53,10 @@
         <div class="movie_info">
           <div class="movie_poster_arer">
             <!-- 이미지 - 표에서 제목을 클릭하면 해당 영화 포스터로 변경 -->
-            <img id="moviePoster" src="../images/poster_rank/20228819.jpg" alt="20228819">
+            <img id="moviePoster" src="../images/poster_rank/20228819.jpg" alt="영화코드">
             <div class="overlay">
-              <button class="movie_detail">상세보기</button>
-              <button class="movie_ticketing">예매하기</button> 
+              <button class="movie_detail" name="영화코드" id="top10_list_movie_detail" >상세보기</button>
+              <button class="movie_ticketing" name="영화코드" id="top10_list_movie_ticketing" >예매하기</button> 
             </div>
           </div>
           <!--영화정보 리스트있는부분-->
@@ -144,7 +144,7 @@
                 </c:forEach>
               </tbody>
             </table>
-            <span class="info_data">2023년 10월 15일(일)기준</span>
+            <span class="info_data"><c:out value="${top10MovieList[0].updateDate}" />기준</span>
           </div>
 
 

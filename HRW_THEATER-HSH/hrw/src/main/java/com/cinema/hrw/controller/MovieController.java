@@ -36,11 +36,11 @@ public class MovieController {
 
     @PostMapping("/movierecommend")
     public String movierecommend(@RequestParam("searchQuery") String searchInputKeyword, Model model){
-       /*List<MovieDTO> searchNowMovieList= movieService.selectNowMovieList(searchInputKeyword);
-       List<MovieDTO> searchPrevMovieList= movieService.selectPrevMovieList(searchInputKeyword);
+       List<MovieDTO> searchNowMovieList= movieService.selectNowMovieList(searchInputKeyword);
+       //List<MovieDTO> searchPrevMovieList= movieService.selectPrevMovieList(searchInputKeyword);
        model.addAttribute("searchNowMovieList",searchNowMovieList);
-       model.addAttribute("searchPrevMovieList",searchPrevMovieList);*/
-        System.out.println(searchInputKeyword);
+      // model.addAttribute("searchPrevMovieList",searchPrevMovieList);
+      
        return "movie/movie_recommend";
     }
     

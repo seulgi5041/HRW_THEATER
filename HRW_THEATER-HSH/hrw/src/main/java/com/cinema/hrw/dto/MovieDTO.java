@@ -60,6 +60,8 @@ public class MovieDTO {
 
     private String posterUrl;
 
+    private String updateDate;
+
 
     public MovieDTO toMovieDTO(MovieEntity movieEntity){
         MovieDTO movieDTO = new MovieDTO();
@@ -85,6 +87,7 @@ public class MovieDTO {
         movieDTO.setIncreaseDecreaseStatus(movieEntity.getIncreaseDecreaseStatus());
         movieDTO.setIncreaseDecreaseRate(movieEntity.getIncreaseDecreaseRate());
         movieDTO.setPosterUrl(movieEntity.getPosterUrl());
+        movieDTO.setUpdateDate(movieEntity.getUpdateDate());
 
         return movieDTO;
     }

@@ -124,6 +124,13 @@ async function box_office_info(movieCode){
     
     // 포스터 이미지 변경
     moviePoster.src = posterPath;
+    moviePoster.alt = movieCode;
+
+    const top10_list_detail_btn = document.getElementById("top10_list_movie_detail");
+    const top10_list_ticketing_btn = document.getElementById("top10_list_movie_ticketing");
+    top10_list_detail_btn.name=movieCode
+    top10_list_ticketing_btn.name=movieCode
+
   }
   
   const spanElements = document.querySelectorAll(".ellip");

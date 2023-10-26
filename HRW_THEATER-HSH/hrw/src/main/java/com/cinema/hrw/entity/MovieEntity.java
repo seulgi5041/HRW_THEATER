@@ -1,9 +1,11 @@
 package com.cinema.hrw.entity;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 
 import lombok.Getter;
 import lombok.Setter;
@@ -82,4 +84,8 @@ public class MovieEntity {
 
     @Column(name = "poster_url")
     private String posterUrl;
+
+    @Column(name = "update_date")
+    private String updateDate;
+    
 }

@@ -128,7 +128,7 @@
               <tr>
                 <th scope="col"></th>
                 <th scope="col" class="rank">영화명</th>
-                <th scope="col">검색결과</th>
+                <th scope="col">일치률</th>
               </tr>
             </thead>
             <tbody>
