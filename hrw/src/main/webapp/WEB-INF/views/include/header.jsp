@@ -35,6 +35,7 @@
                 
                 <li><a href="/member/login" id="login_link">로그인</a></li>
                 <li><a href="/member/join">회원가입</a></li>
+                <li><a href="/question/list">문의 하기</a></li>
                 
             </ul>
         </div>

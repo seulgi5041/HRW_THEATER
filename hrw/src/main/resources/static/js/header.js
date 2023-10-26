@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
             loginList.innerHTML = `
                 <li><a href="#">주문 확인</a></li>
                 <li><a href="/member/userInfo">정보 확인</a></li>
+                <li><a href="/question/list">문의 하기</a></li>
                 <li><a href="/member/logout" id="logout_link">로그아웃</a></li>
             `;
 
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
             loginList.innerHTML = `
                 <li><a href="/member/login" id="login_link">로그인</a></li>
                 <li><a href="/member/join">회원가입</a></li>
+                <li><a href="/question/list">문의 하기</a></li>
             `;
             userNameElement.textContent = "";
             login_user.style.display = "none";
