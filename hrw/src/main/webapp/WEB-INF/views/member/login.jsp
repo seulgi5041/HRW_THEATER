@@ -9,18 +9,6 @@
     <link rel="stylesheet" href="../css/member/form/login_form.css">
 </head>
 <body>
-	<% 
-	String loginError = (String)session.getAttribute("loginError");
-	if(loginError != null) {
-	    session.removeAttribute("loginError");
-	%>
-	    <script>
-	        alert('<%= loginError %>');
-	    </script>
-	<% 
-	}
-	%>
-
     <jsp:include page="../include/header.jsp"/>
 
     <div class="container">
