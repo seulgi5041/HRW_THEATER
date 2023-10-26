@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
     '1947 보스톤': '20197122',
     '천박사 퇴마 연구소: 설경의 비밀': '20227410',
     'title' : '20228819',
-
+    
   };
   
   const spanElements = document.querySelectorAll(".ellip");
