@@ -45,9 +45,8 @@ window.addEventListener('DOMContentLoaded', function () {
       position: new window.kakao.maps.LatLng(place.y, place.x),
 
     });
-
-    var iwRemoveable = true;
     
+    var iwRemoveable = true;
     const infowindow = new window.kakao.maps.InfoWindow({
       content: `
         <div class="infowindow-content">
