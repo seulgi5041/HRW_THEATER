@@ -11,6 +11,7 @@ import com.cinema.hrw.service.MovieService;
 
 import lombok.RequiredArgsConstructor;
 
+
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
@@ -25,3 +26,4 @@ private final MovieService movieService;
 	}
 
 }
+

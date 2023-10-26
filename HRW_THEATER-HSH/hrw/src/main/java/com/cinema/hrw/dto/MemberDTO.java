@@ -1,49 +1,4 @@
-<<<<<<< HEAD:HRW_THEATER-HSH/hrw/src/main/java/com/cinema/hrw/dto/MemberDTO.java
 package com.cinema.hrw.dto;
-
-
-import com.cinema.hrw.entity.MemberEntity;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
-public class MemberDTO {
-	
-	private Long idx;
-	
-	private String userId;
-	private String userPassword;
-	private String userPasswordAgain;
-	private String userName;
-	private String userGender;
-	private String userEmail;
-	private String userPhone;
-	
-	public MemberDTO toMemberDTO(MemberEntity memberEntity) {
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO.setUserId(memberEntity.getUserId());
-		memberDTO.setUserPassword(memberEntity.getUserPassword());
-		memberDTO.setUserPasswordAgain(memberEntity.getUserPasswordAgain());
-		memberDTO.setUserName(memberEntity.getUserName());
-		memberDTO.setUserGender(memberEntity.getUserGender());
-		memberDTO.setUserEmail(memberEntity.getUserEmail());
-		memberDTO.setUserPhone(memberEntity.getUserPhone());
-		return memberDTO;
-
-	}
-
-
-}
-=======
-package com.cinema.hrw.dto;
-
-import javax.persistence.Id;
 
 import com.cinema.hrw.entity.MemberEntity;
 
@@ -59,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class MemberDTO {
-	
+
 	private String userId;
 	private String userPassword;
 	private String userPasswordAgain;
@@ -83,4 +38,3 @@ public class MemberDTO {
 
 
 }
->>>>>>> origin/HSH:hrw/src/main/java/com/cinema/hrw/dto/MemberDTO.java

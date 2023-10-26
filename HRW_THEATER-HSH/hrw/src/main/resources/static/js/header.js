@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
     // 로그인 상태 및 사용자 이름은 header.jsp에서 이미 설정된 상태
-	
+   
     // Elements
     const loginList = document.getElementById("login_list");
     const loginLink = document.getElementById("login_link");
-    const userNameElement = document.getElementById("userName");
+    const userNameElement = document.getElementById("user_Name");
     const login_user = document.getElementById("login_user");
 
     if (!loginList || !loginLink) {
@@ -22,8 +22,9 @@ document.addEventListener("DOMContentLoaded", function() {
             //로그인하면 보여질 메뉴들
             loginList.innerHTML = `
                 <li><a href="#">주문 확인</a></li>
-                <li><a href="#">정보 확인</a></li>
-                <li><a href="#" id="logout_link">로그아웃</a></li>
+                <li><a href="/member/userInfo">정보 확인</a></li>
+                <li><a href="/question/list">문의 하기</a></li>
+                <li><a href="/member/logout" id="logout_link">로그아웃</a></li>
             `;
 
             // 로그인된 사용자의 이름 설정
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
             loginList.innerHTML = `
                 <li><a href="/member/login" id="login_link">로그인</a></li>
                 <li><a href="/member/join">회원가입</a></li>
+                <li><a href="/question/list">문의 하기</a></li>
             `;
             userNameElement.textContent = "";
             login_user.style.display = "none";
@@ -50,21 +52,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
     updateMenuOnLogin();
 
-    window.addEventListener("scroll", function() {
-        const scrollPosition = window.scrollY; 
-        const headerMenu = document.getElementById("header_menu");
-
-        if (scrollPosition > 120) {
-            headerMenu.style.width = "100%";
-            headerMenu.style.position = "fixed";
-            headerMenu.style.zIndex = "999";
-            headerMenu.style.top = "0px";
-            headerMenu.style.backgroundColor = "#F5F4F2"; 
-            headerMenu.style.borderBottom = "2px solid #FB3D28";
-        } else {
-            headerMenu.style.position = "static";
-            headerMenu.style.backgroundColor = "transparent"; 
-            headerMenu.style.borderBottom = "transparent";
-        }
-    });
 });

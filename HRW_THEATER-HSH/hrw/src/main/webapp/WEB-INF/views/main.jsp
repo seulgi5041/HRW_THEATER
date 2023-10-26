@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../css/common.css">
   </head>
   <body>
-   <jsp:include page="include/header.jsp"/>
+    <jsp:include page="./include/header.jsp" />
   
     <!-- 메인영역 -->
     <main>
@@ -171,7 +171,7 @@
     </main>
   
   
-    <jsp:include page="include/footer.jsp"/>
+    <jsp:include page="./include/footer.jsp"/>
   
   
     <!-- 슬라이드 js CDN -->
@@ -179,6 +179,6 @@
   
     <script src="../js/swiper.js"></script>
     <script src="../js/main.js"></script>
-    <script src="../js/common.js"></script>
+    
   </body>
 </html>
