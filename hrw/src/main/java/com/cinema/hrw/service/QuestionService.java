@@ -1,5 +1,12 @@
 package com.cinema.hrw.service;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.cinema.hrw.dto.QuestionDTO;
@@ -18,5 +25,17 @@ public class QuestionService {
 		QuestionEntity questionEntity = QuestionEntity.toQuestionEntity(questionDTO);
 		questionRepository.save(questionEntity);
 	}
+	
+	public Page<QuestionEntity> findPaginated(int pageNo, int pageSize) {
+	    Pageable pageable = PageRequest.of(pageNo - 1, pageSize, Sort.by(Sort.Direction.DESC, "idx")); // 페이지 번호는 0부터 시작합니다.
+	    return questionRepository.findAll(pageable);
+	}
+	
+	public Optional<QuestionEntity> findById(Long idx) {
+	    return questionRepository.findById(idx);
+	}
+
+	
+	
 
 }

@@ -55,7 +55,6 @@ public class MemberController {
 	    // 로그인 성공시, 세션에 ID 저장
 	    if (loginResult != null) {
 	        session.setAttribute("loginId", loginResult.getUserId()); 
-	        session.setAttribute("loginId", loginResult.getUserId()); 
 	        return "main";
 	    } else {
 	        // 로그인 실패

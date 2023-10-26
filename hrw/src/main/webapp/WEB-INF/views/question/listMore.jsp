@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +8,7 @@
 </head>
 <body>
 
-    <jsp:include page="include/header.jsp"/>
+    <jsp:include page="../include/header.jsp"/>
     <div class="container">
     
         <div class="word">
@@ -18,30 +17,35 @@
 
         <hr>
     
-    <form action="#">
+    <form>
         <div class="input-group">
             <label for="userId">아 이 디 :</label>
-            <input type="text" name="userId" id="userId" required="required" readonly="readonly">
+            <!-- 아이디 정보 표시 -->
+            <input type="text" name="userId" id="userId" value="${question.userId}" required="required" readonly="readonly">
         </div>
 
         <div class="input-group">
             <label for="userName">글 쓴 이 :</label>
-            <input type="text" name="userName" id="userName" required="required" readonly="readonly">
+            <!-- 글쓴이 정보 표시 -->
+            <input type="text" name="userName" id="userName" value="${question.userName}" required="required" readonly="readonly">
         </div>
 
 		<div class="input-group">
 		    <label for="userQuestion">문의 내용 :</label>
-		    <textarea name="userQuestion" id="userQuestion" rows="7" cols="50" placeholder="내용을 입력해주세요." required="required" readonly="readonly"></textarea>
+		    <!-- 문의 내용 정보 표시 -->
+		    <textarea name="userQuestion" id="userQuestion" rows="7" cols="50" required="required" readonly="readonly">${question.userQuestion}</textarea>
 		</div>
 
         <div class="input-group">
             <label for="userEmail">이 메 일 :</label>
-            <input type="email" name="userEmail" id="userEmail" required="required" readonly="readonly">
+            <!-- 이메일 정보 표시 -->
+            <input type="email" name="userEmail" id="userEmail" value="${question.userEmail}" required="required" readonly="readonly">
         </div>
         
         <div class="input-group">
             <label for="registrationDate">작 성 일 :</label>
-            <input type="text" name="registrationDate" id="registrationDate" required="required" readonly="readonly">
+            <!-- 작성일 정보 표시 -->
+            <input type="text" name="registrationDate" id="registrationDate" value="${question.registrationDate}" required="required" readonly="readonly">
         </div>
 
         <div class="button-group">
@@ -49,6 +53,6 @@
         </div>
     </form>
     </div>
-    <jsp:include page="include/footer.jsp"/>
+    <jsp:include page="../include/footer.jsp"/>
 </body>
 </html>

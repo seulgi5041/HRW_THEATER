@@ -4,13 +4,16 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>문의 글 작성</title>
+    <title>문의 내역</title>
     <link rel="stylesheet" href="../css/list.css">
 </head>
 <body>
+    <!-- Header 부분 -->
     <jsp:include page="../include/header.jsp" />
 
     <div class="container">
+
+        <!-- 문의 내용 제목 및 설명 -->
         <div class="word">
             <h2>문의 내역</h2>
             <h4>
@@ -20,7 +23,8 @@
         </div>
         
         <hr>
-        
+
+        <!-- 테이블 부분 -->
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -33,50 +37,47 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>user123</td>
-                        <td>문의 내용 예제입니다.</td>
-                        <td>홍길동</td>
-                        <td>2023-10-26</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>user456</td>
-                        <td>또 다른 문의 내용 예제입니다.</td>
-                        <td>이순신</td>
-                        <td>2023-10-25</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>user456</td>
-                        <td>또 다른 문의 내용 예제입니다.</td>
-                        <td>이순신</td>
-                        <td>2023-10-25</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>user456</td>
-                        <td>또 다른 문의 내용 예제입니다.</td>
-                        <td>이순신</td>
-                        <td>2023-10-25</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>user456</td>
-                        <td>또 다른 문의 내용 예제입니다.</td>
-                        <td>이순신</td>
-                        <td>2023-10-25</td>
-                    </tr>
+                    <c:forEach var="question" items="${questions}">
+                        <tr onclick="redirectToMorePage(${question.idx});">
+                            <td>${question.idx}</td>
+                            <td>${question.userId}</td>
+                            <td class="question-content">${question.userQuestion}</td>
+                            <td>${question.userName}</td>
+                            <td>${question.registrationDate}</td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
 
+        <!-- 페이지네이션 -->
+        <div class="pagination">
+            <c:forEach var="i" begin="1" end="${totalPages}">
+                <c:choose>
+                    <c:when test="${i == currentPage}">
+                        <span>${i}</span>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="/question/list?page=${i}">${i}</a>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </div>
+        
+        <!-- 문의 하기 버튼 -->
         <div class="button-group">
             <a href="/question/write"><input type="button" value="문의 하기"></a>
         </div>
+
     </div>
 
+    <!-- Footer 부분 -->
     <jsp:include page="../include/footer.jsp" />
+    
+    <script>
+    function redirectToMorePage(idx) {
+        location.href = '/question/listMore?idx=' + idx;
+    }
+</script>
 </body>
 </html>
