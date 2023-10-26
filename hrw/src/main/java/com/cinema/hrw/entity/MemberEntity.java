@@ -15,12 +15,16 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "member_table")	// ï¿½ë€’ï¿½ì” é‡‰ï¿½ ï¿½ê¹®ï¿½ê½¦.
+@Table(name = "member_table")	// Å×ÀÌºí »ý¼º (ÀÌ¸§)
 
 public class MemberEntity {
 	
-	@Id	// pk ï§žï¿½ï¿½ì ™.
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	private Long idx;
+	
+	@Column (unique = true)
 	private String userId;
 	
 	@Column
@@ -35,7 +39,7 @@ public class MemberEntity {
 	@Column
 	private String userGender;
 	
-	@Column (unique = true)
+	@Column 
 	private String userEmail;
 	
 	@Column
