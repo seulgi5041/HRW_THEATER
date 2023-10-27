@@ -27,11 +27,7 @@
             <ul class="menu_list">
                 <li><a href="/movielist">영화</a></li>
                 <li><a href="/map">매장정보</a></li>
-<<<<<<< HEAD
                 <li><a href="/reservation/first">예매</a></li>
-=======
-                <li><a href="/reservation">예매</a></li>
->>>>>>> 03b06105d6f9e96da199e74b8d3458d69e5fafb9
                 <li><a href="/foodstore/store">푸드스토어</a></li>
             </ul>
             

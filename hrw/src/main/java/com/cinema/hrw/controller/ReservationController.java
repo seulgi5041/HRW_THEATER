@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.cinema.hrw.controller;
 
 import org.springframework.stereotype.Controller;
@@ -48,18 +47,3 @@ public class ReservationController {
 	}
 
 }
-=======
-package com.cinema.hrw.controller;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-
-@Controller
-public class ReservationController {
-	
-	@GetMapping("/reservation")
-	public String reservation() {
-		return "reverseStep02";
-	}
-}
->>>>>>> 03b06105d6f9e96da199e74b8d3458d69e5fafb9
