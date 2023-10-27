@@ -23,56 +23,59 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   let availableSeats = 9;
-  let totalPeopleCount = 0;
-  let clickedSeats = new Set();
+  let totalPeopleCount = 9;
+  const clickedSeats = new Set();
 
-  const selectedSeats = [];
 
   function updateSeatSelection() {
     const seatElements = document.querySelectorAll('.sel');
-    availableSeats = 8 - totalPeopleCount; // Update available seats based on the total people count.
+    availableSeats = availableSeats - totalPeopleCount; // Update available seats based on the total people count.
 
     //console.log('totalPeopleCount:', totalPeopleCount);
     //console.log('availableSeats:', availableSeats);
 
     
     seatElements.forEach((seatElement) => {
+      const seatNumber = seatElement.getAttribute('data-seat');
       //console.log('seatElement:', seatElement);
-      const altValue = seatElement.getAttribute('alt');
-      const seatNumber = altValue.split(' ')[2]; // 좌석 번호 추출
-      const formattedSeatNumber = `좌석 번호: ${seatNumber} 일반석`;
-      selectedSeats.push(seatNumber);
+      // const altValue = seatElement.getAttribute('alt');
+      // const seatNumber = extractSeatNumber(altValue);
+      // console.log('포맷된 숫자 : ', seatNumber);
 
       if (totalPeopleCount === 0 || availableSeats === 0) {
-        seatElement.classList.remove('on'); // 모든 좌석의 'on' 클래스 제거
+        seatElement.classList.remove('on');
         seatElement.removeEventListener('click', seatClickHandler);
       } else if (availableSeats > 0) {
         seatElement.addEventListener('click', () => {
-          selectSeat(seatElement, seatNumber, formattedSeatNumber);
-        }); // 클릭 이벤트 추가
+          selectSeat(seatElement, seatNumber);
+        });
+      } else {
+        seatElement.classList.remove('on');
+        seatElement.removeEventListener('click', seatClickHandler);
       }
     });
   }
 
   // 좌석을 선택할 때 호출되는 함수
-  function selectSeat(seatElement, seatNumber, formattedSeatNumber) {
-    if (totalPeopleCount <= 1 && availableSeats > 0) {
-      if (!clickedSeats.has(seatNumber)) {
+  function selectSeat(seatElement, seatNumber) {
+
+    if (clickedSeats.has(seatNumber)) {
+      clickedSeats.delete(seatNumber);
+      seatElement.classList.remove('on');
+      seatElement.removeEventListener('click', seatClickHandler);
+      totalPeopleCount--;
+      console.log(seatElement.classList);
+    } else {
+      if (totalPeopleCount < 9) {
         clickedSeats.add(seatNumber);
         seatElement.classList.add('on');
-
-        //totalPeopleCount++;
-        //availableSeats = 8 - totalPeopleCount;
-
-        console.log('선택한 좌석:', formattedSeatNumber);
-        console.log('총 인원 합계:', totalPeopleCount);
-        console.log('남아있는 좌석:', availableSeats);
+        totalPeopleCount++;
+        seatElement.removeEventListener('click', seatClickHandler);
       } else {
-        console.log('이미 선택한 좌석:', formattedSeatNumber);
+        alert('인원은 최대 8명까지 가능합니다.');
       }
-    } else {
-      console.log('좌석 선택이 불가능합니다.');
     }
+    updateSeatSelection();
   }
 
 
@@ -88,9 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     totalPeopleCount = Object.values(personCounts).reduce((acc, count) => acc + count, 0);
     updateSeatSelection();
   }
-  
-   //updatePersonCounts();
-  // updateSeatSelection();
+
 
 ///////////////////////////////////////////////
 
@@ -102,22 +103,24 @@ document.addEventListener("DOMContentLoaded", function () {
       const span = button.previousElementSibling;
       const personType = button.closest('li').getAttribute('data-people');
       let count = parseInt(span.innerText);
-  
       
       if (count === 9 && personCounts[personType] > 0) {
         // If the count is already 8, clicking plus should decrease the count by 1
         count--;
         span.innerText = count;
         personCounts[personType] = count;
-      } else if (count < 8 && personCounts[personType] < 8) {
+        alert('인원은 최대 8명까지 가능합니다.');
+      } else if (count < 9 && personCounts[personType] < 9) {
         count++;
         span.innerText = count;
-        personCounts[personType] = count; 
+        personCounts[personType] = count;   
       } else {
-        alert('인원은 최대 8명까지 가능합니다.');
+        count--;
+        span.innerText = count;
+        personCounts[personType] = count;  
       }
   
-      //const totalPeopleCount = Object.values(personCounts).reduce((acc, count) => acc + count, 0);
+      const totalPeopleCount = Object.values(personCounts).reduce((acc, count) => acc + count, 0);
       if (totalPeopleCount > 8) {
         alert('인원은 최대 8명까지 가능합니다.');
         count--;
@@ -125,8 +128,12 @@ document.addEventListener("DOMContentLoaded", function () {
         personCounts[personType] = count;
       }
 
-       totalPeopleCount = Object.values(personCounts).reduce((acc, count) => acc + count, 0);
-       updateSeatSelection();
+      //totalPeopleCount = Object.values(personCounts).reduce((acc, count) => acc + count, 0);
+      updatePersonCounts();
+      updateSeatSelection();
+      console.log(personCounts); 
+      console.log(totalPeopleCount);
+       
     });
   });
 
@@ -144,7 +151,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // 여기서 totalPeopleCount를 업데이트
       totalPeopleCount = Object.values(personCounts).reduce((acc, count) => acc + count, 0);
+      updatePersonCounts();
       updateSeatSelection();
+      console.log(personCounts); 
+      console.log(totalPeopleCount);
     });
   });
 
@@ -156,12 +166,13 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let i = 1; i <= numColumns; i++) {
       const seatElement = document.createElement('a');
       seatElement.href = 'javascript:void(0);';
-      seatElement.className = 'sel p0';
+      seatElement.className = 'sel';
       const seatNumber = `${rowLabel}열${i}`;
-      seatElement.setAttribute('alt', `좌석 번호: ${seatNumber} 일반석`);
+      seatElement.setAttribute('alt', `좌석번호: ${seatNumber}`);
 
       // Set 'data-seat' attribute to store the seat number
       seatElement.setAttribute('data-seat', seatNumber);
+      
 
       let leftMargin = 32;
 
@@ -187,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // });
 
       // 좌석 생성 후 이벤트 추가
-      seatElement.addEventListener('click', seatClickHandler);
+      //seatElement.addEventListener('click', seatClickHandler);
 
       // 좌석을 추가
       seatArea.appendChild(seatElement);
@@ -202,6 +213,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     const seatElements = document.querySelectorAll('.sel');
+    const selectedSeats = new Set();
+
 
     seatElements.forEach(seatElement => {
       seatElement.addEventListener('click', seatClickHandler);
@@ -209,44 +222,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function seatClickHandler() {
       const seatElement = this; // 'this'를 사용해 클릭된 좌석 요소 가져오기
-      console.log(seatElement);
+      //console.log(seatElement);
       const seatNumber = seatElement.getAttribute('data-seat'); // 좌석 정보 추출
-      const isSeatSelected = clickedSeats.has('on');
+      //const isSeatSelected = clickedSeats.has('on');
       // const seatNumber = this.getAttribute('data-seat');
-      // const isSeatSelected = this.classList.contains('on');
-      
-      // console.log('총 인원의 합: ', totalPeopleCount);
-       console.log('총 인원의 타입: ', personCounts);
-      // console.log('선택 좌석: ', seatNumber)
+      //const isSeatSelected = seatElements.classList('on');
 
-      if (totalPeopleCount === 0) {
-        alert('먼저 인원을 선택하세요');
-        return;
-      }
+      if (selectedSeats.has(seatNumber) && totalPeopleCount >= 1) {
+        selectedSeats.add(seatNumber);
+        seatElement.classList.add('on');
+      } else if (selectedSeats.has(seatNumber)) {
+        selectedSeats.delete(seatNumber);
+        seatElement.classList.remove('on');
+      } 
+    
+      updateSeatSelection();
+    
+      console.log('선택됨:', seatNumber);
+      console.log('총 인원의 합:', totalPeopleCount);
+      console.log('선택 좌석:', Array.from(selectedSeats));
 
-      // if (totalPeopleCount >= 8) {
-      //   alert('인원은 최대 8명까지 가능합니다');
-      //   return;
-      // }
 
-      if (isSeatSelected && totalPeopleCount >= 8) {
-        alert('인원은 최대 8명까지 가능합니다');
-        return;
-      }
-
-      console.log('isSeatSelected:', isSeatSelected);
-      if(isSeatSelected) {
-        this.classList.add('on');
-        clickedSeats.add(seatNumber);
-        totalPeopleCount += 1;
-        console.log('선택한 좌석240:', seatNumber);
-      } else {
-        this.classList.remove('on');
-        clickedSeats.delete(seatNumber);
-        totalPeopleCount -= 1;
-        console.log('선택한 좌석 해제240:', seatNumber);
-      }
-      updatePersonCounts();
-      selectSeat(seatElement);
     }
 });
