@@ -7,7 +7,7 @@
 <title>회원가입</title>
     <link rel="stylesheet" href="../css/member/form/join_form.css"> 
     
-    <script src="../js/join.js"></script>
+    <script src="../js/member/join.js"></script>
     
     <script>
     function confirmReset(event) {

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>문의 내역</title>
-    <link rel="stylesheet" href="../css/list.css">
+    <link rel="stylesheet" href="../css/question/list.css">
 </head>
 <body>
     <!-- Header 부분 -->

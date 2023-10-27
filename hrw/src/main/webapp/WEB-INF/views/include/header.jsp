@@ -26,8 +26,8 @@
         <div class="menu">
             <ul class="menu_list">
                 <li><a href="/movielist">영화</a></li>
-                <li><a href="#">매장정보</a></li>
-                <li><a href="#">예매</a></li>
+                <li><a href="/map">매장정보</a></li>
+                <li><a href="/reservation">예매</a></li>
                 <li><a href="/foodstore/store">푸드스토어</a></li>
             </ul>
             
@@ -45,4 +45,4 @@
     var isLoggedIn = "<%= (loggedInUserName != null) ? "true" : "false" %>";
     var loggedUserName = "<%= loggedInUserName %>";
 </script>
-    <script src="../js/header.js"></script>
+    <script src="../js/include/header.js"></script>
