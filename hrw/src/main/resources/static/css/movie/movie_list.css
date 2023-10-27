@@ -1,0 +1,157 @@
+@charset "UTF-8";
+
+/* 초기화 */
+* { 
+    margin: 0; padding: 0; 
+    font-family: 'DM Sans', Arial, 'sans-serif';
+}
+html {
+    font-size:62.5%;
+    background-color: #F5F4F2;
+    color: #000;
+}
+body {overflow-x: hidden; }
+a { 
+    text-decoration: none !important; 
+    color: #383838;
+}
+img { border: 0; }
+ul { list-style: none; }
+
+
+/* 메인메뉴 */
+main {
+  max-width: 1440px;
+  width: 100%;
+  margin-top: 160px;
+  margin: 0 auto;
+}
+/* 영화목록 */
+
+/* 목록위 타이틀부분*/
+#movielist_title h1{
+  letter-spacing: 2;
+  line-height: 1.5;
+  font-size: 3em;
+  color: #383838;
+}
+
+
+#movielist_title{
+  border-bottom: 3px solid #FB3D28;
+  padding-left: 1em;
+  padding-bottom: 3em;
+  margin-bottom: 10em;
+  margin-top: 10em;
+  }
+
+  /*영화목록 포스터 리스트*/
+
+#movielist_postor_content{
+  margin: 0 auto;
+
+}
+
+.movielist_movieposter_row {
+  display: flex; /* Flexbox를 사용하여 가로로 정렬 */
+  max-width: 1440px;
+  width: 100%;
+  height: 400px;
+  align-items: center;
+  margin-bottom: 150px;
+  gap: 15px;
+}
+
+.movielist_movieposter_cell { 
+  position: relative;
+  width: 270px;
+  height: 430px;
+  display: flex;
+  align-items: center;
+  flex-direction:column;
+}
+
+.movielist_movieposter_cell img {
+  width: 200px;
+  height: 300px;
+}
+
+/* 버튼을 눌러야 나오는 부분을 처리하기위한 태그*/
+.movielist_movieposter_row.hidden {
+  display: none;
+}
+
+/*더보기 버튼*/
+#movielist_show_next_button{
+    display: block;
+    width: 100%;
+    margin: 10px;
+    padding: 0;
+    height: 60px;
+    border: 1px solid #b6b3b3;
+    background-color: transparent;
+    color: #666;
+    font-size: 2em;
+  }
+
+  .movielist_movieposter_cell p{
+    font-size: 2em;
+    padding: 10px 0;
+  }
+
+  .movielist_movieposter_overlay p{
+    font-size: 1em;
+    padding: 10px 0;
+  }
+
+
+/*이미지 오버레이 효과*/
+.movielist_movieposter_overlay{
+  position: absolute;
+  align-items: center;
+  width: 200px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(0, 0, 0, 0); 
+  transition: background 0.3s;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0;
+}
+
+.movielist_movieposter_cell:hover .movielist_movieposter_overlay {
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 1; 
+}
+
+.movielist_movieposter_cell .movielist_movieposter_overlay p {
+  color: #fff; 
+  font-size: 1.5em;
+  overflow: hidden ;          /* 넘치는 부분 감춤 */
+  text-overflow: ellipsis ;   /* 넘치는 부분에 "..." 표시 */
+  max-height: 270px;
+  padding: 0 15px ;
+}
+
+
+
+/*예매하기 버튼*/
+.ticketing_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; 
+}
+
+.movie_ticketing {
+  border: none;
+  padding: 10px 25px;
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: rgba(251, 61, 40);
+  font-weight: 700;
+  font-size: 1.8em;
+  color: #F5F4F2;
+}

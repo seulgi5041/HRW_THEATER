@@ -1,0 +1,285 @@
+@charset "UTF-8";
+
+.con_box {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.find01 {
+  padding: 0;
+}
+
+.map_search_wrap {
+  background: #fff;
+  position: absolute;
+  left: 0;
+  top: 350px;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
+  z-index: 999;
+  left: 5%;
+  -webkit-transform: translate(0,-50%);
+  -ms-transform: translate(0,-50%);
+  transform: translate(0,-50%);
+}
+
+.map_search_wrap .cont_text_wrap {
+  margin: 0;
+}
+
+.map_search_wrap .map_search_tab_wrap {
+  padding: 0;
+  text-align: center;
+  margin-bottom: 0;
+  /* background: #1c1c1b; */
+  color: #fff;
+}
+
+.map_search_wrap .map_search_tab_wrap ul {
+  display: table;
+  width: 100%;
+}
+
+.map_search_wrap .map_search_tab_wrap ul li {
+  display: table-cell;
+  cursor: pointer;
+  padding: 15px 0;
+  background: #FB3D28;
+  color: #fff;
+  border-bottom: 1.5px solid #fff;
+  font-size: 1.8em;
+}
+
+.map_search_wrap .cont_text_wrap {
+  margin: 0;
+}
+
+.map_search_wrap .cont_text_box {
+  padding: 20px;
+}
+
+.map_search_wrap .map_search_title_wrap {
+  background: #383838;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+
+.cont_text_title {
+  font-size: 1.4em;
+  line-height: 1.2;
+}
+
+.cont_text {
+  margin: 20px 0;
+  font-weight: 400px;
+  color: #fff;
+  font-size: 1.3em;
+}
+
+.cont_text:first-child {
+  margin-top: 0;
+}
+
+.cont_text_title strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.cont_text {
+  margin: 20px 0;
+}
+
+.input_wrap {
+  height: 45px !important;
+}
+
+.input_text_wrap {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.input_text_wrap label input {
+  width: 250px;
+  height: 100%;
+  padding: 5px 15px !important;
+  color: #383838;
+  box-shadow: 0px 0px 0px 1px #ddd;
+  outline: none;
+  border-radius: 4px;
+  background: #fff;
+  transition: all 0.15s;
+}
+
+.map_search_wrap .input_text_wrap label input {
+  box-shadow: inherit;
+}
+
+input {
+  outline: none;
+  resize: none;
+  border: 0px;
+  /* text-decoration: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0; */
+  line-height: normal;
+}
+
+.search_icon {
+  cursor: pointer;
+  position: absolute;
+  top: 45%;
+  right: 20px;
+  -webkit-transform: translate(0,-50%);
+  -ms-transform: translate(0,-50%);
+  transform: translate(0,-50%);
+}
+
+.search_icon img {
+  position: relative;
+  height: 35px;
+  width: 35px;
+  margin: 0 auto;
+  top: 10px;
+}
+
+.cont_text_box:last-child {
+  margin-bottom: 0;
+}
+
+.map_search_wrap .cont_text_box {
+  padding: 20px;
+}
+
+.map_search .cont_list {
+  height: 300px;
+  overflow-y: scroll;
+  padding-right: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background: #ddd;
+}
+
+.cont_list > ul {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+
+.cinema_search_list_none {
+  width: 100%;
+  vertical-align: middle;
+  align-self: center;
+  text-align: center;
+  font-size: 1.5em;
+  color: #a1a1a1;
+}
+
+.cont_list > ul > li {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.cont_list1 > ul > li {
+  width: 100%;
+  margin-right: 0;
+}
+
+.cont_list_small > ul > li {
+  display: inline-block;
+  float: left;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.cont_list_small1 > ul > li {
+  width: 100%;
+  margin-right: 0;
+}
+
+.cont_list1 > ul > li:first-child {
+  margin-top: 0;
+}
+
+.cont_list_small1 > ul > li:first-child {
+  margin-top: 0;
+}
+
+.map_search .cont_list1 > ul > li:first-child {
+    padding-top: 0;
+}
+.map_search .cont_list1 > ul > li {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 10px 0px;
+}
+
+
+
+
+/* 마커 클릭시 나타날 창 스타일 */
+.infowindow-content {
+  background: #fff;
+  padding: 20px;
+  font-size: 14px;
+  width: 200px;
+}
+
+.cont_box {
+  margin: 5px 0;
+}
+
+.cont_text:first-child {
+  margin-top: 0;
+}
+
+.cont_box:last-child {
+  margin-bottom: 0;
+}
+
+b {
+  font-size: 16px;
+  font-weight: 700;
+  color: #383838;
+}
+
+.mpa_point_info {
+  padding-bottom: 10px;
+}
+
+.cont_text_title {
+  font-size: 1.4em;
+  line-height: 1.2;
+  color: #383838;
+}
+
+.cont_text_inner {
+  margin: 5px 0;
+}
+
+.cont_text_inner:first-child {
+  margin-top: 0 !important;
+}
+
+.cont_text_title b {
+  font-weight: 600;
+}
+
+.cont_text_info {
+  font-size: 0.9em;
+  opacity: 0.7;
+  color: #8d8d8d;
+}
+
+.cont_text_inner:last-child {
+  margin-bottom: 0 !important;
+}
