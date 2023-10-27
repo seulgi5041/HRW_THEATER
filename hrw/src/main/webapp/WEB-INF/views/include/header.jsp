@@ -15,7 +15,7 @@
         <% if(loggedInUserName != null) { %> <!-- 로그인 체크 -->
         <!-- 로그인 성공 시 나타나는 부분 -->
         <div class="login_user" id = "login_user">
-            <p><span id="userName"><%= loggedInUserName %></span>님 환영합니다.</p>
+            <p><span id="user_Name"><%= loggedInUserName %></span>님 환영합니다.</p>
 
         </div>
         <% } %>
@@ -25,9 +25,9 @@
     <nav id="header_menu">
         <div class="menu">
             <ul class="menu_list">
-                <li><a href="#">영화</a></li>
-                <li><a href="#">매장정보</a></li>
-                <li><a href="#">예매</a></li>
+                <li><a href="/movielist">영화</a></li>
+                <li><a href="/map">매장정보</a></li>
+                <li><a href="/reservation/first">예매</a></li>
                 <li><a href="/foodstore/store">푸드스토어</a></li>
             </ul>
             
@@ -35,6 +35,7 @@
                 
                 <li><a href="/member/login" id="login_link">로그인</a></li>
                 <li><a href="/member/join">회원가입</a></li>
+                <li><a href="/question/list">문의 하기</a></li>
                 
             </ul>
         </div>
@@ -44,4 +45,4 @@
     var isLoggedIn = "<%= (loggedInUserName != null) ? "true" : "false" %>";
     var loggedUserName = "<%= loggedInUserName %>";
 </script>
-    <script src="../js/header.js"></script>
+    <script src="../js/include/header.js"></script>
