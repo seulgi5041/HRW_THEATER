@@ -32,7 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
       let count = parseInt(span.innerText);
       
       if (count > 9 && personCounts[personType] > 1) {
-        // If the count is already 8, clicking plus should decrease the count by 1
+        // 총 인원의 수가 8이 됐을때 플러스 버튼 클릭하면 1씩 줄어든다
+        //(즉 모든 타입의 좌석을 8에 맞춤)
         span.innerText = count;
         personCounts[personType] = count;
         alert('인원은 최대 8명까지 가능합니다.');
@@ -79,50 +80,52 @@ document.addEventListener("DOMContentLoaded", function () {
   let totalSelectedSeats = 0;
   let maxSelectedSeats = 0;
   let seatSelectionEnabled = false;
-  // Function to handle seat click event
+  // 좌석 클릭시 수행할 부분
   function handleSeatClick(event) {
     const seatElement = event.currentTarget;
     console.log('seatElement : ', seatElement);
   
     if (seatSelectionEnabled) {
       if (seatElement.classList.contains('sel')) {
-        if (seatElement.classList.contains('on')) {
-          // Deselect the seat
+        if (maxSelectedSeats === 0) {
+          // If no seats are allowed to be selected, show an alert message
+          alert('먼저 인원을 선택하세요.');
+        } else if (seatElement.classList.contains('on')) {
+          // 좌석 선택 해제
           seatElement.classList.remove('on');
           totalSelectedSeats--;
-
-          // Enable the seat
-          disabledSeats.delete(seatElement);
+  
+          // 모든 숨겨진 좌석 활성화
+          const allSeats = document.querySelectorAll('.sel.disabled');
+          allSeats.forEach((otherSeat) => {
+            otherSeat.classList.remove('disabled');
+          });
         } else {
-          // Check if the total selected seats have reached the maximum
+          // 선택한 좌석이 총 합계와 맞는지 확인
           if (totalSelectedSeats < maxSelectedSeats) {
-            // Select the seat
             seatElement.classList.add('on');
             totalSelectedSeats++;
-            
-          } else {
-            // Remove the 'disabled' class when trying to select another seat
-            const allSeats = document.querySelectorAll('.sel');
-            allSeats.forEach((otherSeat) => {
-              if (!otherSeat.classList.contains('on')) {
+  
+            if (totalSelectedSeats === maxSelectedSeats) {
+              // 만약 사용자가 모든 좌석을 선택했으면, 다른 좌석들을 비활성화
+              const allSeats = document.querySelectorAll('.sel:not(.on)');
+              allSeats.forEach((otherSeat) => {
                 otherSeat.classList.add('disabled');
-              }
-            });
-            // Add 'disabled' class to the selected seat
-            seatElement.classList.add('disabled');
+              });
+            }
           }
         }
       }
-    } else if (totalSelectedSeats === 0) {
-      alert('먼저 인원을 선택하세요.'); // Prompt to select the number of people
+    } else if (maxSelectedSeats === 0) {
+      alert('먼저 인원을 선택하세요.'); 
     }
   }
 
-  // Enable seat selection when plus button is clicked
+  // 플러스 버튼 클릭 시 좌석을 선택하기
   plusButtons.forEach((button) => {
     button.addEventListener("click", () => {
       maxSelectedSeats = Object.values(personCounts).reduce((acc, count) => acc + count, 0);
-      // Enable seat selection
+      // 좌석 선택 활성화
       seatSelectionEnabled = true;
 
       
@@ -133,21 +136,42 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+
+  let alertShown = false; 
   minusButtons.forEach((button) => {
     button.addEventListener("click", () => {
       maxSelectedSeats = Object.values(personCounts).reduce((acc, count) => acc + count, 0);
-      // Enable seat selection
+      // 좌석 선택 활성화
       seatSelectionEnabled = true;
-
+      totalSelectedSeats = 0;
       
       const allSeats = document.querySelectorAll('.sel');
       allSeats.forEach((seat) => {
         seat.classList.remove('disabled');
+
+        // 다시 활성화된 좌석 중 이미 선택한 좌석을 클릭하기 전 상태로 되돌리기
+        if (seat.classList.contains('on')) {
+          seat.classList.remove('on');
+        }
       });
+
+      console.log('totalSelectedSeats:', maxSelectedSeats);
+
+      if (maxSelectedSeats === 0 && alertShown) {
+        alert('먼저 인원을 선택하세요.');
+      }
+      alertShown = true;
+  
+      // Reset the alertShown flag when totalSelectedSeats is not 0
+      if (maxSelectedSeats !== 0) {
+        alertShown = false;
+      }
     });
   });
 
   
+
+  //좌석을 생성하는 부분
   rowLabels.forEach((rowLabel) => {
     for (let i = 1; i <= numColumns; i++) {
       const seatElement = document.createElement('a');
