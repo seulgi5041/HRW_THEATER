@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @charset "UTF-8";
 
 #sectiion_wrap {
@@ -355,4 +356,363 @@ table tr {
 
 .hidden{
   display: none;
+=======
+@charset "UTF-8";
+
+#sectiion_wrap {
+  max-width: 1240px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 150px;
+}
+
+/* 영화 추천 박스 부분 */
+#movie_search_wrap {
+  margin-top: 60px;
+  margin-bottom: 100px;
+  margin-left: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding-left: 2px;
+  max-width: 1440px;
+  width: 100%;
+}
+
+.movie_recommend_box p {
+  font-size: 2em;
+  font-weight: 800;
+  color: #383838;
+}
+
+.recommend_tag p {
+  font-size: 1.3em;
+  color: #383838;
+}
+
+.movie_recommend_search {
+  display: flex;
+  align-items: center;
+}
+
+.movie_recommend_search input {
+  width: 600px; 
+  height: 70px; 
+  font-size: 20px;
+  border: 3px solid #383838; 
+  border-radius: 5px;
+  padding: 0 10px;
+}
+
+.movie_recommend_search .recommend_search_btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.movie_recommend_search .recommend_search_btn img {
+  padding-top: 4px;
+  border: none; 
+  width: 90px;
+  height: 90px;
+}
+
+
+/* 현재 상영작 추천 구역 */
+.movie_showing_title {
+  margin-top: 30px;
+  max-width: 1240px;
+}
+
+.movie_showing_title h4 {
+  font-size: 3em;
+  padding: 0px 0px 10px 15px;
+  border-left: 10px solid #FB3D28;
+  border-bottom: 2px solid #FB3D28;
+  color: #383838;
+}
+
+.now_theaters_wrap {
+  display: flex;
+  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 30px;
+  width: 100%;
+  height: 485px;
+  margin-left: 70px;
+
+}
+
+
+.now_theaters_movie_poster_arer {
+  position: relative;
+  width: 340px; 
+  height: auto;
+  float: left;
+  overflow: hidden;
+  margin-right: 40px;
+}
+
+
+.now_theaters_movie_poster_arer img {
+  position: absolute;
+  width: 100%; 
+  height: auto; 
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0); 
+  transition: background 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 4;
+}
+
+.overlay:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.2);
+}
+
+/* 오버레이 버튼 부분 */
+button {
+  display: none;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+/* 오버레이가 호버됐을 때 버튼을 보여줌 */
+.overlay:hover button {
+  display: block; 
+  margin: 10px 0;
+}
+
+.show_movie_detail {
+  background-color: rgba(245, 244, 242, 0.7);
+  font-weight: bolder;
+  color: #383838;
+}
+
+.now_theaters_movie_ticketing {
+  background-color: rgba(251, 61, 40, 0.7);
+  font-weight: 700;
+  color: #F5F4F2;
+}
+
+
+
+
+/* 지난 영화 추천 구역 */
+.recommend_prev_title {
+  margin-top: 100px;
+  max-width: 1240px;
+}
+
+.recommend_prev_title h4 {
+  font-size: 3em;
+  padding: 0px 0px 10px 15px;
+  border-left: 10px solid #FB3D28;
+  border-bottom: 2px solid #FB3D28;
+  margin: 0 auto;
+  color: #383838;
+}
+
+.recommend_prev_movie {
+  display: flex;
+  justify-content: center;
+  /* max-width: 1240px; */
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+.recommend_prev_movie_poster{
+  position: relative;
+  /* max-width: 340px; */
+  width: 340px;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+  margin-right: 40px;
+}
+
+.recommend_prev_movie_poster img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.recommend_prev_movie_info .recommend_prev_movie_table_box {
+  float: left;
+}
+
+.recommend_prev_movie_table_box{
+  width: 300px;
+  padding-top: 36px;
+  margin-right: 40px;
+}
+
+.recommend_prev_movie_title {
+  display: block;
+  padding-bottom: 25px;
+  width: 200px; 
+}
+
+
+.ellip {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 135px;
+  text-align: left;
+  /* 설정 넓이보다 글씨가 길어지면 ... 으로 처리 */
+  text-overflow: ellipsis;
+}
+
+.recommend_prev_movie_title strong {
+  font-size: 3em;
+  color: #383838;
+}
+
+.recommend_prev_movie_title span {
+  font-size: 1.2em;
+  color: #848484;
+}
+
+.bdbtm {
+  border-bottom: 1px solid #848484;
+  width: 240px;
+}
+
+.pd15 {
+  padding: 20px 0;
+}
+
+.dbmovie_info .strdt {
+  float: left;
+  width: 80px;
+  margin-right: 5px;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #383838;
+}
+
+.dbmovie_info .strdd {
+  display: block;
+  width: 115px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #848484;
+}
+
+.dbmovie_info .strdd:last-child {
+  margin-bottom: 0;
+}
+
+
+
+
+/*  영화 순위 테이블 */
+.tbl_wrap {
+  width: 400px;
+  float: left;
+}
+
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+colgroup {
+  display: table-column-group;
+}
+
+thead {
+  display: table-header-group;
+  vertical-align: middle;
+}
+
+.tbl_wrap table thead th {
+  padding: 8px 25px 10px 10px;
+  border-bottom: 2px solid #383838;
+  text-align: right;
+
+  font-weight: 800;
+  font-size: 1.4em;
+  color: #383838;
+
+}
+
+.tbl .rank {
+  text-align: center !important;
+}
+
+.tbl_wrap table td {
+  padding: 15px 25px 15px 10px;
+  border-bottom: 1px solid #848484;
+  text-align: right;
+
+  font-size: 1.2em;
+  color: #848484;
+  font-weight: 600;
+}
+
+
+table tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: #848484;
+}
+
+.info_data {
+  display: block;
+  text-align: right;
+  color: #383838;
+}
+
+
+/*검색결과 없음 창*/
+
+.no_search_result {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 50px;
+  width: 100%;
+  gap: 30px;
+}
+
+.no_search_result img {
+  margin-right: 10px; 
+  max-width: 50px;
+}
+
+.no_search_result h2 {
+  white-space: nowrap; 
+  text-overflow: ellipsis; 
+  color: #848484;
+  font-size: 2em;
+}
+
+.hidden{
+  display: none;
+>>>>>>> 03b06105d6f9e96da199e74b8d3458d69e5fafb9
 }
