@@ -617,7 +617,7 @@ img {
     cursor: inherit;
 }
 
-.mseat_inner .floor_box .seat_area .sel.no_select:not(.disabled):not(.on) span:before {
+/* .mseat_inner .floor_box .seat_area .sel {
     content: '';
     display: block;
     position: absolute;
@@ -627,17 +627,17 @@ img {
     height: 16px;
     background: #000;
     opacity: 0.5;
-}
+} */
 
-.sel.disabled {
-    /* Add styles to indicate that the seat is disabled, e.g., reduce opacity */
-    opacity: 0.5;
-    pointer-events: none; /* Prevent further clicks on the disabled seat */
+.seat_area .sel.disabled {
+    opacity: 0.5; 
+    pointer-events: none; 
+    background: url('../images/ticket/seat_type4.png');
     width: 21px;
     height: 16px;
-    background: url(../images/ticket/seat_type4.png) no-repeat 0 4px;
     cursor: not-allowed;
-  }
+}
+
 
 .m_seat_inner .floor_box .seat_area .sel.on span {
     background: #FB3D28;
