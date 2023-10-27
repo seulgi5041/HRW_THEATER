@@ -1,0 +1,332 @@
+@charset "UTF-8";
+
+/* 초기화 */
+* { 
+    margin: 0; padding: 0; 
+    font-family: 'DM Sans', Arial, 'sans-serif';
+}
+html {
+    font-size:62.5%;
+    background-color: #F5F4F2;
+    color: #000;
+}
+body {overflow-x: hidden; }
+a { 
+    text-decoration: none !important; 
+    color: #383838;
+}
+img { border: 0; }
+ul { list-style: none; }
+
+
+/* 메인메뉴 */
+main {
+  max-width: 1440px;
+  width: 100%;
+  margin-top: 160px;
+  margin: 0 auto;
+}
+
+
+
+#oder_confirmation_wrap{
+  padding: 0 50px;
+}
+
+#oder_confirmation_title h1{
+    padding: 20px 0;
+    font-size: 3em;
+    color: #383838;
+    font-weight: 600;
+    margin-bottom: 70px;
+}
+
+/*영화 주문정보 페이지*/
+
+#oder_movie_container{
+  margin: 50px 100px;
+}
+
+.oder_container_title{
+  font-size: 1.5em;
+  border-bottom: solid 2px #FB3D28;
+  border-left: solid 7px #FB3D28; ;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  margin-bottom: 50px;
+  }
+
+.oder_movie_info_cell{
+  padding: 0 50px;
+  display: flex;
+}
+
+.oder_movie_poster{
+  flex: 1; 
+}
+.oder_movie_info{
+  flex: 1;
+  padding-left: 50px;
+  margin: auto;
+
+}
+
+.oder_movie_info h4{
+  font-size: 1.4em;
+  color: #383838;
+  margin: 50px 0;
+}
+
+.oder_movie_info h3{
+  font-size: 1.8em;
+  color: #383838;
+  margin-bottom: 70px;
+  margin-top: 30px;
+}
+
+.oder_cinema_info{
+  flex: 2;
+  padding-left: 50px;
+  margin: auto;
+
+
+}
+
+.oder_theater_info{
+  flex: 2;
+  padding-left: 50px;
+  margin: auto;
+}
+
+.oder_movie_info_table{
+  display: flex;
+  flex-direction: column;
+}
+
+.oder_movie_info_table tr {
+  display: flex;
+  flex-direction: row;
+  margin: 30px 0;
+}
+
+.oder_movie_info_table th {
+font-size: 1.5em;
+white-space: nowrap;
+flex: 1;
+color: #383838;
+text-align: left;
+}
+
+.oder_movie_info_table td {
+  flex: 5;
+  font-size: 1.2em;
+  line-height: 1.5;
+  color: #848484;
+  padding-left: 20px;
+  text-align: left;
+} 
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+/*영화 결제전 취소 가능하도록 체크박스 설정*/
+.oder_movie_check{
+  margin-right: 10px;
+}
+
+.oder_movie_check_btn{  
+  border: #FB3D28 solid 1px;
+  background-color: #FB3D28;
+}
+.oder_movie_check_img{
+  width: 20px;
+height: auto;
+}
+
+.oder_movie_check_btn.clicked{ 
+  background-color: transparent;
+  border: #b6b3b3 solid 1px;
+}
+
+.oder_movie_check_img.clicked{ 
+  opacity: 0; /*투명이미지로바꾸기*/
+}
+
+/*음식주문정보*/
+
+#oder_food_container{
+  margin: 50px 100px;
+}
+
+#oder_food_container_info{
+  margin-top: 10px;
+  margin-bottom: 60px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  height: auto;
+  max-width: 1240px;
+}
+
+.oder_food_container_cell{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 28%;
+  height: 400px;
+  margin-bottom: 85px;
+  margin: 60px 30px;
+}
+
+.oder_food_info{
+  width: 250px; 
+}
+
+.oder_food_info p {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #848484;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.oder_food_name h4 {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 900;
+  color: #383838;
+}
+
+.oder_food_basket {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 10px;
+  padding: 0 50px;
+  white-space: nowrap;
+}
+
+.oder_food_quantity {
+  width: 45px;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.oder_food_quantity span{
+  font-size: 1.8em;
+  font-weight: 600;
+  color: #383838;
+}
+
+.oder_food_price span {
+  font-size: 1.5em;
+  font-weight: 900;
+  color: #383838;
+}
+
+.oder_food_price span em {
+  font-style: normal;
+  font-size: 0.9em;
+  color: #383838;
+}
+
+/*주문직후 음식정보 변경용*/
+
+.oder_food_basket_check {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.oder_food_minusbutton {
+  margin-right: 10px; 
+  border: none;
+  
+}
+
+.oder_food_plusbutton {
+  margin-left: 10px; 
+  border: none;
+}
+.oder_food_basket_check button img{
+  width: 16px;
+  height: 16px;
+}
+
+
+/*결제전일때 oder_food_basket_check 의 히든빼기, 결제후일때 oder_food_basket 히든빼기*/
+.oder_food_container_cell .hidden{  
+  display: none;
+}
+
+/*합계 */
+
+#oder_price_container{
+  margin-top: 100px;
+  border-top: solid 2px #FB3D28;
+  margin: 50px 100px;
+}
+
+#oder_price_content{
+  padding-right: 150px;
+  margin: 50px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+}
+#oder_price_content h3{
+  font-size: 2em;
+  color: #383838;
+  margin-right: 50px;
+}
+
+#oder_price_content p{
+  font-size: 1.8em;
+  color: #848484;
+
+}
+
+/*버튼 공통*/
+
+.oder_butten_container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 50px 100px;
+  padding: 50px;
+}
+
+/*버튼컨테이너가 각상황에 맟게 안나오게 하는 거*/
+.oder_butten_container.hidden {
+  display: none;
+}
+
+/*결제버튼*/
+
+#oder_page_butten_submit{
+  display: block;
+  width: 100%;
+  margin: 10px;
+  padding: 0;
+  height: 60px;
+  background-color: #FB3D28;
+  color: #ffffff;
+  font-size: 2em;
+  border: none;
+}
+
+#oder_page_butten_submit:hover{
+  border: 1px solid #b6b3b3;
+  background-color: transparent;
+  color: #666;
+}
+
+/*합계나 버튼컨테이너아래 푸터와공간 맞추기위해 빈공간넣음*/
+.empty_place{
+  margin: 200px 0;
+}
