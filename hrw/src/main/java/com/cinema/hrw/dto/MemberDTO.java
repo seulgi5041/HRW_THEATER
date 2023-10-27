@@ -17,8 +17,6 @@ import lombok.ToString;
 @ToString
 public class MemberDTO {
 	
-	private Long idx;
-	
 	private String userId;
 	private String userPassword;
 	private String userPasswordAgain;
@@ -27,7 +25,7 @@ public class MemberDTO {
 	private String userEmail;
 	private String userPhone;
 	
-	public MemberDTO toMemberDTO(MemberEntity memberEntity) {
+	public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setUserId(memberEntity.getUserId());
 		memberDTO.setUserPassword(memberEntity.getUserPassword());

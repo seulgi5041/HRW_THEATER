@@ -6,6 +6,17 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
     <link rel="stylesheet" href="../css/member/form/join_form.css"> 
+    
+    <script src="../js/member/join.js"></script>
+    
+    <script>
+    function confirmReset(event) {
+        var isConfirm = confirm('입력하신 정보를 초기화 시키겠습니까?');
+        if (!isConfirm) {
+            event.preventDefault(); // 초기화 동작 방지
+        }
+    }
+</script>
 </head>
 <body>
     <jsp:include page="../include/header.jsp"/>
@@ -64,12 +75,20 @@
 
                 <div class="button-group">
                     <input type="submit" value="회원 가입" class="big-button"> 
-                    <input type="reset" value="초기화" class="big-button">
+					<input type="reset" value="초기화" class="big-button" onclick="confirmReset(event)">
+
                 </div>
             </div>
         </form>
     </div>
 
     <jsp:include page="../include/footer.jsp"/>
+    
+    <% if (request.getAttribute("errorMessage") != null) { %>
+    <script>
+        alert('<%= request.getAttribute("errorMessage") %>');
+    </script>
+<% } %>
+    
 </body>
 </html>
