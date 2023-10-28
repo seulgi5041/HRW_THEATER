@@ -55,7 +55,7 @@ public class MemberController {
 	    // 로그인 성공시, 세션에 ID 저장
 	    if (loginResult != null) {
 	        session.setAttribute("loginId", loginResult.getUserId()); 
-	        return "main";
+	        return "redirect:/";
 	    } else {
 	        // 로그인 실패
 	    	session.setAttribute("loginError", "아이디 또는 비밀번호가 일치하지 않습니다.");
@@ -109,7 +109,7 @@ public class MemberController {
 	@GetMapping("/member/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "main";
+		return "redirect:/";
 	}
 	
 	// 현재 사용자 정보 폼 요청
