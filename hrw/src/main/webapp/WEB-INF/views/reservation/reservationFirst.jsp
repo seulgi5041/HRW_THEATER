@@ -813,6 +813,81 @@
   </section>
 </main>
 
+<!-- 모달창 부분 -->
+<!-- 좌석 선택으로 넘어가기 위한 모달 창 -->
+<div id="modal" style="left: 50%; top: 50%; margin-top: -256.5px; margin-left: -250px;" tabindex="0">
+  <div class="modal_header">
+    <h4 class="hidden">예매 내용 확인 팝업</h4>
+
+    <!-- 클릭한 요소 가져오기(시간, 관) -->
+    <div class="stepOnePopupHeader">
+      <strong></strong>
+    </div>
+
+    <button type="button" class="btn_close" onclick="closeModal()">
+      팝업닫기
+    </button>
+  </div>
+
+  <!-- 모달 컨테이너 -->
+  <div class="modal_container">
+    <!-- 좌석 정보 -->
+    <div class="seat_info">
+      <div class="group_top" id="stepOnePopupConSeat">
+        <dl>
+          <dt>잔여좌석</dt>
+          <dd>
+            <strong>187</strong>
+            "/195"
+          </dd>
+        </dl>
+      </div>
+
+      <div class="group_container screen_preview">
+        <div class="screen_preview_con">
+          <div class="screen_info">
+            <!-- // -->
+            <div class="sm_screen">
+              <span class="tit_screen">SCREEN</span>
+
+              <!-- 미니맵 -->
+              <div class="minimap" id="stepOnePopupConMiniMap">
+                <div class="seat_arer" style="width: 140.094px; height: 71.5938px;">
+                  <!-- 좌석이미지 -->
+                </div>
+              </div>
+            </div>
+            <!-- //미니맵 -->
+          </div>
+          <!-- // -->
+        </div>
+      </div>
+      <div class="group_bottom" id="stepOnePopupConMsg">
+        <div class="txt_notice gr_15">
+          <p class="tit">
+            <span class="ic_grade gr_15">
+              만 15세 이상 관람가
+            </span>
+            본 영화는 <strong>만 15세 이상 관람가</strong> 영화입니다.
+          </p>
+          <p class="txt">
+            만 15세 미만의 고객님(영,유아 포함)은 반드시 부모님  또는 성인 보호자의 동반하에
+            <br>
+            관람이 가능합니다. 연령 확인 불가 시 입장이 제한 될 수 있습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+     <!-- 모달 안의 확인 창 -->
+    <div class="btn_bottom_wrap" id="stepOnePopupConButton">
+      <a href="#none" class="btn_col1 ty5">취소</a>
+      <!-- 좌석 선택하는 페이지로 넘어감 -->
+      <a href="#none" class="btn_col2 ty5">인원/좌석선택</a>
+    </div> 
+  </div>
+</div>
+
+
 <!-- 푸터 -->
     <jsp:include page="../include/footer.jsp"/>
     
