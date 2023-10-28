@@ -70,7 +70,7 @@
     </div>
 
     <jsp:include page="../include/footer.jsp"/>
-    <script src="../js/userInfo.js"></script>
+    <script src="../js/member/userInfo.js"></script>
     <script>    
         <c:if test="${sessionScope.message != null}">
         alert("${sessionScope.message}");

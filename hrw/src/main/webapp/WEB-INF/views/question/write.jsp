@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <title>문의 글 작성</title>
-    <link rel="stylesheet" href="../css/write.css">
+    <link rel="stylesheet" href="../css/question/write.css">
 </head>
 <body>
 
