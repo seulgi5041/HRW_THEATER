@@ -34,13 +34,25 @@ public class MovieController {
         return "movie/movie_info";
     }
 
+        @GetMapping("/oldmovieinfo")
+        public String oldmovieinfo(OldMovieDTO oldMovieDTO, Model model){
+        OldMovieDTO choicedMovieInfo = movieService.selectOldMovieInfo(oldMovieDTO); /*DTO에 코드만 들어있다 코드받아서 정보 받아오기 */
+
+        model.addAttribute("MovieInfo", choicedMovieInfo);
+
+        return "movie/movie_info";
+    }
+
     @PostMapping("/movierecommend")
     public String movierecommend(@RequestParam("searchQuery") String searchInputKeyword, Model model){
        List<MovieDTO> searchNowMovieList= movieService.selectNowMovieList(searchInputKeyword);
-       //List<MovieDTO> searchPrevMovieList= movieService.selectPrevMovieList(searchInputKeyword);
-       model.addAttribute("searchNowMovieList",searchNowMovieList);
-      // model.addAttribute("searchPrevMovieList",searchPrevMovieList);
-      
+       List<OldMovieDTO> searchPrevMovieList= movieService.selectPrevMovieList(searchInputKeyword);
+       model.addAttribute("searchNowMovieList", searchNowMovieList);
+       model.addAttribute("searchPrevMovieList", searchPrevMovieList);
+       for (OldMovieDTO oldMovieDTO : searchPrevMovieList) {
+        System.out.println("Code: " + oldMovieDTO.getCode());
+        System.out.println("aocld: " + oldMovieDTO.getMatchRate());
+    }
        return "movie/movie_recommend";
     }
     
