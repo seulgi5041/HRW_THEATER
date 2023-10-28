@@ -48,7 +48,7 @@ public class MemberService {
 			if(memberEntity.getUserPassword().equals(memberDTO.getUserPassword())) {
 				// 비밀번호 일치하는 경우.
 				// entity -> dto 변환 후 반환.
-				MemberDTO dto = memberDTO.toMemberDTO(memberEntity);
+				MemberDTO dto = MemberDTO.toMemberDTO(memberEntity);
 				return dto;
 			} else {
 				// 비밀번호 불일치(로그인 실패);
@@ -66,7 +66,7 @@ public class MemberService {
 	    if (byUserNameAndUserEmail.isPresent()) {
 	        // 조회 결과 있음.
 	        MemberEntity memberEntity = byUserNameAndUserEmail.get();
-	        MemberDTO dto = memberDTO.toMemberDTO(memberEntity);
+	        MemberDTO dto = MemberDTO.toMemberDTO(memberEntity);
 	        return dto;  
 	    } else {
 	        // 조회 결과 없음.
@@ -79,7 +79,7 @@ public class MemberService {
 		if (byUserSearchPw.isPresent()) {
 			// 조회결과 있을때
 			MemberEntity memberEntity = byUserSearchPw.get();
-			MemberDTO dto =memberDTO.toMemberDTO(memberEntity);
+			MemberDTO dto =MemberDTO.toMemberDTO(memberEntity);
 			return dto;
 		} else {
 			// 조회 결과 없음

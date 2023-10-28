@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cinema.hrw.dto.MovieDTO;
+import com.cinema.hrw.dto.OldMovieDTO;
 import com.cinema.hrw.service.MovieService;
 
 import lombok.RequiredArgsConstructor;

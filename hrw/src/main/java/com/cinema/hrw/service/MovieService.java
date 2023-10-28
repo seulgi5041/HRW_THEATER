@@ -7,6 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,9 @@ import com.cinema.hrw.repository.OldMovieRepository;
 
 import lombok.RequiredArgsConstructor;
 
+
+
+
 @Service
 @RequiredArgsConstructor
 public class MovieService {
@@ -27,9 +33,12 @@ public class MovieService {
     
     private final MovieRepository movieRepository;
     private final OldMovieRepository oldMovieRepository;
+    private static final Logger logger = LoggerFactory.getLogger(MovieService.class);
+
 
     public List<MovieDTO> selectAllTitle() { /*모든영화가져기 */
         List<MovieEntity> movieEntities = movieRepository.findAll();
+        logger.info("Movie Entities: {}", movieEntities);
     
         List<MovieDTO> movieList = new ArrayList<>();
         for (MovieEntity movieEntity : movieEntities) {
