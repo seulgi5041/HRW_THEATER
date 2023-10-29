@@ -34,7 +34,7 @@ public class MovieService {
         List<MovieDTO> movieList = new ArrayList<>();
         for (MovieEntity movieEntity : movieEntities) {
             MovieDTO movieDTO = new MovieDTO();
-            movieDTO = movieDTO.toMovieDTO(movieEntity);
+            movieDTO = MovieDTO.toMovieDTO(movieEntity);
             movieList.add(movieDTO);
         }
     
@@ -47,7 +47,7 @@ public class MovieService {
         List<MovieDTO> movieList = new ArrayList<>();
         for (MovieEntity movieEntity : top10Movies) {
             MovieDTO movieDTO = new MovieDTO();
-            movieDTO = movieDTO.toMovieDTO(movieEntity);
+            movieDTO = MovieDTO.toMovieDTO(movieEntity);
             movieList.add(movieDTO);
         }
 
@@ -57,7 +57,7 @@ public class MovieService {
     public MovieDTO selectMovieInfo(MovieDTO movieDTO) { /*선택한 영화 정보가져오기 */
         MovieEntity choicedMovieInfoEntity = movieRepository.findByCode(movieDTO.getCode());
 
-        MovieDTO choicedMovieInfo = movieDTO.toMovieDTO(choicedMovieInfoEntity);
+        MovieDTO choicedMovieInfo = MovieDTO.toMovieDTO(choicedMovieInfoEntity);
         return choicedMovieInfo; 
     }
 
@@ -196,7 +196,7 @@ public class MovieService {
        
                OldMovieEntity choicedMovieInfoEntity = oldMovieRepository.findByCode(oldMovieDTO.getCode());
 
-        OldMovieDTO choicedMovieInfo = oldMovieDTO.toMovieDTO(choicedMovieInfoEntity);
+        OldMovieDTO choicedMovieInfo = OldMovieDTO.toOldMovieDTO(choicedMovieInfoEntity);
         return choicedMovieInfo; 
     } 
     

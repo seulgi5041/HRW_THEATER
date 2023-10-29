@@ -63,7 +63,7 @@ public class MovieDTO {
     private String updateDate;
 
 
-    public MovieDTO toMovieDTO(MovieEntity movieEntity){
+    public static MovieDTO toMovieDTO(MovieEntity movieEntity){
         MovieDTO movieDTO = new MovieDTO();
         movieDTO.setCode(movieEntity.getCode());
         movieDTO.setTitle(movieEntity.getTitle());
