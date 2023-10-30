@@ -1,7 +1,6 @@
 package com.cinema.hrw.entity;
 
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,7 +18,7 @@ public class OldMovieEntity {
     @Id
     @Column(name = "code")
     private String code;
-
+    
     @Column(name = "title")
     private String title;
     
