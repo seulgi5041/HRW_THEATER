@@ -1,6 +1,6 @@
 package com.cinema.hrw.dto;
 
-import com.cinema.hrw.entity.MovieEntity;
+
 import com.cinema.hrw.entity.OldMovieEntity;
 
 import lombok.Getter;
@@ -12,7 +12,8 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class OldMovieDTO {
+
+public class OldMovieDTO { 
     private String code;
     
     private String title;
@@ -52,7 +53,7 @@ public class OldMovieDTO {
     private double matchRate;
 
 
-    public OldMovieDTO toMovieDTO(OldMovieEntity oldMovieEntity){
+    public static OldMovieDTO toOldMovieDTO(OldMovieEntity oldMovieEntity){
         OldMovieDTO oldMovieDTO = new OldMovieDTO();
         oldMovieDTO.setCode(oldMovieEntity.getCode());
         oldMovieDTO.setTitle(oldMovieEntity.getTitle());

@@ -26,18 +26,19 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
+	
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.projectlombok:lombok:1.18.22'
+	annotationProcessor 'org.projectlombok:lombok:1.18.22'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper' 
-    implementation 'javax.servlet:jstl'
+  implementation 'javax.servlet:jstl'
 
 	implementation 'org.slf4j:slf4j-api'
-    implementation 'ch.qos.logback:logback-classic'
+  implementation 'ch.qos.logback:logback-classic'
 }
 
 tasks.named('test') {

@@ -17,7 +17,7 @@ import lombok.Setter;
 
 public class MemberEntity {
 	
-	@Id	// 
+	@Id	// pk 吏��젙.
 
 	private String userId;
 	
