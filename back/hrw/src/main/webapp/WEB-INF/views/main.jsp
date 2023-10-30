@@ -19,7 +19,7 @@
    <jsp:include page="include/header.jsp"/>
   
     <!-- 메인영역 -->
-    <main>
+   <main>
       <!--슬라이드-->
       <section id="movie_slide_wrap">
         <div class="swiper mySwiper">
@@ -174,11 +174,13 @@
     <jsp:include page="include/footer.jsp"/>
   
   
+  
     <!-- 슬라이드 js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   
-    <script src="../js/swiper.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/common.js"></script>
+     <script src="../js/main/swiper.js"></script>
+    <script src="../js/main/main.js"></script>
+
   </body>
+
 </html>

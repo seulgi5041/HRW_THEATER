@@ -123,6 +123,11 @@ public class MemberService {
         // 변경된 정보를 데이터베이스에 저장합니다.
         memberRepository.save(member);
     }
+
+	public int idDubleCheck(String userId){
+		int dubleCheck = memberRepository.countByUserId(userId);
+		return dubleCheck;
+	}
     
 
 }

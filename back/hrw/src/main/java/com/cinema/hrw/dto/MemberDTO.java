@@ -1,5 +1,6 @@
 package com.cinema.hrw.dto;
 
+import javax.persistence.Id;
 
 import com.cinema.hrw.entity.MemberEntity;
 

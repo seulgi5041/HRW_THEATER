@@ -7,7 +7,7 @@
 <title>회원가입</title>
     <link rel="stylesheet" href="../css/member/form/join_form.css"> 
     
-    <script src="../js/join.js"></script>
+    <script src="../js/member/join.js"></script>
     
     <script>
     function confirmReset(event) {
@@ -36,7 +36,7 @@
                 <div class="input-group">
                     <label for="user_ID">* 아이디</label>
                     <input type="text" id="user_ID" name="userId" placeholder="영문,숫자 6~20자" maxlength="20" required="required">
-                    <input type="button" value="중복 확인">
+                    <input type="button" value="중복 확인" id="double_check_btn">
                 </div>
 
                 <div class="input-group">

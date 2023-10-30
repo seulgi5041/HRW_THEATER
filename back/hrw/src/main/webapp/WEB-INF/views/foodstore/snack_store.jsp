@@ -7,7 +7,7 @@
 <title>HRW 푸드스토어</title>
 
     <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/stroe.css">
+    <link rel="stylesheet" href="../css/store/store.css">
 </head>
 <body>
 	<jsp:include page="../include/header.jsp"/>

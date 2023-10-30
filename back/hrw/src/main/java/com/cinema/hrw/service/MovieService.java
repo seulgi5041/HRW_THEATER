@@ -1,6 +1,7 @@
 package com.cinema.hrw.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -129,6 +130,7 @@ public class MovieService {
     public List<OldMovieDTO> selectPrevMovieList(String searchInputKeyword) {/*지난상역작중 검색어와 관련된영화 10개 가져오기 */
         StringBuilder whereClauses = new StringBuilder();
         String[] searchKeywords = searchInputKeyword.split("#");
+        
         for (int i = 0; i < searchKeywords.length; i++) {
             searchKeywords[i] = searchKeywords[i].trim();
         }
@@ -175,7 +177,7 @@ public class MovieService {
         // 결과 처리
         for (Object[] result : results) {
             OldMovieEntity oldMovieSearchEntity = (OldMovieEntity)result[0];
-            double matchRate = ((double) ((Integer) result[1]) / (double) searchKeywords.length) * 100;
+            double matchRate = ((double) ((Integer) result[1]) / (double) (searchKeywords.length-1)) * 100;
             oldMovieSearchEntity.setMatchRate(matchRate);
             oldMovieSearchListEntity.add(oldMovieSearchEntity);
         }

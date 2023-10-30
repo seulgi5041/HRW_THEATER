@@ -1,6 +1,6 @@
 package com.cinema.hrw.dto;
 
-//import com.cinema.hrw.entity.QuestionEntity;
+import com.cinema.hrw.entity.QuestionEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

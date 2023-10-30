@@ -28,4 +28,4 @@
       </section>
     </footer>
  
-    <script src="../js/footer.js"></script>
+    <script src="../js/include/footer.js"></script>

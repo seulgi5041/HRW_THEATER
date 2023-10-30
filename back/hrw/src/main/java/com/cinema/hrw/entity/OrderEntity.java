@@ -7,9 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-
-
+import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -65,7 +63,8 @@ public class OrderEntity {
     @Column
     private int installment; // 일시불: 0, 할부시 개월수
 
-    
+    @Transient
+    private int allPrice; // 총결제액
 
 
 }

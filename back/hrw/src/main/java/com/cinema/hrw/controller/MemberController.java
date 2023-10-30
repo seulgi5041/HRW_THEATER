@@ -1,11 +1,17 @@
 package com.cinema.hrw.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cinema.hrw.dto.MemberDTO;
@@ -55,7 +61,7 @@ public class MemberController {
 	    // 로그인 성공시, 세션에 ID 저장
 	    if (loginResult != null) {
 	        session.setAttribute("loginId", loginResult.getUserId()); 
-	        return "main";
+	        return "redirect:/";
 	    } else {
 	        // 로그인 실패
 	    	session.setAttribute("loginError", "아이디 또는 비밀번호가 일치하지 않습니다.");
@@ -109,7 +115,7 @@ public class MemberController {
 	@GetMapping("/member/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "main";
+		return "redirect:/";
 	}
 	
 	// 현재 사용자 정보 폼 요청
@@ -144,6 +150,16 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/";
 	}
+
+	//아이디 중복체크
+	@PostMapping("/idDoubleCheck")
+	@ResponseBody
+	public int id_duble_check(@RequestBody Map<String, String> requestBody) {
+    System.out.println("id_duble_check");
+    String userId = requestBody.get("userId");
+    int check = memberService.idDubleCheck(userId);
+    return check;
+}
 	
 
 }

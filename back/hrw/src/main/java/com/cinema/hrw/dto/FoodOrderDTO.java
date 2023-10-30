@@ -15,7 +15,7 @@ import lombok.ToString;
 public class FoodOrderDTO {
     private int num;
    
-    private OrderDTO orderCode;
+    private String orderCode;
     
     private String foodName;
    
@@ -28,7 +28,7 @@ public class FoodOrderDTO {
     public static FoodOrderDTO toFoodOrderDTO(FoodOrderEntity foodOrderEntity){
     FoodOrderDTO foodOrderDTO = new FoodOrderDTO();
     foodOrderDTO.setNum(foodOrderEntity.getNum());
-    foodOrderDTO.setOrderCode(OrderDTO.toOrderDTO(foodOrderEntity.getOrderCode()));
+    foodOrderDTO.setOrderCode(OrderDTO.toOrderDTO(foodOrderEntity.getOrderCode()).getOrderCode());
     foodOrderDTO.setFoodName(foodOrderEntity.getFoodName());
     foodOrderDTO.setFoodCount(foodOrderEntity.getFoodCount());
     foodOrderDTO.setFoodPrice(foodOrderEntity.getFoodPrice());
