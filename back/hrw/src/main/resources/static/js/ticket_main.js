@@ -124,18 +124,22 @@ document.addEventListener("DOMContentLoaded", function() {
   
   function go_on_post_mapping() {
     const scheduleCode = "10010012023110206";
-  //alert("검색결과(나중에 쿼리문 사용 수정) " + searchQuery);
-  let form = document.createElement('form');
-    
-    let obj;
-    obj = document.createElement('input');
-    obj.setAttribute('type', 'text');
-    obj.setAttribute('name', 'scheduleCode');
-    obj.setAttribute('value', scheduleCode);
-    
-    form.appendChild(obj);
+ 
+    let form = document.createElement('form');
+
+    // scheduleCode를 숨겨진 입력 필드로 추가
+    let scheduleCodeInput = document.createElement('input');
+    scheduleCodeInput.setAttribute('type', 'hidden');
+    scheduleCodeInput.setAttribute('name', 'scheduleCode');
+    scheduleCodeInput.setAttribute('value', scheduleCode);
+    form.appendChild(scheduleCodeInput);
+
+
     form.setAttribute('method', 'post');
     form.setAttribute('action', '/reservation/second');
+    
+    // 필요한 경우 데이터 유효성 검사 수행
+
     document.body.appendChild(form);
     form.submit();
   }

@@ -60,8 +60,6 @@ public class OrderEntity {
     @Column
     private String payCompany;
 
-    /*@Column
-    private int installment; // 일시불: 0, 할부시 개월수*/
 
     @Transient
     private int allPrice; // 총결제액

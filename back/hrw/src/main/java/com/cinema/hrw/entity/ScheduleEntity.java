@@ -29,7 +29,7 @@ public class ScheduleEntity {
     private String scheduleCode;
 
    
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cinema_code", referencedColumnName = "cinema_code")
     private CinemaAddressEntity cinemaCode;
 
@@ -45,7 +45,7 @@ public class ScheduleEntity {
     @Transient
     private String takeDateOfWeek;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "movie_code", referencedColumnName = "code")
     private MovieEntity movieCode;
 

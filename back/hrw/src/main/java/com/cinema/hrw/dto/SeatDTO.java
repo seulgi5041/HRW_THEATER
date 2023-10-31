@@ -14,14 +14,14 @@ import lombok.ToString;
 public class SeatDTO {
 private int num;
 
-private String orderCode;
+private OrderDTO orderCode;
 
 private String seatName;
 
 public static SeatDTO toSeatDTO(SeatEntity seatEntity){
     SeatDTO seatDTO = new SeatDTO();
     seatDTO.setNum(seatEntity.getNum());
-    seatDTO.setOrderCode(OrderDTO.toOrderDTO(seatEntity.getOrderCode()).getOrderCode());
+    seatDTO.setOrderCode(OrderDTO.toOrderDTO(seatEntity.getOrderCode()));
     seatDTO.setSeatName(seatEntity.getSeatName());
     return seatDTO;
 }

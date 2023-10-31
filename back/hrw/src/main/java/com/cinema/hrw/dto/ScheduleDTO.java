@@ -15,7 +15,7 @@ public class ScheduleDTO {
 
     private String scheduleCode;
 
-    private String cinemaCode;
+    private CinemaAddressDTO cinemaCode;
 
     private String cinemaName;
 
@@ -25,7 +25,7 @@ public class ScheduleDTO {
 
     private String takeDateOfWeek;
 
-    private String movieCode;
+    private MovieDTO movieCode;
 
     private String movieTitle;
 
@@ -48,12 +48,12 @@ public class ScheduleDTO {
     public static ScheduleDTO toScheduleDTO (ScheduleEntity scheduleEntity){
         ScheduleDTO scheduleDTO = new ScheduleDTO();
         scheduleDTO.setScheduleCode(scheduleEntity.getScheduleCode());
-        scheduleDTO.setCinemaCode(CinemaAddressDTO.toCinemaAddressDTO(scheduleEntity.getCinemaCode()).getCinemaCode());
+        scheduleDTO.setCinemaCode(CinemaAddressDTO.toCinemaAddressDTO(scheduleEntity.getCinemaCode()));
         scheduleDTO.setCinemaName(scheduleEntity.getCinemaName());
         scheduleDTO.setAuditorium(scheduleEntity.getAuditorium());
         scheduleDTO.setTakeDate(scheduleEntity.getTakeDate());
         scheduleDTO.setTakeDateOfWeek(scheduleEntity.getTakeDateOfWeek());
-        scheduleDTO.setMovieCode(MovieDTO.toMovieDTO(scheduleEntity.getMovieCode()).getCode());
+        scheduleDTO.setMovieCode(MovieDTO.toMovieDTO(scheduleEntity.getMovieCode()));
         scheduleDTO.setMovieTitle(scheduleEntity.getMovieTitle());
         scheduleDTO.setMovieRating(scheduleEntity.getMovieRating());
         scheduleDTO.setStartTime(scheduleEntity.getStartTime());

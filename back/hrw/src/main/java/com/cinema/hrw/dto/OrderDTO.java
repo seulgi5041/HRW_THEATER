@@ -14,15 +14,15 @@ public class OrderDTO {
     
     private String orderCode;
 
-    private String userId;
+    private MemberDTO userId;
 
     private String orderDate;
 
     private int num;
 
-    private String movieCode;
+    private MovieDTO movieCode;
     
-    private String scheduleCode;
+    private ScheduleDTO scheduleCode;
     
     private int teenagerCount;
 
@@ -44,11 +44,11 @@ public class OrderDTO {
     public static OrderDTO toOrderDTO(OrderEntity orderEntity){
     OrderDTO orderDTO = new OrderDTO();
     orderDTO.setOrderCode(orderEntity.getOrderCode());
-    orderDTO.setUserId(MemberDTO.toMemberDTO(orderEntity.getUserId()).getUserId());
+    orderDTO.setUserId(MemberDTO.toMemberDTO(orderEntity.getUserId()));
     orderDTO.setOrderDate(orderEntity.getOrderDate());
     orderDTO.setNum(orderEntity.getNum());
-    orderDTO.setMovieCode(MovieDTO.toMovieDTO(orderEntity.getMovieCode()).getCode());
-    orderDTO.setScheduleCode(ScheduleDTO.toScheduleDTO(orderEntity.getScheduleCode()).getScheduleCode());
+    orderDTO.setMovieCode(MovieDTO.toMovieDTO(orderEntity.getMovieCode()));
+    orderDTO.setScheduleCode(ScheduleDTO.toScheduleDTO(orderEntity.getScheduleCode()));
     orderDTO.setTeenagerCount(orderEntity.getTeenagerCount());
     orderDTO.setAdultCount(orderEntity.getAdultCount());
     orderDTO.setDisabledCount(orderEntity.getDisabledCount());
