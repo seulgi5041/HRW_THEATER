@@ -5,16 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "cinema_addressTBL")	
+@Table(name = "cinema_addressTBL")
 public class CinemaAddressEntity {
-    
+
     @Id
     @Column(name = "cinema_code")
     private String cinemaCode;
@@ -29,8 +28,8 @@ public class CinemaAddressEntity {
     private String tell;
 
     @Column
-    private String xAxis;
-    
+    private Double xAxis;
+
     @Column
-    private String yAxis;
+    private Double yAxis;
 }
