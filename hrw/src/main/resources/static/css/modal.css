@@ -32,7 +32,7 @@
 }
 
 .modal_header .btn_close {
-  background-image: url(../images/close.png);
+  background-image: url(../images/ticket/close.png);
 }
 
 .modal_header .btn_close {
@@ -43,7 +43,7 @@
   height: 19px;
   border: none;
   text-indent: -9999em;
-  background: transparent url(../images/close.png) no-repeat 0 0;
+  background: transparent url(../images/ticket/close.png) no-repeat 0 0;
 }
 
 #modal .modal_container {

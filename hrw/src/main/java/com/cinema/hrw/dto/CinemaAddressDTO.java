@@ -1,6 +1,5 @@
 package com.cinema.hrw.dto;
 
-
 import com.cinema.hrw.entity.CinemaAddressEntity;
 
 import lombok.Getter;
@@ -23,18 +22,18 @@ public class CinemaAddressDTO {
     private String tell;
 
     private Double xAxis;
-    
+
     private Double yAxis;
 
-    public static CinemaAddressDTO toCinemaAddressDTO(CinemaAddressEntity cinemaAddressEntity){
-    CinemaAddressDTO cinemaAddressDTO = new CinemaAddressDTO();
-    cinemaAddressDTO.setCinemaCode(cinemaAddressEntity.getCinemaCode());
-    cinemaAddressDTO.setCinemaName(cinemaAddressEntity.getCinemaName());
-    cinemaAddressDTO.setAddress(cinemaAddressEntity.getAddress());
-    cinemaAddressDTO.setTell(cinemaAddressEntity.getTell());
-    cinemaAddressDTO.setXAxis(cinemaAddressEntity.getXAxis());
-    cinemaAddressDTO.setYAxis(cinemaAddressEntity.getYAxis());
-    return cinemaAddressDTO;
+    public static CinemaAddressDTO toCinemaAddressDTO(CinemaAddressEntity cinemaAddressEntity) {
+        CinemaAddressDTO cinemaAddressDTO = new CinemaAddressDTO();
+        cinemaAddressDTO.setCinemaCode(cinemaAddressEntity.getCinemaCode());
+        cinemaAddressDTO.setCinemaName(cinemaAddressEntity.getCinemaName());
+        cinemaAddressDTO.setAddress(cinemaAddressEntity.getAddress());
+        cinemaAddressDTO.setTell(cinemaAddressEntity.getTell());
+        cinemaAddressDTO.setXAxis(cinemaAddressEntity.getXAxis());
+        cinemaAddressDTO.setYAxis(cinemaAddressEntity.getYAxis());
+        return cinemaAddressDTO;
     }
 
 }

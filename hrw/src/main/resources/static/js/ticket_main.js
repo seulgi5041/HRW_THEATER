@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
     element.classList.add('active');
     const depth2 = element.querySelector('.depth2');
     if (depth2) {
-      depth2.style.display = 'block'; // 이 부분에서 '=' 기호가 빠졌습니다.
+      depth2.style.display = 'block'; 
     }
 
     // 기존에 있던 이미지와 글씨들 사라짐
@@ -40,13 +40,22 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
 
-    // element에 active를 추가하고, 가장 가까운 depth1에서도 active를 추가
-    element.classList.add('active');
-    const depth1 = element.closest('.depth1');
-    if (depth1) {
-      depth1.classList.add('active');
+    if (!element.classList.contains('active')) { // 이미 active 클래스를 가지고 있지 않은 경우에만 실행
+      element.classList.add('active');
+      const depth1 = element.closest('.depth1');
+      if (depth1) {
+        depth1.classList.add('active');
+      }
     }
-  }
+    const selectedLocation = element.textContent.trim(); // 앞뒤 공백 제거
+    const movieHall = document.querySelector('.hall').textContent;
+    console.log("선택지점: " + selectedLocation + " (" + movieHall + ")");
+
+
+     // <dd> 업데이트
+  const ddElement = document.querySelector('li.step01.active dl dd');
+  ddElement.textContent = selectedLocation + " (" + movieHall + ")";
+}
 
   // depth1Select에 대한 클릭 이벤트 처리
   depth1Select1.forEach((element) => {
@@ -59,32 +68,73 @@ document.addEventListener("DOMContentLoaded", function() {
   depth2Select1.forEach((element) => {
     element.addEventListener('click', () => {
       handleDepth2Click(element);
+      
     });
   });
 
   //영화 선택시 속성주기
   const liSelect = document.querySelectorAll('.movie_select_wrap ul > li');
-
-  liSelect.forEach((element) => {
-    element.addEventListener('click', () => {
-      // li에 있는 class에 active 속성 삭제
-      liSelect.forEach((el) => {
-        el.classList.remove('active');
-      });
-
-      // li에 있는 class에 active 속성 활성화
-      element.classList.add('active');
-    });
+  liSelect.forEach((liElement) => {
+    liElement.classList.add('clickable-li'); // Add a class to style the li elements
   });
 
-  
+  // Event delegation: Listen for clicks on the ul element
+  const ulElement = document.querySelector('.movie_select_wrap ul');
+  ulElement.addEventListener('click', function (event) {
+    const clickedLi = event.target.closest('.clickable-li'); // Find the closest clickable li element
+    if (clickedLi) {
+      // Remove active class from all li elements
+      liSelect.forEach((liElement) => {
+        liElement.classList.remove('active');
+      });
+
+      // Add active class to the clicked li
+      clickedLi.classList.add('active');
+
+      
+      // Extract and log the movie title from the clicked li
+      const movieTitle = clickedLi.querySelector('.bx_title .tit').textContent;
+      console.log("선택영화: ", movieTitle);
+
+      const ddElements = document.querySelectorAll('li.step01.active dl dd');
+      ddElements[1].textContent = movieTitle;
+
+      // for (let i = 0; i < ddElements.length; i++) {
+      //   if (ddElements[i].textContent.trim() === "") {
+      //     ddElements[1].textContent = movieTitle;
+      //     break; // Stop after filling the first empty <dd>
+      //   }
+      // }
+    }
+});
+
+function updateThirdDdText(event) {
+  const radioDate = event.currentTarget.querySelector('input');
+  const thirdDd = document.querySelectorAll('dl dd')[2]; // 세 번째 <dd> 요소 선택
+
+  if (radioDate && thirdDd) {
+    const playDate = radioDate.getAttribute('data-playdate');
+    const playweek = radioDate.getAttribute('data-playweek'); // 주의 오타 수정
+    thirdDd.textContent = `${playDate}(${playweek})`;
+  }
+}
+
+  // 각 날짜를 클릭할 때 위에서 정의한 함수를 호출
+  const dateElements = document.querySelectorAll('a.date');
+  dateElements.forEach(dateElement => {
+    dateElement.addEventListener('click', updateThirdDdText);
+  });
+
+
 
   //상영시간 선택시 속성주기
   const groupTimeSelects = document.querySelectorAll('.group_time_select ul > li a');
   const strongElement = document.querySelector('.stepOnePopupHeader strong');
+  //const ddElements = document.querySelectorAll('dl dd');
 
   groupTimeSelects.forEach((groupTimeSelect) => {
     groupTimeSelect.addEventListener('click', (event) => {
+      
       // 클릭된 요소에 active 클래스 추가
       groupTimeSelect.classList.add('active');
 
@@ -99,6 +149,19 @@ document.addEventListener("DOMContentLoaded", function() {
       const selectedTime = groupTimeSelect.querySelector('.time strong').textContent;
       const endTime = groupTimeSelect.querySelector('.time .tooltip').textContent;
       const hall = groupTimeSelect.querySelector('.hall').textContent;
+
+
+      // 네 번째 <dd> 요소 선택
+      const ddElements = document.querySelectorAll('dl dd');
+
+      // 네 번째 <dd> 요소 선택
+      const fourthDd = ddElements[3];
+
+      if (fourthDd) {
+        fourthDd.textContent = `시작 ${selectedTime} ~ ${endTime}`;
+        console.log(fourthDd.textContent);
+      }
+      
 
       // 선택한 요소의 속성을 stepOnePopupHeader의 strong 태그에 출력
       strongElement.textContent = `시작 ${selectedTime} - ${endTime} (${hall})`;

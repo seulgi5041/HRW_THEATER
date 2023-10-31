@@ -54,16 +54,11 @@
               인원/좌석
             </strong>
             <div class="box_con">
-              <dl>선택한 영화 제목
-                <dt>title</dt>
-                <dd>선택한 상영관</dd>
-                <dd>"지점 " 
-                    "관"</dd>
-                <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
-                <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+              <dl>
+                <dt>선택인원</dt>
+                <dd>예-성인1장애인1 / 성인2</dd>
+                <dt>선택한 좌석</dt>
+                <dd>A2,A3....</dd>
               </dl>
             </div>
           </a>
