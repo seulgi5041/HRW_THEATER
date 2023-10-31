@@ -19,17 +19,20 @@ public class CinemaAddressDTO {
 
     private String address;
 
+    private String local;
+
     private String tell;
 
-    private Double xAxis;
+    private double xAxis;
 
-    private Double yAxis;
+    private double yAxis;
 
     public static CinemaAddressDTO toCinemaAddressDTO(CinemaAddressEntity cinemaAddressEntity) {
         CinemaAddressDTO cinemaAddressDTO = new CinemaAddressDTO();
         cinemaAddressDTO.setCinemaCode(cinemaAddressEntity.getCinemaCode());
         cinemaAddressDTO.setCinemaName(cinemaAddressEntity.getCinemaName());
         cinemaAddressDTO.setAddress(cinemaAddressEntity.getAddress());
+        cinemaAddressDTO.setLocal(cinemaAddressEntity.getLocal());
         cinemaAddressDTO.setTell(cinemaAddressEntity.getTell());
         cinemaAddressDTO.setXAxis(cinemaAddressEntity.getXAxis());
         cinemaAddressDTO.setYAxis(cinemaAddressEntity.getYAxis());
