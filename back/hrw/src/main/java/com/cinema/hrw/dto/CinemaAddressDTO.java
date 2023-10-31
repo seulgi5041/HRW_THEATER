@@ -22,9 +22,9 @@ public class CinemaAddressDTO {
 
     private String tell;
 
-    private String xAxis;
+    private double xAxis;
     
-    private String yAxis;
+    private double yAxis;
 
     public static CinemaAddressDTO toCinemaAddressDTO(CinemaAddressEntity cinemaAddressEntity){
     CinemaAddressDTO cinemaAddressDTO = new CinemaAddressDTO();

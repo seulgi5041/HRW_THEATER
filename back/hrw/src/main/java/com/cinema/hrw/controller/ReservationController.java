@@ -1,31 +1,55 @@
 package com.cinema.hrw.controller;
 
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.cinema.hrw.dto.ScheduleDTO;
+import com.cinema.hrw.dto.SeatDTO;
+import com.cinema.hrw.service.ReservationService;
+
+
 
 @Controller
 public class ReservationController {
+	@Autowired
+	ReservationService reservationService;
 	
 	@GetMapping("/reservation/first")
-	public String reservationFirst(HttpSession session) {
-		// HttpSession에서 "loginId" 속성을 가져옴
-		String loginId = (String) session.getAttribute("loginId");
-    
-		// "loginId" 속성이 존재하면 reservationFirst 페이지로 이동
-		if (loginId != null && !loginId.isEmpty()) {
+	public String reservationFirst() {
+	
 			return "reservation/reservationFirst";
-		} else {
-			// "loginId" 속성이 존재하지 않으면 로그인 페이지로 리다이렉트
-			return "redirect:/member/login";
-		}
+		
 	}
 	
-	@GetMapping("/reservation/second")
-	public String reservationSecond() {
-		return "reservation/reservationSecond";
-	}
+	@PostMapping("/reservation/second")
+	public String reservationSecond(@RequestParam("scheduleCode")  String schedule_code, Model model, HttpSession session) {
+	//String  scheduleCode = scheduleDTO.getScheduleCode();
+		System.out.println("컨트롤러 1 " + schedule_code);
+	session.setAttribute("scheduleCode",schedule_code); 
+	
+	List<SeatDTO> remainingSeats = reservationService.getRemainingSeats(schedule_code);
+	System.out.println("컨트롤러 2 " + schedule_code);
+	Object[] choiceScheduleInfo= reservationService.getChoiceScheduleInfo(schedule_code); //{choiceScheduleDTO,choiceMovieDTO,choiceCinemaAddressDTO}
+
+	model.addAttribute("choiceSchedule", choiceScheduleInfo[0]);
+	model.addAttribute("choiceMovie", choiceScheduleInfo[1]);
+	model.addAttribute("choiceCinemaAddress", choiceScheduleInfo[2]);
+	model.addAttribute("remainingSeats", remainingSeats);
+	//model.addAttribute("choiceScheduleInfo", choiceScheduleInfo);
+	String nextPage = "reservation/reservationSecond";
+	return nextPage;
+}
+	
 	
 	@GetMapping("/reservation/third_combo")
 	public String reservationThirdCombo() {

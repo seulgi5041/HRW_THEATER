@@ -32,7 +32,7 @@ public class OrderEntity {
     private int num;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "movie_code", referencedColumnName = "code")
+    @JoinColumn(name = "movie_code", referencedColumnName = "code") // name 및 referencedColumnName 추가
     private MovieEntity movieCode;
     
     @ManyToOne(fetch = FetchType.EAGER)
@@ -60,8 +60,8 @@ public class OrderEntity {
     @Column
     private String payCompany;
 
-    @Column
-    private int installment; // 일시불: 0, 할부시 개월수
+    /*@Column
+    private int installment; // 일시불: 0, 할부시 개월수*/
 
     @Transient
     private int allPrice; // 총결제액

@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,12 +25,24 @@ public class CinemaAddressEntity {
     @Column
     private String address;
 
+    @Transient
+    private String local;
+
     @Column
     private String tell;
 
     @Column
-    private String xAxis;
+    private double xAxis;
     
     @Column
-    private String yAxis;
+    private double yAxis;
+
+
+    public String getLocal(){
+        if(address!= null){
+            String localStr = address.substring(1);
+            return localStr;
+        }
+        return null;
+    }
 }

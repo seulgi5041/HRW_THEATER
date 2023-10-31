@@ -31,15 +31,15 @@
             <div class="box_con">
               <dl>
                 <dt>선택한 영화 정보</dt>
-                <dd>title</dd>
+                <dd><%= choiceMovie.getTitle()%></dd>
                 <dt>선택한 상영관</dt>
-                <dd>"지점 " 
-                    "관"</dd>
+                <dd>"<%=choiceCinemaAddress.getCinemaName()%>"
+                "<%=choiceSchedule.getAuditorium()%>"</dd>
                 <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
+                <dd>date(<%=choiceSchedule.getTakeDate()%>(<%=choiceSchedule.getTakeDateOfWeek()%>))</dd>
                 <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+                <dd><%=choiceSchedule.getStartTime()%> ~ 
+                    <%=choiceSchedule.getEndTime()%></dd>
               </dl>
             </div>
           </a>
@@ -54,16 +54,11 @@
               인원/좌석
             </strong>
             <div class="box_con">
-              <dl>선택한 영화 제목
-                <dt>title</dt>
-                <dd>선택한 상영관</dd>
-                <dd>"지점 " 
-                    "관"</dd>
-                <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
-                <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+              <dl>
+                <dt>선택인원</dt>
+                <dd>성인, 청소년, 장애인 중 선택한 인원 들어감</dd>
+                <dt>좌석선택</dt>
+                <dd>선택한좌석</dd>
               </dl>
             </div>
           </a>
@@ -158,34 +153,34 @@
             <div class="movie_info">
               <h6 class="hidden">예매정보</h6>
               <span class="thum_movie">
-                <img src="../images/poster_rank/20226798.jpg" alt="20226798">
+                <img src="../images/poster_rank/<%=choiceMovie.getCode()%>.jpg" alt="<%=choiceMovie.getCode()%>">
                 <!-- 이미지부터 아래는 db 혹은 자바스크립트로 가져와야 할 듯... -->
               </span>
               <div class="movie_group_info">
                 <div class="box_tit">
-                  <span class="ic_grade gr_12">
+                  <span class="<%=choiceMovie.getRating()%>">
                     관람가
                   </span>
                   <strong>
-                    30일
+                  <%=choiceMovie.getTitle%>
                   </strong>
                 </div>
                 <dl>
                   <dt>일시</dt>
                   <dd class="sub_info1">
-                    yymmdd
+                    <%=choiceSchedule.getTakeDate()%>
                     <em>
-                      요일
+                    <%=choiceSchedule.getTakeDateOfWeek()%>
                     </em>
                     <span class="time">
-                      시작 ~ 종료
+                    <%=choiceSchedule.getStartTime()%> ~ <%=choiceSchedule.getEndTime()%>
                     </span>
                   </dd>
                   <dt>영화관</dt>
                   <dd class="sub_info1">
-                    영화관
+                  <%=choiceCinemaAddress.getCinemaName()%>
                     .
-                    1관
+                    <%=choiceSchedule.getAuditorium()%>
                   </dd>
                 </dl>
               </div>
@@ -332,6 +327,14 @@
   </section>
 </main>
 
+<script>
+     const fullSeats = [
+     <c:forEach items="${remainingSeats}" var="remainingSeat" varStatus="loop">
+      '${remainingSeats.seatName}'<c:if test="${!loop.last}">, </c:if>
+    </c:forEach>
+   ];
+
+  </script>
 
 <!-- 푸터 -->
     <jsp:include page="../include/footer.jsp"/>

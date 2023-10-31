@@ -38,7 +38,8 @@ public class OrderDTO {
 
     private String payCompany;
 
-    private int installment; // 일시불: 0, 할부시 개월수
+    /*private int installment; // 일시불: 0, 할부시 개월수*/
+    private int allPrice;
 
     public static OrderDTO toOrderDTO(OrderEntity orderEntity){
     OrderDTO orderDTO = new OrderDTO();
@@ -55,7 +56,7 @@ public class OrderDTO {
     orderDTO.setMovieOrderCondition(orderEntity.getMovieOrderCondition());
     orderDTO.setPayMethod(orderEntity.getPayMethod());
     orderDTO.setPayCompany(orderEntity.getPayCompany());
-    orderDTO.setInstallment(orderEntity.getInstallment());
+    /*orderDTO.setInstallment(orderEntity.getInstallment());*/
     return orderDTO;
     }
 }

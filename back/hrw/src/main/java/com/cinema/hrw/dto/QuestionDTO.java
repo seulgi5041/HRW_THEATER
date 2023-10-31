@@ -1,6 +1,5 @@
 package com.cinema.hrw.dto;
 
-import com.cinema.hrw.entity.QuestionEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +20,4 @@ public class QuestionDTO {
 	private String userQuestion;
 	private String userEmail;
 	private String registrationDate;
-	
-
 }

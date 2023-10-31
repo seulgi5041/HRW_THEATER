@@ -112,4 +112,32 @@ document.addEventListener("DOMContentLoaded", function() {
       event.preventDefault();
     });
   });
+
+
+  /*좌석선택시 포스트 매핑 */
+  const seatSelectionLink = document.getElementById("seatSelectionLink");
+
+  seatSelectionLink.addEventListener("click", function() {
+    
+    go_on_post_mapping();  
+  });
+  
+  function go_on_post_mapping() {
+    const scheduleCode = "10010012023110206";
+  //alert("검색결과(나중에 쿼리문 사용 수정) " + searchQuery);
+  let form = document.createElement('form');
+    
+    let obj;
+    obj = document.createElement('input');
+    obj.setAttribute('type', 'text');
+    obj.setAttribute('name', 'scheduleCode');
+    obj.setAttribute('value', scheduleCode);
+    
+    form.appendChild(obj);
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', '/reservation/second');
+    document.body.appendChild(form);
+    form.submit();
+  }
+
 });
