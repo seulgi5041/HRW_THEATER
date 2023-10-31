@@ -1,5 +1,8 @@
 window.addEventListener('DOMContentLoaded', function () {
   const markers = [];
+  let places = [];
+  const cinemaAddressEntity = [];
+
 
   const mapContainer = document.getElementById("map");
   const mapOption = {
@@ -10,8 +13,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   const searchIcon = document.querySelector('.search_icon');
   const searchInput = document.getElementById('cinema_search');
-  // const searchList = document.querySelector('.cinema_search_list');
-  // const searchNoneMessage = document.querySelector('.cinema_search_list_none');
+
 
   searchIcon.addEventListener('click', searchPlaces);
   
@@ -21,8 +23,11 @@ window.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+
+
   function searchPlaces() {
     const keyword = searchInput.value.trim();
+    console.log('Keyword:', keyword);
 
     if (!keyword) {
       alert('키워드를 입력해주세요!');
@@ -37,11 +42,20 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
   function displayMarker(place) {
+
+    const imageSrc = "../images/marker.png";
+    const imageSize = new window.kakao.maps.Size(36, 37);
+    const imgOptions = { offset: new kakao.maps.Point(27, 69) };
+
+    const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions);
+    const markerPosition = new kakao.maps.LatLng(place.y, place.x);
+
     const marker = new window.kakao.maps.Marker({
       map,
-      position: new window.kakao.maps.LatLng(place.y, place.x),
-
+      position: markerPosition,
+      image: markerImage,
     });
+  
     
     var iwRemoveable = true;
     const infowindow = new window.kakao.maps.InfoWindow({
@@ -76,26 +90,33 @@ window.addEventListener('DOMContentLoaded', function () {
         });
       }
       });
+
     }
 
 
   function displayPlaces(places) {
+    console.log('Displaying places:', places);
+
     const listEl = document.querySelector('.cinema_search_list');
     removeAllChildNodes(listEl);
-    removeMarker();
+    //removeMarker();
 
     if (places.length === 0) {
       listEl.innerHTML = '<div class="cinema_search_list_none">검색 결과가 없습니다.</div>';
     } else {
       const fragment = document.createDocumentFragment();
 
+      
       places.forEach((place, index) => {
-        const placePosition = new window.kakao.maps.LatLng(place.y, place.x);
+        //const placePosition = new window.kakao.maps.LatLng(place.y, place.x);
         displayMarker(place);
+        
         const itemEl = getListItem(index, place);
 
         itemEl.addEventListener("click", function () {
+          console.log('Clicked item coordinates (y, x):', place.y, place.x);
           map.panTo(new window.kakao.maps.LatLng(place.y, place.x));
+          
         });
 
         fragment.appendChild(itemEl);
@@ -125,38 +146,59 @@ window.addEventListener('DOMContentLoaded', function () {
     return li;
   }
 
-  // Example usage:
-  const places = [
-    {
-      title: 'HRW 가산디지털',
-      x: 127.1231209,
-      y: 37.63570256,
-      address: '서울특별시 서대문구 연세로 50 지하1층 (신촌동 , 연세대학교 공학원)',
-      phone: '1111-1111',
-    },
-    {
-      title: 'HRW 구월',
-      x: 126.7018872,
-      y: 37.4519298,
-      address: '인천광역시 남동구 백범로 어쩌구 (구월동 , 인천직능원)',
-      phone: '1111-1111',
-    },
-    {
-      title: 'HRW 광주어딘가',
-      x: 126.8503422,
-      y: 35.21647002,
-      address: '광주광역시 남동구 백범로 어쩌구 (구월동 , 인천직능원)',
-      phone: '1111-1111',
-    },
-    {
-      title: 'HRW 해운대',
-      x: 129.1296309,
-      y: 35.16892183,
-      address: '부산광역시 남동구 백범로 어쩌구 (구월동 , 인천직능원)',
-      phone: '1111-1111',
-    },
-  ];
+  
 
+  // Process the cinemaAddressEntity data to create places array
+cinemaAddressEntity.forEach((cinemaAddressEntity) => {
+  const cinemaAddressDTO = {
+    cinemaName: cinemaAddressEntity.cinemaName,
+    address: cinemaAddressEntity.address,
+    tell: cinemaAddressEntity.tell,
+    xAxis: cinemaAddressEntity.xAxis,
+    yAxis: cinemaAddressEntity.yAxis,
+  };
+
+  const place = {
+    title: cinemaAddressDTO.cinemaName,
+    y: parseFloat(cinemaAddressDTO.yAxis),
+    x: parseFloat(cinemaAddressDTO.xAxis),  
+    address: cinemaAddressDTO.address,
+    phone: cinemaAddressDTO.tell,
+  };
+
+  places.push(place);
+});
+
+// Fetch new data and display markers on the map
+fetch('/api/getCinemaData')
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); // Assuming the server returns JSON data
+  })
+  .then((data) => {
+    // Process the data and add it to the places array
+    data.forEach((cinemaAddressDTO) => {
+      const place = {
+        title: cinemaAddressDTO.cinemaName,
+        y: parseFloat(cinemaAddressDTO.yaxis),
+        x: parseFloat(cinemaAddressDTO.xaxis), 
+        address: cinemaAddressDTO.address,
+        phone: cinemaAddressDTO.tell,
+      };
+      places.push(place);
+
+      console.log(`x: ${place.y}, y: ${place.x}`);
+
+      displayMarker(place);
+    });
+  })
+  .catch((error) => {
+    console.error('There was a problem with the fetch operation:', error);
+  });
+
+  
 
   function addMarker(position, idx) {
     const imageSrc =
@@ -185,6 +227,7 @@ window.addEventListener('DOMContentLoaded', function () {
     return marker;
   }
 
+
   function removeMarker() {
     for (let i = 0; i < markers.length; i++) {
       markers[i].setMap(null);
@@ -192,6 +235,8 @@ window.addEventListener('DOMContentLoaded', function () {
     markers.length = 0;
   }
 
+
+  // 사용하지 않는 부분(페이지 넘기는 부분인데 사용하지 않지만, 안정성을)
   function displayPagination(pagination) {
     const paginationEl = document.getElementById("pagination");
     const fragment = document.createDocumentFragment();
