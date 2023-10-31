@@ -2,6 +2,7 @@ package com.cinema.hrw.service;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,4 @@ public class CinemaAddressService {
         .map(CinemaAddressDTO::toCinemaAddressDTO)
         .collect(Collectors.toList());
   }
-
-  // Other methods in your service class, if needed
 }

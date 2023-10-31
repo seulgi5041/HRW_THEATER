@@ -31,15 +31,13 @@
             <div class="box_con">
               <dl>
                 <dt>선택한 영화 정보</dt>
-                <dd>title</dd>
+                <dd></dd>
                 <dt>선택한 상영관</dt>
-                <dd>"지점 " 
-                    "관"</dd>
-                <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
+                <dd></dd>
+                <dt>선택한 날짜</dt>
+                <dd></dd>
                 <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+                <dd></dd>
               </dl>
             </div>
           </a>
@@ -184,11 +182,11 @@
   
                   <!-- 지역선택 -->
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" id="seoul-region">
                       서울
                     </a>
                     <div class="depth2" style="display: block;">
-                      <ul>
+                      <ul id="seoul-cinema-list">
                         <li class>
                           <a href="#none">가산디지털</a>
                         </li class>
@@ -454,7 +452,7 @@
                             <span class="ic_grade gr_12">
                               "12세 관람가"
                             </span>
-                            <strong class="tit">30일</strong>
+                            <strong class="tit">라라라라라</strong>
                           </div>
                         </div>
                       </a>
@@ -467,7 +465,7 @@
                             <span class="ic_grade gr_15">
                               "15세 관람가"
                             </span>
-                            <strong class="tit">30일</strong>
+                            <strong class="tit">집에가고싶다</strong>
                           </div>
                         </div>
                       </a>
@@ -480,7 +478,7 @@
                             <span class="ic_grade gr_18">
                               "18세 관람가"
                             </span>
-                            <strong class="tit">30일</strong>
+                            <strong class="tit">꿀복이보고싶다</strong>
                           </div>
                         </div>
                       </a>
@@ -517,7 +515,7 @@
                         <strong class="month">10월</strong>
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate0">
-                            <input type="radio" id="radioDate0" name="radioDate1" data-displayn="Y" data-playdate="2023-10-18" data-isplaydate="Y" ata-playweek="오늘" checked>
+                            <input type="radio" id="radioDate0" name="radioDate1" data-displayn="Y" data-playdate="2023-10-18" data-isplaydate="Y" data-playweek="오늘" checked>
                             <strong>18</strong>
                             <em>오늘</em>
                           </label>
@@ -528,7 +526,7 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate1">
-                            <input type="radio" id="radioDate1" name="radioDate1" data-displayn="Y" data-playdate="2023-10-19" data-isplaydate="Y" ata-playweek="목">
+                            <input type="radio" id="radioDate1" name="radioDate1" data-displayn="Y" data-playdate="2023-10-19" data-isplaydate="Y" data-playweek="목">
                             <strong>19</strong>
                             <em>목</em>
                           </label>
@@ -539,7 +537,7 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate2">
-                            <input type="radio" id="radioDate2" name="radioDate1" data-displayn="Y" data-playdate="2023-10-19" data-isplaydate="Y" ata-playweek="목">
+                            <input type="radio" id="radioDate2" name="radioDate1" data-displayn="Y" data-playdate="2023-10-20" data-isplaydate="Y" data-playweek="금">
                             <strong>20</strong>
                             <em>금</em>
                           </label>
@@ -550,7 +548,7 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate3">
-                            <input type="radio" id="radioDate3" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
+                            <input type="radio" id="radioDate3" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" data-playweek="토">
                             <strong>21</strong>
                             <em>토</em>
                           </label>
@@ -561,7 +559,7 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate4">
-                            <input type="radio" id="radioDate4" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
+                            <input type="radio" id="radioDate4" name="radioDate1" data-displayn="Y" data-playdate="2023-10-22" data-isplaydate="Y" data-playweek="일">
                             <strong>22</strong>
                             <em>일</em>
                           </label>
@@ -572,7 +570,7 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate5">
-                            <input type="radio" id="radioDate5" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
+                            <input type="radio" id="radioDate5" name="radioDate1" data-displayn="Y" data-playdate="2023-10-23" data-isplaydate="Y" data-playweek="월">
                             <strong>23</strong>
                             <em>월</em>
                           </label>
@@ -583,7 +581,7 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate6">
-                            <input type="radio" id="radioDate6" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
+                            <input type="radio" id="radioDate6" name="radioDate1" data-displayn="Y" data-playdate="2023-10-24" data-isplaydate="Y" data-playwee="화">
                             <strong>24</strong>
                             <em>화</em>
                           </label>
@@ -594,7 +592,7 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate7">
-                            <input type="radio" id="radioDate7" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
+                            <input type="radio" id="radioDate7" name="radioDate1" data-displayn="Y" data-playdate="2023-10-25" data-isplaydate="Y" data-playweek="수">
                             <strong>25</strong>
                             <em>수</em>
                           </label>
@@ -893,10 +891,11 @@
     
     
 <!-- 자바스크립트 영역 -->
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../js/ticket_main.js"></script>
-<script src="../js/ticket_reverse.js"></script>
 <script src="../js/modal.js"></script>
+<script src="../js/ticket_reverse.js"></script>
+
 
 </body>
 </html>
