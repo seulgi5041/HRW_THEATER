@@ -43,8 +43,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
   function displayMarker(place) {
 
-    const imageSrc = "../images/marker.png";
-    const imageSize = new window.kakao.maps.Size(36, 37);
+    const imageSrc = "../images/marker_location.png";
+    const imageSize = new window.kakao.maps.Size(72, 70);
     const imgOptions = { offset: new kakao.maps.Point(27, 69) };
 
     const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions);
