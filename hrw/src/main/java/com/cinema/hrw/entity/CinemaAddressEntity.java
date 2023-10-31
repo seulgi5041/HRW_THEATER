@@ -25,11 +25,15 @@ public class CinemaAddressEntity {
     private String address;
 
     @Column
+    private String local;
+
+    @Column
     private String tell;
 
     @Column
-    private Double xAxis;
+    private double xAxis;
 
     @Column
-    private Double yAxis;
+    private double yAxis;
+
 }
