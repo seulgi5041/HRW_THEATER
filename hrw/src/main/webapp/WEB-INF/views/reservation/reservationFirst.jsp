@@ -186,10 +186,10 @@
                       서울
                     </a>
                     <div class="depth2" style="display: block;">
-                      <ul id="seoul-cinema-list">
-                        <li class>
-                          <a href="#none">가산디지털</a>
-                        </li class>
+                      <ul>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
                         <li>
                           <a href="#none">가양</a>
                         </li>
@@ -891,7 +891,7 @@
     
     
 <!-- 자바스크립트 영역 -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script src="../js/ticket_main.js"></script>
 <script src="../js/modal.js"></script>
 <script src="../js/ticket_reverse.js"></script>
