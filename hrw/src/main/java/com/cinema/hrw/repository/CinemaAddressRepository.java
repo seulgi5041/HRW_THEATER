@@ -29,4 +29,7 @@ public interface CinemaAddressRepository extends JpaRepository<CinemaAddressEnti
 
   @Query("SELECT c.cinemaName FROM CinemaAddressEntity c WHERE c.local = :local")
   List<String> findCinemaNamesByLocal(@Param("local") String local);
+
+  @Query("SELECT c.cinemaCode FROM CinemaAddressEntity c WHERE c.local = :local")
+  List<String> findCinemaCodesByLocal(@Param("local") String local);
 }
