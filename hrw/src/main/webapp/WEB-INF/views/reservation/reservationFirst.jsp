@@ -899,66 +899,7 @@
 <script src="../js/modal.js"></script>
 <script src="../js/ticket_reverse.js"></script>
 
-<!-- 
-<script>
-$(document).ready(function() {
-  // Make an AJAX request to get local and cinema names
-  $.ajax({
-    type: "GET",
-    url: "/cinema/getAllLocalAndCinemaNames", // Replace with the actual endpoint URL
-    success: function(data) {
-      // Handle the data received from the server
-      var localData = data;
 
-      // Select the container where you want to display the menu
-      var menuContainer = $(".tab_container .cinema_select_wrap ul");
-
-      var activeDepth1 = null;
-
-      // Iterate through localData and update the menu structure
-      for (var local in localData) {
-        var localItem = $("<li>").addClass("depth1");
-        var localLink = $("<a>").attr("href", "javascript:void(0)").text(local);
-
-        var submenu = $("<div>").addClass("depth2").css("display", "none");
-        var submenuList = $("<ul>");
-
-        // Add an onclick event to handle submenu visibility
-        localLink.click(function() {
-          var localName = $(this).text();
-          var cinemaNames = localData[localName];
-          console.log("Cinema names for " + localName + ":", cinemaNames);
-          var depth2 = $(this).next(".depth2");
-          depth2.css("display", "block");
-        });
-
-        localItem.append(localLink);
-
-        //Create the submenu (depth2)
-        var submenu = $("<div>").addClass("depth2").css("display", "none");
-        var submenuList = $("<ul>");
-
-        // Populate submenu items
-        localData[local].forEach(function(cinemaName) {
-          var submenuItem = $("<li>").addClass("depth1");
-          var cinemaLink = $("<a>").attr("href", "#none").text(cinemaName);
-          submenuItem.append(cinemaLink);
-          submenuList.append(submenuItem);
-        });
-
-        submenu.append(submenuList);
-        localItem.append(submenu);
-        menuContainer.append(localItem);
-      }
-    },
-    error: function(xhr, status, error) {
-      console.error("Error: " + error);
-    }
-  });
-});
-</script> -->
-
-<!-- <script>
   $(document).ready(function() {
   // Make an AJAX request to get local and cinema names
   $.ajax({
@@ -1051,6 +992,11 @@ $(document).ready(function() {
           var localName = $(this).text();
           var cinemaNames = localData[localName];
           console.log("Cinema names for " + localName + ":", cinemaNames);
+
+          $(".depth1, .depth2 li").removeClass("active");
+          var depth1 = $(this).parent();
+          depth1.addClass("active");
+
 
           // Reset the previously active depth2
           if (activeDepth2) {
@@ -1080,6 +1026,14 @@ $(document).ready(function() {
         localItem.append(submenu);
         menuContainer.append(localItem);
       }
+
+      var depth2Select1 = $(".depth2 ul li");
+      depth2Select1.click(function() {
+        depth2Select1.removeClass("active");
+        $(this).addClass("active");
+        // Handle depth2 click event
+        // You can access the clicked element using $(this)
+      });
     },
     error: function(xhr, status, error) {
       console.error("Error: " + error);
