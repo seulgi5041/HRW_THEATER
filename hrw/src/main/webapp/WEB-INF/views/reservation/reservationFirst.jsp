@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,9 @@
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/ticket.css">
   <link rel="stylesheet" href="../css/modal.css">
+
+  <!-- jQuery CDN 포함 -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
 </head>
 <body>
@@ -181,107 +185,22 @@
                   </li>
   
                   <!-- 지역선택 -->
-                  <li class="depth1">
-                    <a href="#none">
-                      서울
-                    </a>
-                    <div class="depth2" style="display: block;">
-                      <ul class="select_depth2">
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                          <li class>
-                            <a href="#none">가산디지털</a>
-                          </li>
-                        <li>
-                          <a href="#none">가양</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
+                  <c:forEach items="${localData}" var="local">
+                    <li class="depth1">
+                      <a href="javascript:void(0);" >${local}</a>
+                        <div class="depth2" style="display: none;">
+                            <ul>
+                                <c:forEach items="${cinemaNames[local]}" var="cinemaName">
+                                    <li class>
+                                        <a href="#none">${cinemaName}</a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </li>
+                  </c:forEach>
+        
+                  <!-- <li class="depth1">
                     <a href="#none">
                       경기
                     </a>
@@ -455,7 +374,7 @@
                         </li>
                       </ul>
                     </div>
-                  </li>
+                  </li> 
   
                   <li class="depth1">
                     <a href="#none">
@@ -487,7 +406,7 @@
                         </li>
                       </ul>
                     </div>
-                  </li>
+                  </li> -->
   
   
                 </ul>
@@ -980,6 +899,194 @@
 <script src="../js/modal.js"></script>
 <script src="../js/ticket_reverse.js"></script>
 
+<!-- 
+<script>
+$(document).ready(function() {
+  // Make an AJAX request to get local and cinema names
+  $.ajax({
+    type: "GET",
+    url: "/cinema/getAllLocalAndCinemaNames", // Replace with the actual endpoint URL
+    success: function(data) {
+      // Handle the data received from the server
+      var localData = data;
 
+      // Select the container where you want to display the menu
+      var menuContainer = $(".tab_container .cinema_select_wrap ul");
+
+      var activeDepth1 = null;
+
+      // Iterate through localData and update the menu structure
+      for (var local in localData) {
+        var localItem = $("<li>").addClass("depth1");
+        var localLink = $("<a>").attr("href", "javascript:void(0)").text(local);
+
+        var submenu = $("<div>").addClass("depth2").css("display", "none");
+        var submenuList = $("<ul>");
+
+        // Add an onclick event to handle submenu visibility
+        localLink.click(function() {
+          var localName = $(this).text();
+          var cinemaNames = localData[localName];
+          console.log("Cinema names for " + localName + ":", cinemaNames);
+          var depth2 = $(this).next(".depth2");
+          depth2.css("display", "block");
+        });
+
+        localItem.append(localLink);
+
+        //Create the submenu (depth2)
+        var submenu = $("<div>").addClass("depth2").css("display", "none");
+        var submenuList = $("<ul>");
+
+        // Populate submenu items
+        localData[local].forEach(function(cinemaName) {
+          var submenuItem = $("<li>").addClass("depth1");
+          var cinemaLink = $("<a>").attr("href", "#none").text(cinemaName);
+          submenuItem.append(cinemaLink);
+          submenuList.append(submenuItem);
+        });
+
+        submenu.append(submenuList);
+        localItem.append(submenu);
+        menuContainer.append(localItem);
+      }
+    },
+    error: function(xhr, status, error) {
+      console.error("Error: " + error);
+    }
+  });
+});
+</script> -->
+
+<!-- <script>
+  $(document).ready(function() {
+  // Make an AJAX request to get local and cinema names
+  $.ajax({
+    type: "GET",
+    url: "/cinema/getAllLocalAndCinemaNames", // Replace with the actual endpoint URL
+    success: function(data) {
+      // Handle the data received from the server
+      var localData = data;
+
+      // Select the container where you want to display the menu
+      var menuContainer = $(".tab_container .cinema_select_wrap ul");
+
+      // Store a reference to the currently active depth1 element
+      var activeDepth2 = null;
+
+      // Iterate through localData and update the menu structure
+      for (var local in localData) {
+        var localItem = $("<li>").addClass("depth1");
+        var localLink = $("<a>").attr("href", "javascript:void(0)").text(local);
+
+        var submenu = $("<div>").addClass("depth2").css("display", "none");
+
+        localLink.click(function() {
+          var localName = $(this).text();
+          var cinemaNames = localData[localName];
+          console.log("Cinema names for " + localName + ":", cinemaNames);
+
+          // Reset the previously active depth2
+          if (activeDepth2) {
+            activeDepth2.css("display", "none");
+          }
+
+          var depth2 = $(this).next(".depth2");
+          depth2.css("display", "block");
+
+          // Set the currently active depth1
+          activeDepth2 = depth2;
+        });
+
+        localItem.append(localLink);
+
+        // Create the submenu (depth2)
+        var submenuList = $("<ul>");
+
+        // Populate submenu items
+        localData[local].forEach(function(cinemaName) {
+          var submenuItem = $("<li>").addClass("depth1");
+          var cinemaLink = $("<a>").attr("href", "#none").text(cinemaName);
+          submenuItem.append(cinemaLink);
+          submenuList.append(submenuItem);
+        });
+
+        submenu.append(submenuList);
+        localItem.append(submenu);
+        menuContainer.append(localItem);
+      }
+    },
+    error: function(xhr, status, error) {
+      console.error("Error: " + error);
+    }
+  });
+});
+</script> -->
+
+
+<script>
+  $(document).ready(function() {
+  // Make an AJAX request to get local and cinema names
+  $.ajax({
+    type: "GET",
+    url: "/cinema/getAllLocalAndCinemaNames", // Replace with the actual endpoint URL
+    success: function(data) {
+      // Handle the data received from the server
+      var localData = data;
+
+      // Select the container where you want to display the menu
+      var menuContainer = $(".tab_container .cinema_select_wrap ul");
+
+      // Store a reference to the currently active depth1 element
+      var activeDepth2 = null;
+
+      // Iterate through localData and update the menu structure
+      for (var local in localData) {
+        var localItem = $("<li>").addClass("depth1");
+        var localLink = $("<a>").attr("href", "javascript:void(0)").text(local);
+
+        var submenu = $("<div>").addClass("depth2").css("display", "none");
+
+        localLink.click(function() {
+          var localName = $(this).text();
+          var cinemaNames = localData[localName];
+          console.log("Cinema names for " + localName + ":", cinemaNames);
+
+          // Reset the previously active depth2
+          if (activeDepth2) {
+            activeDepth2.css("display", "none");
+          }
+
+          var depth2 = $(this).next(".depth2");
+          depth2.css("display", "block");
+
+          // Set the currently active depth1
+          activeDepth2 = depth2;
+        });
+
+        localItem.append(localLink);
+
+        // Create the submenu (depth2)
+        var submenuList = $("<ul>");
+
+        // Populate submenu items
+        localData[local].forEach(function(cinemaName) {
+          var cinemaLink = $("<a>").attr("href", "#none").text(cinemaName);
+          var submenuItem = $("<li>").append(cinemaLink);
+          submenuList.append(submenuItem);
+        });
+
+        submenu.append(submenuList);
+        localItem.append(submenu);
+        menuContainer.append(localItem);
+      }
+    },
+    error: function(xhr, status, error) {
+      console.error("Error: " + error);
+    }
+  });
+});
+
+</script>
 </body>
 </html>
