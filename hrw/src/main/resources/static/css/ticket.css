@@ -393,10 +393,6 @@ li.depth1:first-child {
   font-size: 13px;
 }
 
-.cinema_select_wrap > ul .depth2 ul {
-  
-}
-
 .cinema_select_wrap > ul .depth2 ul li a {
   display: table-cell;
   position: relative;
