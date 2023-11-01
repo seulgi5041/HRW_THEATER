@@ -273,23 +273,27 @@ li {
 
 .wrap_reserve .section_step_con .article_layer.article_cinema > .inner .tab_wrap.outer > li > .tab_tit {
   height: 85px;
-  background-color: #fff;
+  background-color: #e9e9e9;
+  color: #383838;
+  font-weight: 600;
 }
 
 .wrap_reserve .section_step_con .article_layer.article_cinema > .inner .tab_wrap.outer > li.active > .tab_tit {
   height: 85px;
+
 }
 
 .article_cinema.area__movingbar.litype2 .tab_wrap.outer.actionmovingbar > li:nth-child(1).active ~ .wrap_underline .underline {
   left: 0;
 }
 
+
 /* 지역선택 부분 */
 .tab_container {
   overflow: inherit;
   position: relative;
   width: auto;
-  height: auto;
+  height: 960px;
 }
 
 .cinema_select_wrap {
@@ -306,7 +310,7 @@ li.depth1:first-child {
 }
 
 .wrap_reserve .section_step_con .article_layer.article_cinema .cinema_select_wrap > ul li {
-  padding: 2px 0;
+  padding: 2px 0px;
   border-bottom: none;
 }
 
@@ -335,6 +339,12 @@ li.depth1:first-child {
 
 /* 구선택 */
 
+.cinema_select_wrap > ul {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  
+}
 
 .cinema_select_wrap > ul .depth2 {
   display: none;
@@ -343,7 +353,33 @@ li.depth1:first-child {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: #F5F5F5;
+  width: 174px;
+}
+
+.depth2 > ul {
+  height: 100%;
+  width: auto;
+  overflow-y: scroll; 
+}
+
+.depth2 > ul::-webkit-scrollbar {
+  width: 6px;
+  right: 0;
+}
+
+.depth2 > ul::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.depth2 > ul::-webkit-scrollbar-thumb {
+  height: 15%;
+  border-radius: 3px;
+  background: #CCC;
+}
+
+.depth2 > ul::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
 }
 
  .cinema_select_wrap .depth2 li {
@@ -351,10 +387,14 @@ li.depth1:first-child {
 }
 
 .cinema_select_wrap > ul .depth2 ul li {
-  /* overflow: hidden; */
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 13px;
+}
+
+.cinema_select_wrap > ul .depth2 ul {
+  
 }
 
 .cinema_select_wrap > ul .depth2 ul li a {

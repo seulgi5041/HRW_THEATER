@@ -182,11 +182,95 @@
   
                   <!-- 지역선택 -->
                   <li class="depth1">
-                    <a href="#none" id="seoul-region">
+                    <a href="#none">
                       서울
                     </a>
                     <div class="depth2" style="display: block;">
-                      <ul>
+                      <ul class="select_depth2">
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
+                          <li class>
+                            <a href="#none">가산디지털</a>
+                          </li>
                           <li class>
                             <a href="#none">가산디지털</a>
                           </li>
