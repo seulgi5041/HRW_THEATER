@@ -405,12 +405,12 @@ li.depth1:first-child {
 }
 
 .wrap_reserve .section_step_con .article_layer.article_cinema .cinema_select_wrap > ul .depth2 ul li.active a {
-  color: #383838;
-  font-weight: 600;
+  color: #FB3D28;
+  font-weight: 800;
   content: "";
   top: 0px;
-  background: url(../images/ticket/check_active.png) no-repeat 100% 8px;
-  background-size: 18px auto;
+  /* background: url(../images/ticket/check_active.png) no-repeat 100% 8px;
+  background-size: 18px auto; */
 }
 
 
