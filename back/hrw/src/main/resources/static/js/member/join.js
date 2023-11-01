@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return true; // 모든 검사를 통과했을 때
     }
 
+
     /*중복 */
     const double_check_btn = document.getElementById('double_check_btn');
     double_check_btn.addEventListener("click", function(){
@@ -97,6 +98,5 @@ document.addEventListener("DOMContentLoaded", function() {
     const data = JSON.stringify({ userId: userId });
     xhr.send(data);
     });
-
 });
 

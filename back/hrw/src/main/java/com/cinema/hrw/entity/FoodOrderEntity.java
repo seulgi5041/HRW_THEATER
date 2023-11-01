@@ -24,7 +24,7 @@ public class FoodOrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int num;
 
-     @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_code", referencedColumnName = "orderCode")
     private OrderEntity orderCode;
 

@@ -56,7 +56,6 @@ public class OrderDTO {
     orderDTO.setMovieOrderCondition(orderEntity.getMovieOrderCondition());
     orderDTO.setPayMethod(orderEntity.getPayMethod());
     orderDTO.setPayCompany(orderEntity.getPayCompany());
-    /*orderDTO.setInstallment(orderEntity.getInstallment());*/
     return orderDTO;
     }
 }

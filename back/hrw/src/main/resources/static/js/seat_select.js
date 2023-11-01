@@ -31,6 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const personType = button.closest('li').getAttribute('data-people');
       let count = parseInt(span.innerText);
       
+      
+
       if (count > 9 && personCounts[personType] > 1) {
         // 총 인원의 수가 8이 됐을때 플러스 버튼 클릭하면 1씩 줄어든다
         //(즉 모든 타입의 좌석을 8에 맞춤)
@@ -54,6 +56,9 @@ document.addEventListener("DOMContentLoaded", function () {
         span.innerText = count;
         personCounts[personType] = count;
       }
+
+      /* 함수명*/
+      on_choice_person_count_list()
        
     });
   });
@@ -63,14 +68,13 @@ document.addEventListener("DOMContentLoaded", function () {
       const span = button.nextElementSibling;
       const personType = button.closest('li').getAttribute('data-people');
       let count = parseInt(span.innerText);
-
       if (count > 0) {
         count--;
         span.innerText = count;
         personCounts[personType] = count; 
       }
-
-      
+      /* 함수명*/
+      on_choice_person_count_list()
     });
   });
 
@@ -83,10 +87,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // 좌석 클릭시 수행할 부분
   function handleSeatClick(event) {
     const seatElement = event.currentTarget;
+    
     console.log('seatElement : ', seatElement);
   
     if (seatSelectionEnabled) {
       if (seatElement.classList.contains('sel')) {
+        if (seatElement.classList.contains('readonly')){
+          alert('이미 사용중인 좌석입니다.');
+          return
+        }
         if (maxSelectedSeats === 0) {
           // If no seats are allowed to be selected, show an alert message
           alert('먼저 인원을 선택하세요.');
@@ -100,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
           allSeats.forEach((otherSeat) => {
             otherSeat.classList.remove('disabled');
           });
+
         } else {
           // 선택한 좌석이 총 합계와 맞는지 확인
           if (totalSelectedSeats < maxSelectedSeats) {
@@ -114,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
               });
             }
           }
-        }
+        }on_choice_seat_list()
       }
     } else if (maxSelectedSeats === 0) {
       alert('먼저 인원을 선택하세요.'); 
@@ -166,6 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (maxSelectedSeats !== 0) {
         alertShown = false;
       }
+      
     });
   });
 
@@ -205,5 +216,62 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 });
+
+
+/*클릭시 좌석정보 step01에 추가*/
+
+function on_choice_seat_list(){const choice_seats = document.querySelectorAll('.sel.on'); /*배열에 추가 */
+const choice_seat_list = [];
+choice_seats.forEach((seat) => {
+  const dataSeat = seat.getAttribute('data-seat');
+  choice_seat_list.push(dataSeat);
+});
+console.log("choice_seat_list :"+choice_seat_list);
+set_dd_choice_seats_list(choice_seat_list)
+}
+
+function set_dd_choice_seats_list(choice_seat_list){
+document.getElementById("dd_choice_seats").textContent=choice_seat_list;
+}
+
+
+
+/*클릭시 인원정보 step01에 추가*/
+function on_choice_person_count_list(){
+  const person_ounts_string = Object.keys(personCounts).map((key) => `${key}: ${personCounts[key]}`).join(', ');
+
+  document.getElementById("dd_choice_person_count").textContent=person_ounts_string;
+  set_total_Price()
+}
+
+/*가격보여주기*/
+function set_total_Price(){
+  let total_Price = 0;
+  for (const key in personCounts) {
+    if (personCounts.hasOwnProperty(key) && cost_in_choice_schedule.hasOwnProperty(key)) {
+      total_Price += personCounts[key] * cost_in_choice_schedule[key];
+    }
+  }
+  document.getElementById("setting_total_Price").textContent=total_Price;
+}
+
+
+
+  /*팔린 좌석은 잠그기*/
+
+function on_use_seat_check(){
+  let all_seat_list = document.querySelectorAll('.sel'); // 'sel' 클래스를 가진 모든 좌석 요소를 선택
+
+  all_seat_list.forEach((seat) => {
+    let seat_code = seat.getAttribute('data-seat');
+    if (in_use_seats.includes(seat_code)) {
+      seat.classList.add('readonly')
+    }
+
+});
+}
+
+on_use_seat_check();
+
 
 });

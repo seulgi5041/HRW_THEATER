@@ -65,4 +65,16 @@ public class ScheduleDTO {
         scheduleDTO.setDisabledPrice(scheduleEntity.getDisabledPrice());
         return scheduleDTO;
     }
+
+    public String getMovieCode(){
+        MovieDTO MovieCodeDTO=this.movieCode;
+        String movieCodeStr=MovieCodeDTO.getCode();
+        return movieCodeStr;
+    }
+
+    public String getCinemaCode(){
+        CinemaAddressDTO cinemaAddressDTO = this.cinemaCode;
+        String cinemaCodeStr = cinemaAddressDTO.getCinemaCode();
+        return cinemaCodeStr;
+    }
 }

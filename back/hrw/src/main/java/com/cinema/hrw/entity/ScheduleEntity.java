@@ -113,8 +113,26 @@ public class ScheduleEntity {
 
         // 요일 이름 가져오기
         String dayOfWeekName = dayOfWeek.toString();
+         String koreaWeekName = "";
 
-            return dayOfWeekName;
+        switch (dayOfWeekName) {
+            case "SUNDAY":
+                koreaWeekName = "일";
+            case "MONDAY":
+                koreaWeekName = "월";
+            case "TUESDAY":
+                koreaWeekName = "화";
+            case "WEDNESDAY":
+                koreaWeekName = "수";
+            case "THURSDAY":
+                koreaWeekName = "목";
+            case "FRIDAY":
+                koreaWeekName = "금";
+            case "SATURDAY":
+                koreaWeekName = "토";
+        }
+
+            return koreaWeekName;
         }
         return null;
     }

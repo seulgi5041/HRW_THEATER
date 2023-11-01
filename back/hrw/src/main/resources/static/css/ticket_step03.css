@@ -1,4 +1,4 @@
-@charset "UTF-8";
+
 
 a {
     color: #fff;
@@ -439,18 +439,6 @@ li {
   color: #383838;
 }
 
-#popcorn_store .food_box .add img {
-  width: 25px;
-  height: 25px;
-  transition: transform 0.3s ease-in-out; 
-}
-
-#popcorn_store .food_box .add img:hover {
-  transform: scale(1.1); 
-  content: url('../images/store/cart_hover.png');
-}
-
-
 
 /* 합계, 결제부분 */
 .storeSum {
@@ -521,4 +509,16 @@ dl.total_price dd strong {
   text-align: center;
   vertical-align: middle;
   background-color: #FB3D28;
+}
+
+
+#popcorn_store .food_box .add img {
+  width: 25px;
+  height: 25px;
+  transition: transform 0.3s ease-in-out; 
+}
+
+#popcorn_store .food_box .add img:hover {
+  transform: scale(1.1); 
+  content: url('/images/store/cart_hover.png');
 }

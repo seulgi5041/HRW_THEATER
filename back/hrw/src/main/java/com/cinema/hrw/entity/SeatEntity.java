@@ -23,7 +23,7 @@ public class SeatEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int num;
 
-     @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_code", referencedColumnName = "orderCode")
     private OrderEntity orderCode;
 

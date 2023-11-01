@@ -8,13 +8,13 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Service;
-
-import com.cinema.hrw.dto.CinemaAddressDTO;
-import com.cinema.hrw.dto.MovieDTO;
 import com.cinema.hrw.dto.ScheduleDTO;
 import com.cinema.hrw.dto.SeatDTO;
+import com.cinema.hrw.entity.CinemaAddressEntity;
+import com.cinema.hrw.entity.MovieEntity;
+import com.cinema.hrw.entity.ScheduleEntity;
 import com.cinema.hrw.entity.SeatEntity;
-import com.cinema.hrw.repository.ScheduleRepository;
+import com.cinema.hrw.repository.ReservationRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,66 +25,62 @@ import lombok.RequiredArgsConstructor;
 public class ReservationService {
     @PersistenceContext
     private EntityManager entityManager;
+    private final ReservationRepository reservationRepository;
 
-    private final ScheduleRepository scheduleRepository;
 
     
 
-    /*public List<SeatDTO> getRemainingSeats(String schedule_code) {
-        System.out.println("서비스 01 " + schedule_code);
-        List<SeatEntity> remainingSeatsEntity =seatRepository.findSeatNameByScheduleCode(schedule_code);
-        System.out.println("서비스 02 " + schedule_code);
-        List<SeatDTO>seatList = new ArrayList<>();
-        System.out.println("getRemainingSeats  "+ schedule_code);
-        for(SeatEntity seatEntity : remainingSeatsEntity){
-            SeatDTO seatDTO = new SeatDTO();
-            seatDTO = SeatDTO.toSeatDTO(seatEntity);
-            seatList.add(seatDTO);
-        }
-        return seatList;
-    }*/
-
-    public Object[] getChoiceScheduleInfo(String schedule_code) {
-        Object[] choiceScheduleEntity = scheduleRepository.findScheduleDetailsByScheduleCode(schedule_code); 
-    /*m.code , m.title, m.rating, s.takeDate, s.startTime, s.endTime, c.cinemaName , s.auditorium, s.teenagerPrice, s.adultPrice, s.disabledPrice  */
-        ScheduleDTO choiceScheduleDTO = new ScheduleDTO();
-        MovieDTO choiceMovieDTO = new MovieDTO();
-        System.out.println("서비스 03 " + schedule_code);
-        CinemaAddressDTO choiceCinemaAddressDTO = new CinemaAddressDTO();
-        choiceMovieDTO.setCode((String)choiceScheduleEntity[0]);
-        choiceMovieDTO.setTitle((String)choiceScheduleEntity[1]);
-        choiceMovieDTO.setRating((String)choiceScheduleEntity[2]);
-        choiceScheduleDTO.setTakeDate((String)choiceScheduleEntity[3]);
-        choiceScheduleDTO.setStartTime((String)choiceScheduleEntity[4]);
-        choiceScheduleDTO.setEndTime((String)choiceScheduleEntity[5]);
-        choiceCinemaAddressDTO.setCinemaName((String)choiceScheduleEntity[6]);
-        choiceScheduleDTO.setAuditorium((String)choiceScheduleEntity[7]);
-        choiceScheduleDTO.setTeenagerPrice((Long)choiceScheduleEntity[8]);
-        choiceScheduleDTO.setAdultPrice((Long)choiceScheduleEntity[9]);
-        choiceScheduleDTO.setDisabledPrice((Long)choiceScheduleEntity[10]);
-        Object[] ChoiceScheduleInfo = {choiceScheduleDTO,choiceMovieDTO,choiceCinemaAddressDTO};
-        return ChoiceScheduleInfo;
-    }
-
     public List<SeatDTO> getRemainingSeats(String scheduleCode) {
-    System.out.println("서비스 01 " + scheduleCode);
-
-    String jpql = "SELECT SeatEntity.setNum FROM SeatEntity " +
-                 "INNER JOIN OrderEntity on SeatEntity.orderCode = OrderEntity.orderCode " +
-                 "WHERE OrderEntity.scheduleCode = "+scheduleCode;
-    TypedQuery<SeatEntity> query = entityManager.createQuery(jpql, SeatEntity.class);
-
-    List<SeatEntity> remainingSeatEntities = query.getResultList();
-
-    // SeatEntity를 SeatDTO로 변환
-    List<SeatDTO> remainingSeats = new ArrayList<>();
-    for(SeatEntity seatEntit : remainingSeatEntities){
-    SeatDTO seatDTO = new SeatDTO();
-    seatDTO = SeatDTO.toSeatDTO(seatEntit);
-    remainingSeats.add(seatDTO);
+    
+        String jpql = "SELECT s FROM SeatEntity s " +
+                     "INNER JOIN s.orderCode o " +
+                     "WHERE o.scheduleCode = " + scheduleCode;
+    
+        TypedQuery<SeatEntity> query = entityManager.createQuery(jpql, SeatEntity.class);
+        
+        List<SeatEntity> remainingSeatEntities = query.getResultList();
+    
+        // SeatEntity를 SeatDTO로 변환
+        List<SeatDTO> remainingSeats = new ArrayList<>();
+        
+        for (SeatEntity seatEntity : remainingSeatEntities) {
+            SeatDTO seatDTO = SeatDTO.toSeatDTO(seatEntity);
+            remainingSeats.add(seatDTO);
+        }
+        
+        return remainingSeats;
     }
-    return remainingSeats;
-}
+
+
+    public ScheduleDTO getChoiceScheduleInfo(String scheduleCode) {
+       String jpql = "SELECT s FROM ScheduleEntity s INNER JOIN FETCH s.movieCode m INNER JOIN FETCH s.cinemaCode c WHERE s.scheduleCode = "+scheduleCode;
+       TypedQuery<ScheduleEntity> query = entityManager.createQuery(jpql, ScheduleEntity.class);
+       
+    List<ScheduleEntity> result = query.getResultList();
+
+    if (result.isEmpty()) {
+        System.out.println("선택된 스케쥴없음");
+        return null;
+    }
+
+    ScheduleEntity scheduleEntity = result.get(0);
+    MovieEntity movieEntity = scheduleEntity.getMovieCode();
+    CinemaAddressEntity cinemaAddressEntity = scheduleEntity.getCinemaCode();
+
+    ScheduleDTO choiceScheduleInfoDTO = ScheduleDTO.toScheduleDTO(scheduleEntity);
+    choiceScheduleInfoDTO.setMovieTitle(movieEntity.getTitle());
+    choiceScheduleInfoDTO.setMovieRating(movieEntity.getRating());
+    choiceScheduleInfoDTO.setCinemaName(cinemaAddressEntity.getCinemaName());
+
+    return choiceScheduleInfoDTO;
+    }
+
+
+    public List<String> getCinemaNamesInSeoul() {
+        return reservationRepository.findCinemaNamesInSeoul();
+    }
+
+
     }
     
 

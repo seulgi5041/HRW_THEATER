@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,20 @@
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/ticket.css">
   <link rel="stylesheet" href="../css/modal.css">
-  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+  $(document).ready(function() {
+       // 서버에서 '서울' 지역의 영화관 이름을 가져옵니다.
+       $.get("/getSeoulCinemaNames", function(data) {
+           // 반환된 데이터를 사용하여 '서울' 지역의 영화관 이름을 동적으로 추가합니다.
+           var ul = $("#seoulCinemaList");
+           data.forEach(function(cinemaName) {
+               var li = $("<li class><a href='#none'>" + cinemaName + "</a></li>");
+               ul.append(li);
+           });
+       });
+   });
+  </script>
 </head>
 <body>
 
@@ -22,7 +36,7 @@
       <ul>
         <!-- 상영시간 -->
         <li class="step01 active">
-          <a href="#reverseStep01">
+          <a href="/reservation/first">
             <strong class="tit">
               <span>01</span>
               <br>
@@ -184,23 +198,17 @@
   
                   <!-- 지역선택 -->
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" name="서울">
                       서울
                     </a>
-                    <div class="depth2" style="display: block;">
-                      <ul>
-                        <li class>
-                          <a href="#none">가산디지털</a>
-                        </li class>
-                        <li>
-                          <a href="#none">가양</a>
-                        </li>
+                    <div class="depth2" style="display: none;">
+                      <ul id="seoulCinemaList">
                       </ul>
                     </div>
                   </li>
   
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" name="경기">
                       경기
                     </a>
                     <div class="depth2" style="display: none;">
@@ -216,7 +224,7 @@
                   </li>
   
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" name="인천">
                       인천
                     </a>
                     <div class="depth2" style="display: none;">
@@ -232,7 +240,7 @@
                   </li>
   
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" name="부산">
                       부산
                     </a>
                     <div class="depth2" style="display: none;">
@@ -248,7 +256,7 @@
                   </li>
   
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" name="대구">
                       대구
                     </a>
                     <div class="depth2" style="display: none;">
@@ -264,7 +272,7 @@
                   </li>
   
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" name="광주">
                       광주
                     </a>
                     <div class="depth2" style="display: none;">
@@ -280,7 +288,7 @@
                   </li>
   
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" name="대전">
                       대전
                     </a>
                     <div class="depth2" style="display: none;">
@@ -296,7 +304,7 @@
                   </li>
   
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" name="울산">
                       울산
                     </a>
                     <div class="depth2" style="display: none;">
@@ -312,7 +320,7 @@
                   </li>
   
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" name="세종">
                       세종
                     </a>
                     <div class="depth2" style="display: none;">
@@ -328,7 +336,7 @@
                   </li>
   
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" name="강원">
                       강원
                     </a>
                     <div class="depth2" style="display: none;">
@@ -344,7 +352,7 @@
                   </li>
   
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" name="충청">
                       충북/충남
                     </a>
                     <div class="depth2" style="display: none;">
@@ -358,9 +366,9 @@
                       </ul>
                     </div>
                   </li>
-  
+                  
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" name="전라">
                       전북/전남
                     </a>
                     <div class="depth2" style="display: none;">
@@ -376,7 +384,7 @@
                   </li>
   
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" name="경상">
                       경북/경남
                     </a>
                     <div class="depth2" style="display: none;">
@@ -390,9 +398,10 @@
                       </ul>
                     </div>
                   </li>
-  
+                  
+ 
                   <li class="depth1">
-                    <a href="#none">
+                    <a href="#none" name="제주">
                       제주
                     </a>
                     <div class="depth2" style="display: none;">
