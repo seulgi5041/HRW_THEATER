@@ -600,8 +600,26 @@ img {
     width: 21px;
     height: 16px;
     line-height: 17px;
-    background: #E8E8E8;
+    background: url(../images/ticket/seat_type2.png) no-repeat center center;
+    background-size: 21px 16px;
     color: #222;
+    font-size: 10px;
+    text-align: center;
+    letter-spacing: -0.5px;
+    box-sizing: border-box;
+    border-radius: 7px 7px 2px 0px;
+}
+
+.m_seat_inner .floor_box .seat_area .sel.disabled > span {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 21px;
+    height: 16px;
+    line-height: 17px;
+    background: url(../images/ticket/seat_type4.png) no-repeat center center;
+    background-size: 21px 16px;
+    /* color: #222; */
     font-size: 10px;
     text-align: center;
     letter-spacing: -0.5px;
@@ -617,7 +635,7 @@ img {
     cursor: inherit;
 }
 
-/* .mseat_inner .floor_box .seat_area .sel {
+.mseat_inner .floor_box .seat_area .sel > span::before {
     content: '';
     display: block;
     position: absolute;
@@ -625,18 +643,11 @@ img {
     left: 0;
     width: 21px;
     height: 16px;
-    background: #000;
-    opacity: 0.5;
-} */
-
-.seat_area .sel.disabled {
-    opacity: 0.5; 
-    pointer-events: none; 
-    background: url('../images/ticket/seat_type4.png');
-    width: 21px;
-    height: 16px;
-    cursor: not-allowed;
+    /* background: #000; */
+    /* opacity: 0.5; */
 }
+
+
 
 
 .m_seat_inner .floor_box .seat_area .sel.on span {

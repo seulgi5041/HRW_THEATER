@@ -4,18 +4,6 @@ document.addEventListener("DOMContentLoaded", function() {
   const groupTimeSelect = document.querySelectorAll('.group_time_select');
   const boxNotice = document.querySelector('.box_notice');
 
-
-  /*2023-11-01 10:50분 수정 페이지가 로드 될 때 depth1이 자동으로 active되는 것을 방지하고
-   * depth2의 css속성을 none으로 변경
-  */
-  depth1Select1.forEach((element) => {
-    const depth2 = element.querySelector('.depth2');
-    if (depth2) {
-      depth2.style.display = 'none';
-    }
-  });
-
-
   function handleDepth1Click(element) {
     // depth1에 active가 없다면 depth2가 나타나지 않음
     depth1Select1.forEach((el) => {
@@ -65,8 +53,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
      // <dd> 업데이트
-    const ddElement = document.querySelector('li.step01.active dl dd');
-    ddElement.textContent = selectedLocation + " (" + movieHall + ")";
+  const ddElement = document.querySelector('li.step01.active dl dd');
+  ddElement.textContent = selectedLocation + " (" + movieHall + ")";
 }
 
   // depth1Select에 대한 클릭 이벤트 처리
