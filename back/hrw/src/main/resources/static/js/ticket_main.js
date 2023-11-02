@@ -1,4 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
+  function showCinema(){
+  const filteredArray = in_sssss.filter(item => item['로컬'] === '서울');
+
+// filteredArray에는 로컬 키의 값이 '로컬1'과 일치하는 JSON 객체만 포함됩니다.
+  console.log(filteredArray);
+  }
+  
+  showCinema()
+
   const depth1Select1 = document.querySelectorAll('.depth1');
   const depth2Select1 = document.querySelectorAll('.depth2 li');
   const groupTimeSelect = document.querySelectorAll('.group_time_select');
@@ -144,4 +153,5 @@ document.addEventListener("DOMContentLoaded", function() {
     form.submit();
   }
 
+  
 });

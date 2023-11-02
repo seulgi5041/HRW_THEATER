@@ -150,11 +150,11 @@ public class MemberController {
 	}
 
 	//아이디 중복체크
-	@PostMapping("/idDoubleCheck")
+	@PostMapping("/idDoubleCheck") 
 	@ResponseBody
 	public int id_duble_check(@RequestBody Map<String, String> requestBody) {
     System.out.println("id_duble_check");
-    String userId = requestBody.get("userId");
+    String userId = requestBody.get("user_Id");
     int check = memberService.idDubleCheck(userId);
     return check;
 }

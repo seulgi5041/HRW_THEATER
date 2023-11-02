@@ -118,18 +118,25 @@ public class ScheduleEntity {
         switch (dayOfWeekName) {
             case "SUNDAY":
                 koreaWeekName = "일";
+                break;
             case "MONDAY":
                 koreaWeekName = "월";
+                break;
             case "TUESDAY":
                 koreaWeekName = "화";
+                break;
             case "WEDNESDAY":
                 koreaWeekName = "수";
+                break;
             case "THURSDAY":
                 koreaWeekName = "목";
+                break;
             case "FRIDAY":
                 koreaWeekName = "금";
+                break;
             case "SATURDAY":
                 koreaWeekName = "토";
+                break;
         }
 
             return koreaWeekName;

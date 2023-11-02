@@ -95,7 +95,8 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     // 데이터를 JSON 문자열로 변환하여 body에 설정
-    const data = JSON.stringify({ userId: userId });
+    const data = JSON.stringify({ user_Id : userId });
+
     xhr.send(data);
     });
 });

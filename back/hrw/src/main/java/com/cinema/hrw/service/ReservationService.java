@@ -8,6 +8,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Service;
+
+import com.cinema.hrw.dto.CinemaAddressDTO;
 import com.cinema.hrw.dto.ScheduleDTO;
 import com.cinema.hrw.dto.SeatDTO;
 import com.cinema.hrw.entity.CinemaAddressEntity;
@@ -78,6 +80,18 @@ public class ReservationService {
 
     public List<String> getCinemaNamesInSeoul() {
         return reservationRepository.findCinemaNamesInSeoul();
+    }
+
+
+    public List<CinemaAddressDTO> getsss() {
+        List<CinemaAddressEntity> sss= reservationRepository.findAll();
+        List<CinemaAddressDTO>sssss = new ArrayList<>();
+        for(CinemaAddressEntity cinemaAddressEntity : sss){
+            CinemaAddressDTO aaa = new CinemaAddressDTO();
+            aaa = CinemaAddressDTO.toCinemaAddressDTO(cinemaAddressEntity);
+            sssss.add(aaa);
+        }
+        return sssss;
     }
 
 

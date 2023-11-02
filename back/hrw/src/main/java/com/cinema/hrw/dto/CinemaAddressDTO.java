@@ -25,6 +25,7 @@ public class CinemaAddressDTO {
     private double xAxis;
     
     private double yAxis;
+    private String local;
 
     public static CinemaAddressDTO toCinemaAddressDTO(CinemaAddressEntity cinemaAddressEntity){
     CinemaAddressDTO cinemaAddressDTO = new CinemaAddressDTO();
@@ -34,6 +35,7 @@ public class CinemaAddressDTO {
     cinemaAddressDTO.setTell(cinemaAddressEntity.getTell());
     cinemaAddressDTO.setXAxis(cinemaAddressEntity.getXAxis());
     cinemaAddressDTO.setYAxis(cinemaAddressEntity.getYAxis());
+    cinemaAddressDTO.setLocal(cinemaAddressEntity.getLocal());
     return cinemaAddressDTO;
     }
 

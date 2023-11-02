@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cinema.hrw.dto.CinemaAddressDTO;
 import com.cinema.hrw.dto.ScheduleDTO;
 import com.cinema.hrw.dto.SeatDTO;
 import com.cinema.hrw.service.ReservationService;
@@ -26,17 +27,10 @@ public class ReservationController {
 	ReservationService reservationService;
 	
 	   @GetMapping("/reservation/first")
-   public String reservationFirst(HttpSession session) {
-      // HttpSession에서 "loginId" 속성을 가져옴
-      String loginId = (String) session.getAttribute("loginId");
-      
-      // "loginId" 속성이 존재하면 reservationFirst 페이지로 이동
-      if (loginId != null && !loginId.isEmpty()) {
-         return "reservation/reservationFirst";
-      } else {
-         session.setAttribute("loginError", "로그인 후 이용하실 수 있습니다.");
-         return "redirect:/member/login";
-      }
+   public String reservationFirst( Model model) {
+      List<CinemaAddressDTO> sss = reservationService.getsss();
+	  model.addAttribute("sss", sss);
+	  return "reservation/reservationFirst";
    }
    
    @GetMapping("/getSeoulCinemaNames")

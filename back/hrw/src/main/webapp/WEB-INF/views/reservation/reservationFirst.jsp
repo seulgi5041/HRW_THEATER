@@ -896,7 +896,21 @@
   </div>
 </div>
 
+<script>
+const in_sssss = [
+  <c:forEach items="${sss}" var="sss" varStatus="loop">
+    {
+      '지점명': '${sss.cinemaName}',
+      '지점코드': '${sss.cinemaCode}',
+      '로컬': '${sss.local}'
+    },
+    
+    <c:if test="${!loop.last}">, 
+    </c:if>
+  </c:forEach>
+];
 
+</script>
 <!-- 푸터 -->
     <jsp:include page="../include/footer.jsp"/>
     
