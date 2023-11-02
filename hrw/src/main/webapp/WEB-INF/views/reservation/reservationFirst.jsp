@@ -191,7 +191,7 @@
                             <ul>
                                 <c:forEach items="${cinemaNames[local]}" var="cinemaName">
                                     <li class>
-                                        <a href="#none" cinema-code="${cinemaData.cinemaCode}">${cinemaData.cinemaName}</a>
+                                        <a href="/cinema/movies?cinemaCode=${cinemaData.cinemaCode}" cinema-code="${cinemaData.cinemaCode}">${cinemaData.cinemaName}</a>
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -223,21 +223,21 @@
             <div class="mCustomScrollbar movieScroll _mCS_9 mCS-autoHide" style="position: relative; overflow: visible;">
               <div id="mCSB_9" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" tabindex="0" style="max-height: none;">
                 <div id="mCSB_9_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" dir="ltr">
-                  <ul>
-                    <li class="disabled">
-                      <a href="#none">
-                        <div class="group_infor">
-                          <div class="bx_title">
-                            <span class="ic_grade gr_all">
-                              "0세 관람가"
-                            </span>
-                            <strong class="tit">30일</strong>
+                  <ul id="movie-list-container">
+                    <c:forEach var="movie" items="${movies}">
+                      <li>
+                        <a href="#none">
+                          <div class="group_infor">
+                            <div class="bx_title">
+                              <span class="ic_grade ${movie.rating}"></span>
+                              <strong class="tit">${movie.title}</strong>
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </li>
+                        </a>
+                      </li>
+                    </c:forEach>
 
-                    <li>
+                    <!-- <li>
                       <a href="#none">
                         <div class="group_infor">
                           <div class="bx_title">
@@ -274,7 +274,7 @@
                           </div>
                         </div>
                       </a>
-                    </li>
+                    </li> -->
 
                     
                   </ul>

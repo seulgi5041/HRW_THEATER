@@ -58,6 +58,7 @@ for (var local in localData) {
 
     // depth1을 클릭하고 나면 depth2로 넘어감
     activeDepth2 = depth2;
+
   });
   localItem.append(localLink);
 
@@ -71,14 +72,36 @@ for (var local in localData) {
     var cinemaCode = parts[1].trim();
 
     var cinemaLink = $("<a>")
-      .attr("href", "#none")
+      .attr("href", '/cinema/movies?cinemaCode=' + cinemaCode)
       .attr("cinema-code", cinemaCode) // Add cinema-code attribute
       .text(cinemaName);
 
     var submenuItem = $("<li>").append(cinemaLink);
     submenuList.append(submenuItem);
 
-  });
+    cinemaLink.click(function(e) {
+      e.preventDefault();  // Prevent the default anchor tag behavior
+      var cinemaCode = $(this).attr("cinema-code");
+
+      // Your AJAX request to fetch movie data for the selected cinema can go here
+      $.ajax({
+        url: '/cinema/movies?cinemaCode=' + cinemaCode,
+        method: 'GET',
+        success: function(data) {
+            // Assuming 'data' is a JSON array of movie data
+            $('#movie-list-container').empty(); // Clear the container first
+            $.each(data, function(index, movie) {
+                // Create and append the movie item to the list
+                var movieItem = $("<li><a href='#'><div class='group_infor'><div class='bx_title'><span class='ic_grade " + movie.rating + "'></span><strong class='tit'>" + movie.title + "</strong></div></div></a></li>");
+                $('#movie-list-container').append(movieItem);
+            });
+        },
+        error: function(xhr, status, error) {
+          console.error("Error: " + error);
+        }
+      });
+    });
+ });
   //depth2의 li에 보여줄 내용들
   submenu.append(submenuList);
   localItem.append(submenu);
@@ -97,7 +120,25 @@ depth2Select1.click(function() {
 
   console.log("Cinema Name:", cinemaName);
   console.log("Cinema Code:", cinemaCode);
-});
+
+  //Your AJAX request to fetch movie data for the selected cinema can go here
+  $.ajax({
+    url: '/cinema/movies?cinemaCode=' + cinemaCode,
+    method: 'GET',
+    success: function(data) {
+        // Assuming 'data' is a JSON array of movie data
+        $('#movie-list-container').empty(); // Clear the container first
+        $.each(data, function(index, movie) {
+            // Create and append the movie item to the list
+            var movieItem = $("<li><a href='#'><div class='group_infor'><div class='bx_title'><span class='ic_grade " + movie.rating + "'></span><strong class='tit'>" + movie.title + "</strong></div></div></a></li>");
+            $('#movie-list-container').append(movieItem);
+        });
+    },
+    error: function(xhr, status, error) {
+      console.error("Error: " + error);
+    }
+  });
+ });
 }
 
 

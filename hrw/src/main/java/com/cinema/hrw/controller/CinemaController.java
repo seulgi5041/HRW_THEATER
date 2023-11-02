@@ -2,7 +2,9 @@ package com.cinema.hrw.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,7 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 
+import com.cinema.hrw.dto.MovieDTO;
+import com.cinema.hrw.entity.ScheduleEntity;
+import com.cinema.hrw.repository.MovieSelectRepository;
 import com.cinema.hrw.service.CinemaAddressService;
 
 @Controller
@@ -18,12 +24,14 @@ import com.cinema.hrw.service.CinemaAddressService;
 public class CinemaController {
 
   private final CinemaAddressService cinemaAddressService;
-  private static final Logger logger = LoggerFactory.getLogger(CinemaController.class); // Logger 객체 정의
+  // private static final Logger logger =
+  // LoggerFactory.getLogger(CinemaController.class); // Logger 객체 정의
 
-  @GetMapping("/reservation")
-  public String showJspPage() {
-    return "/reservation/reservationFirst"; // "your-jsp-page.jsp"가 실제 JSP 파일명입니다.
-  }
+  // @GetMapping("/reservation")
+  // public String showJspPage() {
+  // return "/reservation/reservationFirst"; // "your-jsp-page.jsp"가 실제 JSP
+  // 파일명입니다.
+  // }
 
   // 해당 클래스의 인스턴스를 만들고 초기화하는 데 사용되는 클래스의 특수 메서드
   // 하나의 매개 변수를 사용
@@ -57,4 +65,31 @@ public class CinemaController {
     return result;
     // Map에 가져온 값을 반환
   }
+
+  // 영화선택부분
+  @Autowired
+  private MovieSelectRepository movieSelectRepository;
+
+  @GetMapping("/movies")
+  @ResponseBody // Return JSON data
+  public List<MovieDTO> showMovies(@RequestParam("cinemaCode") String cinemaCode) {
+    List<Object[]> movieData = movieSelectRepository.findSchedulesMovieTitleRating(cinemaCode);
+    List<MovieDTO> movies = new ArrayList<>();
+
+    for (Object[] data : movieData) {
+      String title = (String) data[1];
+      String rating = (String) data[2];
+
+      MovieDTO movie = new MovieDTO();
+      movie.setTitle(title);
+      movie.setRating(rating);
+
+      // You can add other properties from ScheduleEntity to the MovieDTO if needed
+
+      movies.add(movie);
+    }
+
+    return movies;
+  }
+
 }
