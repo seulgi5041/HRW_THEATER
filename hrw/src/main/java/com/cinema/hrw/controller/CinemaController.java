@@ -34,6 +34,7 @@ public class CinemaController {
     this.cinemaAddressService = cinemaAddressService;
   }
 
+  // 엔드포인트
   @GetMapping("/getAllLocalAndCinemaNames")
   @ResponseBody // 반환 => JSON으로 변환되어 전송
   public java.util.Map<String, List<String>> getAllLocalAndCinemaNames() {
@@ -48,7 +49,7 @@ public class CinemaController {
       // Map에 항목을 추가
       result.put(targetLocal, namesForLocal);
 
-      logger.info("result: {}", namesForLocal);
+      // logger.info("result: {}", namesForLocal);
     }
     // System.out.println or consol.log와 같은 역할(터미널에서 확인가능)
     // logger.info("localAndCinemaNames: {}", result);

@@ -793,21 +793,44 @@
 */
 function sortLocalData(localData, desiredOrder) {
   var sortedData = {};
-  for (var i = 0; i < desiredOrder.length; i++) {
-    var local = desiredOrder[i];
-    if (localData[local]) {
-      sortedData[local] = localData[local];
-      delete localData[local];
-    }
-  }
 
-  // 순서대로 위치를 추가한 후에 sortedData로 반환해준다
+  //기존의 행정구역을 북/남으로 바꾸기
+  var localMapping = {
+    "충청": "충북/충남",
+    "전라": "전북/전남",
+    "경상": "경북/경남",
+  };
+
+
+  //로컬 이름의 원하는 순서가 포함된 배열을 반복
+  for (var i = 0; i < desiredOrder.length; i++) {
+      var local = desiredOrder[i];   //로컬 이름을 검색
+      if (localData[local]) {   //항목이 존재하는 경우 매핑, 정렬
+        var mappedLocal = localMapping[local] || local; //북/남으로 매핑한 내용의 로컬이 존재하는 경우 매핑된 이름을 사용. 아니면 원래 이름 사용 
+        
+        //매핑된 로컬 이름을 키로 사용, 해당 로컬 데이터를 localData값으로 사용하여 객체에 저장
+        sortedData[mappedLocal] = localData[local];
+        delete localData[local];  //중복을 피하기 위해 원래 로컬 이름을 사용하고, 객체 에서 제거
+      }
+    }
+
+   // 매핑된 이름을 집어넣기
   for (var local in localData) {
-    sortedData[local] = localData[local];
+    var mappedLocal = localMapping[local] || local;  //현재 로컬 이름에 대한 매핑이 있는지 확인
+    sortedData[mappedLocal] = localData[local];
+    //정렬된 데이터는 sortedData에 매핑된 로컬 이름을 키로 사용, 객체의 해당 로컬 데이터를 localData값으로 사용하여 객체에 저장
   }
 
   return sortedData;
 }
+
+
+
+
+
+
+
+
 
 
 
