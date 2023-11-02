@@ -773,8 +773,8 @@
         depth2Select1.removeClass("active");
         $(this).addClass("active");
         var cinemaLink = $(this).find("a");
-        var cinemaName = cinemaLink.data("cinema-name");
-        var cinemaCode = cinemaLink.data("cinema-code");
+        var cinemaName = cinemaLink.text();
+        var cinemaCode = cinemaLink.attr("cinema-code");
 
 
         console.log("Cinema Name:", cinemaName);
