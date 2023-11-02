@@ -147,6 +147,7 @@ li {
   width: 172px;
   padding-left: 20px;
   background-color: #333;
+  overflow-y: auto;
 }
 
 .wrap_reserve .section_step_title ul li.active > a .box_con {
@@ -307,14 +308,16 @@ li.depth1:first-child {
 
 .wrap_reserve .section_step_con .article_layer.article_cinema > .inner .cinema_select_wrap > ul {
   height: 960px;
+  width: 175px;
 }
 
 .wrap_reserve .section_step_con .article_layer.article_cinema .cinema_select_wrap > ul li {
+  width: 170px;
   padding: 2px 0px;
   border-bottom: none;
 }
 
-.wrap_reserve .section_step_con .article_layer.article_cinema .cinema_select_wrap > ul > li.depth1.active > a {
+.wrap_reserve .section_step_con .article_layer.article_cinema .cinema_select_wrap > ul > li.active {
   border: 2px solid #383838;
   background-color: #fff;
 }
@@ -403,12 +406,12 @@ li.depth1:first-child {
 }
 
 .wrap_reserve .section_step_con .article_layer.article_cinema .cinema_select_wrap > ul .depth2 ul li.active a {
-  color: #383838;
-  font-weight: 600;
+  color: #FB3D28;
+  font-weight: 800;
   content: "";
   top: 0px;
-  background: url(../images/ticket/check_active.png) no-repeat 100% 8px;
-  background-size: 18px auto;
+  /* background: url(../images/ticket/check_active.png) no-repeat 100% 8px;
+  background-size: 18px auto; */
 }
 
 

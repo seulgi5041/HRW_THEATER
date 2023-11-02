@@ -31,15 +31,15 @@
             <div class="box_con">
               <dl>
                 <dt>선택한 영화 정보</dt>
-                <dd>title</dd>
+                <dd>${choiceScheduleInfo.movieTitle}</dd>
                 <dt>선택한 상영관</dt>
-                <dd>"지점 " 
-                    "관"</dd>
+                <dd>"${choiceScheduleInfo.cinemaName} " 
+                    "${choiceScheduleInfo.auditorium}"</dd>
                 <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
+                <dd>date(${choiceScheduleInfo.takeDate}(${choiceScheduleInfo.takeDateOfWeek}))</dd>
                 <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+                <dd>"${choiceScheduleInfo.startTime}~" 
+                  "${choiceScheduleInfo.endTime}"</dd>
               </dl>
             </div>
           </a>
@@ -57,11 +57,11 @@
               <dl>
                 <dt>선택한 인원</dt>
                 <dd>
-                  <span id="preview_people_info"></span>
+                  <span id="preview_people_info">${personCount}</span>
                 </dd>
                 <dt>선택한 좌석</dt>
                 <dd>
-                  <span id="preview_seat_info"></span>
+                  <span id="preview_seat_info"> ${seatList}</span>
                 </dd>
               </dl>
             </div>
@@ -170,9 +170,7 @@
                             <li><a href="/reservation/third_drink">음료</a></li>
                             <li><a href="/reservation/third_snack">스낵</a></li>
                           </ul>
-                          <ul class="add_food">
-                            <li><a href="#">장바구니</a></li>
-                          </ul>
+                          
                         </div>
                       </div>
                     </div>
@@ -185,7 +183,7 @@
                       </div>
                       <!-- 상품 목록 메인 박스 -->
                       <div class="store_content">
-                        <article class="food_box">
+                        <article class="food_box" data-product="콜라(M)">
                           <div class="food_image">
                             <img src="../images/store/product/coke_M.png" alt="콜라(M)">
                           </div>
@@ -208,13 +206,13 @@
                                 <span>2,500<em>원</em></span>
                               </div>
                               <div class="add">
-                                <button><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
+                                <button class="add_count_btn"><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
                               </div>
                             </div>
                           </div>
                         </article>
                   
-                        <article class="food_box">
+                        <article class="food_box" data-product="콜라(L)">
                           <div class="food_image">
                             <img src="../images/store/product/coke_L.png" alt="콜라(L)">
                           </div>
@@ -237,13 +235,13 @@
                                 <span>3,000<em>원</em></span>
                               </div>
                               <div class="add">
-                                <button><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
+                                <button class="add_count_btn"><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
                               </div>
                             </div>
                           </div>
                         </article>
                   
-                        <article class="food_box">
+                        <article class="food_box" data-product="사이다(M)">
                           <div class="food_image">
                             <img src="../images/store/product/cider_M.png" alt="사이다(M)">
                           </div>
@@ -266,13 +264,13 @@
                                 <span>2,500<em>원</em></span>
                               </div>
                               <div class="add">
-                                <button><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
+                                <button class="add_count_btn"><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
                               </div>
                             </div>
                           </div>
                         </article>
                   
-                        <article class="food_box">
+                        <article class="food_box" data-product="사이다(L)">
                           <div class="food_image">
                             <img src="../images/store/product/cider_L.png" alt="사이다(L)">
                           </div>
@@ -295,13 +293,13 @@
                                 <span>3,000<em>원</em></span>
                               </div>
                               <div class="add">
-                                <button><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
+                                <button class="add_count_btn"><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
                               </div>
                             </div>
                           </div>
                         </article>
                   
-                        <article class="food_box">
+                        <article class="food_box" data-product="아메리카노(ICE)">
                           <div class="food_image">
                             <img src="../images/store/product/coffee_ice.png" alt="아메리카노(ICE)">
                           </div>
@@ -324,13 +322,13 @@
                                 <span>4,000<em>원</em></span>
                               </div>
                               <div class="add">
-                                <button><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
+                                <button class="add_count_btn"><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
                               </div>
                             </div>
                           </div>
                         </article>
                   
-                        <article class="food_box">
+                        <article class="food_box" data-product="아메리카노(HOT)">
                           <div class="food_image">
                             <img src="../images/store/product/coffee_hot.png" alt="아메리카노(HOT)">
                           </div>
@@ -353,7 +351,7 @@
                                 <span>3,500<em>원</em></span>
                               </div>
                               <div class="add">
-                                <button><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
+                                <button class="add_count_btn"><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
                               </div>
                             </div>
                           </div>
@@ -378,13 +376,13 @@
             <dl class="total_price">
               <dt>총 합계</dt>
               <dd>
-                <strong>금액</strong>
+                <strong id="total_choice_food_price">금액</strong>
                 원
               </dd>
             </dl>
           </div>
           <div class="bottom_right">
-            <a href="/reservation/payment" class="btn_col" id="link_pay">결제하기</a>
+            <a href="javascript:void(0)" class="btn_col" id="link_pay">결제하기</a>
           </div>
         </div>
       </div>
@@ -399,9 +397,9 @@
     
     
 <!-- 자바스크립트 영역 -->
-<script src="../js/store_depth.js"></script>
 <script src="../js/ticket_main.js"></script>
-<script src="../js/ticket_reverse.js"></script> 
+<script src="../js/ticket_reverse.js"></script>
+<script src="../js/reservation_food.js"></script> 
 
 </body>
 </html>

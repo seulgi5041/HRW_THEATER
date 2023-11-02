@@ -1,6 +1,8 @@
 package com.cinema.hrw.dto;
 
 
+import java.util.Map;
+
 import com.cinema.hrw.entity.FoodOrderEntity;
 
 import lombok.Getter;
@@ -34,5 +36,24 @@ public class FoodOrderDTO {
     foodOrderDTO.setFoodPrice(foodOrderEntity.getFoodPrice());
     foodOrderDTO.setFoodOrderCondition(foodOrderEntity.getFoodOrderCondition());
         return foodOrderDTO;
+    }
+
+    public static FoodOrderDTO mapToFoodOrderDTO(Map<String, Object> choiceFoodInfo) {
+        FoodOrderDTO foodOrderDTO = new FoodOrderDTO();
+
+        if (choiceFoodInfo.containsKey("이름")) {
+            foodOrderDTO.setFoodName((String) choiceFoodInfo.get("이름"));
+        }
+
+        if (choiceFoodInfo.containsKey("구매 가격")) {
+            foodOrderDTO.setFoodPrice(((Number) choiceFoodInfo.get("구매 가격")).longValue());
+        }
+
+        if (choiceFoodInfo.containsKey("수량")) {
+            foodOrderDTO.setFoodCount(((Number) choiceFoodInfo.get("수량")).longValue());
+        }
+
+        return foodOrderDTO;
+        
     }
 }

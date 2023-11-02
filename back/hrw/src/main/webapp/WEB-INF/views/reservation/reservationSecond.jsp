@@ -311,7 +311,7 @@
               </dl>
             </div>
             <div class="bottom_right">
-              <a href="/reservation/third_combo" class="btn_col" id="link_rpay">결제하기</a>
+              <a href="javascript:void(0)" class="btn_col" id="link_rpay">결제하기</a>
             </div>
           </div>
         </div>

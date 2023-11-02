@@ -3,8 +3,10 @@ package com.cinema.hrw.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cinema.hrw.dto.CinemaAddressDTO;
+import com.cinema.hrw.dto.FoodOrderDTO;
 import com.cinema.hrw.dto.ScheduleDTO;
 import com.cinema.hrw.dto.SeatDTO;
 import com.cinema.hrw.service.ReservationService;
@@ -64,27 +67,132 @@ public class ReservationController {
 	
 	
 	@PostMapping("/reservation/third_combo")
-	public String reservationThirdCombo() {
-		return "reservation/reservationThird_Combo";
+	public String reservationThirdCombo(@RequestParam("seat_list") List<String> seatList,
+    @RequestParam("person_count") String personCount,
+    @RequestParam("total_price") int totalPrice,
+    HttpSession session, Model model) {
+    // 받은 데이터를 세션에 추가 
+    session.setAttribute("seatList", seatList);
+    session.setAttribute("personCount", personCount);
+    session.setAttribute("totalPrice", totalPrice);
+
+	//세션에서 스케쥴코드 출력하기
+	String scheduleCode = (String) session.getAttribute("scheduleCode");
+	ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCode);
+	String person_count = (String) session.getAttribute("personCount");
+	List<String> seat_list = (List<String>) session.getAttribute("seatList");
+
+	model.addAttribute("choiceScheduleInfo", choiceScheduleInfo);
+	person_count=person_count.replace(":", " : ");
+	person_count=person_count.replace("\"", "");
+	person_count=person_count.replace("{", "");
+	person_count=person_count.replace("}", "");
+	person_count=person_count.replace(",", " , ");
+	model.addAttribute("personCount", person_count);
+	model.addAttribute("seatList", seat_list);
+    return "reservation/reservationThird_Combo";
+}
+
+@GetMapping("/reservation/third_combo")
+	public String showReservationThirdComboPage(HttpSession session , Model model) {
+
+	//세션에서 스케쥴코드 출력하기
+	String scheduleCode = (String) session.getAttribute("scheduleCode");
+	ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCode);
+	String person_count = (String) session.getAttribute("personCount");
+	List<String> seat_list = (List<String>) session.getAttribute("seatList");
+
+	model.addAttribute("choiceScheduleInfo", choiceScheduleInfo);
+	person_count=person_count.replace(":", " : ");
+	person_count=person_count.replace("\"", "");
+	person_count=person_count.replace("{", "");
+	person_count=person_count.replace("}", "");
+	person_count=person_count.replace(",", " , ");
+	model.addAttribute("personCount", person_count);
+	model.addAttribute("seatList", seat_list);
+
+    return "reservation/reservationThird_Combo";
 	}
 	
+	
 	@GetMapping("/reservation/third_popcorn")
-	public String reservationThirdPopcorn() {
+	public String reservationThirdPopcorn(HttpSession session , Model model) {
+		//세션에서 스케쥴코드 출력하기
+	String scheduleCode = (String) session.getAttribute("scheduleCode");
+	ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCode);
+	String person_count = (String) session.getAttribute("personCount");
+	List<String> seat_list = (List<String>) session.getAttribute("seatList");
+
+	model.addAttribute("choiceScheduleInfo", choiceScheduleInfo);
+	person_count=person_count.replace(":", " : ");
+	person_count=person_count.replace("\"", "");
+	person_count=person_count.replace("{", "");
+	person_count=person_count.replace("}", "");
+	person_count=person_count.replace(",", " , ");
+	model.addAttribute("personCount", person_count);
+	model.addAttribute("seatList", seat_list);
+
 		return "reservation/reservationThird_Popcorn";
 	}
 	
 	@GetMapping("/reservation/third_drink")
-	public String reservationThirdDrink() {
+	public String reservationThirdDrink(HttpSession session , Model model) {
+		//세션에서 스케쥴코드 출력하기
+	String scheduleCode = (String) session.getAttribute("scheduleCode");
+	ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCode);
+	String person_count = (String) session.getAttribute("personCount");
+	List<String> seat_list = (List<String>) session.getAttribute("seatList");
+
+	model.addAttribute("choiceScheduleInfo", choiceScheduleInfo);
+	person_count=person_count.replace(":", " : ");
+	person_count=person_count.replace("\"", "");
+	person_count=person_count.replace("{", "");
+	person_count=person_count.replace("}", "");
+	person_count=person_count.replace(",", " , ");
+	model.addAttribute("personCount", person_count);
+	model.addAttribute("seatList", seat_list);
+
 		return "reservation/reservationThird_Drink";
 	}
 	
 	@GetMapping("/reservation/third_snack")
-	public String reservationThirdSnack() {
+	public String reservationThirdSnack(HttpSession session , Model model) {
+		//세션에서 스케쥴코드 출력하기
+	String scheduleCode = (String) session.getAttribute("scheduleCode");
+	ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCode);
+	String person_count = (String) session.getAttribute("personCount");
+	List<String> seat_list = (List<String>) session.getAttribute("seatList");
+
+	model.addAttribute("choiceScheduleInfo", choiceScheduleInfo);
+	person_count=person_count.replace(":", " : ");
+	person_count=person_count.replace("\"", "");
+	person_count=person_count.replace("{", "");
+	person_count=person_count.replace("}", "");
+	person_count=person_count.replace(",", " , ");
+	model.addAttribute("personCount", person_count);
+	model.addAttribute("seatList", seat_list);
+
 		return "reservation/reservationThird_Snack";
 	}
 	
-	@GetMapping("/reservation/payment")
-	public String reservationPayment() {
+	@PostMapping("/reservation/payment")
+	public String reservationPayment(@RequestParam("choice_food_info") String choiceFoodInfoList, HttpSession session , Model model) {
+		System.out.println(choiceFoodInfoList);
+		session.setAttribute("choiceFoodInfoList", choiceFoodInfoList);
+		String scheduleCode = (String) session.getAttribute("scheduleCode");
+		ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCode);
+		String person_count = (String) session.getAttribute("personCount");
+		List<String> seat_list = (List<String>) session.getAttribute("seatList");
+
+		model.addAttribute("choiceScheduleInfo", choiceScheduleInfo);
+		person_count=person_count.replace(":", " : ");
+		person_count=person_count.replace("\"", "");
+		person_count=person_count.replace("{", "");
+		person_count=person_count.replace("}", "");
+		person_count=person_count.replace(",", " , ");
+		model.addAttribute("personCount", person_count);
+		model.addAttribute("seatList", seat_list);
+
 		return "reservation/payment";
 	}
 	

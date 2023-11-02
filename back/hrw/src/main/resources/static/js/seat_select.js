@@ -270,8 +270,57 @@ function on_use_seat_check(){
 
 });
 }
-
 on_use_seat_check();
 
+
+/*다음버튼으로 보내기 post로 좌석배열, 제이슨, 가격 보내기 */
+
+
+const link_rpay_btn = document.getElementById('link_rpay');
+function set_go_to_next_info(choice_list, choice_person_count, choice_total_price) {
+  const dd_choice_list = document.getElementById("dd_choice_seats").textContent;
+  const  set_choice_seat_list = dd_choice_list.split(',');
+  const  set_choice_person_count = personCounts;
+  const  set_choice_total_price = document.getElementById('setting_total_Price').textContent;
+  return { choice_seat_list: set_choice_seat_list, choice_person_count: set_choice_person_count, choice_total_price: set_choice_total_price };
+}
+
+link_rpay_btn.addEventListener("click", () => {
+  const { choice_seat_list, choice_person_count, choice_total_price } = set_go_to_next_info();
+  go_on_post_mapping(choice_seat_list, choice_person_count, choice_total_price)
+});
+
+function go_on_post_mapping(choice_seat_list, choice_person_count, choice_total_price) {
+  let form = document.createElement('form');
+  const seat_list_value = choice_seat_list.join(',');
+
+  // scheduleCode를 숨겨진 입력 필드로 추가
+  let seat_list_input = document.createElement('input');
+  seat_list_input.setAttribute('type', 'hidden');
+  seat_list_input.setAttribute('name', 'seat_list');
+  seat_list_input.setAttribute('value', seat_list_value);
+  form.appendChild(seat_list_input);
+
+  let person_count_input = document.createElement('input');
+  person_count_input.setAttribute('type', 'hidden');
+  person_count_input.setAttribute('name', 'person_count');
+  person_count_input.setAttribute('value', JSON.stringify(choice_person_count));
+  form.appendChild(person_count_input);
+
+  let total_price_input = document.createElement('input');
+  total_price_input.setAttribute('type', 'hidden');
+  total_price_input.setAttribute('name', 'total_price');
+  total_price_input.setAttribute('value', choice_total_price.toString());
+  form.appendChild(total_price_input);
+
+
+  form.setAttribute('method', 'post');
+  form.setAttribute('action', '/reservation/third_combo');
+  
+  // 필요한 경우 데이터 유효성 검사 수행
+
+  document.body.appendChild(form);
+  form.submit();
+}
 
 });

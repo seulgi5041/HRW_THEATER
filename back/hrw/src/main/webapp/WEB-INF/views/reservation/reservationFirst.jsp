@@ -1,29 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-<head>
+<head><!--테스트용으로 오른족 상영시간쪽에 누르면 좌석으로 연결되도록해놨으니 추후 변경예정-->
 <meta charset="UTF-8">
 <title>HRW 예매페이지</title>
 
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/ticket.css">
   <link rel="stylesheet" href="../css/modal.css">
+
+  <!-- jQuery CDN 포함 -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-  $(document).ready(function() {
-       // 서버에서 '서울' 지역의 영화관 이름을 가져옵니다.
-       $.get("/getSeoulCinemaNames", function(data) {
-           // 반환된 데이터를 사용하여 '서울' 지역의 영화관 이름을 동적으로 추가합니다.
-           var ul = $("#seoulCinemaList");
-           data.forEach(function(cinemaName) {
-               var li = $("<li class><a href='#none'>" + cinemaName + "</a></li>");
-               ul.append(li);
-           });
-       });
-   });
-  </script>
+  
 </head>
 <body>
 
@@ -36,7 +26,7 @@
       <ul>
         <!-- 상영시간 -->
         <li class="step01 active">
-          <a href="/reservation/first">
+          <a href="#reverseStep01" id="seatSelectionLink">
             <strong class="tit">
               <span>01</span>
               <br>
@@ -45,15 +35,13 @@
             <div class="box_con">
               <dl>
                 <dt>선택한 영화 정보</dt>
-                <dd>title</dd>
+                <dd></dd>
                 <dt>선택한 상영관</dt>
-                <dd>"지점 " 
-                    "관"</dd>
-                <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
+                <dd></dd>
+                <dt>선택한 날짜</dt>
+                <dd></dd>
                 <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+                <dd></dd>
               </dl>
             </div>
           </a>
@@ -193,230 +181,22 @@
                     <a href="#none">
                       지역선택
                     </a>
-                    
                   </li>
-  
                   <!-- 지역선택 -->
-                  <li class="depth1">
-                    <a href="#none" name="서울">
-                      서울
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul id="seoulCinemaList">
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="경기">
-                      경기
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="인천">
-                      인천
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="부산">
-                      부산
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="대구">
-                      대구
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="광주">
-                      광주
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="대전">
-                      대전
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li class>
-                        <li>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="울산">
-                      울산
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="세종">
-                      세종
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="강원">
-                      강원
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul class>
-                        <li>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="충청">
-                      충북/충남
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                  
-                  <li class="depth1">
-                    <a href="#none" name="전라">
-                      전북/전남
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li class>
-                        <li>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="경상">
-                      경북/경남
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                  
- 
-                  <li class="depth1">
-                    <a href="#none" name="제주">
-                      제주
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-  
+                  <c:forEach items="${localData}" var="local">
+                    <li class="depth1">
+                      <a href="javascript:void(0);" >${local}</a>
+                        <div class="depth2" style="display: none;">
+                            <ul>
+                                <c:forEach items="${cinemaNames[local]}" var="cinemaName">
+                                    <li class>
+                                        <a href="#none" cinema-code="${cinemaData.cinemaCode}">${cinemaData.cinemaName}</a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </li>
+                  </c:forEach>
                 </ul>
               </div>
 
@@ -463,7 +243,7 @@
                             <span class="ic_grade gr_12">
                               "12세 관람가"
                             </span>
-                            <strong class="tit">30일</strong>
+                            <strong class="tit">라라라라라</strong>
                           </div>
                         </div>
                       </a>
@@ -476,7 +256,7 @@
                             <span class="ic_grade gr_15">
                               "15세 관람가"
                             </span>
-                            <strong class="tit">30일</strong>
+                            <strong class="tit">집에가고싶다</strong>
                           </div>
                         </div>
                       </a>
@@ -489,7 +269,7 @@
                             <span class="ic_grade gr_18">
                               "18세 관람가"
                             </span>
-                            <strong class="tit">30일</strong>
+                            <strong class="tit">꿀복이보고싶다</strong>
                           </div>
                         </div>
                       </a>
@@ -526,7 +306,7 @@
                         <strong class="month">10월</strong>
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate0">
-                            <input type="radio" id="radioDate0" name="radioDate1" data-displayn="Y" data-playdate="2023-10-18" data-isplaydate="Y" ata-playweek="오늘" checked>
+                            <input type="radio" id="radioDate0" name="radioDate1" data-displayn="Y" data-playdate="2023-10-18" data-isplaydate="Y" data-playweek="오늘" checked>
                             <strong>18</strong>
                             <em>오늘</em>
                           </label>
@@ -537,7 +317,7 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate1">
-                            <input type="radio" id="radioDate1" name="radioDate1" data-displayn="Y" data-playdate="2023-10-19" data-isplaydate="Y" ata-playweek="목">
+                            <input type="radio" id="radioDate1" name="radioDate1" data-displayn="Y" data-playdate="2023-10-19" data-isplaydate="Y" data-playweek="목">
                             <strong>19</strong>
                             <em>목</em>
                           </label>
@@ -548,7 +328,7 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate2">
-                            <input type="radio" id="radioDate2" name="radioDate1" data-displayn="Y" data-playdate="2023-10-19" data-isplaydate="Y" ata-playweek="목">
+                            <input type="radio" id="radioDate2" name="radioDate1" data-displayn="Y" data-playdate="2023-10-20" data-isplaydate="Y" data-playweek="금">
                             <strong>20</strong>
                             <em>금</em>
                           </label>
@@ -559,7 +339,7 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate3">
-                            <input type="radio" id="radioDate3" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
+                            <input type="radio" id="radioDate3" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" data-playweek="토">
                             <strong>21</strong>
                             <em>토</em>
                           </label>
@@ -570,7 +350,7 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate4">
-                            <input type="radio" id="radioDate4" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
+                            <input type="radio" id="radioDate4" name="radioDate1" data-displayn="Y" data-playdate="2023-10-22" data-isplaydate="Y" data-playweek="일">
                             <strong>22</strong>
                             <em>일</em>
                           </label>
@@ -581,7 +361,7 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate5">
-                            <input type="radio" id="radioDate5" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
+                            <input type="radio" id="radioDate5" name="radioDate1" data-displayn="Y" data-playdate="2023-10-23" data-isplaydate="Y" data-playweek="월">
                             <strong>23</strong>
                             <em>월</em>
                           </label>
@@ -592,7 +372,7 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate6">
-                            <input type="radio" id="radioDate6" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
+                            <input type="radio" id="radioDate6" name="radioDate1" data-displayn="Y" data-playdate="2023-10-24" data-isplaydate="Y" data-playwee="화">
                             <strong>24</strong>
                             <em>화</em>
                           </label>
@@ -603,7 +383,7 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate7">
-                            <input type="radio" id="radioDate7" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
+                            <input type="radio" id="radioDate7" name="radioDate1" data-displayn="Y" data-playdate="2023-10-25" data-isplaydate="Y" data-playweek="수">
                             <strong>25</strong>
                             <em>수</em>
                           </label>
@@ -891,26 +671,12 @@
     <div class="btn_bottom_wrap" id="stepOnePopupConButton">
       <a href="#none" class="btn_col1 ty5">취소</a>
       <!-- 좌석 선택하는 페이지로 넘어감 -->
-      <a href="javascript:void(0)" id="seatSelectionLink" class="btn_col2 ty5">인원/좌석선택</a>
+      <a href="/reservation/second" class="btn_col2 ty5">인원/좌석선택</a>
     </div> 
   </div>
 </div>
 
-<script>
-const in_sssss = [
-  <c:forEach items="${sss}" var="sss" varStatus="loop">
-    {
-      '지점명': '${sss.cinemaName}',
-      '지점코드': '${sss.cinemaCode}',
-      '로컬': '${sss.local}'
-    },
-    
-    <c:if test="${!loop.last}">, 
-    </c:if>
-  </c:forEach>
-];
 
-</script>
 <!-- 푸터 -->
     <jsp:include page="../include/footer.jsp"/>
     
@@ -918,8 +684,133 @@ const in_sssss = [
 <!-- 자바스크립트 영역 -->
 
 <script src="../js/ticket_main.js"></script>
-<script src="../js/ticket_reverse.js"></script>
 <script src="../js/modal.js"></script>
+<script src="../js/ticket_reverse.js"></script>
 
+
+<script>
+  $(document).ready(function() {
+  // Ajax로 백엔드에 정의되어 있는 로컬과 지점명, 코드 요청하기
+  $.ajax({
+    type: "GET",
+    url: "/cinema/getAllLocalAndCinemaNames", //컨트롤러에 있는 엔드포인트 입력
+    success: function(data) {
+      // 서버에서 수신한 데이터를 처리하는 곳을 선언
+      var localData = data;
+
+      //백에서 쿼리문을 작성하였지만, 이곳에서 다시 한번 정의해줘야 순서대로 들어감
+      var desiredOrder = [
+        "서울", "경기", "인천", "부산", "대구", "광주", "대전", "울산", "세종", "강원", "충청", "전라", "경상", "제주"
+      ];
+      localData = sortLocalData(localData, desiredOrder);
+
+      // 보여줘야 하는 부분
+      var menuContainer = $(".tab_container .cinema_select_wrap ul");
+
+      //lidepth1을 누르기 전에는 active가 없음
+      var activeDepth2 = null;
+
+      // 스타일 지정한 부분과 백엔드에 있던 로컬, 지점, 코드를 불러오는 구간
+      for (var local in localData) {
+        var localItem = $("<li>").addClass("depth1");
+        var localLink = $("<a>").attr("href", "javascript:void(0)").text(local);
+
+        var submenu = $("<div>").addClass("depth2").css("display", "none");
+
+        //지역선택 쪽에 표시될 로컬명들
+        localLink.click(function() {
+          var localName = $(this).text();
+          var cinemaNames = localData[localName];
+          //console.log("지점명을 모두 출력 " + localName + ":", cinemaNames);
+
+          $(".depth1, .depth2 li").removeClass("active");
+          var depth1 = $(this).parent();
+          depth1.addClass("active");
+
+          // Reset the previously active depth2
+          if (activeDepth2) {
+            activeDepth2.css("display", "none");
+          }
+
+          var depth2 = $(this).next(".depth2");
+          depth2.css("display", "block");
+
+          // depth1을 클릭하고 나면 depth2로 넘어감
+          activeDepth2 = depth2;
+
+        });
+        localItem.append(localLink);
+
+        // depth2의 ul 태그를 다시 생성
+        var submenuList = $("<ul>");
+
+        // depth2에 들어갈 지점명과 지점코드를 나누는 부분
+        localData[local].forEach(function(cinemaName) {
+          var parts = cinemaName.split(',');
+          var cinemaName = parts[0].trim();
+          var cinemaCode = parts[1].trim();
+
+          var cinemaLink = $("<a>")
+            .attr("href", "#none")
+            .attr("cinema-code", cinemaCode) // Add cinema-code attribute
+            .text(cinemaName);
+
+          var submenuItem = $("<li>").append(cinemaLink);
+          submenuList.append(submenuItem);
+
+        });
+        //depth2의 li에 보여줄 내용들
+        submenu.append(submenuList);
+        localItem.append(submenu);
+        menuContainer.append(localItem);
+      }
+
+      
+      //depth2를 선택했을때 작동될 이벤트들과 지점코드, 지점명을 다시 나눠 출력해주는 부분
+      //위에서 ul이 새로 생성되었기 때문에 다시 이벤트를 등록한 것이다
+      var depth2Select1 = $(".depth2 ul li");
+      depth2Select1.click(function() {
+        depth2Select1.removeClass("active");
+        $(this).addClass("active");
+        var cinemaLink = $(this).find("a");
+        var cinemaName = cinemaLink.text();
+        var cinemaCode = cinemaLink.attr("cinema-code");
+
+
+        console.log("Cinema Name:", cinemaName);
+        console.log("Cinema Code:", cinemaCode);
+      });
+    },
+    error: function(xhr, status, error) {
+      console.error("Error: " + error);
+    }
+  });
+});
+
+
+/* 레포지토리에 쿼리문으로 order by로 했지만,
+* Ajax에서 가져오는 과정에서 로컬의 순서를 다시 바꿔줘야 함
+*/
+function sortLocalData(localData, desiredOrder) {
+  var sortedData = {};
+  for (var i = 0; i < desiredOrder.length; i++) {
+    var local = desiredOrder[i];
+    if (localData[local]) {
+      sortedData[local] = localData[local];
+      delete localData[local];
+    }
+  }
+
+  // 순서대로 위치를 추가한 후에 sortedData로 반환해준다
+  for (var local in localData) {
+    sortedData[local] = localData[local];
+  }
+
+  return sortedData;
+}
+
+
+
+</script>
 </body>
 </html>

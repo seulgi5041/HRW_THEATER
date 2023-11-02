@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../css/common.css">
   </head>
   <body>
-   <jsp:include page="include/header.jsp"/>
+   <jsp:include page="./include/header.jsp"/>
   
     <!-- 메인영역 -->
    <main>
@@ -171,7 +171,7 @@
     </main>
   
   
-    <jsp:include page="include/footer.jsp"/>
+    <jsp:include page="./include/footer.jsp"/>
   
   
   
