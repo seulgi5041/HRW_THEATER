@@ -747,13 +747,14 @@
         // depth2에 들어갈 지점명과 지점코드를 나누는 부분
         localData[local].forEach(function(cinemaName) {
           var parts = cinemaName.split(',');
+          var cinemaName = parts[0].trim();
+          var cinemaCode = parts[1].trim();
+
           var cinemaLink = $("<a>")
             .attr("href", "#none")
-            .text(parts[0].trim()) // Set the cinema name
-            .data("cinema-name", parts[0].trim())
-            .data("cinema-code", parts[1].trim());
-          
-          //depth2의 li에 보여줄 내용들
+            .attr("cinema-code", cinemaCode) // Add cinema-code attribute
+            .text(cinemaName);
+
           var submenuItem = $("<li>").append(cinemaLink);
           submenuList.append(submenuItem);
 
