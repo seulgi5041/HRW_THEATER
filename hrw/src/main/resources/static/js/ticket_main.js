@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const depth2Select1 = document.querySelectorAll('.depth2 li');
   const groupTimeSelect = document.querySelectorAll('.group_time_select');
   const boxNotice = document.querySelector('.box_notice');
+  // JSP 파일에서 선언한 window.localData를 사용
+  //const localData = window.localData;
 
   function handleDepth1Click(element) {
     // depth1에 active가 없다면 depth2가 나타나지 않음
