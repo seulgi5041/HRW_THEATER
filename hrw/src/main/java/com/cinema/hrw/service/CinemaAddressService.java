@@ -38,9 +38,4 @@ public class CinemaAddressService {
     List<String> cinemaNames = cinemaAddressRepository.findCinemaNamesByLocal(local);
     return cinemaNames;
   }
-
-  // 영화코드 가져오기
-  public List<String> getCinemaCodesByLocal(String local) {
-    return cinemaAddressRepository.findCinemaCodesByLocal(local);
-  }
 }
