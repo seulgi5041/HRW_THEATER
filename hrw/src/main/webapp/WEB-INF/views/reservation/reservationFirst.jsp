@@ -181,9 +181,7 @@
                     <a href="#none">
                       지역선택
                     </a>
-                    
                   </li>
-  
                   <!-- 지역선택 -->
                   <c:forEach items="${localData}" var="local">
                     <li class="depth1">
@@ -192,223 +190,13 @@
                             <ul>
                                 <c:forEach items="${cinemaNames[local]}" var="cinemaName">
                                     <li class>
-                                        <a href="#none">${cinemaName}</a>
+                                        <a href="#none" cinema-code="${cinemaData.cinemaCode}">${cinemaData.cinemaName}</a>
                                     </li>
                                 </c:forEach>
                             </ul>
                         </div>
                     </li>
                   </c:forEach>
-        
-                  <!-- <li class="depth1">
-                    <a href="#none">
-                      경기
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none">
-                      인천
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none">
-                      부산
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none">
-                      대구
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none">
-                      광주
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none">
-                      대전
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li class>
-                        <li>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none">
-                      울산
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none">
-                      세종
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none">
-                      강원
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul class>
-                        <li>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none">
-                      충북/충남
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none">
-                      전북/전남
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li class>
-                        <li>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li> 
-  
-                  <li class="depth1">
-                    <a href="#none">
-                      경북/경남
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none">
-                      제주
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul>
-                        <li class>
-                          <a href="#none">구월</a>
-                        </li>
-                        <li class>
-                          <a href="#none">인천</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li> -->
-  
-  
                 </ul>
               </div>
 
@@ -900,104 +688,45 @@
 <script src="../js/ticket_reverse.js"></script>
 
 
-  $(document).ready(function() {
-  // Make an AJAX request to get local and cinema names
-  $.ajax({
-    type: "GET",
-    url: "/cinema/getAllLocalAndCinemaNames", // Replace with the actual endpoint URL
-    success: function(data) {
-      // Handle the data received from the server
-      var localData = data;
-
-      // Select the container where you want to display the menu
-      var menuContainer = $(".tab_container .cinema_select_wrap ul");
-
-      // Store a reference to the currently active depth1 element
-      var activeDepth2 = null;
-
-      // Iterate through localData and update the menu structure
-      for (var local in localData) {
-        var localItem = $("<li>").addClass("depth1");
-        var localLink = $("<a>").attr("href", "javascript:void(0)").text(local);
-
-        var submenu = $("<div>").addClass("depth2").css("display", "none");
-
-        localLink.click(function() {
-          var localName = $(this).text();
-          var cinemaNames = localData[localName];
-          console.log("Cinema names for " + localName + ":", cinemaNames);
-
-          // Reset the previously active depth2
-          if (activeDepth2) {
-            activeDepth2.css("display", "none");
-          }
-
-          var depth2 = $(this).next(".depth2");
-          depth2.css("display", "block");
-
-          // Set the currently active depth1
-          activeDepth2 = depth2;
-        });
-
-        localItem.append(localLink);
-
-        // Create the submenu (depth2)
-        var submenuList = $("<ul>");
-
-        // Populate submenu items
-        localData[local].forEach(function(cinemaName) {
-          var submenuItem = $("<li>").addClass("depth1");
-          var cinemaLink = $("<a>").attr("href", "#none").text(cinemaName);
-          submenuItem.append(cinemaLink);
-          submenuList.append(submenuItem);
-        });
-
-        submenu.append(submenuList);
-        localItem.append(submenu);
-        menuContainer.append(localItem);
-      }
-    },
-    error: function(xhr, status, error) {
-      console.error("Error: " + error);
-    }
-  });
-});
-</script> -->
-
-
 <script>
   $(document).ready(function() {
-  // Make an AJAX request to get local and cinema names
+  // Ajax로 백엔드에 정의되어 있는 로컬과 지점명, 코드 요청하기
   $.ajax({
     type: "GET",
-    url: "/cinema/getAllLocalAndCinemaNames", // Replace with the actual endpoint URL
+    url: "/cinema/getAllLocalAndCinemaNames", //컨트롤러에 있는 엔드포인트 입력
     success: function(data) {
-      // Handle the data received from the server
+      // 서버에서 수신한 데이터를 처리하는 곳을 선언
       var localData = data;
 
-      // Select the container where you want to display the menu
+      //백에서 쿼리문을 작성하였지만, 이곳에서 다시 한번 정의해줘야 순서대로 들어감
+      var desiredOrder = [
+        "서울", "경기", "인천", "부산", "대구", "광주", "대전", "울산", "세종", "강원", "충청", "전라", "경상", "제주"
+      ];
+      localData = sortLocalData(localData, desiredOrder);
+
+      // 보여줘야 하는 부분
       var menuContainer = $(".tab_container .cinema_select_wrap ul");
 
-      // Store a reference to the currently active depth1 element
+      //lidepth1을 누르기 전에는 active가 없음
       var activeDepth2 = null;
 
-      // Iterate through localData and update the menu structure
+      // 스타일 지정한 부분과 백엔드에 있던 로컬, 지점, 코드를 불러오는 구간
       for (var local in localData) {
         var localItem = $("<li>").addClass("depth1");
         var localLink = $("<a>").attr("href", "javascript:void(0)").text(local);
 
         var submenu = $("<div>").addClass("depth2").css("display", "none");
 
+        //지역선택 쪽에 표시될 로컬명들
         localLink.click(function() {
           var localName = $(this).text();
           var cinemaNames = localData[localName];
-          console.log("Cinema names for " + localName + ":", cinemaNames);
+          //console.log("지점명을 모두 출력 " + localName + ":", cinemaNames);
 
           $(".depth1, .depth2 li").removeClass("active");
           var depth1 = $(this).parent();
           depth1.addClass("active");
 
-
           // Reset the previously active depth2
           if (activeDepth2) {
             activeDepth2.css("display", "none");
@@ -1006,33 +735,49 @@
           var depth2 = $(this).next(".depth2");
           depth2.css("display", "block");
 
-          // Set the currently active depth1
+          // depth1을 클릭하고 나면 depth2로 넘어감
           activeDepth2 = depth2;
-        });
 
+        });
         localItem.append(localLink);
 
-        // Create the submenu (depth2)
+        // depth2의 ul 태그를 다시 생성
         var submenuList = $("<ul>");
 
-        // Populate submenu items
+        // depth2에 들어갈 지점명과 지점코드를 나누는 부분
         localData[local].forEach(function(cinemaName) {
-          var cinemaLink = $("<a>").attr("href", "#none").text(cinemaName);
+          var parts = cinemaName.split(',');
+          var cinemaLink = $("<a>")
+            .attr("href", "#none")
+            .text(parts[0].trim()) // Set the cinema name
+            .data("cinema-name", parts[0].trim())
+            .data("cinema-code", parts[1].trim());
+          
+          //depth2의 li에 보여줄 내용들
           var submenuItem = $("<li>").append(cinemaLink);
           submenuList.append(submenuItem);
-        });
 
+        });
+        //depth2의 li에 보여줄 내용들
         submenu.append(submenuList);
         localItem.append(submenu);
         menuContainer.append(localItem);
       }
 
+      
+      //depth2를 선택했을때 작동될 이벤트들과 지점코드, 지점명을 다시 나눠 출력해주는 부분
+      //위에서 ul이 새로 생성되었기 때문에 다시 이벤트를 등록한 것이다
       var depth2Select1 = $(".depth2 ul li");
       depth2Select1.click(function() {
         depth2Select1.removeClass("active");
         $(this).addClass("active");
-        // Handle depth2 click event
-        // You can access the clicked element using $(this)
+        var cinemaLink = $(this).find("a");
+        var cinemaName = cinemaLink.data("cinema-name");
+        var cinemaCode = cinemaLink.data("cinema-code");
+
+
+        console.log("Cinema Name:", cinemaName);
+        console.log("Cinema Code:", cinemaCode);
       });
     },
     error: function(xhr, status, error) {
@@ -1040,6 +785,30 @@
     }
   });
 });
+
+
+/* 레포지토리에 쿼리문으로 order by로 했지만,
+* Ajax에서 가져오는 과정에서 로컬의 순서를 다시 바꿔줘야 함
+*/
+function sortLocalData(localData, desiredOrder) {
+  var sortedData = {};
+  for (var i = 0; i < desiredOrder.length; i++) {
+    var local = desiredOrder[i];
+    if (localData[local]) {
+      sortedData[local] = localData[local];
+      delete localData[local];
+    }
+  }
+
+  // 순서대로 위치를 추가한 후에 sortedData로 반환해준다
+  for (var local in localData) {
+    sortedData[local] = localData[local];
+  }
+
+  return sortedData;
+}
+
+
 
 </script>
 </body>
