@@ -22,11 +22,7 @@
       <ul>
         <!-- 상영시간 -->
         <li class="step01 prev">
-<<<<<<< HEAD
           <a href="/reservation/first">
-=======
-          <a href="#reserveStep02">
->>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
             <strong class="tit">
               <span>01</span>
               <br>
@@ -51,11 +47,7 @@
 
         <!-- 인원,좌석 -->
         <li class="step01 prev">
-<<<<<<< HEAD
           <a href="/reservation/second">
-=======
-          <a href="#reserveStep03">
->>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
             <strong class="tit">
               <span>02</span>
               <br>
@@ -78,11 +70,7 @@
 
         <!-- 음식선택 -->
         <li class="step01 prev">
-<<<<<<< HEAD
           <a href="/reservation/third_combo">
-=======
-          <a href="#reserveStep04">
->>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
             <strong class="tit">
               <span>03</span>
               <br>

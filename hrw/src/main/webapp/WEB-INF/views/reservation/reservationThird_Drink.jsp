@@ -22,11 +22,7 @@
       <ul>
         <!-- 상영시간 -->
         <li class="step01 prev">
-<<<<<<< HEAD
           <a href="/reservation/first">
-=======
-          <a href="#reserveStep02">
->>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
             <strong class="tit">
               <span>01</span>
               <br>
@@ -51,11 +47,7 @@
 
         <!-- 인원,좌석 -->
         <li class="step01 prev">
-<<<<<<< HEAD
           <a href="/reservation/second">
-=======
-          <a href="#reserveStep03">
->>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
             <strong class="tit">
               <span>02</span>
               <br>
@@ -407,11 +399,7 @@
     
     
 <!-- 자바스크립트 영역 -->
-<<<<<<< HEAD
 <script src="../js/store/store_depth.js"></script>
-=======
-<script src="../js/store_depth.js"></script>
->>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
 <script src="../js/ticket_main.js"></script>
 <script src="../js/ticket_reverse.js"></script> 
 
