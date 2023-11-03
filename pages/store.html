@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRW 푸드스토어</title>
+
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/stroe.css">
+</head>
+<body>
+   <!-- 헤더 영역 -->
+  <header>
+    <!-- 로고 -->
+    <div id="main_header">
+      <div class="logo">
+        <a href="#"><img src="../images/logo.jpg" alt="메인 로고"></a>
+      </div>
+      <!-- 로그인 성공 시 나타나는 부분 -->
+      <div class="login_user" id="login_user">
+        <p><span id="userName">username</span>님 환영합니다.</p>
+      </div>
+    </div>
+    
+    <!-- nav -->
+    <nav id="header_menu">
+      <div class="menu">
+        <ul class="menu_list">
+          <li><a href="#">영화</a></li>
+          <li><a href="#">매장정보</a></li>
+          <li><a href="#">예매</a></li>
+          <li><a href="#">푸드스토어</a></li>
+        </ul>
+        <ul class="login_list" id="login_list">
+          <li><a href="#" id="login_link">로그인</a></li>
+          <li><a href="#">회원가입</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 로그인을 하면 보여지는 메뉴부분 -->
+  <!-- 자바스크립트로 구현 -->
+
+
+  <!-- 푸드스토어 메인 -->
+  <main id="store">
+    <!-- 푸드 스토어 메뉴 -->
+    <div class="store_menu">
+      <p>푸드스토어</p>
+      <div class="snb_menu">
+        <ul class="food_menu">
+          <li><a href="#">콤보</a></li>
+          <li><a href="#">팝콘</a></li>
+          <li><a href="#">음료</a></li>
+          <li><a href="#">스낵</a></li>
+        </ul>
+        <ul class="add_food">
+          <li><a href="#">장바구니</a></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- 푸드스토어 메인 구역 -->
+  <section id="popcorn_store">
+    <div class="store_title">
+      <h4>콤보</h4>
+      <div class="block_color"></div>
+    </div>
+    <!-- 상품 목록 메인 박스 -->
+    <div class="store_content">
+      <article class="food_box">
+        <div class="food_image">
+          <img src="../images/store/product/single_combo.png" alt="더블콤보">
+        </div>
+        <div class="product">  
+          <p>팝콘(M)2 + 탄산(M)2</p>
+          <div class="product_name">
+            <h4>더블콤보</h4>
+          </div>
+          <div class="shopping_basket">
+            <div class="sum">
+              <button class="minus-button">
+                <img src="../images/store/minus.png" alt="minus">
+              </button>
+              <span>0</span>
+              <button class="plus-button">
+                <img src="../images/store/plus.png" alt="plus">
+              </button>
+            </div>
+            <div class="price_wrap">
+              <span>13,000<em>원</em></span>
+            </div>
+            <div class="add">
+              <button><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="food_box">
+        <div class="food_image">
+          <img src="../images/store/product/double_combo.png" alt="라지콤보">
+        </div>
+        <div class="product">  
+          <p>팝콘(L)2 + 탄산(L)2</p>
+          <div class="product_name">
+            <h4>라지콤보</h4>
+          </div>
+          <div class="shopping_basket">
+            <div class="sum">
+              <button class="minus-button">
+                <img src="../images/store/minus.png" alt="minus">
+              </button>
+              <span>0</span>
+              <button class="plus-button">
+                <img src="../images/store/plus.png" alt="plus">
+              </button>
+            </div>
+            <div class="price_wrap">
+              <span>15,000<em>원</em></span>
+            </div>
+            <div class="add">
+              <button><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="food_box">
+        <div class="food_image">
+          <img src="../images/store/product/single_combo.png" alt="스몰콤보">
+        </div>
+        <div class="product">  
+          <p>팝콘(M)1 + 탄산(M)1</p>
+          <div class="product_name">
+            <h4>스몰콤보</h4>
+          </div>
+          <div class="shopping_basket">
+            <div class="sum">
+              <button class="minus-button">
+                <img src="../images/store/minus.png" alt="minus">
+              </button>
+              <span>0</span>
+              <button class="plus-button">
+                <img src="../images/store/plus.png" alt="plus">
+              </button>
+            </div>
+            <div class="price_wrap">
+              <span>7,000<em>원</em></span>
+            </div>
+            <div class="add">
+              <button><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="food_box">
+        <div class="food_image">
+          <img src="../images/store/product/double_combo.png" alt="HRW콤보">
+        </div>
+        <div class="product">  
+          <p>팝콘(M)1 + 탄산(M)1</p>
+          <div class="product_name">
+            <h4>HRW콤보</h4>
+          </div>
+          <div class="shopping_basket">
+            <div class="sum">
+              <button class="minus-button">
+                <img src="../images/store/minus.png" alt="minus">
+              </button>
+              <span>0</span>
+              <button class="plus-button">
+                <img src="../images/store/plus.png" alt="plus">
+              </button>
+            </div>
+            <div class="price_wrap">
+              <span>10,000<em>원</em></span>
+            </div>
+            <div class="add">
+              <button><img id="sum_add" src="../images/store/cart.png" alt="장바구니"></button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+
+
+  <!-- 상단 이동 버튼 -->
+  <a class="topBtn" id="go_top" href="#">
+    <img src="../images/top.png" alt="누르면 홈페이지 상단으로 이동합니다.">
+  </a>
+
+
+
+  <!-- 푸터 -->
+  <footer id="main_footer">
+    <section class="company_info_wrap">
+      <address>(21570)인천광역시 남동구 구월동 1126-7(인주대로 596) 기한빌딩 8층</address>
+      <dl class="company_info_list">
+        <dt>대표이사</dt>
+        <dd>HRW</dd>
+        <dt class="with_colon">사업자번호</dt>
+        <dd data-content>000-00-00000</dd>
+        <dt class="with_colon">통신판매업신고번호</dt>
+        <dd data-content>2023-인천구월-0000</dd>
+      </dl>
+      <dl class="company_info_list">
+        <dt>호스팅사업자</dt>
+        <dd data-content>HRW THEATER</dd>
+        <dt class="with_colon">대표이메일</dt>
+        <dd data-content>hrwmaster@hrw.net</dd>
+      </dl>
+      <p class="copyright">Copyright© HRW THEATER. All Rights Reserved</p>
+    </section>
+  </footer>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/store.js"></script>
+</body>
+</html>

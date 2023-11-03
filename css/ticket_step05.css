@@ -1,0 +1,309 @@
+@charset "UTF-8";
+
+.wrap_reserve .section_step_con.active {
+  display: block;
+  overflow: inherit;
+  position: relative;
+  width: 1202px;
+  height: 100%;
+  margin-left: 78px;
+}
+
+.wrap_reserve .section_step_con .article_layer {
+  position: relative;
+  float: left;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.wrap_reserve .section_step_con .article_layer.article_fin {
+  width: 1202px;
+}
+
+.wrap_reserve .section_step_con .article_layer .group_header {
+  overflow: hidden;
+  position: relative;
+  height: 55px;
+  line-height: 55px;
+  border-left: 1px solid #DDD;
+  text-align: center;
+  background-color: #383838;
+}
+
+.wrap_reserve .section_step_con .article_layer .group_header .tit {
+  font-size: 18px;
+  color: #F5F4F2;
+}
+
+.fin_wrap {
+  width: 685px;
+  margin: 0 auto;
+}
+
+.top_notice_fin {
+  margin: 110px 0 20px;
+  padding-top: 52px;
+  font-size: 15px;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.top_notice_fin.ty1 {
+  background-image: url(../images/ticket/top_notice_ic_01.png);
+}
+
+.top_notice_fin strong {
+  font-weight: bold;
+}
+
+.reserve_result_wrap {
+  position: relative;
+  width: 605px;
+  margin: 18px 0;
+  padding: 40px 40px 25px;
+  border-radius: 4px;
+  border: 1px solid #DDD;
+  background-color: #FFF;
+}
+
+.reserve_result_wrap:after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  bottom: -1px;
+  height: 6px;
+  background: url(../../Content/images/member/bg_ticket.gif) repeat-x 0 bottom;
+}
+
+.reserve_result_wrap .info_wrap:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.reserve_result_wrap .info_wrap .box_thum {
+  overflow: hidden;
+  float: left;
+  width: 150px;
+  height: 215px;
+  margin-right: 50px;
+  border-radius: 4px;
+}
+
+.reserve_result_wrap .info_wrap .box_thum img {
+  width: 100%;
+}
+
+img {
+  border: none;
+  vertical-align: top;
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}
+
+.reserve_result_wrap .info_wrap .group_info {
+  float: left;
+  margin-top: -4px;
+}
+
+.reserve_result_wrap .info_wrap .group_info dl {
+  margin: 0 0 10px 0;
+}
+
+.reserve_result_wrap .info_wrap .group_info dl:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.reserve_result_wrap .info_wrap .group_info dl:first-child {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #FB3D28;
+}
+
+.reserve_result_wrap .info_wrap .group_info dl dt {
+  clear: both;
+  float: left;
+  width: 86px;
+  line-height: 1.4;
+  margin: 4px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #383838;
+}
+
+.reserve_result_wrap .info_wrap .group_info dl dd {
+  float: left;
+  width: 315px;
+  line-height: 1.4;
+  margin: 4px 0;
+  font-size: 15px;
+  color: #383838;
+}
+
+.reserve_result_wrap .info_wrap .group_info dl dd strong.txt_num {
+  /* font-family: 'Roboto'; */
+  color: #666;
+}
+
+
+.reserve_result_wrap .payment_wrap {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #FB3D28;
+}
+
+.reserve_result_wrap .payment_wrap:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.reserve_result_wrap .payment_wrap .group_price {
+  position: relative;
+  float: left;
+  /* height: 80px; */
+  padding: 0 25px;
+  border-right: 1px solid #DDD;
+}
+
+.reserve_result_wrap .payment_wrap .group_price.case1 {
+  width: 135px;
+  padding-left: 0;
+}
+
+.reserve_result_wrap .payment_wrap .group_price.case1:after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  top: 0;
+  width: 21px;
+  height: 21px;
+  background: url(../images/ticket/price_plus.png) no-repeat;
+  background-size: 22px;
+  z-index: 1;
+}
+
+.reserve_result_wrap .payment_wrap dl:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.reserve_result_wrap .payment_wrap dl dt {
+  clear: both;
+  float: left;
+  line-height: 1.4;
+  margin: 2px 0 6px;
+  font-size: 13px;
+  color: #666;
+  font-weight: 600;
+}
+
+.reserve_result_wrap .payment_wrap dl dd {
+  float: right;
+  line-height: 1.4;
+  margin: 2px 0 6px;
+  font-size: 13px;
+  color: #383838;
+}
+
+.reserve_result_wrap .payment_wrap dl dd strong {
+  color: #333;
+}
+
+.reserve_result_wrap .payment_wrap.new2020 .group_price {
+  border-right: 0;
+}
+
+.reserve_result_wrap .payment_wrap .group_price.case2 {
+  width: 150px;
+}
+
+.reserve_result_wrap .payment_wrap .group_price.case2:after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  top: 0;
+  width: 21px;
+  height: 21px;
+  background: url(../images/ticket/price_equal.png) no-repeat;
+  background-size: 22px;
+  z-index: 1;
+}
+
+.reserve_result_wrap .payment_wrap.new2020 .group_price.case2 {
+  border-right: 0;
+}
+
+.reserve_result_wrap .payment_wrap .group_price.case3 {
+  width: 215px;
+  padding-right: 0;
+  border-right: 0;
+}
+
+.list_txt.sml {
+  font-size: 11px;
+}
+
+.list_txt.sml li {
+  margin-bottom: 3px;
+}
+
+.list_txt > li {
+  line-height: 1.4;
+  margin: 0 0 5px 8px;
+  text-indent: -8px;
+  color: #333;
+}
+
+.list_txt > li:before {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  margin: 8px 5px 0 0;
+  border-radius: 50%;
+  vertical-align: top;
+  background-color: #666;
+}
+
+.list_txt strong {
+  color: #FF243E;
+}
+
+.fin_wrap .btn_btm_wrap {
+  margin: 50px 0 0;
+}
+
+.btn_wrap {
+  margin: 60px 0;
+  text-align: center;
+}
+
+.btn_col1 {
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #FB3D28 !important;
+  font-size: 14px;
+  color: #ffffff !important;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #FB3D28 !important;
+}
+
+.btn_col2 {
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #383838 !important;
+  font-size: 14px;
+  color: #ffffff !important;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #383838 !important;
+}
