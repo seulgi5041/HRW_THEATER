@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.cinema.hrw.dto.CinemaAddressDTO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,6 +37,18 @@ public class CinemaAddressEntity {
     
     @Column
     private double yAxis;
+
+    public static CinemaAddressEntity toCinemaAddressEntity(CinemaAddressDTO cinemaAddressDTO) {
+        CinemaAddressEntity cinemaAddressEntity = new CinemaAddressEntity();
+        cinemaAddressEntity.setCinemaCode(cinemaAddressDTO.getCinemaCode());
+        cinemaAddressEntity.setCinemaName(cinemaAddressDTO.getCinemaName());
+        cinemaAddressEntity.setAddress(cinemaAddressDTO.getAddress());
+        cinemaAddressEntity.setTell(cinemaAddressDTO.getTell());
+        cinemaAddressEntity.setXAxis(cinemaAddressDTO.getXAxis());
+        cinemaAddressEntity.setYAxis(cinemaAddressDTO.getYAxis());
+        cinemaAddressEntity.setLocal(cinemaAddressDTO.getLocal());
+        return cinemaAddressEntity;
+    }
 
 
 }

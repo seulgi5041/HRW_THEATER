@@ -27,6 +27,8 @@ public class MemberService {
 	        throw new Exception("이미 사용 중인 이메일입니다.");
 	    }
 		
+			
+
 		// 1. dto -> entity로 변환.
 		MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
 		memberRepository.save(memberEntity);	// 저장 성공 여부 확인.

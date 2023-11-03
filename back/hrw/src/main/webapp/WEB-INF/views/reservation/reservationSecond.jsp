@@ -148,7 +148,7 @@
             <div class="movie_info">
               <h6 class="hidden">예매정보</h6>
               <span class="thum_movie">
-                <img src="../images/poster_rank/${choiceScheduleInfo.movieCode}.jpg" alt="${choiceScheduleInfo.movieCode}">
+                <img src="../images/poster_rank/${choiceScheduleInfo.movieCode.code}.jpg" alt="${choiceScheduleInfo.movieCode.code}">
                 <!-- 이미지부터 아래는 db 혹은 자바스크립트로 가져와야 할 듯... -->
               </span>
               <div class="movie_group_info">

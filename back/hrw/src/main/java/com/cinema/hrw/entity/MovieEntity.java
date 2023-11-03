@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.cinema.hrw.dto.MovieDTO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -87,5 +88,36 @@ public class MovieEntity {
 
     @Column(name = "update_date")
     private String updateDate;
+
+    public static MovieEntity toMovieEntity(MovieDTO movieDTO) {
+        
+        MovieEntity movieEntity = new MovieEntity();
+        movieEntity.setCode(movieDTO.getCode());
+        movieEntity.setTitle(movieDTO.getTitle());
+        movieEntity.setAka(movieDTO.getAka());
+        movieEntity.setSummary(movieDTO.getSummary());
+        movieEntity.setRating(movieDTO.getRating());
+        movieEntity.setReleaseDate(movieDTO.getReleaseDate());
+        movieEntity.setProductionYear(movieDTO.getProductionYear());
+        movieEntity.setProductionCondition(movieDTO.getProductionCondition());
+        movieEntity.setCrankInUp(movieDTO.getCrankInUp());
+        movieEntity.setFilmingCount(movieDTO.getFilmingCount());
+        movieEntity.setScreenType(movieDTO.getScreenType());
+        movieEntity.setSynopsis(movieDTO.getSynopsis());
+        movieEntity.setDirector(movieDTO.getDirector());
+        movieEntity.setActor(movieDTO.getActor());
+        movieEntity.setProducer(movieDTO.getProducer());
+        movieEntity.setDistributor(movieDTO.getDistributor());
+        movieEntity.setImporter(movieDTO.getImporter());
+        movieEntity.setAdvanceReservationRate(movieDTO.getAdvanceReservationRate());
+        movieEntity.setCumulativeNumberOfAudience(movieDTO.getCumulativeNumberOfAudience());
+        movieEntity.setIncreaseDecreaseStatus(movieDTO.getIncreaseDecreaseStatus());
+        movieEntity.setIncreaseDecreaseRate(movieDTO.getIncreaseDecreaseRate());
+        movieEntity.setPosterUrl(movieDTO.getPosterUrl());
+        movieEntity.setUpdateDate(movieDTO.getUpdateDate());
+    
+            return movieEntity;
+        
+    }
     
 }

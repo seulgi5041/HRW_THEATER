@@ -80,4 +80,21 @@ public class OrderDTO {
         return null;
     }   
     }
+
+    public static OrderDTO toPayInfo(String payInfoJson) {
+    ObjectMapper objectMapper = new ObjectMapper();
+    try {
+        Map<String, String> jsonMap = objectMapper.readValue(payInfoJson, new TypeReference<Map<String, String>>() {});
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setPayMethod(jsonMap.get("결제방법"));
+        if(jsonMap.get("결제방법").equals("카드")||jsonMap.get("결제방법").equals("간편결제")){
+        orderDTO.setPayCompany(jsonMap.get("결제사"));}
+        return orderDTO;
+    } catch (JsonProcessingException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        return null;
+    }   
+    }
+
 }

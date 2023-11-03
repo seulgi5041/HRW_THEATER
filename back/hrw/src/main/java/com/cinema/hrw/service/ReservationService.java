@@ -10,13 +10,22 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Service;
 
 import com.cinema.hrw.dto.CinemaAddressDTO;
+import com.cinema.hrw.dto.FoodOrderDTO;
+import com.cinema.hrw.dto.MemberDTO;
+import com.cinema.hrw.dto.OrderDTO;
 import com.cinema.hrw.dto.ScheduleDTO;
 import com.cinema.hrw.dto.SeatDTO;
 import com.cinema.hrw.entity.CinemaAddressEntity;
 import com.cinema.hrw.entity.MovieEntity;
+import com.cinema.hrw.entity.OrderEntity;
 import com.cinema.hrw.entity.ScheduleEntity;
 import com.cinema.hrw.entity.SeatEntity;
+import com.cinema.hrw.repository.FoodOrderRepository;
+import com.cinema.hrw.repository.OrderRepository;
 import com.cinema.hrw.repository.ReservationRepository;
+import com.cinema.hrw.repository.SeatRepository;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,17 +37,21 @@ public class ReservationService {
     @PersistenceContext
     private EntityManager entityManager;
     private final ReservationRepository reservationRepository;
+    private final OrderRepository orderRepository;
+    private final FoodOrderRepository foodOrderRepository;
+    private final SeatRepository seatRepository;
 
 
     
 
-    public List<SeatDTO> getRemainingSeats(String scheduleCode) {
-    
+    public List<SeatDTO> getRemainingSeats(ScheduleDTO scheduleCodeDTO) {
+        String scheduleCode = scheduleCodeDTO.getScheduleCode();
         String jpql = "SELECT s FROM SeatEntity s " +
                      "INNER JOIN s.orderCode o " +
-                     "WHERE o.scheduleCode = " + scheduleCode;
+                     "WHERE o.scheduleCode = = :scheduleCode";
     
         TypedQuery<SeatEntity> query = entityManager.createQuery(jpql, SeatEntity.class);
+        query.setParameter("scheduleCode", scheduleCode);
         
         List<SeatEntity> remainingSeatEntities = query.getResultList();
     
@@ -54,9 +67,11 @@ public class ReservationService {
     }
 
 
-    public ScheduleDTO getChoiceScheduleInfo(String scheduleCode) {
-       String jpql = "SELECT s FROM ScheduleEntity s INNER JOIN FETCH s.movieCode m INNER JOIN FETCH s.cinemaCode c WHERE s.scheduleCode = "+scheduleCode;
+    public ScheduleDTO getChoiceScheduleInfo(ScheduleDTO scheduleCodeDTO) {
+        String scheduleCode = scheduleCodeDTO.getScheduleCode();
+       String jpql = "SELECT s FROM ScheduleEntity s INNER JOIN FETCH s.movieCode m INNER JOIN FETCH s.cinemaCode c WHERE s.scheduleCode = :scheduleCode";
        TypedQuery<ScheduleEntity> query = entityManager.createQuery(jpql, ScheduleEntity.class);
+       query.setParameter("scheduleCode", scheduleCode);
        
     List<ScheduleEntity> result = query.getResultList();
 
@@ -75,7 +90,9 @@ public class ReservationService {
     choiceScheduleInfoDTO.setCinemaName(cinemaAddressEntity.getCinemaName());
 
     return choiceScheduleInfoDTO;
-    }
+    } 
+
+    
 
 
     public List<String> getCinemaNamesInSeoul() {
@@ -83,16 +100,40 @@ public class ReservationService {
     }
 
 
-    public List<CinemaAddressDTO> getsss() {
-        List<CinemaAddressEntity> sss= reservationRepository.findAll();
-        List<CinemaAddressDTO>sssss = new ArrayList<>();
-        for(CinemaAddressEntity cinemaAddressEntity : sss){
-            CinemaAddressDTO aaa = new CinemaAddressDTO();
-            aaa = CinemaAddressDTO.toCinemaAddressDTO(cinemaAddressEntity);
-            sssss.add(aaa);
-        }
-        return sssss;
+    public int orderSuccessOrFailCheck(OrderDTO payInfoDTO, ScheduleDTO scheduleDTO, OrderDTO person_count,
+            List<SeatDTO> seat_list,List<FoodOrderDTO> foodInfoList, String currentUserId) {
+                int order_check= 0;
+                MemberDTO memberDTO = new MemberDTO();
+                memberDTO.setUserId(currentUserId);
+                LocalDate defalt = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String orderDate  = defalt.format(formatter);
+
+                /**주문정보테이블 */
+                OrderDTO setOrderDTO = new OrderDTO();
+                setOrderDTO.setUserId(memberDTO);
+                setOrderDTO.setOrderDate(orderDate);
+                setOrderDTO.setMovieCode(scheduleDTO.getMovieCode());
+                setOrderDTO.setScheduleCode(scheduleDTO);
+                setOrderDTO.setTeenagerCount(person_count.getTeenagerCount());
+                setOrderDTO.setAdultCount(person_count.getAdultCount());
+                setOrderDTO.setDisabledCount(person_count.getDisabledCount());
+                setOrderDTO.setMoviePrice(person_count.getMoviePrice());
+                setOrderDTO.setMovieOrderCondition(1);
+                setOrderDTO.setPayMethod(payInfoDTO.getPayMethod());
+                setOrderDTO.setPayCompany(payInfoDTO.getPayCompany());
+                OrderEntity orderEntity = OrderEntity.toOrderEntity(setOrderDTO);
+                orderRepository.save(orderEntity);
+                
+                /**좌석 테이블 */
+
+                /**음식주문 테이블 */
+
+        return order_check; //주문 성공 : 0 , 주문 실패 : 1 그외
     }
+
+
+
 
 
     }

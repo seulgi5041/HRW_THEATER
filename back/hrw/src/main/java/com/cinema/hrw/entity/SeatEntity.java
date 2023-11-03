@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.cinema.hrw.dto.OrderDTO;
+import com.cinema.hrw.dto.SeatDTO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +31,14 @@ public class SeatEntity {
 
     @Column
     private String seatName;
+
+    public static SeatEntity toOrderEntity(SeatDTO seatDTO){
+        SeatEntity seatEntity = new SeatEntity();
+        seatEntity.setNum(seatDTO.getNum());
+        seatEntity.setOrderCode(OrderEntity.toOrderEntity(seatDTO.getOrderCode()));
+        seatEntity.setSeatName(seatDTO.getSeatName());
+        return seatEntity;
+        }
 
 
 }

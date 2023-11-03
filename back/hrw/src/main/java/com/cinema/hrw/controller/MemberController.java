@@ -59,7 +59,15 @@ public class MemberController {
 	    // 로그인 성공시, 세션에 ID 저장
 	    if (loginResult != null) {
 	        session.setAttribute("loginId", loginResult.getUserId()); 
-	        return "redirect:/";
+			String returnUrl = (String) session.getAttribute("returnUrl");
+			if (returnUrl != null) {
+				session.removeAttribute("returnUrl");
+				return "redirect:" + returnUrl;
+			} else {
+				
+				return "redirect:/"; 
+			}
+
 	    } else {
 	        // 로그인 실패
 	    	session.setAttribute("loginError", "아이디 또는 비밀번호가 일치하지 않습니다.");

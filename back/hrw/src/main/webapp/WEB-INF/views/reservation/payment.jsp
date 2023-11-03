@@ -158,7 +158,7 @@
         <!-- 예매한 영화 -->
         <div class="movie_info">
           <span class="thum">
-            <img src="../images/poster_rank/${choiceScheduleInfo.movieCode}.jpg" alt="선택 영화 포스터">
+            <img src="../images/poster_rank/${choiceScheduleInfo.movieCodeStr}.jpg" alt="${choiceScheduleInfo.movieCodeStr}">
           </span>
           <strong class="tit">
             <span class="ic_grade ${choiceScheduleInfo.movieRating}"></span>
@@ -223,16 +223,16 @@
                   <div class="box_case">
                     <ul class="list_pay_item cate6">
                       <li>
-                        <button type="button" class="case1">신용카드</button>
+                        <button type="button" class="case1" data-payment="카드">신용카드</button>
                       </li>
                       <li>
-                        <button type="button" class="case2">간편결제</button>
+                        <button type="button" class="case2" data-payment="간편결제">간편결제</button>
                       </li>
                       <li>
-                        <button type="button" class="case3">무통장입금</button>
+                        <button type="button" class="case3" data-payment="무통장">무통장입금</button>
                       </li>
                       <li>
-                        <button type="button" class="case4">휴대폰</button>
+                        <button type="button" class="case4" data-payment="휴대폰">휴대폰</button>
                       </li>
                     </ul>
                   </div>
@@ -241,7 +241,7 @@
                   <div class="article_pay_card">
                     <ul class="list_pay_item cate5 itemcenter">
                       <li>
-                        <button class>
+                        <button data-paycompany="국민" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_kb.png" alt="국민카드" class="mCS_img_loaed"> 
                           </span>
@@ -249,7 +249,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="삼성" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_samsung.png" alt="상성카드" class="mCS_img_loaed"> 
                           </span>
@@ -257,7 +257,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="현대" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_hyundai.png" alt="현대카드" class="mCS_img_loaed"> 
                           </span>
@@ -265,7 +265,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="롯데" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_lotte.png" alt="롯데카드" class="mCS_img_loaed"> 
                           </span>
@@ -273,7 +273,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="카카오뱅크" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_kakao.png" alt="카카오뱅크" class="mCS_img_loaed"> 
                           </span>
@@ -281,7 +281,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="신한" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_shinhan.png" alt="신한카드" class="mCS_img_loaed"> 
                           </span>
@@ -289,7 +289,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="하나" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_hana.png" alt="하나카드" class="mCS_img_loaed"> 
                           </span>
@@ -297,7 +297,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="외환" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_keb.png" alt="외환카드" class="mCS_img_loaed"> 
                           </span>
@@ -305,7 +305,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="우리" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_woori.png" alt="우리카드" class="mCS_img_loaed"> 
                           </span>
@@ -313,7 +313,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="BC" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_bc.png" alt="롯데카드" class="mCS_img_loaed"> 
                           </span>
@@ -321,7 +321,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="농협" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_nh.png" alt="농협카드" class="mCS_img_loaed"> 
                           </span>
@@ -329,7 +329,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="씨티" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_citi.png" alt="씨티카드" class="mCS_img_loaed"> 
                           </span>
@@ -341,7 +341,7 @@
                   <div class="article_pay_simple">
                     <ul class="list_pay_item cate3">
                       <li>
-                        <button class="pay_simple_box" type="button">
+                        <button class="pay_simple_box" type="button"  data-paycompany="카카오페이">
                           <span class="pay_simple_thum">
                             <img src="../images/ticket/group_payment/payment_simple_kakao.png" alt="카카오페이">
                           </span>
@@ -349,7 +349,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class="pay_simple_box" type="button">
+                        <button class="pay_simple_box" type="button" data-paycompany="네이버페이">
                           <span class="pay_simple_thum">
                             <img src="../images/ticket/group_payment/payment_simple_npay1.png" alt="네이버페이">
                           </span>
@@ -357,7 +357,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class="pay_simple_box" type="button">
+                        <button class="pay_simple_box" type="button" data-paycompany="페이코">
                           <span class="pay_simple_thum">
                             <img src="../images/ticket/group_payment/payment_simple_payco.png" alt="페이코">
                           </span>
@@ -365,7 +365,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class="pay_simple_box" type="button">
+                        <button class="pay_simple_box" type="button" data-paycompany="토스">
                           <span class="pay_simple_thum">
                             <img src="../images/ticket/group_payment/payment_simple_toss.png" alt="토스">
                           </span>
@@ -456,7 +456,7 @@
               원
             </dd>
           </dl>
-          <a href="/reservation/paymentCompleted" class="btn_col1 btn_confirm">결제하기</a>
+          <a href="javascript:void(0)" class="btn_col1 btn_confirm" id="next_page_btn">결제하기</a>
         </div>
       </div>
 

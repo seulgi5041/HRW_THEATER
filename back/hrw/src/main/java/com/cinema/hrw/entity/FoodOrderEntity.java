@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.cinema.hrw.dto.FoodOrderDTO;
+import com.cinema.hrw.dto.OrderDTO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,5 +44,16 @@ public class FoodOrderEntity {
 
     @Transient
     private String foodImgName;
- 
+
+
+    public static FoodOrderEntity toFoodOrderEntity(FoodOrderDTO foodOrderDTO){
+        FoodOrderEntity foodOrderEntity = new FoodOrderEntity();
+        foodOrderEntity.setNum(foodOrderDTO.getNum());
+        foodOrderEntity.setOrderCode(OrderEntity.toOrderEntity(foodOrderDTO.getOrderCode()));
+        foodOrderEntity.setFoodName(foodOrderDTO.getFoodName());
+        foodOrderEntity.setFoodCount(foodOrderDTO.getFoodCount());
+        foodOrderEntity.setFoodPrice(foodOrderDTO.getFoodPrice());
+        foodOrderEntity.setFoodOrderCondition(foodOrderDTO.getFoodOrderCondition());
+            return foodOrderEntity;
+    }
 }

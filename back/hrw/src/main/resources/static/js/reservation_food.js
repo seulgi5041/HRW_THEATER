@@ -305,7 +305,18 @@ set_all_price(food_info_setting);
 const link_rpay_btn = document.getElementById('link_pay');
 
 link_rpay_btn.addEventListener("click", () => {
-    const choice_food_info = food_info_setting.filter(item => item['수량'] !== 0);
+    let choice_food_info = food_info_setting.filter(item => item['수량'] !== 0);
+
+    if (choice_food_info.length === 0) {
+        // choice_food_info가 비어있을 경우 기본값으로 설정
+        choice_food_info = [{
+            '이름': "주문정보없음",
+            '구매 가격': 0,
+            '수량': 0 ,
+            "이미지명" : "no_data"
+        }];
+    }
+    
     for (let item of choice_food_info) {
         const matchingItem = food_price_info.find(info => info['이름'] === item['이름']);
         if (matchingItem) {
@@ -313,7 +324,8 @@ link_rpay_btn.addEventListener("click", () => {
         }
     }
     
-  sessionStorage.clear();
+    console.log(choice_food_info)
+  //sessionStorage.clear();
   /*나중에 완전결제 완료시 클리어되도록 변경예정 */
   go_on_post_mapping(choice_food_info);
 });

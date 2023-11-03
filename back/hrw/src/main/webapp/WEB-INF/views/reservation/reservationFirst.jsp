@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-<head><!--테스트용으로 오른족 상영시간쪽에 누르면 좌석으로 연결되도록해놨으니 추후 변경예정-->
+<head>
 <meta charset="UTF-8">
 <title>HRW 예매페이지</title>
 
@@ -13,6 +13,7 @@
 
   <!-- jQuery CDN 포함 -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../js/ajax/ticket1.js"></script>
   
 </head>
 <body>
@@ -26,7 +27,7 @@
       <ul>
         <!-- 상영시간 -->
         <li class="step01 active">
-          <a href="#reverseStep01" id="seatSelectionLink">
+          <a href="#reverseStep01">
             <strong class="tit">
               <span>01</span>
               <br>
@@ -48,7 +49,7 @@
         </li>
 
         <!-- 인원,좌석 -->
-        <li class="disabled">
+        <li class="disabled" id="seatSelectionLink">
           <a style="cursor: default;">
             <strong class="tit">
               <span>02</span>
@@ -190,7 +191,7 @@
                             <ul>
                                 <c:forEach items="${cinemaNames[local]}" var="cinemaName">
                                     <li class>
-                                        <a href="#none" cinema-code="${cinemaData.cinemaCode}">${cinemaData.cinemaName}</a>
+                                        <a href="/cinema/movies?cinemaCode=${cinemaData.cinemaCode}" cinema-code="${cinemaData.cinemaCode}">${cinemaData.cinemaName}</a>
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -222,60 +223,19 @@
             <div class="mCustomScrollbar movieScroll _mCS_9 mCS-autoHide" style="position: relative; overflow: visible;">
               <div id="mCSB_9" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" tabindex="0" style="max-height: none;">
                 <div id="mCSB_9_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" dir="ltr">
-                  <ul>
-                    <li class="disabled">
-                      <a href="#none">
-                        <div class="group_infor">
-                          <div class="bx_title">
-                            <span class="ic_grade gr_all">
-                              "0세 관람가"
-                            </span>
-                            <strong class="tit">30일</strong>
+                  <ul id="movie-list-container">
+                    <c:forEach var="movie" items="${movies}">
+                      <li>
+                        <a href="#none">
+                          <div class="group_infor">
+                            <div class="bx_title">
+                              <span class="ic_grade ${movie.rating}"></span>
+                              <strong class="tit">${movie.title}</strong>
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="#none">
-                        <div class="group_infor">
-                          <div class="bx_title">
-                            <span class="ic_grade gr_12">
-                              "12세 관람가"
-                            </span>
-                            <strong class="tit">라라라라라</strong>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="#none">
-                        <div class="group_infor">
-                          <div class="bx_title">
-                            <span class="ic_grade gr_15">
-                              "15세 관람가"
-                            </span>
-                            <strong class="tit">집에가고싶다</strong>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="#none">
-                        <div class="group_infor">
-                          <div class="bx_title">
-                            <span class="ic_grade gr_18">
-                              "18세 관람가"
-                            </span>
-                            <strong class="tit">꿀복이보고싶다</strong>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    
+                        </a>
+                      </li>
+                    </c:forEach>  
                   </ul>
                 </div>
               </div>
@@ -687,130 +647,5 @@
 <script src="../js/modal.js"></script>
 <script src="../js/ticket_reverse.js"></script>
 
-
-<script>
-  $(document).ready(function() {
-  // Ajax로 백엔드에 정의되어 있는 로컬과 지점명, 코드 요청하기
-  $.ajax({
-    type: "GET",
-    url: "/cinema/getAllLocalAndCinemaNames", //컨트롤러에 있는 엔드포인트 입력
-    success: function(data) {
-      // 서버에서 수신한 데이터를 처리하는 곳을 선언
-      var localData = data;
-
-      //백에서 쿼리문을 작성하였지만, 이곳에서 다시 한번 정의해줘야 순서대로 들어감
-      var desiredOrder = [
-        "서울", "경기", "인천", "부산", "대구", "광주", "대전", "울산", "세종", "강원", "충청", "전라", "경상", "제주"
-      ];
-      localData = sortLocalData(localData, desiredOrder);
-
-      // 보여줘야 하는 부분
-      var menuContainer = $(".tab_container .cinema_select_wrap ul");
-
-      //lidepth1을 누르기 전에는 active가 없음
-      var activeDepth2 = null;
-
-      // 스타일 지정한 부분과 백엔드에 있던 로컬, 지점, 코드를 불러오는 구간
-      for (var local in localData) {
-        var localItem = $("<li>").addClass("depth1");
-        var localLink = $("<a>").attr("href", "javascript:void(0)").text(local);
-
-        var submenu = $("<div>").addClass("depth2").css("display", "none");
-
-        //지역선택 쪽에 표시될 로컬명들
-        localLink.click(function() {
-          var localName = $(this).text();
-          var cinemaNames = localData[localName];
-          //console.log("지점명을 모두 출력 " + localName + ":", cinemaNames);
-
-          $(".depth1, .depth2 li").removeClass("active");
-          var depth1 = $(this).parent();
-          depth1.addClass("active");
-
-          // Reset the previously active depth2
-          if (activeDepth2) {
-            activeDepth2.css("display", "none");
-          }
-
-          var depth2 = $(this).next(".depth2");
-          depth2.css("display", "block");
-
-          // depth1을 클릭하고 나면 depth2로 넘어감
-          activeDepth2 = depth2;
-
-        });
-        localItem.append(localLink);
-
-        // depth2의 ul 태그를 다시 생성
-        var submenuList = $("<ul>");
-
-        // depth2에 들어갈 지점명과 지점코드를 나누는 부분
-        localData[local].forEach(function(cinemaName) {
-          var parts = cinemaName.split(',');
-          var cinemaName = parts[0].trim();
-          var cinemaCode = parts[1].trim();
-
-          var cinemaLink = $("<a>")
-            .attr("href", "#none")
-            .attr("cinema-code", cinemaCode) // Add cinema-code attribute
-            .text(cinemaName);
-
-          var submenuItem = $("<li>").append(cinemaLink);
-          submenuList.append(submenuItem);
-
-        });
-        //depth2의 li에 보여줄 내용들
-        submenu.append(submenuList);
-        localItem.append(submenu);
-        menuContainer.append(localItem);
-      }
-
-      
-      //depth2를 선택했을때 작동될 이벤트들과 지점코드, 지점명을 다시 나눠 출력해주는 부분
-      //위에서 ul이 새로 생성되었기 때문에 다시 이벤트를 등록한 것이다
-      var depth2Select1 = $(".depth2 ul li");
-      depth2Select1.click(function() {
-        depth2Select1.removeClass("active");
-        $(this).addClass("active");
-        var cinemaLink = $(this).find("a");
-        var cinemaName = cinemaLink.text();
-        var cinemaCode = cinemaLink.attr("cinema-code");
-
-
-        console.log("Cinema Name:", cinemaName);
-        console.log("Cinema Code:", cinemaCode);
-      });
-    },
-    error: function(xhr, status, error) {
-      console.error("Error: " + error);
-    }
-  });
-});
-
-
-/* 레포지토리에 쿼리문으로 order by로 했지만,
-* Ajax에서 가져오는 과정에서 로컬의 순서를 다시 바꿔줘야 함
-*/
-function sortLocalData(localData, desiredOrder) {
-  var sortedData = {};
-  for (var i = 0; i < desiredOrder.length; i++) {
-    var local = desiredOrder[i];
-    if (localData[local]) {
-      sortedData[local] = localData[local];
-      delete localData[local];
-    }
-  }
-
-  // 순서대로 위치를 추가한 후에 sortedData로 반환해준다
-  for (var local in localData) {
-    sortedData[local] = localData[local];
-  }
-
-  return sortedData;
-}
-
-
-
-</script>
 </body>
 </html>

@@ -4,6 +4,7 @@ package com.cinema.hrw.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cinema.hrw.dto.CinemaAddressDTO;
 import com.cinema.hrw.dto.FoodOrderDTO;
 import com.cinema.hrw.dto.OrderDTO;
 import com.cinema.hrw.dto.ScheduleDTO;
@@ -31,8 +31,7 @@ public class ReservationController {
 	
 	   @GetMapping("/reservation/first")
    public String reservationFirst( Model model) {
-      List<CinemaAddressDTO> sss = reservationService.getsss();
-	  model.addAttribute("sss", sss);
+      
 	  return "reservation/reservationFirst";
    }
    
@@ -46,9 +45,13 @@ public class ReservationController {
 	
 	@PostMapping("/reservation/second")
 	public String reservationSecond(@RequestParam("scheduleCode") String scheduleCode, Model model, HttpSession session) {
-	  	session.setAttribute("scheduleCode",scheduleCode); 
-		/*List<SeatDTO>remainingSeats=reservationService.getRemainingSeats(scheduleCode);*/
-	 	ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCode);
+		ScheduleDTO scheduleCodeDTO = new ScheduleDTO();
+		scheduleCodeDTO.setScheduleCode(scheduleCode);
+		ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCodeDTO);
+	  	session.setAttribute("scheduleCode",choiceScheduleInfo);
+		
+		/*List<SeatDTO>remainingSeats=reservationService.getRemainingSeats(scheduleCodeDTO);*/
+	 	
 	
         // 사용된좌석체크위해 임시로 정보 넣기
         List<SeatDTO> remainingSeats = new ArrayList<>();
@@ -82,8 +85,7 @@ public class ReservationController {
 		session.setAttribute("countAndPrice", countAndPrice);
 
 		//세션에서 스케쥴코드 출력하기
-		String scheduleCode = (String) session.getAttribute("scheduleCode");
-		ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCode);
+		ScheduleDTO choiceScheduleInfo = (ScheduleDTO) session.getAttribute("scheduleCode");
 		OrderDTO person_count = (OrderDTO) session.getAttribute("countAndPrice");
 		List<SeatDTO> seat_list = (List<SeatDTO>) session.getAttribute("seatList");
 
@@ -97,8 +99,7 @@ public class ReservationController {
 	public String showReservationThirdComboPage(HttpSession session , Model model) {
 
 		//세션에서 스케쥴코드 출력하기
-		String scheduleCode = (String) session.getAttribute("scheduleCode");
-		ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCode);
+		ScheduleDTO choiceScheduleInfo = (ScheduleDTO) session.getAttribute("scheduleCode");
 		OrderDTO person_count = (OrderDTO) session.getAttribute("countAndPrice");
 		List<SeatDTO> seat_list = (List<SeatDTO>) session.getAttribute("seatList");
 
@@ -112,8 +113,7 @@ public class ReservationController {
 	@GetMapping("/reservation/third_popcorn")
 	public String reservationThirdPopcorn(HttpSession session , Model model) {
 		//세션에서 스케쥴코드 출력하기
-		String scheduleCode = (String) session.getAttribute("scheduleCode");
-		ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCode);
+		ScheduleDTO choiceScheduleInfo = (ScheduleDTO) session.getAttribute("scheduleCode");
 		OrderDTO person_count = (OrderDTO) session.getAttribute("countAndPrice");
 		List<SeatDTO> seat_list = (List<SeatDTO>) session.getAttribute("seatList");
 
@@ -127,8 +127,7 @@ public class ReservationController {
 	@GetMapping("/reservation/third_drink")
 	public String reservationThirdDrink(HttpSession session , Model model) {
 		//세션에서 스케쥴코드 출력하기
-		String scheduleCode = (String) session.getAttribute("scheduleCode");
-		ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCode);
+		ScheduleDTO choiceScheduleInfo = (ScheduleDTO) session.getAttribute("scheduleCode");
 		OrderDTO person_count = (OrderDTO) session.getAttribute("countAndPrice");
 		List<SeatDTO> seat_list = (List<SeatDTO>) session.getAttribute("seatList");
 
@@ -142,8 +141,7 @@ public class ReservationController {
 	@GetMapping("/reservation/third_snack")
 	public String reservationThirdSnack(HttpSession session , Model model) {
 		//세션에서 스케쥴코드 출력하기
-		String scheduleCode = (String) session.getAttribute("scheduleCode");
-		ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCode);
+		ScheduleDTO choiceScheduleInfo = (ScheduleDTO) session.getAttribute("scheduleCode");
 		OrderDTO person_count = (OrderDTO) session.getAttribute("countAndPrice");
 		List<SeatDTO> seat_list = (List<SeatDTO>) session.getAttribute("seatList");
 
@@ -157,13 +155,21 @@ public class ReservationController {
 	}
 	
 	@PostMapping("/reservation/payment")
-	public String reservationPayment(@RequestParam("choice_food_info") String choiceFoodInfoList, HttpSession session , Model model) {
+	public String reservationPayment(@RequestParam("choice_food_info") String choiceFoodInfoList, HttpSession session , 
+	Model model) {
 		List<FoodOrderDTO> foodInfoList = FoodOrderDTO.mapToFoodOrderDTOList(choiceFoodInfoList);
 		session.setAttribute("foodInfoList", foodInfoList);
 
+		String currentUserId = (String) session.getAttribute("loginId");
+		if(currentUserId == null){
+			String returnUrl = "/reservation/third_combo"; 
+			session.setAttribute("returnUrl", returnUrl);
+	
+			return "redirect:/member/login";
+		}else{
+
 		//세션에서 스케쥴코드 출력하기
-		String scheduleCode = (String) session.getAttribute("scheduleCode");
-		ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCode);
+		ScheduleDTO choiceScheduleInfo = (ScheduleDTO) session.getAttribute("scheduleCode");
 		OrderDTO person_count = (OrderDTO) session.getAttribute("countAndPrice");
 		List<SeatDTO> seat_list = (List<SeatDTO>) session.getAttribute("seatList");
 	
@@ -173,10 +179,24 @@ public class ReservationController {
 		model.addAttribute("seatList", seat_list);
 		model.addAttribute("foodInfoList", foodInfoList);
 
-		return "reservation/payment";
+		return "reservation/payment";}
+	}
+
+	@PostMapping("/reservation/paymentCheck")
+	public String reservationpaymentCheck(@RequestParam("pay_info") String payInfo, HttpSession session) {
+		OrderDTO payInfoDTO = OrderDTO.toPayInfo(payInfo);
+		ScheduleDTO scheduleDTO = (ScheduleDTO) session.getAttribute("scheduleCode");
+		OrderDTO person_count = (OrderDTO) session.getAttribute("countAndPrice");
+		List<SeatDTO> seat_list = (List<SeatDTO>) session.getAttribute("seatList");
+		List<FoodOrderDTO> foodInfoList = (List<FoodOrderDTO>) session.getAttribute("foodInfoList");
+		String currentUserId = (String) session.getAttribute("loginId");
+
+		int orderSuccessOrFail = reservationService.orderSuccessOrFailCheck(payInfoDTO, scheduleDTO, person_count, seat_list,foodInfoList, currentUserId);
+
+		return "";
 	}
 	
-	@GetMapping("/reservation/paymentCompleted")
+	@PostMapping("/reservation/paymentCompleted")
 	public String reservationPaymentCompleted() {
 		return "reservation/paymentCompleted";
 	}

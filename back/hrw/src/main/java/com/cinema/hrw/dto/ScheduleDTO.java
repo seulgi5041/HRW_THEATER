@@ -1,5 +1,7 @@
 package com.cinema.hrw.dto;
 
+import com.cinema.hrw.entity.CinemaAddressEntity;
+import com.cinema.hrw.entity.MovieEntity;
 import com.cinema.hrw.entity.ScheduleEntity;
 
 import lombok.Getter;
@@ -48,12 +50,12 @@ public class ScheduleDTO {
     public static ScheduleDTO toScheduleDTO (ScheduleEntity scheduleEntity){
         ScheduleDTO scheduleDTO = new ScheduleDTO();
         scheduleDTO.setScheduleCode(scheduleEntity.getScheduleCode());
-        scheduleDTO.setCinemaCode(CinemaAddressDTO.toCinemaAddressDTO(scheduleEntity.getCinemaCode()));
+        scheduleDTO.setCinemaCode(scheduleEntity.getCinemaCode());
         scheduleDTO.setCinemaName(scheduleEntity.getCinemaName());
         scheduleDTO.setAuditorium(scheduleEntity.getAuditorium());
         scheduleDTO.setTakeDate(scheduleEntity.getTakeDate());
         scheduleDTO.setTakeDateOfWeek(scheduleEntity.getTakeDateOfWeek());
-        scheduleDTO.setMovieCode(MovieDTO.toMovieDTO(scheduleEntity.getMovieCode()));
+        scheduleDTO.setMovieCode(scheduleEntity.getMovieCode());
         scheduleDTO.setMovieTitle(scheduleEntity.getMovieTitle());
         scheduleDTO.setMovieRating(scheduleEntity.getMovieRating());
         scheduleDTO.setStartTime(scheduleEntity.getStartTime());
@@ -66,16 +68,24 @@ public class ScheduleDTO {
         return scheduleDTO;
     }
 
-    public String getMovieCode(){
+    public String getMovieCodeStr(){
         MovieDTO MovieCodeDTO=this.movieCode;
         String movieCodeStr=MovieCodeDTO.getCode();
         return movieCodeStr;
     }
 
-    public String getCinemaCode(){
+    public void setMovieCode(MovieEntity movieEntity){
+        this.movieCode=MovieDTO.toMovieDTO(movieEntity);
+    }
+
+    public String getCinemaCodeStr(){
         CinemaAddressDTO cinemaAddressDTO = this.cinemaCode;
         String cinemaCodeStr = cinemaAddressDTO.getCinemaCode();
         return cinemaCodeStr;
+    }
+
+    public void setCinemaCode(CinemaAddressEntity cinemaAddressEntity){
+        this.cinemaCode=CinemaAddressDTO.toCinemaAddressDTO(cinemaAddressEntity);
     }
 
 

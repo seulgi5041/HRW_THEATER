@@ -15,6 +15,7 @@ import javax.persistence.Transient;
 
 import com.cinema.hrw.dto.CinemaAddressDTO;
 import com.cinema.hrw.dto.MovieDTO;
+import com.cinema.hrw.dto.ScheduleDTO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -142,5 +143,31 @@ public class ScheduleEntity {
             return koreaWeekName;
         }
         return null;
+    }
+
+    public static ScheduleEntity toScheduleEntity(ScheduleDTO scheduleDTO) {
+        ScheduleEntity scheduleEntity = new ScheduleEntity();
+        scheduleEntity.setScheduleCode(scheduleDTO.getScheduleCode());
+        scheduleEntity.setCinemaCode(scheduleDTO.getCinemaCode());
+        scheduleEntity.setAuditorium(scheduleDTO.getAuditorium());
+        scheduleEntity.setTakeDate(scheduleDTO.getTakeDate());
+        scheduleEntity.setTakeDateOfWeek(scheduleDTO.getTakeDateOfWeek());
+        scheduleEntity.setMovieCode(scheduleDTO.getMovieCode());
+        scheduleEntity.setStartTime(scheduleDTO.getStartTime());
+        scheduleEntity.setEndTime(scheduleDTO.getEndTime());
+        scheduleEntity.setScreenType(scheduleDTO.getScreenType());
+        scheduleEntity.setAllSeatCount(scheduleDTO.getAllSeatCount());
+        scheduleEntity.setTeenagerPrice(scheduleDTO.getTeenagerPrice());
+        scheduleEntity.setAdultPrice(scheduleDTO.getAdultPrice());
+        scheduleEntity.setDisabledPrice(scheduleDTO.getDisabledPrice());
+        return scheduleEntity;
+    }
+
+    public void setMovieCode(MovieDTO movieDTO){
+        this.movieCode=MovieEntity.toMovieEntity(movieDTO);
+    }
+
+    public void setCinemaCode(CinemaAddressDTO cinemaAddressDTO){
+        this.cinemaCode=CinemaAddressEntity.toCinemaAddressEntity(cinemaAddressDTO);
     }
 }
