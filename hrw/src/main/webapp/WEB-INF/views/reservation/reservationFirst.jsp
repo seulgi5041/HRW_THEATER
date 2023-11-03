@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
+=======
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +13,15 @@
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/ticket.css">
   <link rel="stylesheet" href="../css/modal.css">
+<<<<<<< HEAD
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
     var allCinemaList = ${allCinemaList}; // 서버에서 받은 JSON 데이터
 </script>
 	
+=======
+  
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
 </head>
 <body>
 
@@ -27,7 +34,11 @@
       <ul>
         <!-- 상영시간 -->
         <li class="step01 active">
+<<<<<<< HEAD
           <a href="/reservation/first">
+=======
+          <a href="#reverseStep01">
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
             <strong class="tit">
               <span>01</span>
               <br>
@@ -184,10 +195,15 @@
                     <a href="#none">
                       지역선택
                     </a>
+<<<<<<< HEAD
+=======
+                    
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
                   </li>
   
                   <!-- 지역선택 -->
                   <li class="depth1">
+<<<<<<< HEAD
                     <a href="#none" name="서울">
                       서울
                     </a>
@@ -198,101 +214,241 @@
 				            <li class><a href="#none"> ${cinema.cinemaName}</a></li>
 				        </c:if>
 				    </c:forEach>
+=======
+                    <a href="#none">
+                      서울
+                    </a>
+                    <div class="depth2" style="display: block;">
+                      <ul>
+                        <li class>
+                          <a href="#none">가산디지털</a>
+                        </li class>
+                        <li>
+                          <a href="#none">가양</a>
+                        </li>
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
                       </ul>
                     </div>
                   </li>
   
                   <li class="depth1">
+<<<<<<< HEAD
                     <a href="#none" name="경기">
                       경기
                     </a>
                     <div class="depth2" style="display: none;">
                        <ul id="경기CinemaList">
+=======
+                    <a href="#none">
+                      경기
+                    </a>
+                    <div class="depth2" style="display: none;">
+                      <ul>
+                        <li class>
+                          <a href="#none">구월</a>
+                        </li>
+                        <li>
+                          <a href="#none">인천</a>
+                        </li>
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
                       </ul>
                     </div>
                   </li>
   
                   <li class="depth1">
+<<<<<<< HEAD
                     <a href="#none" name="인천">
                       인천
                     </a>
                     <div class="depth2" style="display: none;">
                       <ul id="인천CinemaList">
+=======
+                    <a href="#none">
+                      인천
+                    </a>
+                    <div class="depth2" style="display: none;">
+                      <ul>
+                        <li class>
+                          <a href="#none">구월</a>
+                        </li>
+                        <li class>
+                          <a href="#none">인천</a>
+                        </li>
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
                       </ul>
                     </div>
                   </li>
   
                   <li class="depth1">
+<<<<<<< HEAD
                     <a href="#none" name="부산">
                       부산
                     </a>
                     <div class="depth2" style="display: none;">
                       <ul id="부산CinemaList">
+=======
+                    <a href="#none">
+                      부산
+                    </a>
+                    <div class="depth2" style="display: none;">
+                      <ul>
+                        <li class>
+                          <a href="#none">구월</a>
+                        </li>
+                        <li class>
+                          <a href="#none">인천</a>
+                        </li>
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
                       </ul>
                     </div>
                   </li>
   
                   <li class="depth1">
+<<<<<<< HEAD
                     <a href="#none" name="대구">
                       대구
                     </a>
                     <div class="depth2" style="display: none;">
                       <ul id="대구CinemaList">
+=======
+                    <a href="#none">
+                      대구
+                    </a>
+                    <div class="depth2" style="display: none;">
+                      <ul>
+                        <li class>
+                          <a href="#none">구월</a>
+                        </li>
+                        <li class>
+                          <a href="#none">인천</a>
+                        </li>
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
                       </ul>
                     </div>
                   </li>
   
                   <li class="depth1">
+<<<<<<< HEAD
                     <a href="#none" name="광주">
                       광주
                     </a>
                     <div class="depth2" style="display: none;">
                       <ul id="광주CinemaList">
+=======
+                    <a href="#none">
+                      광주
+                    </a>
+                    <div class="depth2" style="display: none;">
+                      <ul>
+                        <li class>
+                          <a href="#none">구월</a>
+                        </li>
+                        <li class>
+                          <a href="#none">인천</a>
+                        </li>
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
                       </ul>
                     </div>
                   </li>
   
                   <li class="depth1">
+<<<<<<< HEAD
                     <a href="#none" name="대전">
                       대전
                     </a>
                     <div class="depth2" style="display: none;">
                       <ul id="대전CinemaList">
+=======
+                    <a href="#none">
+                      대전
+                    </a>
+                    <div class="depth2" style="display: none;">
+                      <ul>
+                        <li class>
+                          <a href="#none">구월</a>
+                        </li class>
+                        <li>
+                          <a href="#none">인천</a>
+                        </li>
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
                       </ul>
                     </div>
                   </li>
   
                   <li class="depth1">
+<<<<<<< HEAD
                     <a href="#none" name="울산">
                       울산
                     </a>
                     <div class="depth2" style="display: none;">
                       <ul id="울산CinemaList">
+=======
+                    <a href="#none">
+                      울산
+                    </a>
+                    <div class="depth2" style="display: none;">
+                      <ul>
+                        <li class>
+                          <a href="#none">구월</a>
+                        </li>
+                        <li class>
+                          <a href="#none">인천</a>
+                        </li>
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
                       </ul>
                     </div>
                   </li>
   
                   <li class="depth1">
+<<<<<<< HEAD
                     <a href="#none" name="세종">
                       세종
                     </a>
                     <div class="depth2" style="display: none;">
                       <ul id="세종CinemaList">
+=======
+                    <a href="#none">
+                      세종
+                    </a>
+                    <div class="depth2" style="display: none;">
+                      <ul>
+                        <li class>
+                          <a href="#none">구월</a>
+                        </li>
+                        <li class>
+                          <a href="#none">인천</a>
+                        </li>
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
                       </ul>
                     </div>
                   </li>
   
                   <li class="depth1">
+<<<<<<< HEAD
                     <a href="#none" name="강원">
                       강원
                     </a>
                     <div class="depth2" style="display: none;">
                       <ul id="강원CinemaList">
+=======
+                    <a href="#none">
+                      강원
+                    </a>
+                    <div class="depth2" style="display: none;">
+                      <ul class>
+                        <li>
+                          <a href="#none">구월</a>
+                        </li>
+                        <li class>
+                          <a href="#none">인천</a>
+                        </li>
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
                       </ul>
                     </div>
                   </li>
   
                   <li class="depth1">
+<<<<<<< HEAD
                     <a href="#none" name="충청">
                       충북/충남
                     </a>
@@ -308,11 +464,25 @@
                     </a>
                     <div class="depth2" style="display: none;">
                       <ul id="전라CinemaList">
+=======
+                    <a href="#none">
+                      충북/충남
+                    </a>
+                    <div class="depth2" style="display: none;">
+                      <ul>
+                        <li class>
+                          <a href="#none">구월</a>
+                        </li>
+                        <li class>
+                          <a href="#none">인천</a>
+                        </li>
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
                       </ul>
                     </div>
                   </li>
   
                   <li class="depth1">
+<<<<<<< HEAD
                     <a href="#none" name="경상">
                       경북/경남
                     </a>
@@ -329,6 +499,51 @@
                     </a>
                     <div class="depth2" style="display: none;">
                       <ul id="제주CinemaList">
+=======
+                    <a href="#none">
+                      전북/전남
+                    </a>
+                    <div class="depth2" style="display: none;">
+                      <ul>
+                        <li class>
+                          <a href="#none">구월</a>
+                        </li class>
+                        <li>
+                          <a href="#none">인천</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+  
+                  <li class="depth1">
+                    <a href="#none">
+                      경북/경남
+                    </a>
+                    <div class="depth2" style="display: none;">
+                      <ul>
+                        <li class>
+                          <a href="#none">구월</a>
+                        </li>
+                        <li class>
+                          <a href="#none">인천</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+  
+                  <li class="depth1">
+                    <a href="#none">
+                      제주
+                    </a>
+                    <div class="depth2" style="display: none;">
+                      <ul>
+                        <li class>
+                          <a href="#none">구월</a>
+                        </li>
+                        <li class>
+                          <a href="#none">인천</a>
+                        </li>
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
                       </ul>
                     </div>
                   </li>
@@ -732,13 +947,18 @@
               </div>
             </div>
           </div>
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
         </div>
       </article>
     </div>
   </section>
 </main>
 
+<<<<<<< HEAD
 <!-- 모달창 부분 -->
 <!-- 좌석 선택으로 넘어가기 위한 모달 창 -->
 <div id="modal" style="left: 50%; top: 50%; margin-top: -256.5px; margin-left: -250px;" tabindex="0">
@@ -814,6 +1034,8 @@
 </div>
 
 
+=======
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
 <!-- 푸터 -->
     <jsp:include page="../include/footer.jsp"/>
     
@@ -823,7 +1045,10 @@
 <script src="../js/ticket_main.js"></script>
 <script src="../js/ticket_reverse.js"></script>
 <script src="../js/modal.js"></script>
+<<<<<<< HEAD
 <script src="../js/cinema.js"></script>
+=======
+>>>>>>> 167ea023502192dc31f8cd1a7cbf773bda115a24
 
 </body>
 </html>
