@@ -2,6 +2,7 @@ package com.cinema.hrw.service;
 
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cinema.hrw.dto.MemberDTO;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberService {
 	
 	private final MemberRepository memberRepository;
+	private final PasswordEncoder passwordEncoder;
 	
 	public void join(MemberDTO memberDTO) throws Exception {
 	    // 중복된 userId 확인
@@ -26,7 +28,14 @@ public class MemberService {
 	    if (memberRepository.existsByUserEmail(memberDTO.getUserEmail())) {
 	        throw new Exception("이미 사용 중인 이메일입니다.");
 	    }
-		
+	    String encryptedPassword = passwordEncoder.encode(memberDTO.getUserPassword());
+	    // 비밀번호 암호화를 통해 얻은 값으로 memberDTO의 비밀번호를 갱신
+	    memberDTO.setUserPassword(encryptedPassword);
+	    
+	    // userPasswordAgain도 동일하게 처리
+	    String encryptedPasswordAgain = passwordEncoder.encode(memberDTO.getUserPasswordAgain());
+	    memberDTO.setUserPasswordAgain(encryptedPasswordAgain);
+
 		// 1. dto -> entity로 변환.
 		MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
 		memberRepository.save(memberEntity);	// 저장 성공 여부 확인.
@@ -45,10 +54,12 @@ public class MemberService {
 		if (byUserId.isPresent()) {
 			// 조회 결과가 있음.(해당 아이디를 가진 회원 정보가 있음.)
 			MemberEntity memberEntity = byUserId.get();
-			if(memberEntity.getUserPassword().equals(memberDTO.getUserPassword())) {
+			
+			boolean passwordMatches = passwordEncoder.matches(memberDTO.getUserPassword(), memberEntity.getUserPassword());
+			if(passwordMatches) {
 				// 비밀번호 일치하는 경우.
 				// entity -> dto 변환 후 반환.
-				MemberDTO dto = memberDTO.toMemberDTO(memberEntity);
+				MemberDTO dto = MemberDTO.toMemberDTO(memberEntity);
 				return dto;
 			} else {
 				// 비밀번호 불일치(로그인 실패);
@@ -66,7 +77,7 @@ public class MemberService {
 	    if (byUserNameAndUserEmail.isPresent()) {
 	        // 조회 결과 있음.
 	        MemberEntity memberEntity = byUserNameAndUserEmail.get();
-	        MemberDTO dto = memberDTO.toMemberDTO(memberEntity);
+	        MemberDTO dto = MemberDTO.toMemberDTO(memberEntity);
 	        return dto;  
 	    } else {
 	        // 조회 결과 없음.
@@ -79,7 +90,7 @@ public class MemberService {
 		if (byUserSearchPw.isPresent()) {
 			// 조회결과 있을때
 			MemberEntity memberEntity = byUserSearchPw.get();
-			MemberDTO dto =memberDTO.toMemberDTO(memberEntity);
+			MemberDTO dto =MemberDTO.toMemberDTO(memberEntity);
 			return dto;
 		} else {
 			// 조회 결과 없음
@@ -123,6 +134,38 @@ public class MemberService {
         // 변경된 정보를 데이터베이스에 저장합니다.
         memberRepository.save(member);
     }
-    
 
+    public void updateUserPassword(String userId, String userPassword, String userPasswordAgain) throws Exception {
+        Optional<MemberEntity> memberEntity = memberRepository.findByUserId(userId);
+        if (memberEntity.isPresent()) {
+            MemberEntity member = memberEntity.get();
+            
+            // 새로운 비밀번호와 새로운 비밀번호 확인이 일치하는지 확인
+            if (!userPassword.equals(userPasswordAgain)) {
+                throw new Exception("새로운 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            }
+
+            // 영문과 숫자로 6자 이상인지 확인
+            if (!isPasswordValid(userPassword)) {
+                throw new Exception("비밀번호는 영문과 숫자를 혼합하여 6자 이상이어야 합니다.");
+            }
+            
+            String encryptedPassword = passwordEncoder.encode(userPassword);
+            String encryptedPasswordAgain = passwordEncoder.encode(userPasswordAgain);
+
+            member.setUserPassword(encryptedPassword);
+            member.setUserPasswordAgain(encryptedPasswordAgain);
+
+            memberRepository.save(member);
+        } else {
+            System.out.println("오류");
+        }
+    }
+
+    // 비밀번호 유효성 검사를 수행하는 메서드
+    private boolean isPasswordValid(String password) {
+        // 영문자와 숫자가 혼합되어 6자 이상인 경우 유효하다고 가정
+        return password.matches("^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$");
+    }
 }
+

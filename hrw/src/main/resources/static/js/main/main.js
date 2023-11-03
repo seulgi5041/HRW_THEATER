@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
       
 
 async function box_office_info(movieCode){
-  var apiKey = '6c2bad543927107f8334416fc5f2a63b';
+  var apiKey = 'c5df5d07dd8a15b2f5d00f6c21e37cc1';
   var url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key='+apiKey+'&movieCd='+movieCode;
   
   try {
@@ -160,8 +160,8 @@ movie_detail_btn.forEach(button => {
 
 movie_ticketing_btn.forEach(button => {
     button.addEventListener("click", function () {
-        var movieCode = this.getAttribute("data-movie-code");
-        var movie_ticketing_link = "/예매링크?code="+movieCode;
+        var movieCode = this.getAttribute("name");
+        var movie_ticketing_link = "/reservation/first?code="+movieCode;
         window.location.href = movie_ticketing_link;
     });
 });
@@ -202,11 +202,6 @@ function performSearch() {
     form.submit();
 }
 
-
-
-
-
 });
-
 
 

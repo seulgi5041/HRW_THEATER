@@ -1,11 +1,14 @@
 package com.cinema.hrw.controller;
 
+import java.lang.reflect.Member;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cinema.hrw.dto.MemberDTO;
@@ -75,7 +78,6 @@ public class MemberController {
 	    MemberDTO foundMember = memberService.searchPw(memberDTO);
 	    if (foundMember != null) {
 	        model.addAttribute("foundUserId", foundMember.getUserId());
-	        model.addAttribute("foundUserPassword", foundMember.getUserPassword());
 	        return "/member/find_password_ok";
 	    } else {
 	        return "/member/find_password_ng";
@@ -145,5 +147,18 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-
+	@PostMapping("/member/resetPassword")
+	public String resetPassword(@RequestParam String foundUserId, @RequestParam String userPassword, @RequestParam String userPasswordAgain, Model model) {
+	    try {
+	        String userId = foundUserId;
+	        memberService.updateUserPassword(userId, userPassword, userPasswordAgain);
+	        model.addAttribute("message","비밀번호 변경 성공");
+	        return "/member/login";
+	    } catch (Exception e) {
+	        // 에러 메시지를 모델에 추가하여 JSP에서 사용할 수 있도록 함
+	        model.addAttribute("errorMessage", e.getMessage());
+	        return "/member/find_password";
+	    }
+	}
+	
 }

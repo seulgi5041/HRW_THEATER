@@ -15,10 +15,10 @@
     }
 
     .title {
-        font-size: 24px;
-        text-align: center;
-        margin-bottom: 15px;
-        color: #333;
+    font-size: 3em;
+    padding: 0px 0px 10px 15px;
+    border-left: 10px solid #FB3D28;
+    border-bottom: 2px solid #FB3D28;
     }
 
     .subtitle {
@@ -58,3 +58,9 @@
     input[type="button"]:hover {
         background-color: #0056b3;
     }
+.store_title h4 {
+    font-size: 3em;
+    padding: 0px 0px 10px 15px;
+    border-left: 10px solid #FB3D28;
+    border-bottom: 2px solid #FB3D28;
+}

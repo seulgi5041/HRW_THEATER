@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
             `;
 
             // 로그인된 사용자의 이름 설정
-            userNameElement.textContent = loggedUserName; 
+            userNameElement.textContent = loggedUserName;
             login_user.style.display = "block";
 
             const logoutLink = document.getElementById("logout_link");

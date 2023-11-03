@@ -24,5 +24,7 @@ public class StoreController {
 	public String snack() {
 		return "/foodstore/snack_store";
 	}
+	
+
 
 }
