@@ -77,4 +77,6 @@ public class ScheduleDTO {
         String cinemaCodeStr = cinemaAddressDTO.getCinemaCode();
         return cinemaCodeStr;
     }
+
+
 }

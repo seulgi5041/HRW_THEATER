@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 ];
     const storedData = sessionStorage.getItem('food_info_setting');
-    console.log(storedData)
+    
     if(storedData){
         food_info_setting = JSON.parse(storedData);
     };
@@ -97,64 +97,84 @@ document.addEventListener("DOMContentLoaded", function() {
 const food_price_info =[
     {
         '이름' : "더블콤보",
-        '가격' : 13000
+        '가격' : 13000,
+        '이미지명' : "double_combo"
     },{
         '이름' : "라지콤보",
-        '가격' : 15000
+        '가격' : 15000,
+        '이미지명' : "large_combo"
     },{
         '이름' : "스몰콤보",
-        '가격' : 7000
+        '가격' : 7000,
+        '이미지명' : "small_combo"
     },{
         '이름' : "HRW콤보",
-        '가격' : 10000
+        '가격' : 10000,
+        '이미지명' : "hrw_combo"
     },{
         '이름' : "팝콘(M) 오리지널",
-        '가격' : 5000
+        '가격' : 5000,
+        '이미지명' : "single_popcorn"
     },{
         '이름' : "팝콘(L) 오리지널",
-        '가격' : 5500
+        '가격' : 5500,
+        '이미지명' : "double_popcorn"
     },{
         '이름' : "팝콘(M) 카라멜",
-        '가격' : 6000
+        '가격' : 6000,
+        '이미지명' : "single_sweet_popcorn"
     },{
         '이름' : "팝콘(L) 카라멜",
-        '가격' : 6500
+        '가격' : 6500,
+        '이미지명' : "double_sweet_popcorn"
     },{
         '이름' : "반반팝콘(오리지널/카라멜)L",
-        '가격' : 6500
+        '가격' : 6500,
+        '이미지명' : "half_popcorn"
     },{
         '이름' : "콜라(M)",
-        '가격' : 2500
+        '가격' : 2500,
+        '이미지명' : "coke_M"
     },{
         '이름' : "콜라(L)",
-        '가격' : 3000
+        '가격' : 3000,
+        '이미지명' : "coke_L"
     },{
         '이름' : "사이다(M)",
-        '가격' : 2500
+        '가격' : 2500,
+        '이미지명' : "cider_M"
     },{
         '이름' : "사이다(L)",
-        '가격' : 3000
+        '가격' : 3000,
+        '이미지명' : "cider_L"
     },{
         '이름' : "아메리카노(ICE)",
-        '가격' : 4000
+        '가격' : 4000,
+        '이미지명' : "coffee_ice"
     },{
         '이름' : "아메리카노(HOT)",
-        '가격' : 3500
+        '가격' : 3500,
+        '이미지명' : "coffee_hot"
     },{
         '이름' : "칠리치즈나쵸",
-        '가격' : 4900
+        '가격' : 4900,
+        '이미지명' : "nachos"
     },{
         '이름' : "플레인핫도그",
-        '가격' : 4500
+        '가격' : 4500,
+        '이미지명' : "origin_hotdog"
     },{
         '이름' : "치즈핫도그",
-        '가격' : 5000
+        '가격' : 5000,
+        '이미지명' : "cheese_hotdog"
     },{
         '이름' : "맛밤",
-        '가격' : 3500
+        '가격' : 3500,
+        '이미지명' : "chestnut"
     },{
         '이름' : "땅콩버터오징어",
-        '가격' : 3500
+        '가격' : 3500,
+        '이미지명' : "squidwithbutter"
     }
 ];
 
@@ -224,7 +244,7 @@ set_all_price(food_info_setting);
   if (choice_food && choice_food_price) {
     choice_food['수량'] = count;
     choice_food['구매 가격'] = count * choice_food_price['가격'];
-    console.log(choice_food);
+    
   } else {
     console.log('배열에서 제품을 찾지 못하거나 가격이 없습니다.');
   }
@@ -238,7 +258,7 @@ set_all_price(food_info_setting);
 
    function set_side_step01(food_info_setting) {
     const choice_food_info = food_info_setting.filter(item => item['수량'] !== 0);
-    console.log(choice_food_info);
+    
 
     // 음식 정보를 담고 있는 <dl> 요소에 접근
     const dlElement = document.querySelector('li.step01.active dl');
@@ -265,8 +285,6 @@ set_all_price(food_info_setting);
     const choice_food_info = food_info_setting.filter(item => item['수량'] !== 0);
     let totalPrice = choice_food_info.reduce((total, item) => total + item['구매 가격'], 0);
     document.getElementById("total_choice_food_price").textContent=totalPrice;
-    console.log(choice_food_info);
-    console.log(totalPrice);
    };
 
 
@@ -281,16 +299,23 @@ set_all_price(food_info_setting);
 
    });
 
-/*다음버튼으로 보내기 post로 좌석배열, 제이슨, 가격 보내기 */
+/*다음버튼으로 보내기 post로 상품, 수량 가격 보내기 */
 
 
 const link_rpay_btn = document.getElementById('link_pay');
 
 link_rpay_btn.addEventListener("click", () => {
     const choice_food_info = food_info_setting.filter(item => item['수량'] !== 0);
-  go_on_post_mapping(choice_food_info);
+    for (let item of choice_food_info) {
+        const matchingItem = food_price_info.find(info => info['이름'] === item['이름']);
+        if (matchingItem) {
+            item['이미지명'] = matchingItem['이미지명'];
+        }
+    }
+    
   sessionStorage.clear();
-
+  /*나중에 완전결제 완료시 클리어되도록 변경예정 */
+  go_on_post_mapping(choice_food_info);
 });
 
 function go_on_post_mapping(choice_food_info) {

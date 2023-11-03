@@ -62,7 +62,7 @@ public class OrderEntity {
 
 
     @Transient
-    private int allPrice; // 총결제액
+    private Long allPrice; // 총결제액
 
 
 }

@@ -1,6 +1,11 @@
 package com.cinema.hrw.dto;
-import com.cinema.hrw.entity.OrderEntity;
 
+
+import com.cinema.hrw.entity.OrderEntity;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Map;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,7 +44,7 @@ public class OrderDTO {
     private String payCompany;
 
     /*private int installment; // 일시불: 0, 할부시 개월수*/
-    private int allPrice;
+    private Long allPrice;
 
     public static OrderDTO toOrderDTO(OrderEntity orderEntity){
     OrderDTO orderDTO = new OrderDTO();
@@ -57,5 +62,22 @@ public class OrderDTO {
     orderDTO.setPayMethod(orderEntity.getPayMethod());
     orderDTO.setPayCompany(orderEntity.getPayCompany());
     return orderDTO;
+    }
+
+    public static OrderDTO toPersonCountAndTotalPrice(String personCount, Long totalPrice) {
+    ObjectMapper objectMapper = new ObjectMapper();
+    try {
+        Map<String, Integer> jsonMap = objectMapper.readValue(personCount, new TypeReference<Map<String, Integer>>() {});
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setAdultCount(jsonMap.get("성인"));
+        orderDTO.setTeenagerCount(jsonMap.get("청소년"));
+        orderDTO.setDisabledCount(jsonMap.get("장애인"));
+        orderDTO.setMoviePrice(totalPrice);
+        return orderDTO;
+    } catch (JsonProcessingException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        return null;
+    }   
     }
 }

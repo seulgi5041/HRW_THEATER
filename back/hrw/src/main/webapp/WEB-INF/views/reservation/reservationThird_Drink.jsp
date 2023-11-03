@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,11 +58,16 @@
               <dl>
                 <dt>선택한 인원</dt>
                 <dd>
-                  <span id="preview_people_info">${personCount}</span>
+                  <span id="preview_people_info">
+                    성인 : ${personCount.adultCount} |
+                     청소년 : ${personCount.teenagerCount} |
+                     장애인 : ${personCount.disabledCount}</span>
                 </dd>
                 <dt>선택한 좌석</dt>
                 <dd>
-                  <span id="preview_seat_info"> ${seatList}</span>
+                  <span id="preview_seat_info"> <c:forEach items="${seatList}" var="seat" varStatus="loop">
+                    '${seat.seatName}'<c:if test="${!loop.last}">, </c:if>
+                  </c:forEach> </span>
                 </dd>
               </dl>
             </div>

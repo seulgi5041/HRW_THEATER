@@ -58,11 +58,16 @@
               <dl>
                 <dt>선택한 인원</dt>
                 <dd>
-                  <span id="preview_people_info">${personCount}</span>
+                  <span id="preview_people_info">
+                    성인 : ${personCount.adultCount} |
+                     청소년 : ${personCount.teenagerCount} |
+                     장애인 : ${personCount.disabledCount}</span>
                 </dd>
                 <dt>선택한 좌석</dt>
                 <dd>
-                  <span id="preview_seat_info"> ${seatList}</span>
+                  <span id="preview_seat_info"> <c:forEach items="${seatList}" var="seat" varStatus="loop">
+                    '${seat.seatName}'<c:if test="${!loop.last}">, </c:if>
+                  </c:forEach></span>
                 </dd>
               </dl>
             </div>
@@ -181,7 +186,7 @@
                       <div class="store_content">
                         <article class="food_box" data-product="더블콤보">
                           <div class="food_image">
-                            <img src="../images/store/product/single_combo.png" alt="더블콤보">
+                            <img src="../images/store/product/double_combo.png" alt="더블콤보">
                           </div>
                           <div class="product">  
                             <p>팝콘(M)2 + 탄산(M)2</p>
@@ -210,7 +215,7 @@
 
                         <article class="food_box" data-product="라지콤보">
                           <div class="food_image">
-                            <img src="../images/store/product/double_combo.png" alt="라지콤보">
+                            <img src="../images/store/product/large_combo.png" alt="라지콤보">
                           </div>
                           <div class="product">  
                             <p>팝콘(L)2 + 탄산(L)2</p>
@@ -268,10 +273,10 @@
 
                         <article class="food_box" data-product="HRW콤보">
                           <div class="food_image">
-                            <img src="../images/store/product/double_combo.png" alt="HRW콤보">
+                            <img src="../images/store/product/hrw_combo.png" alt="HRW콤보">
                           </div>
                           <div class="product">  
-                            <p>팝콘(M)1 + 탄산(M)1</p>
+                            <p>팝콘(L)1 + 탄산(M)2</p>
                             <div class="product_name">
                               <h4>HRW콤보</h4>
                             </div>
