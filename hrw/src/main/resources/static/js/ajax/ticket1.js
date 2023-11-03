@@ -80,18 +80,18 @@ for (var local in localData) {
     submenuList.append(submenuItem);
 
     cinemaLink.click(function(e) {
-      e.preventDefault();  // Prevent the default anchor tag behavior
+      e.preventDefault();  // 기본 앵커 태그 동작 방지
       var cinemaCode = $(this).attr("cinema-code");
 
-      // Your AJAX request to fetch movie data for the selected cinema can go here
+      // 선택한 영화관의 영화 데이터를 가져오려는 AJAX 요청
       $.ajax({
         url: '/cinema/movies?cinemaCode=' + cinemaCode,
         method: 'GET',
         success: function(data) {
-            // Assuming 'data' is a JSON array of movie data
-            $('#movie-list-container').empty(); // Clear the container first
+            // 영화 데이터의 JSON 배열(data)
+            $('#movie-list-container').empty(); // 영화 데이터가 들어갈 요소(여기선 ul임)를 먼저 지움
             $.each(data, function(index, movie) {
-                // Create and append the movie item to the list
+                // 목록에 영화목록을 만들기
                 var movieItem = $("<li><a href='#'><div class='group_infor'><div class='bx_title'><span class='ic_grade " + movie.rating + "'></span><strong class='tit'>" + movie.title + "</strong></div></div></a></li>");
                 $('#movie-list-container').append(movieItem);
             });
@@ -121,15 +121,15 @@ depth2Select1.click(function() {
   console.log("Cinema Name:", cinemaName);
   console.log("Cinema Code:", cinemaCode);
 
-  //Your AJAX request to fetch movie data for the selected cinema can go here
+  // 선택한 영화관의 영화 데이터를 가져오려는 AJAX 요청
   $.ajax({
     url: '/cinema/movies?cinemaCode=' + cinemaCode,
     method: 'GET',
     success: function(data) {
-        // Assuming 'data' is a JSON array of movie data
-        $('#movie-list-container').empty(); // Clear the container first
+        // 영화 데이터의 JSON 배열(data)
+        $('#movie-list-container').empty(); // 영화 데이터가 들어갈 요소(여기선 ul임)를 먼저 지움
         $.each(data, function(index, movie) {
-            // Create and append the movie item to the list
+            // 목록에 영화목록을 만들기
             var movieItem = $("<li><a href='#'><div class='group_infor'><div class='bx_title'><span class='ic_grade " + movie.rating + "'></span><strong class='tit'>" + movie.title + "</strong></div></div></a></li>");
             $('#movie-list-container').append(movieItem);
         });

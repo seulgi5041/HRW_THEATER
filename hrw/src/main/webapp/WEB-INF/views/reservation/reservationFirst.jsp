@@ -235,48 +235,7 @@
                           </div>
                         </a>
                       </li>
-                    </c:forEach>
-
-                    <!-- <li>
-                      <a href="#none">
-                        <div class="group_infor">
-                          <div class="bx_title">
-                            <span class="ic_grade gr_12">
-                              "12세 관람가"
-                            </span>
-                            <strong class="tit">라라라라라</strong>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="#none">
-                        <div class="group_infor">
-                          <div class="bx_title">
-                            <span class="ic_grade gr_15">
-                              "15세 관람가"
-                            </span>
-                            <strong class="tit">집에가고싶다</strong>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="#none">
-                        <div class="group_infor">
-                          <div class="bx_title">
-                            <span class="ic_grade gr_18">
-                              "18세 관람가"
-                            </span>
-                            <strong class="tit">꿀복이보고싶다</strong>
-                          </div>
-                        </div>
-                      </a>
-                    </li> -->
-
-                    
+                    </c:forEach>  
                   </ul>
                 </div>
               </div>
