@@ -71,25 +71,33 @@ public class CinemaController {
   private MovieSelectRepository movieSelectRepository;
 
   @GetMapping("/movies")
-  @ResponseBody // Return JSON data
+  @ResponseBody // JSON data로 반환
+  // cinemaCode라는 HTTP 요청 매개 변수를 받아 메소드를 호출할 때 사용자가 전달한 극장 코드를 나타낸다
+  // 메소드는 해당 극장의 영화 정보를 검색할 때 사용
   public List<MovieDTO> showMovies(@RequestParam("cinemaCode") String cinemaCode) {
+    // movieSelectRepository에서 findSchedulesMovieTitleRating 메소드를 호출하여 영화 정보를 DB로부터
+    // 가져온다
+    // findSchedulesMovieTitleRating 메소드: 제목과 등급을 검색하는 쿼리를 실행 =>List로 변환
     List<Object[]> movieData = movieSelectRepository.findSchedulesMovieTitleRating(cinemaCode);
+    // MovieDTO 객체를 담을 빈 리스트인 movies를 생성
     List<MovieDTO> movies = new ArrayList<>();
 
+    // movieData 리스트에 있는 각 Object[] 배열을 반복(영화의 제목, 등급을 추출)
     for (Object[] data : movieData) {
       String title = (String) data[1];
       String rating = (String) data[2];
 
+      // MovieDTO 클래스의 새로운 인스턴스를 생성(영화 정보를 저장하는 데이터 전송 객체)
       MovieDTO movie = new MovieDTO();
       movie.setTitle(title);
       movie.setRating(rating);
 
-      // You can add other properties from ScheduleEntity to the MovieDTO if needed
+      // 필요한 경우 Schedule Entity의 다른 속성을 Movie DTO에 추가할 수 있음
 
-      movies.add(movie);
+      movies.add(movie); // 각 MovieDTO 객체를 movies 리스트에 추가
     }
 
-    return movies;
+    return movies; // 영화 정보를 포함, JSON 형식으로 반환
   }
 
 }
