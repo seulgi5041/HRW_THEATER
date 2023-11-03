@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HRW THEATER</title>
+
+  <!-- 카카오맵 api -->
+  <!-- 카카오API가져오기 -->
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=485c800daaf7f4a608a950713639e97a&libraries=services,clusterer,drawing"></script>
+  <script src="../js/map.js"></script>
+
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/map.css">
+</head>
+<body>
+  <!-- 헤더 영역 -->
+  <header>
+    <!-- 로고 -->
+    <div id="main_header">
+      <div class="logo">
+        <a href="#"><img src="../images/logo.jpg" alt="메인 로고"></a>
+      </div>
+      <!-- 로그인 성공 시 나타나는 부분 -->
+      <div class="login_user" id="login_user">
+        <p><span id="userName">username</span>님 환영합니다.</p>
+      </div>
+    </div>
+    
+    <!-- nav -->
+    <nav id="header_menu">
+      <div class="menu">
+        <ul class="menu_list">
+          <li><a href="#">영화</a></li>
+          <li><a href="#">매장정보</a></li>
+          <li><a href="#">예매</a></li>
+          <li><a href="#">푸드스토어</a></li>
+        </ul>
+        <ul class="login_list" id="login_list">
+          <li><a href="#" id="login_link">로그인</a></li>
+          <li><a href="#">회원가입</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 로그인을 하면 보여지는 메뉴부분 -->
+  <!-- 자바스크립트로 구현 -->
+  
+
+  <!-- 지도매장찾기 -->
+  
+  <div class="con_box find01">
+    <div class="map_search_wrap">
+      <div class="map_search">
+        <div class="cont_text_wrap map_search_tab_wrap">
+          <div class="search_tab">
+            <ul>
+              <li>매장찾기</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cont_text_wrap map_search_box">
+          <div class="cont_text_box map_search_title_wrap">
+            <div class="cont_text cont_text_title">
+              <strong>매장찾기</strong>
+            </div>
+            <div class="cont_text">함께하면 즐거운 HRW시네마</div>
+            <div class="cont_text">
+              <div class="input_text_wrap input_wrap">
+                <label>
+                  <input type="text" name="cinema_search" id="cinema_search" placeholder="지점명 또는 주소를 입력하세요" required="required">
+                  <div class="search_icon">
+                    <img src="../images/search_border_none.png" alt="검색">
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="cont_text_box">
+            <div class="cont_list cont_list1 cont_list_small cont_list_small1">
+              <ul class="cinema_search_list">
+                <div class="cinema_search_list_none">검색어가 없습니다.</div>
+                <li>
+                  <a onclick="panTo();">
+                    <div class="cont_text">
+                      <div class="cont_text_inner">
+                        <b></b>
+                      </div>
+                      <div class="cont_text_inner cont_text_info">
+
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 카카오 API이용 <div id="map" class="map">  <div class="infowindow-content"> 건들지 말 것-->
+  <div id="map" class="map" style="max-width:1440px; width:100%;height:700px; margin: 0 auto;">
+    <div class="infowindow-content">
+      <div class="cont_box mpa_point_info">
+        <div class="cont_text_title cont_text_inner">
+          <b></b>
+        </div>
+        <div class="cont_text_info cont_text_inner">
+          
+        </div>
+        <div class="cont_text_info cont_text_inner">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+
+   <!-- 상단 이동 버튼 -->
+   <a class="topBtn" id="go_top" href="#">
+    <img src="../images/top.png" alt="누르면 홈페이지 상단으로 이동합니다.">
+  </a>
+
+  <!-- 푸터 -->
+  <footer id="main_footer">
+    <section class="company_info_wrap">
+      <address>(21570)인천광역시 남동구 구월동 1126-7(인주대로 596) 기한빌딩 8층</address>
+      <dl class="company_info_list">
+        <dt>대표이사</dt>
+        <dd>HRW</dd>
+        <dt class="with_colon">사업자번호</dt>
+        <dd data-content>000-00-00000</dd>
+        <dt class="with_colon">통신판매업신고번호</dt>
+        <dd data-content>2023-인천구월-0000</dd>
+      </dl>
+      <dl class="company_info_list">
+        <dt>호스팅사업자</dt>
+        <dd data-content>HRW THEATER</dd>
+        <dt class="with_colon">대표이메일</dt>
+        <dd data-content>hrwmaster@hrw.net</dd>
+      </dl>
+      <p class="copyright">Copyright© HRW THEATER. All Rights Reserved</p>
+    </section>
+  </footer>
+  
+  
+  <script src="../js/common.js"></script>
+  
+</body>
+</html>
