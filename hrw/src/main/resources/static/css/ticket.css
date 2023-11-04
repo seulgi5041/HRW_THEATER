@@ -454,6 +454,7 @@ li.depth1:first-child {
 
 .movieSelect {
   overflow-y: scroll; 
+  overflow: hidden;
   max-height: 950px; 
 }
 
@@ -476,18 +477,6 @@ li.depth1:first-child {
   height: 0;
 }
 
-
-/* 
-.mCSB_container {
-  overflow: scroll;
-  width: auto;
-  height: auto;
-} */
-
-/* .wrap_reserve .section_step_con .article_layer.article_movie .inner .mCSB_container {
-  padding-bottom: 30px;
-  height: 100%;
-} */
 
 .movie_select_wrap ul > li {
   box-sizing: border-box;

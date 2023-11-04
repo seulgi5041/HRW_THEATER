@@ -225,7 +225,7 @@
                 <div id="mCSB_9_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" dir="ltr">
                   <ul id="movie-list-container">
                     <c:forEach var="movie" items="${movies}">
-                      <li>
+                      <li class>
                         <a href="#none">
                           <div class="group_infor">
                             <div class="bx_title">

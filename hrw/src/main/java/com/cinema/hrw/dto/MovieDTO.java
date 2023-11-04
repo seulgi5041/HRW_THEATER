@@ -89,4 +89,12 @@ public class MovieDTO {
 
         return movieDTO;
     }
+
+    public String getMovieCode() {
+        return code;
+    }
+
+    public void setMovieCode(String code) {
+        this.code = code;
+    }
 }
