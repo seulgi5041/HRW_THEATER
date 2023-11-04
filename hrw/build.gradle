@@ -34,10 +34,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper' 
-  implementation 'javax.servlet:jstl'
+  	implementation 'javax.servlet:jstl'
 
 	implementation 'org.slf4j:slf4j-api'
-  implementation 'ch.qos.logback:logback-classic'
+  	implementation 'ch.qos.logback:logback-classic'
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	

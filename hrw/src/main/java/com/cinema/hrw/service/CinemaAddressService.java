@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.cinema.hrw.dto.CinemaAddressDTO;
 import com.cinema.hrw.entity.CinemaAddressEntity;
 import com.cinema.hrw.repository.CinemaAddressRepository;
@@ -14,6 +17,8 @@ import com.cinema.hrw.repository.CinemaAddressRepository;
 public class CinemaAddressService {
 
   private final CinemaAddressRepository cinemaAddressRepository;
+  private static final Logger logger = LoggerFactory.getLogger(CinemaAddressService.class);
+
 
   @Autowired
   public CinemaAddressService(CinemaAddressRepository cinemaAddressRepository) {
@@ -22,6 +27,7 @@ public class CinemaAddressService {
 
   public List<CinemaAddressDTO> getAllCinemaAddresses() {
     List<CinemaAddressEntity> cinemaAddressEntities = cinemaAddressRepository.findAll();
+    logger.info("Retrieved {} cinema addresses", cinemaAddressEntities.size());
     return cinemaAddressEntities.stream()
         .map(CinemaAddressDTO::toCinemaAddressDTO)
         .collect(Collectors.toList());
