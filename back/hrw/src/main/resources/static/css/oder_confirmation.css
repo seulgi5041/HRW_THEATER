@@ -33,6 +33,12 @@ main {
   padding: 0 50px;
 }
 
+#oder_confirmation_title {
+  display: flex;
+  margin: 0 50px;
+  justify-content: space-between;
+}
+
 #oder_confirmation_title h1{
     padding: 20px 0;
     font-size: 3em;
@@ -41,10 +47,29 @@ main {
     margin-bottom: 70px;
 }
 
+#oder_confirmation_title dl{
+  display: flex;
+  align-items: flex-end;
+  gap: 30px;
+  padding-right: 100px;
+  padding-bottom: 30px;
+   font-size: 1.3em;
+}
+
+#oder_confirmation_title dt{
+font-weight: 700;
+color: #383838;
+}
+#oder_confirmation_title dd{
+  color: #848484;
+ 
+}
+
 /*영화 주문정보 페이지*/
 
 #oder_movie_container{
-  margin: 50px 100px;
+  margin: 0 100px;
+  margin-bottom: 50px;
 }
 
 .oder_container_title{
@@ -53,7 +78,7 @@ main {
   border-left: solid 7px #FB3D28; ;
   padding-bottom: 10px;
   padding-left: 10px;
-  margin-bottom: 50px;
+  margin: 50px;
   }
 
 .oder_movie_info_cell{
@@ -154,15 +179,36 @@ height: auto;
   opacity: 0; /*투명이미지로바꾸기*/
 }
 
+.oder_movie_info_sum{
+  padding-right: 150px;
+  margin: 50px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+}
+
+.oder_movie_info_sum h3{
+  font-size: 2em;
+  color: #383838;
+  margin-right: 50px;
+}
+
+.oder_movie_info_sum p{
+  font-size: 1.8em;
+  color: #848484;
+
+}
+
 /*음식주문정보*/
 
 #oder_food_container{
-  margin: 50px 100px;
+  margin: 0 100px;
+  margin-bottom: 50px;
 }
 
 #oder_food_container_info{
   margin-top: 10px;
-  margin-bottom: 60px;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -234,6 +280,33 @@ height: auto;
   color: #383838;
 }
 
+.oder_food_price_sum{
+  padding-right: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end !important;
+}
+
+.oder_food_price_sum h3{
+  font-size: 2em;
+  color: #383838;
+  margin-right: 50px;
+}
+
+.oder_food_price_sum p{
+  font-size: 1.8em;
+  color: #848484;
+
+}
+.oder_food_price_sum.hidden{
+  display: none;
+}
+
+.oder_food_container_cell.hidden{
+  display: none;
+}
+
+
 /*주문직후 음식정보 변경용*/
 
 .oder_food_basket_check {
@@ -264,22 +337,53 @@ height: auto;
   display: none;
 }
 
-/*합계 */
+/*결제정보*/
 
-#oder_price_container{
+#oder_paymen_container{
   margin-top: 100px;
-  border-top: solid 2px #FB3D28;
   margin: 50px 100px;
 }
 
+.payment_info{
+  padding-right: 150px;
+  margin-top: 50px;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+
+
+.payment_info tr{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.payment_info th{
+  font-size: 1.5em;
+  color: #383838;
+  white-space: nowrap;
+  margin-right: 50px;
+}
+
+.payment_info td{
+  font-size: 1.3em;
+  color: #848484;
+}
+
+
 #oder_price_content{
   padding-right: 150px;
-  margin: 50px 0;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 
 }
+
 #oder_price_content h3{
   font-size: 2em;
   color: #383838;
@@ -292,12 +396,15 @@ height: auto;
 
 }
 
+
+
+
 /*버튼 공통*/
 
 .oder_butten_container {
   display: flex;
   justify-content: flex-end;
-  margin: 50px 100px;
+  margin: 0 100px;
   padding: 50px;
 }
 
@@ -320,6 +427,7 @@ height: auto;
   border: none;
 }
 
+
 #oder_page_butten_submit:hover{
   border: 1px solid #b6b3b3;
   background-color: transparent;
@@ -329,4 +437,32 @@ height: auto;
 /*합계나 버튼컨테이너아래 푸터와공간 맞추기위해 빈공간넣음*/
 .empty_place{
   margin: 200px 0;
+}
+
+/*검색결과 없음 창*/
+
+.no_oder_result {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 50px;
+  width: 100%;
+  gap: 30px;
+  margin-bottom: 120px;
+}
+
+.no_oder_result img {
+  margin-right: 10px; 
+  max-width: 50px;
+}
+
+.no_oder_result h2 {
+  white-space: nowrap; 
+  text-overflow: ellipsis; 
+  color: #848484;
+  font-size: 2.5em;
+}
+
+.no_oder_result.hidden{
+  display: none;
 }

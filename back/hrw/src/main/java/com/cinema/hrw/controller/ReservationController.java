@@ -4,7 +4,6 @@ package com.cinema.hrw.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -48,19 +47,11 @@ public class ReservationController {
 		ScheduleDTO scheduleCodeDTO = new ScheduleDTO();
 		scheduleCodeDTO.setScheduleCode(scheduleCode);
 		ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCodeDTO);
-	  	session.setAttribute("scheduleCode",choiceScheduleInfo);
-		
-		/*List<SeatDTO>remainingSeats=reservationService.getRemainingSeats(scheduleCodeDTO);*/
+	  	session.setAttribute("scheduleCode",choiceScheduleInfo);		
+		List<SeatDTO>remainingSeats=reservationService.getRemainingSeats(scheduleCodeDTO);
 	 	
 	
-        // 사용된좌석체크위해 임시로 정보 넣기
-        List<SeatDTO> remainingSeats = new ArrayList<>();
-		String[]aa={"A열4", "A열13", "G열12", "G열9"};
-		for(String aaa:aa){
-			SeatDTO ss = new SeatDTO();
-			ss.setSeatName(aaa);
-			remainingSeats.add(ss);
-		}
+
 
 		model.addAttribute("remainingSeats", remainingSeats);
 		model.addAttribute("choiceScheduleInfo", choiceScheduleInfo);
@@ -157,8 +148,9 @@ public class ReservationController {
 	@PostMapping("/reservation/payment")
 	public String reservationPayment(@RequestParam("choice_food_info") String choiceFoodInfoList, HttpSession session , 
 	Model model) {
-		List<FoodOrderDTO> foodInfoList = FoodOrderDTO.mapToFoodOrderDTOList(choiceFoodInfoList);
-		session.setAttribute("foodInfoList", foodInfoList);
+		List<FoodOrderDTO> foodInfoList = reservationService.mapToFoodOrderDTOList(choiceFoodInfoList);
+		if(foodInfoList!=null){session.setAttribute("foodInfoList", foodInfoList);}
+		
 
 		String currentUserId = (String) session.getAttribute("loginId");
 		if(currentUserId == null){
@@ -177,23 +169,36 @@ public class ReservationController {
 		model.addAttribute("choiceScheduleInfo", choiceScheduleInfo);
 		model.addAttribute("personCount", person_count);
 		model.addAttribute("seatList", seat_list);
-		model.addAttribute("foodInfoList", foodInfoList);
+		if(foodInfoList!=null){
+		model.addAttribute("foodInfoList", foodInfoList);}
 
 		return "reservation/payment";}
 	}
 
 	@PostMapping("/reservation/paymentCheck")
-	public String reservationpaymentCheck(@RequestParam("pay_info") String payInfo, HttpSession session) {
+	public String reservationpaymentCheck(@RequestParam("pay_info") String payInfo, HttpSession session, Model model) {
 		OrderDTO payInfoDTO = OrderDTO.toPayInfo(payInfo);
 		ScheduleDTO scheduleDTO = (ScheduleDTO) session.getAttribute("scheduleCode");
 		OrderDTO person_count = (OrderDTO) session.getAttribute("countAndPrice");
 		List<SeatDTO> seat_list = (List<SeatDTO>) session.getAttribute("seatList");
 		List<FoodOrderDTO> foodInfoList = (List<FoodOrderDTO>) session.getAttribute("foodInfoList");
+		
 		String currentUserId = (String) session.getAttribute("loginId");
 
-		int orderSuccessOrFail = reservationService.orderSuccessOrFailCheck(payInfoDTO, scheduleDTO, person_count, seat_list,foodInfoList, currentUserId);
-
-		return "";
+		String oderCode = reservationService.orderSuccessOrFailCheck(payInfoDTO, scheduleDTO, person_count, seat_list,foodInfoList, currentUserId);
+		String nextPage="reservation/paymentCompleted";
+		if(oderCode != null){
+			session.removeAttribute("scheduleCode");
+			session.removeAttribute("countAndPrice");
+			session.removeAttribute("seatList");
+			session.removeAttribute("foodInfoList");
+			OrderDTO orderDTO = reservationService.getChoiceOrderDTO(oderCode);
+			model.addAttribute("choiceScheduleInfo", scheduleDTO);
+			model.addAttribute("orderDTO", orderDTO);
+			model.addAttribute("seatList", seat_list);
+			model.addAttribute("foodInfoList", foodInfoList);
+		}else{nextPage= "reservation/payment";}
+		return nextPage;
 	}
 	
 	@PostMapping("/reservation/paymentCompleted")

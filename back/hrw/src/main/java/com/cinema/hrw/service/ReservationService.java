@@ -2,6 +2,8 @@ package com.cinema.hrw.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,14 +18,23 @@ import com.cinema.hrw.dto.OrderDTO;
 import com.cinema.hrw.dto.ScheduleDTO;
 import com.cinema.hrw.dto.SeatDTO;
 import com.cinema.hrw.entity.CinemaAddressEntity;
+import com.cinema.hrw.entity.FoodEntity;
+import com.cinema.hrw.entity.FoodOrderEntity;
+import com.cinema.hrw.entity.MemberEntity;
 import com.cinema.hrw.entity.MovieEntity;
 import com.cinema.hrw.entity.OrderEntity;
 import com.cinema.hrw.entity.ScheduleEntity;
 import com.cinema.hrw.entity.SeatEntity;
 import com.cinema.hrw.repository.FoodOrderRepository;
+import com.cinema.hrw.repository.FoodRepository;
+import com.cinema.hrw.repository.MemberRepository;
 import com.cinema.hrw.repository.OrderRepository;
 import com.cinema.hrw.repository.ReservationRepository;
+import com.cinema.hrw.repository.ScheduleRepository;
 import com.cinema.hrw.repository.SeatRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -40,18 +51,19 @@ public class ReservationService {
     private final OrderRepository orderRepository;
     private final FoodOrderRepository foodOrderRepository;
     private final SeatRepository seatRepository;
-
-
+    private final MemberRepository memberRepository;
+    private final FoodRepository foodRepository;
     
 
     public List<SeatDTO> getRemainingSeats(ScheduleDTO scheduleCodeDTO) {
-        String scheduleCode = scheduleCodeDTO.getScheduleCode();
+        ScheduleEntity scheduleEntity = new ScheduleEntity();
+        scheduleEntity.setScheduleCode(scheduleCodeDTO.getScheduleCode());
         String jpql = "SELECT s FROM SeatEntity s " +
                      "INNER JOIN s.orderCode o " +
-                     "WHERE o.scheduleCode = = :scheduleCode";
+                     "WHERE o.scheduleCode = :scheduleCode";
     
         TypedQuery<SeatEntity> query = entityManager.createQuery(jpql, SeatEntity.class);
-        query.setParameter("scheduleCode", scheduleCode);
+        query.setParameter("scheduleCode", scheduleEntity);
         
         List<SeatEntity> remainingSeatEntities = query.getResultList();
     
@@ -100,36 +112,114 @@ public class ReservationService {
     }
 
 
-    public int orderSuccessOrFailCheck(OrderDTO payInfoDTO, ScheduleDTO scheduleDTO, OrderDTO person_count,
+    public String orderSuccessOrFailCheck(OrderDTO payInfoDTO, ScheduleDTO scheduleDTO, OrderDTO person_count,
             List<SeatDTO> seat_list,List<FoodOrderDTO> foodInfoList, String currentUserId) {
-                int order_check= 0;
-                MemberDTO memberDTO = new MemberDTO();
-                memberDTO.setUserId(currentUserId);
+                Optional<MemberEntity> optionalMemberEntity = memberRepository.findByUserId(currentUserId);
+                MemberEntity memberEntity = optionalMemberEntity.orElse(null);
+                MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
                 LocalDate defalt = LocalDate.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                String orderDate  = defalt.format(formatter);
+                DateTimeFormatter formatter02 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String orderDate  = defalt.format(formatter02);
+                
+                int maxIncrement = orderRepository.countByOrderDate(orderDate);
+                if (maxIncrement == 0) {
+                    maxIncrement += 1;
+                } else {
+                    maxIncrement++;
+                }
+                String formattedIncrement = String.format("%03d", maxIncrement);
+                int num = maxIncrement;
+                String orderCode = defalt.format(DateTimeFormatter.ofPattern("yyyyMMdd")) + formattedIncrement;
+                
+                
 
                 /**주문정보테이블 */
                 OrderDTO setOrderDTO = new OrderDTO();
-                setOrderDTO.setUserId(memberDTO);
+                setOrderDTO.setOrderCode(orderCode);
+                setOrderDTO.setUserId(MemberEntity.toMemberEntity(memberDTO));
                 setOrderDTO.setOrderDate(orderDate);
-                setOrderDTO.setMovieCode(scheduleDTO.getMovieCode());
-                setOrderDTO.setScheduleCode(scheduleDTO);
+                setOrderDTO.setMovieCode(MovieEntity.toMovieEntity(scheduleDTO.getMovieCode()));
+                setOrderDTO.setScheduleCode(ScheduleEntity.toScheduleEntity(scheduleDTO));
                 setOrderDTO.setTeenagerCount(person_count.getTeenagerCount());
                 setOrderDTO.setAdultCount(person_count.getAdultCount());
                 setOrderDTO.setDisabledCount(person_count.getDisabledCount());
                 setOrderDTO.setMoviePrice(person_count.getMoviePrice());
                 setOrderDTO.setMovieOrderCondition(1);
+                setOrderDTO.setNum(num);              
                 setOrderDTO.setPayMethod(payInfoDTO.getPayMethod());
-                setOrderDTO.setPayCompany(payInfoDTO.getPayCompany());
+                if(payInfoDTO.getPayCompany()==null){setOrderDTO.setPayCompany("정보없음");}
+                else{ setOrderDTO.setPayCompany(payInfoDTO.getPayCompany());}
+            
                 OrderEntity orderEntity = OrderEntity.toOrderEntity(setOrderDTO);
-                orderRepository.save(orderEntity);
-                
+                OrderEntity orderSavecheck = orderRepository.save(orderEntity);
+               
+                OrderEntity afterOrder = orderRepository.findByOrderCode(orderCode);
+               
                 /**좌석 테이블 */
+                if(seat_list != null){
+                for (SeatDTO seatDTO : seat_list) {
+                    seatDTO.setOrderCode(afterOrder);
+                    SeatEntity seatEntity = SeatEntity.toSeatEntity(seatDTO);
+                    SeatEntity seatSavecheck= seatRepository.save(seatEntity);
+                    
+                }}
 
                 /**음식주문 테이블 */
+                if(foodInfoList != null){
+                for (FoodOrderDTO foodOrderDTO : foodInfoList) {
+                    foodOrderDTO.setOrderCode(afterOrder);
+                    foodOrderDTO.setFoodOrderCondition(0);
+                    FoodOrderEntity foodOrderEntity = FoodOrderEntity.toFoodOrderEntity(foodOrderDTO);
+                    FoodOrderEntity foodSavecheck= foodOrderRepository.save(foodOrderEntity);
+                }}
 
-        return order_check; //주문 성공 : 0 , 주문 실패 : 1 그외
+
+        return afterOrder.getOrderCode(); //주문 성공 : 0 , 주문 실패 : 1 그외
+    }
+
+
+    public OrderDTO getChoiceOrderDTO(String oderCode) {
+        OrderEntity orderEntity = orderRepository.findByOrderCode(oderCode);
+        OrderDTO orderDTO = OrderDTO.toOrderDTO(orderEntity);
+        return orderDTO;
+    }
+
+
+    public List<FoodOrderDTO> mapToFoodOrderDTOList(String choiceFoodInfo) {
+        ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                Map<String, Object>[] choiceFoodInfoMaps = objectMapper.readValue(choiceFoodInfo, Map[].class);
+                List<FoodOrderDTO> choiceFoodInfoList =new ArrayList<>();
+                for(Map<String, Object> choiceFoodInfoMap : choiceFoodInfoMaps ){
+                    FoodOrderDTO foodOrderDTO = new FoodOrderDTO();
+                    if (choiceFoodInfoMap.containsKey("이름")) {
+                        if(choiceFoodInfoMap.get("이름").equals("주문정보없음")){break;}
+                        FoodEntity foodEntity = foodRepository.findByFoodName((String)choiceFoodInfoMap.get("이름"));
+
+                        foodOrderDTO.setFoodName(foodEntity);
+                    }
+                    
+                    if (choiceFoodInfoMap.containsKey("구매 가격")) {
+                        foodOrderDTO.setFoodPrice(((Number) choiceFoodInfoMap.get("구매 가격")).longValue());
+                    }
+            
+                    if (choiceFoodInfoMap.containsKey("수량")) {
+                        foodOrderDTO.setFoodCount(((Number) choiceFoodInfoMap.get("수량")).longValue());
+                    }
+            
+                    if (choiceFoodInfoMap.containsKey("이미지명")) {
+                        foodOrderDTO.setFoodImgName((String) choiceFoodInfoMap.get("이미지명"));
+                    }
+
+                    choiceFoodInfoList.add(foodOrderDTO);
+                }
+                return choiceFoodInfoList;
+
+            } catch (JsonProcessingException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return null;
+            }
     }
 
 

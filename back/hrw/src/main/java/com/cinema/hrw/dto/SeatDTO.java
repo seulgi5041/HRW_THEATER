@@ -1,5 +1,6 @@
 package com.cinema.hrw.dto;
 
+import com.cinema.hrw.entity.OrderEntity;
 import com.cinema.hrw.entity.SeatEntity;
 
 import lombok.Getter;
@@ -20,9 +21,12 @@ private String seatName;
 
 public static SeatDTO toSeatDTO(SeatEntity seatEntity){
     SeatDTO seatDTO = new SeatDTO();
-    seatDTO.setNum(seatEntity.getNum());
-    seatDTO.setOrderCode(OrderDTO.toOrderDTO(seatEntity.getOrderCode()));
+    seatDTO.setOrderCode(seatEntity.getOrderCode());
     seatDTO.setSeatName(seatEntity.getSeatName());
     return seatDTO;
 }
+
+public void setOrderCode(OrderEntity orderEntity){
+        this.orderCode=OrderDTO.toOrderDTO(orderEntity);
+    }
 }

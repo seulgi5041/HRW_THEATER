@@ -6,16 +6,13 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
+import com.cinema.hrw.dto.MemberDTO;
+import com.cinema.hrw.dto.MovieDTO;
 import com.cinema.hrw.dto.OrderDTO;
-import com.cinema.hrw.repository.OrderRepository;
+import com.cinema.hrw.dto.ScheduleDTO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,34 +22,18 @@ import lombok.Setter;
 @Setter
 @Table(name = "orderTBL")	
 public class OrderEntity {
-    @Autowired
-    private OrderRepository orderRepository;
 
     @Id
     @Column
     private String orderCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "userId")
     private MemberEntity userId;
 
     @Column
     private String orderDate;
 
-     @PrePersist
-    public void setOderCode(){ 
-        LocalDate insertDate= LocalDate.now();
-         
-         int maxIncrement = orderRepository.countByOrderDate(insertDate);
-         if (maxIncrement == 0) {
-             maxIncrement = 1;
-         } else {
-             maxIncrement++;
-         }
-         String formattedIncrement = String.format("%03d", maxIncrement);
-         num = maxIncrement;
-         orderCode = insertDate.format(DateTimeFormatter.ofPattern("yyyyMMdd")) + formattedIncrement;
-    }
 
     @Column
     private int num;
@@ -93,13 +74,12 @@ public class OrderEntity {
 
     public static OrderEntity toOrderEntity(OrderDTO orderDTO){
         OrderEntity orderEntity = new OrderEntity();
-
         orderEntity.setOrderCode(orderDTO.getOrderCode());
-        orderEntity.setUserId(MemberEntity.toMemberEntity(orderDTO.getUserId()));
+        orderEntity.setUserId(orderDTO.getUserId());
         orderEntity.setOrderDate(orderDTO.getOrderDate());
         orderEntity.setNum(orderDTO.getNum());
-        orderEntity.setMovieCode(MovieEntity.toMovieEntity(orderDTO.getMovieCode()));
-        orderEntity.setScheduleCode(ScheduleEntity.toScheduleEntity(orderDTO.getScheduleCode()));
+        orderEntity.setMovieCode(orderDTO.getMovieCode());
+        orderEntity.setScheduleCode(orderDTO.getScheduleCode());
         orderEntity.setTeenagerCount(orderDTO.getTeenagerCount());
         orderEntity.setAdultCount(orderDTO.getAdultCount());
         orderEntity.setDisabledCount(orderDTO.getDisabledCount());
@@ -109,5 +89,16 @@ public class OrderEntity {
         orderEntity.setPayCompany(orderDTO.getPayCompany());
         return orderEntity;
         }
+
+    public void setUserId(MemberDTO memberDTO){
+        this.userId=MemberEntity.toMemberEntity(memberDTO);
+    }
+    public void setMovieCode(MovieDTO movieDTO){
+        this.movieCode=MovieEntity.toMovieEntity(movieDTO);
+    }
+
+    public void setScheduleCode(ScheduleDTO scheduleDTO){
+        this.scheduleCode=ScheduleEntity.toScheduleEntity(scheduleDTO);
+    }
 
 }

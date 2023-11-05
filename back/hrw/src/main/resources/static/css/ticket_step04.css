@@ -290,6 +290,10 @@ button > * {
   position: relative;
 }
 
+[data-paycompany].choice_company {
+  border: 0.2px solid #FB3D28;
+}
+
 
 /* 간편결제 */
 .article_pay_simple {

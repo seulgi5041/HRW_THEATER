@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HRW 예매페이지</title>
+<title>HRW 예매페이지</title> 
 
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/ticket.css">
@@ -16,6 +17,12 @@
 
   <!-- 헤더 영역 -->
     <jsp:include page="../include/header.jsp"/>
+
+    <c:set var="foodPrice" value="0" />
+    <c:forEach items="${foodInfoList}" var="foodInfo">
+    <c:set var="foodPrice" value="${foodPrice + foodInfo.foodPrice}" />
+    </c:forEach>
+<c:set var="totalPrice" value="${orderDTO.moviePrice+foodPrice}" />
 
 <main id="contents" class="contents_full contents_reserve" style="margin-top:30px;">
   <section class="wrap_reserve">
@@ -32,15 +39,15 @@
             <div class="box_con">
               <dl>
                 <dt>선택한 영화 정보</dt>
-                <dd>title</dd>
+                <dd>${choiceScheduleInfo.movieTitle}</dd>
                 <dt>선택한 상영관</dt>
-                <dd>"지점 " 
-                    "관"</dd>
+                <dd>"${choiceScheduleInfo.cinemaName} " 
+                    "${choiceScheduleInfo.auditorium}"</dd>
                 <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
+                <dd>date(${choiceScheduleInfo.takeDate}(${choiceScheduleInfo.takeDateOfWeek}))</dd>
                 <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+                <dd>"${choiceScheduleInfo.startTime}~" 
+                  "${choiceScheduleInfo.endTime}"</dd>
               </dl>
             </div>
           </a>
@@ -58,11 +65,15 @@
               <dl>
                 <dt>선택한 인원</dt>
                 <dd>
-                  <span id="preview_people_info"></span>
+                  <span id="preview_people_info">성인 : ${orderDTO.adultCount} |
+                    청소년 : ${orderDTO.teenagerCount} |
+                    장애인 : ${orderDTO.disabledCount}</span>
                 </dd>
                 <dt>선택한 좌석</dt>
                 <dd>
-                  <span id="preview_seat_info"></span>
+                  <span id="preview_seat_info"><c:forEach items="${seatList}" var="seat" varStatus="loop">
+                    '${seat.seatName}'<c:if test="${!loop.last}">, </c:if>
+                  </c:forEach></span>
                 </dd>
               </dl>
             </div>
@@ -80,15 +91,13 @@
             <div class="box_con">
               <dl>
                 <dt>선택한 음식</dt>
+                <c:forEach items="${foodInfoList}" var="foodInfo" varStatus="loop">
+                    
                 <dd>
-                  <span id="preview_store_info"></span>
+                  <span id="preview_store_info">${foodInfo.foodNameStr} , 수량 : ${foodInfo.foodCount} , 가격 : ${foodInfo.foodPrice}</span>
                 </dd>
-                <dd>
-                  <span id="preview_store_info"></span>
-                </dd>
-                <dd>
-                  <span id="preview_store_info"></span>
-                </dd>
+
+                  </c:forEach>
               </dl>
             </div>
           </a>
@@ -103,16 +112,13 @@
               결제
             </strong>
             <div class="box_con">
-              <dl>선택한 영화 제목
-                <dt>title</dt>
-                <dd>선택한 상영관</dd>
-                <dd>"지점 " 
-                    "관"</dd>
-                <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
-                <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+              <dl>
+                <dt>티켓금액</dt>
+                <dd>Movie : ${orderDTO.moviePrice}원</dd>
+                <dt>음식합계</dt>
+                <dd>Food : ${foodPrice}원</dd>
+                <dt>총 합계</dt>
+                <dd>총 ${totalPrice} 원</dd>
               </dl>
             </div>
           </a>
@@ -168,31 +174,39 @@
           <div class="reserve_result_wrap">
             <div class="info_wrap">
               <div class="box_thum">
-                <img src="../images/poster_rank/20212667.jpg" alt="내가 선택한 영화의 포스터 이미지">
+                <img src="../images/poster_rank/${choiceScheduleInfo.movieCodeStr}.jpg" alt="${choiceScheduleInfo.movieCodeStr}">
               </div>
               <div class="group_info">
                 <dl>
-                  <dt>예매번호</dt>
+                  <dt>주문번호</dt>
                   <dd>
-                    <strong class="txt_num">예매번호출력</strong>
+                    <strong class="txt_num">${orderDTO.orderCode}</strong>
                   </dd>
                 </dl>
                 <dl>
                   <dt>상영일시</dt>
                   <dd>
-                    (yyyy-mm-dd (요일))
-                    <span>시작시간 ~ 종료시간</span>
+                    date(${choiceScheduleInfo.takeDate}(${choiceScheduleInfo.takeDateOfWeek}))
+                    <span>${choiceScheduleInfo.startTime}~ 
+                      ${choiceScheduleInfo.endTime}</span>
                   </dd>
                   <dt>상영관</dt>
-                  <dd>선택 상영관 몇관</dd>
+                  <dd>${choiceScheduleInfo.cinemaName}  
+                    ${choiceScheduleInfo.auditorium}</dd>
                   <dt>관람인원</dt>
-                  <dd>선택인원</dd>
+                  <dd>성인 : ${orderDTO.adultCount} |
+                    청소년 : ${orderDTO.teenagerCount} |
+                    장애인 : ${orderDTO.disabledCount}</dd>
                   <dt>좌석</dt>
-                  <dd>선택좌석(예 A1)</dd>
+                  <dd><c:forEach items="${seatList}" var="seat" varStatus="loop">
+                    '${seat.seatName}'<c:if test="${!loop.last}">, </c:if>
+                  </c:forEach></dd>
                 </dl>
                 <dl>
                   <dt>선택 음식</dt>
-                  <dd>선택음식1 수량, 2수량, 3수량 3수량3수량3수량3수량3수량3수량</dd>
+                  <dd><c:forEach items="${foodInfoList}" var="foodInfo" varStatus="loop">
+                    ${foodInfo.foodNameStr} , 수량 : ${foodInfo.foodCount}<c:if test="${!loop.last}">, </c:if>
+                      </c:forEach></dd>
                   <!-- 몇개를 선택했는지에 따라 달라짐 -->
             
                 </dl>
@@ -205,7 +219,7 @@
                 <dl>
                   <dt>영화금액</dt>
                   <dd>
-                    <strong>선택금액</strong>
+                    <strong>${orderDTO.moviePrice}</strong>
                     원
                   </dd>
                 </dl>
@@ -214,7 +228,7 @@
                 <dl>
                   <dt>음식금액</dt>
                   <dd>
-                    <strong>선택금액</strong>
+                    <strong>${foodPrice}</strong>
                     원
                   </dd>
                 </dl>
@@ -223,7 +237,7 @@
                 <dl>
                   <dt>총 결제 금액</dt>
                   <dd>
-                    <strong>영화+음식 금액</strong>
+                    <strong>${totalPrice}</strong>
                     원
                   </dd>
                 </dl>
@@ -255,8 +269,8 @@
 
           <!-- 버튼 출력부분 -->
           <div class="btn_wrap">           
-            <a href="#none" class="btn_col2 ty5" style="
-            margin-right: 20px;">결제내역 바로가기</a>
+            <a href="javascript:void(0)" class="btn_col2 ty5" style="
+            margin-right: 20px;" data-ordercode="${orderDTO.orderCode}" id="go_order_detail_btn">결제내역 바로가기</a>
             <a href="/" class="btn_col1 ty5">홈으로 바로가기</a>
           </div>
         </div>
@@ -275,6 +289,7 @@
     
     
 <!-- 자바스크립트 영역 -->
+<script src="../js/pay_completed.js"></script>
 <script src="../js/ticket_main.js"></script>
 <script src="../js/ticket_reverse.js"></script> 
 <script src="../js/modal.js"></script>

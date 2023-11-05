@@ -5,7 +5,10 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.cinema.hrw.entity.FoodEntity;
 import com.cinema.hrw.entity.FoodOrderEntity;
+import com.cinema.hrw.entity.MemberEntity;
+import com.cinema.hrw.entity.OrderEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,7 +27,7 @@ public class FoodOrderDTO {
    
     private OrderDTO orderCode;
     
-    private String foodName;
+    private FoodDTO foodName;
    
     private Long foodCount;
 
@@ -36,57 +39,25 @@ public class FoodOrderDTO {
 
     public static FoodOrderDTO toFoodOrderDTO(FoodOrderEntity foodOrderEntity){
     FoodOrderDTO foodOrderDTO = new FoodOrderDTO();
-    foodOrderDTO.setNum(foodOrderEntity.getNum());
-    foodOrderDTO.setOrderCode(OrderDTO.toOrderDTO(foodOrderEntity.getOrderCode()));
+    foodOrderDTO.setOrderCode(foodOrderEntity.getOrderCode());
     foodOrderDTO.setFoodName(foodOrderEntity.getFoodName());
     foodOrderDTO.setFoodCount(foodOrderEntity.getFoodCount());
     foodOrderDTO.setFoodPrice(foodOrderEntity.getFoodPrice());
     foodOrderDTO.setFoodOrderCondition(foodOrderEntity.getFoodOrderCondition());
         return foodOrderDTO;
     }
-
-
-
-
-    public static List<FoodOrderDTO> mapToFoodOrderDTOList(String choiceFoodInfo) {
-         ObjectMapper objectMapper = new ObjectMapper();
-            try {
-                Map<String, Object>[] choiceFoodInfoMaps = objectMapper.readValue(choiceFoodInfo, Map[].class);
-                List<FoodOrderDTO> choiceFoodInfoList =new ArrayList<>();
-                for(Map<String, Object> choiceFoodInfoMap : choiceFoodInfoMaps ){
-                    FoodOrderDTO foodOrderDTO = FoodOrderDTO.mapToFoodOrderDTO(choiceFoodInfoMap);
-                    choiceFoodInfoList.add(foodOrderDTO);
-                }
-                return choiceFoodInfoList;
-
-            } catch (JsonProcessingException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                return null;
-            }
-        
+    public void setOrderCode(OrderEntity orderEntity){
+        this.orderCode=OrderDTO.toOrderDTO(orderEntity);
     }
 
-    public static FoodOrderDTO mapToFoodOrderDTO(Map<String, Object> choiceFoodInfo) {
-        FoodOrderDTO foodOrderDTO = new FoodOrderDTO();
-
-        if (choiceFoodInfo.containsKey("이름")) {
-            foodOrderDTO.setFoodName((String) choiceFoodInfo.get("이름"));
-        }
-
-        if (choiceFoodInfo.containsKey("구매 가격")) {
-            foodOrderDTO.setFoodPrice(((Number) choiceFoodInfo.get("구매 가격")).longValue());
-        }
-
-        if (choiceFoodInfo.containsKey("수량")) {
-            foodOrderDTO.setFoodCount(((Number) choiceFoodInfo.get("수량")).longValue());
-        }
-
-        if (choiceFoodInfo.containsKey("이미지명")) {
-            foodOrderDTO.setFoodImgName((String) choiceFoodInfo.get("이미지명"));
-        }
-
-        return foodOrderDTO;
-        
+    public void setFoodName(FoodEntity foodEntity){
+        this.foodName=FoodDTO.toFoodDTO(foodEntity);
     }
+
+    public String getFoodNameStr(){
+        FoodDTO foodDTO = this.foodName;
+        String foodNameStr = foodDTO.getFoodName();
+        return foodNameStr ;
+    }
+  
 }

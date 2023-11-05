@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.cinema.hrw.dto.FoodDTO;
 import com.cinema.hrw.dto.FoodOrderDTO;
 import com.cinema.hrw.dto.OrderDTO;
 
@@ -30,8 +31,9 @@ public class FoodOrderEntity {
     @JoinColumn(name = "order_code", referencedColumnName = "orderCode")
     private OrderEntity orderCode;
 
-    @Column
-    private String foodName;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "food_name", referencedColumnName = "foodName")
+    private FoodEntity foodName;
 
     @Column
     private Long foodCount;
@@ -48,12 +50,19 @@ public class FoodOrderEntity {
 
     public static FoodOrderEntity toFoodOrderEntity(FoodOrderDTO foodOrderDTO){
         FoodOrderEntity foodOrderEntity = new FoodOrderEntity();
-        foodOrderEntity.setNum(foodOrderDTO.getNum());
-        foodOrderEntity.setOrderCode(OrderEntity.toOrderEntity(foodOrderDTO.getOrderCode()));
+        foodOrderEntity.setOrderCode(foodOrderDTO.getOrderCode());
         foodOrderEntity.setFoodName(foodOrderDTO.getFoodName());
         foodOrderEntity.setFoodCount(foodOrderDTO.getFoodCount());
         foodOrderEntity.setFoodPrice(foodOrderDTO.getFoodPrice());
         foodOrderEntity.setFoodOrderCondition(foodOrderDTO.getFoodOrderCondition());
             return foodOrderEntity;
+    }
+
+    public void setOrderCode(OrderDTO orderDTO){
+        this.orderCode=OrderEntity.toOrderEntity(orderDTO);
+    }
+
+    public void setFoodName(FoodDTO foodDTO){
+        this.foodName=FoodEntity.toFoodEntity(foodDTO);
     }
 }

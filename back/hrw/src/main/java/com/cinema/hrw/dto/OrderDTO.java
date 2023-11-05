@@ -1,7 +1,10 @@
 package com.cinema.hrw.dto;
 
 
+import com.cinema.hrw.entity.MemberEntity;
+import com.cinema.hrw.entity.MovieEntity;
 import com.cinema.hrw.entity.OrderEntity;
+import com.cinema.hrw.entity.ScheduleEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,11 +52,11 @@ public class OrderDTO {
     public static OrderDTO toOrderDTO(OrderEntity orderEntity){
     OrderDTO orderDTO = new OrderDTO();
     orderDTO.setOrderCode(orderEntity.getOrderCode());
-    orderDTO.setUserId(MemberDTO.toMemberDTO(orderEntity.getUserId()));
+    orderDTO.setUserId(orderEntity.getUserId());
     orderDTO.setOrderDate(orderEntity.getOrderDate());
     orderDTO.setNum(orderEntity.getNum());
-    orderDTO.setMovieCode(MovieDTO.toMovieDTO(orderEntity.getMovieCode()));
-    orderDTO.setScheduleCode(ScheduleDTO.toScheduleDTO(orderEntity.getScheduleCode()));
+    orderDTO.setMovieCode(orderEntity.getMovieCode());
+    orderDTO.setScheduleCode(orderEntity.getScheduleCode());
     orderDTO.setTeenagerCount(orderEntity.getTeenagerCount());
     orderDTO.setAdultCount(orderEntity.getAdultCount());
     orderDTO.setDisabledCount(orderEntity.getDisabledCount());
@@ -95,6 +98,17 @@ public class OrderDTO {
         e.printStackTrace();
         return null;
     }   
+    }
+
+    public void setUserId(MemberEntity memberEntity){
+        this.userId=MemberDTO.toMemberDTO(memberEntity);
+    }
+    public void setMovieCode(MovieEntity movieEntity){
+        this.movieCode=MovieDTO.toMovieDTO(movieEntity);
+    }
+
+    public void setScheduleCode(ScheduleEntity scheduleEntity){
+        this.scheduleCode=ScheduleDTO.toScheduleDTO(scheduleEntity);
     }
 
 }

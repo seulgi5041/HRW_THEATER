@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('.article_pay_simple').style.display = 'none';
     document.querySelector('.group_item').classList.add('active');
     choice_class_reset();
+    choice_company_class_reset();
     this.classList.add('choice');
   });
 
@@ -52,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('.article_pay_simple').style.display = 'none';
     document.querySelector('.group_item').classList.add('active');
     choice_class_reset();
+    choice_company_class_reset();
     this.classList.add('choice');
   });
 
@@ -65,6 +67,36 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     
   });
+
+  /* 메인 약관을체크하면 나머지도 다 체크되게하기*/
+
+  const chkSavingTerm = document.getElementById('chkSavingTerm');
+
+  // 다른 약관 동의 체크박스들
+  const chkProvisionTerm01 = document.getElementById('chkProvisionTerm01');
+  const chkProvisionTerm02 = document.getElementById('chkProvisionTerm02');
+  const chkProvisionTerm03 = document.getElementById('chkProvisionTerm03');
+  const chkProvisionTerm04 = document.getElementById('chkProvisionTerm04');
+  
+  // 결제대행 서비스 약관 동의 체크박스 상태가 변경될 때 이벤트 핸들러 추가
+  chkSavingTerm.addEventListener('change', function() {
+      // 만약 결제대행 서비스 약관 동의 체크박스가 체크되면
+      if (chkSavingTerm.checked) {
+          // 나머지 약관 동의 체크박스들도 모두 체크
+          chkProvisionTerm01.checked = true;
+          chkProvisionTerm02.checked = true;
+          chkProvisionTerm03.checked = true;
+          chkProvisionTerm04.checked = true;
+      } else {
+          // 결제대행 서비스 약관 동의 체크박스가 체크 해제되면
+          // 나머지 약관 동의 체크박스들도 모두 체크 해제
+          chkProvisionTerm01.checked = false;
+          chkProvisionTerm02.checked = false;
+          chkProvisionTerm03.checked = false;
+          chkProvisionTerm04.checked = false;
+      }
+  });
+
 
   /*정보 포스트로 보내기*/
   function go_on_post_mapping(choice_pay_info) {

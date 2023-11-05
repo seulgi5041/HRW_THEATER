@@ -93,7 +93,7 @@
                 <c:forEach items="${foodInfoList}" var="foodInfo" varStatus="loop">
                     
                 <dd>
-                  <span id="preview_store_info">${foodInfo.foodName} , 수량 : ${foodInfo.foodCount} , 가격 : ${foodInfo.foodPrice}</span>
+                  <span id="preview_store_info">${foodInfo.foodNameStr} , 수량 : ${foodInfo.foodCount} , 가격 : ${foodInfo.foodPrice}</span>
                 </dd>
 
                   </c:forEach>
@@ -184,21 +184,21 @@
         <!-- 선택한 음식 -->
         <div class="movie_info">
           <span class="thum">
-            <img src="../images/store/product/${foodInfoList[0].foodImgName}.png" alt="${foodInfoList[0].foodName}">
+            <img src="../images/store/product/${foodInfoList[0].foodImgName}.png" alt="${foodInfoList[0].foodNameStr}">
           </span>
           <strong class="tit">
-            ${foodInfoList[0].foodName}
+            ${foodInfoList[0].foodNameStr}
           </strong>
           <dl class="list_info">
             <dt>음식</dt>
             <dd>
               <c:forEach items="${foodInfoList}" var="food" varStatus="loop">
-                ${food.foodName}<c:if test="${!loop.last}">, </c:if>
+                ${food.foodNameStr}<c:if test="${!loop.last}">, </c:if>
                 </c:forEach>
             </dd>
             <dt>수량</dt>
             <c:forEach items="${foodInfoList}" var="food" varStatus="loop">
-              <c:if test="${!loop.first}"><dt></dt></c:if> <dd>${food.foodName} : ${food.foodCount}</dd>
+              <c:if test="${!loop.first}"><dt></dt></c:if> <dd>${food.foodNameStr} : ${food.foodCount}</dd>
                 </c:forEach>            
           </dl>
         </div>

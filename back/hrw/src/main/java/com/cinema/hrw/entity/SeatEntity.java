@@ -25,20 +25,23 @@ public class SeatEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int num;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_code", referencedColumnName = "orderCode")
     private OrderEntity orderCode;
 
     @Column
     private String seatName;
 
-    public static SeatEntity toOrderEntity(SeatDTO seatDTO){
+    public static SeatEntity toSeatEntity(SeatDTO seatDTO){
         SeatEntity seatEntity = new SeatEntity();
-        seatEntity.setNum(seatDTO.getNum());
-        seatEntity.setOrderCode(OrderEntity.toOrderEntity(seatDTO.getOrderCode()));
+        seatEntity.setOrderCode(seatDTO.getOrderCode());
         seatEntity.setSeatName(seatDTO.getSeatName());
         return seatEntity;
         }
+
+        public void setOrderCode(OrderDTO orderDTO){
+        this.orderCode=OrderEntity.toOrderEntity(orderDTO);
+    }
 
 
 }
