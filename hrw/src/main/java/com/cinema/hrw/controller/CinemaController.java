@@ -17,7 +17,9 @@ import java.util.ArrayList;
 import com.cinema.hrw.dto.MovieDTO;
 import com.cinema.hrw.entity.ScheduleEntity;
 import com.cinema.hrw.repository.MovieSelectRepository;
+import com.cinema.hrw.repository.ScheduleRepository;
 import com.cinema.hrw.service.CinemaAddressService;
+import com.cinema.hrw.service.ScheduleService;
 
 @Controller
 @RequestMapping("/cinema")
@@ -100,6 +102,23 @@ public class CinemaController {
     }
 
     return movies; // 영화 정보를 포함, JSON 형식으로 반환
+  }
+
+
+  // 상영시간표 부분
+  @Autowired
+  private ScheduleRepository scheduleRepository;
+
+  @GetMapping("/reservationFirst")
+  public String showReservationFirst(Model model) {
+      // Get schedules and dates
+      List<ScheduleEntity> schedules = scheduleRepository.findSchedulesAndCurrentTime("yourMovieCode");
+      List<String> availableDates = scheduleRepository.findCurrentDatesByMovieCode("yourMovieCode");
+
+      model.addAttribute("schedules", schedules);
+      model.addAttribute("availableDates", availableDates);
+
+      return "reservationFirst"; // Assuming your JSP file is named "reservationFirst.jsp"
   }
 
 }
