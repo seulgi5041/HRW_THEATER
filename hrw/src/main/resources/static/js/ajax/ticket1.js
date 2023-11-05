@@ -97,8 +97,22 @@ for (var local in localData) {
                 // 목록에 영화목록을 만들기
                 if (!SelectTitles.has(movie.title)) {
                   // 중복된 제목이 아니라면 영화 목록에 추가
-                  var movieItem = $("<li><a href='#'><div class='group_infor'><div class='bx_title'><span class='ic_grade " + movie.rating + "'></span><strong class='tit'>" + movie.title + "</strong></div></div></a></li>");
+                  var movieItem = $("<li><a href='#'><div class='group_infor'><div class='bx_title'><span class='ic_grade " + movie.rating + "'></span><strong class='tit' movie-code='" + movie.movieCode + "'>" + movie.title + "</strong></div></div></a></li>");
                   $('#movie-list-container').append(movieItem);
+
+                  // 클릭 이벤트 핸들러를 해당 li에 추가
+                  movieItem.click(function() {
+                    console.log("Selected Movie:", movie.title);
+                    movieListContainer.find("li").removeClass("active");
+                    $(this).addClass("active");
+                    // 클릭된 영화의 movieCode 값을 selectedMovieCode에 저장
+                    var clickedMovieCode = $(this).find('.tit').attr('movie-code');
+                    selectedMovieCode = clickedMovieCode; 
+                    console.log("Movie Code:", selectedMovieCode);
+                  });
+
+                  $('#movie-list-container').append(movieItem);
+
           
                   // 중복을 제거한 영화 제목을 Set에 추가
                   SelectTitles.add(movie.title);
@@ -154,7 +168,7 @@ depth2Select1.click(function() {
             // 목록에 영화목록을 만들기
             if (!DistinctTitle.has(movie.title)) {
               // 중복된 제목이 아니라면 영화 목록에 추가
-              var movieItem = $("<li><a href='#'><div class='group_infor'><div class='bx_title'><span class='ic_grade " + movie.rating + "'></span><strong class='tit' movie-code='" + movieCode + "'>" + movie.title + "</strong></div></div></a></li>");
+              var movieItem = $("<li><a href='#'><div class='group_infor'><div class='bx_title'><span class='ic_grade " + movie.rating + "'></span><strong class='tit' movie-code='" + movie.movieCode + "'>" + movie.title + "</strong></div></div></a></li>");
               $('#movie-list-container').append(movieItem);
       
 
@@ -165,7 +179,8 @@ depth2Select1.click(function() {
                 movieListContainer.find("li").removeClass("active");
                 $(this).addClass("active");
                 // 클릭된 영화의 movieCode 값을 selectedMovieCode에 저장
-                selectedMovieCode = $(this).find('.tit').attr('movie-code');
+                var clickedMovieCode = $(this).find('.tit').attr('movie-code');
+                selectedMovieCode = clickedMovieCode; 
                 console.log("Movie Code:", selectedMovieCode);
               });
 

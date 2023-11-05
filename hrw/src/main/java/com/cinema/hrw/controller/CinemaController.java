@@ -86,11 +86,13 @@ public class CinemaController {
     for (Object[] data : movieData) {
       String title = (String) data[1];
       String rating = (String) data[2];
+      String movieCode = (String) data[3];
 
       // MovieDTO 클래스의 새로운 인스턴스를 생성(영화 정보를 저장하는 데이터 전송 객체)
       MovieDTO movie = new MovieDTO();
       movie.setTitle(title);
       movie.setRating(rating);
+      movie.setMovieCode(movieCode);
 
       // 필요한 경우 Schedule Entity의 다른 속성을 Movie DTO에 추가할 수 있음
 
