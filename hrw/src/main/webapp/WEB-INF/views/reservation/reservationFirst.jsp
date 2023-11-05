@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +16,10 @@
   <!-- jQuery CDN 포함 -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../js/ajax/ticket1.js"></script>
+  <script>
+    // Get the current date
+    var currentDate = new Date();
+  </script>
   
 </head>
 <body>
@@ -259,21 +265,31 @@
               <ul clss="owl-carousel owl-loaded owl-drag">
                 <div class="owl-stage-outer">
                   <div class="owl-stage">
+                    <c:forEach var="date" items="${availableDates}" varStatus="loop">
+                    <c:set var="loopDate" value="${fn:substring(date, 0, 10)}" />
+                    <c:set var="formattedDate" value="${fn:replace(loopDate, '-', '')}" />
+                    <c:set var="dayOfWeek" value="${fn:substring(date, 11, fn:length(date))}" />
 
-                    <!-- 각 li에 들어갈 날짜들 -->
-                    <div class="owl-item active" style="width: 52px;">
-                      <li class="item">
-                        <strong class="month">10월</strong>
-                        <a href="#none" class="date" tabindex="0">
-                          <label for="radioDate0">
-                            <input type="radio" id="radioDate0" name="radioDate1" data-displayn="Y" data-playdate="2023-10-18" data-isplaydate="Y" data-playweek="오늘" checked>
-                            <strong>18</strong>
-                            <em>오늘</em>
-                          </label>
-                        </a>
-                      </li>
-                    </div>
-                    <div class="owl-item active" style="width: 52px;">
+                    <!-- Debugging -->
+                    <c:out value="formattedDate: ${formattedDate}" />
+                    <c:out value="dayOfWeek: ${dayOfWeek}" />
+                    <!-- The formattedDate should now be in 'yyyyMMdd' format. -->
+
+                        <div class="owl-item active" style="width: 52px;">
+                            <li class="item">
+                                <strong class="month">${fn:substring(formattedDate, 4, 6)}월</strong>
+                                <a href="#none" class="date" tabindex="0">
+                                    <label for="radioDate${loop.index}">
+                                        <input type="radio" id="radioDate${loop.index}" name="radioDate1" data-displayn="Y" data-playdate="${formattedDate}" data-isplaydate="Y" data-playweek="${loop.index eq 0 ? '오늘' : dayOfWeek}">
+                                        <strong>${fn:substring(formattedDate, 6, 8)}</strong>
+                                        <em>${loop.index eq 0 ? '오늘' : dayOfWeek}</em>
+                                    </label>
+                                </a>
+                            </li>
+                        </div>
+                      </c:forEach>
+
+                    <!-- <div class="owl-item active" style="width: 52px;">
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate1">
@@ -349,7 +365,7 @@
                           </label>
                         </a>
                       </li>
-                    </div>
+                    </div> -->
                     
                     
                   </div>
@@ -380,6 +396,8 @@
                         <strong>30일</strong>
                       </span>
                     </div>
+
+
                     <div class="time_select_wrap timeSelect">
                       <ul class="list_time">
                         <li class>
