@@ -173,6 +173,37 @@ function updateThirdDdText(event) {
       // 모달 열기 함수 호출
       openModal();
 
+
+      /*좌석선택시 포스트 매핑 나중에 변경할것 */
+      const seatSelectionLink = document.getElementById("stepOnePopupConButton");
+
+      seatSelectionLink.addEventListener("click", function() {
+        
+        go_on_post_mapping();  
+      });
+
+      function go_on_post_mapping() {
+        const scheduleCode = "11025042023110821";
+
+        let form = document.createElement('form');
+
+        // scheduleCode를 숨겨진 입력 필드로 추가
+        let scheduleCodeInput = document.createElement('input');
+        scheduleCodeInput.setAttribute('type', 'hidden');
+        scheduleCodeInput.setAttribute('name', 'scheduleCode');
+        scheduleCodeInput.setAttribute('value', scheduleCode);
+        form.appendChild(scheduleCodeInput);
+
+
+        form.setAttribute('method', 'post');
+        form.setAttribute('action', '/reservation/second');
+        
+        // 필요한 경우 데이터 유효성 검사 수행
+
+        document.body.appendChild(form);
+        form.submit();
+      }
+
       // 이벤트 기본 동작 방지 (a 태그의 링크 이동 방지)
       event.preventDefault();
     });

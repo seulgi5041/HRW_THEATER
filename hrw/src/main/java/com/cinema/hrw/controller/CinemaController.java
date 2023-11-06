@@ -118,7 +118,7 @@ public class CinemaController {
   public List<String> showAvailableDates() {
       List<String> availableDates = scheduleRepository.findDistinctAvailableDates();
       logger.info("Available Dates: {}", availableDates);
-      
+
       return availableDates;
   }
 
@@ -134,7 +134,7 @@ public class CinemaController {
 
       // Other logic
 
-      return "movieSchedules"; // Assuming you have a JSP file to display movie schedules
+      return "reservationFirst"; // Assuming you have a JSP file to display movie schedules
   }
 
 }
