@@ -12,8 +12,11 @@ public class ScheduleService {
     @Autowired
     private ScheduleRepository scheduleRepository;
 
-    public List<ScheduleEntity> findSchedulesByMovieCodeAndCurrentTime(String movieCode) {
-        return scheduleRepository.findSchedulesAndCurrentTime(movieCode);
+    public List<String> findAvailableDatesByMovieCode(String movieCode) {
+        return scheduleRepository.findDistinctAvailableDates();
     }
-    
+
+    public List<ScheduleEntity> findSchedulesByCinemaMovieAndDate(String cinemaCode, String movieCode, String selectedDate) {
+        return scheduleRepository.findSchedulesByCinemaMovieAndDate(cinemaCode, movieCode, selectedDate);
+    }
 }
