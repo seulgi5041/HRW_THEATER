@@ -23,6 +23,9 @@ $.ajax({
 });
 });
 
+
+
+
 // DOM 요소를 선택하고 이벤트를 등록하는 함수(기존의 자바스크립트 구현을 가져오는 구간)
 function selectAndRegisterEvents(localData) {
 // 보여줘야 하는 부분
@@ -182,6 +185,7 @@ depth2Select1.click(function() {
                 var clickedMovieCode = $(this).find('.tit').attr('movie-code');
                 selectedMovieCode = clickedMovieCode; 
                 console.log("Movie Code:", selectedMovieCode);
+         
               });
 
               $('#movie-list-container').append(movieItem);

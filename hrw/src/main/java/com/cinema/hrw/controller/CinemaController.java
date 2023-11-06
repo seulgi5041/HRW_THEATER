@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,8 +27,8 @@ import com.cinema.hrw.service.ScheduleService;
 public class CinemaController {
 
   private final CinemaAddressService cinemaAddressService;
-  // private static final Logger logger =
-  // LoggerFactory.getLogger(CinemaController.class); // Logger 객체 정의
+  //private static final Logger logger =
+  //LoggerFactory.getLogger(CinemaController.class); // Logger 객체 정의
 
   // @GetMapping("/reservation")
   // public String showJspPage() {
@@ -109,16 +110,31 @@ public class CinemaController {
   @Autowired
   private ScheduleRepository scheduleRepository;
 
-  @GetMapping("/reservationFirst")
-  public String showReservationFirst(Model model) {
-      // Get schedules and dates
-      List<ScheduleEntity> schedules = scheduleRepository.findSchedulesAndCurrentTime("yourMovieCode");
-      List<String> availableDates = scheduleRepository.findCurrentDatesByMovieCode("yourMovieCode");
+  private static final Logger logger =
+  LoggerFactory.getLogger(CinemaController.class);
 
+  @GetMapping("/schedule")
+  @ResponseBody
+  public List<String> showAvailableDates() {
+      List<String> availableDates = scheduleRepository.findDistinctAvailableDates();
+      logger.info("Available Dates: {}", availableDates);
+      
+      return availableDates;
+  }
+
+  @GetMapping("/schedule/{cinemaCode}/{movieCode}/{selectedDate}")
+  public String showMovieSchedulesForDate(
+      @PathVariable String cinemaCode,
+      @PathVariable String movieCode,
+      @PathVariable String selectedDate,
+      Model model ) {
+      // Retrieve and load movie schedules based on cinema, movie, and selected date
+      List<ScheduleEntity> schedules = scheduleRepository.findSchedulesByCinemaMovieAndDate(cinemaCode, movieCode, selectedDate);
       model.addAttribute("schedules", schedules);
-      model.addAttribute("availableDates", availableDates);
 
-      return "reservationFirst"; // Assuming your JSP file is named "reservationFirst.jsp"
+      // Other logic
+
+      return "movieSchedules"; // Assuming you have a JSP file to display movie schedules
   }
 
 }
