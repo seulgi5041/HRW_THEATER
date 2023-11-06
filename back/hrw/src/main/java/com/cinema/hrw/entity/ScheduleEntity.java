@@ -147,21 +147,22 @@ public class ScheduleEntity {
 
     public static ScheduleEntity toScheduleEntity(ScheduleDTO scheduleDTO) {
         ScheduleEntity scheduleEntity = new ScheduleEntity();
-        scheduleEntity.setScheduleCode(scheduleDTO.getScheduleCode());
+        scheduleEntity.setScheduleCode(scheduleDTO.getScheduleCode()!= null ? scheduleDTO.getScheduleCode() : "");
         scheduleEntity.setCinemaCode(scheduleDTO.getCinemaCode());
-        scheduleEntity.setAuditorium(scheduleDTO.getAuditorium());
-        scheduleEntity.setTakeDate(scheduleDTO.getTakeDate());
-        scheduleEntity.setTakeDateOfWeek(scheduleDTO.getTakeDateOfWeek());
+        scheduleEntity.setAuditorium(scheduleDTO.getAuditorium()!= null ? scheduleDTO.getAuditorium() : "");
+        scheduleEntity.setTakeDate(scheduleDTO.getTakeDate()!= null ? scheduleDTO.getTakeDate() : "");
+        scheduleEntity.setTakeDateOfWeek(scheduleDTO.getTakeDateOfWeek()!= null ? scheduleDTO.getTakeDateOfWeek() : "");
         scheduleEntity.setMovieCode(scheduleDTO.getMovieCode());
-        scheduleEntity.setStartTime(scheduleDTO.getStartTime());
-        scheduleEntity.setEndTime(scheduleDTO.getEndTime());
-        scheduleEntity.setScreenType(scheduleDTO.getScreenType());
-        scheduleEntity.setAllSeatCount(scheduleDTO.getAllSeatCount());
-        scheduleEntity.setTeenagerPrice(scheduleDTO.getTeenagerPrice());
-        scheduleEntity.setAdultPrice(scheduleDTO.getAdultPrice());
-        scheduleEntity.setDisabledPrice(scheduleDTO.getDisabledPrice());
+        scheduleEntity.setStartTime(scheduleDTO.getStartTime()!= null ? scheduleDTO.getStartTime() : "");
+        scheduleEntity.setEndTime(scheduleDTO.getEndTime()!= null ? scheduleDTO.getEndTime() : "");
+        scheduleEntity.setScreenType(scheduleDTO.getScreenType()!= null ? scheduleDTO.getScreenType() : "");
+        scheduleEntity.setAllSeatCount(scheduleDTO.getAllSeatCount()!= null ? scheduleDTO.getAllSeatCount() : 0);
+        scheduleEntity.setTeenagerPrice(scheduleDTO.getTeenagerPrice()!= null ? scheduleDTO.getTeenagerPrice() : 0);
+        scheduleEntity.setAdultPrice(scheduleDTO.getAdultPrice()!= null ? scheduleDTO.getAdultPrice() : 0);
+        scheduleEntity.setDisabledPrice(scheduleDTO.getDisabledPrice()!= null ? scheduleDTO.getDisabledPrice() : 0);
         return scheduleEntity;
     }
+
 
     public void setMovieCode(MovieDTO movieDTO){
         this.movieCode=MovieEntity.toMovieEntity(movieDTO);

@@ -84,6 +84,11 @@ color: #383838;
 .oder_movie_info_cell{
   padding: 0 50px;
   display: flex;
+  margin: 0 50px;
+}
+
+.oder_movie_info_cell.hidden{
+  display: none;
 }
 
 .oder_movie_poster{
@@ -200,6 +205,14 @@ height: auto;
 
 }
 
+.oder_movie_check.hidden{
+  display: none;
+}
+
+.oder_movie_info_sum.hidden{
+  display: none;
+}
+
 /*음식주문정보*/
 
 #oder_food_container{
@@ -280,25 +293,25 @@ height: auto;
   color: #383838;
 }
 
-.oder_food_price_sum{
+#oder_food_price_sum{
   padding-right: 150px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end !important;
 }
 
-.oder_food_price_sum h3{
+#oder_food_price_sum h3{
   font-size: 2em;
   color: #383838;
   margin-right: 50px;
 }
 
-.oder_food_price_sum p{
+#oder_food_price_sum p{
   font-size: 1.8em;
   color: #848484;
 
 }
-.oder_food_price_sum.hidden{
+#oder_food_price_sum.hidden{
   display: none;
 }
 

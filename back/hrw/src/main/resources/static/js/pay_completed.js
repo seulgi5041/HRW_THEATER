@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function() {
      const go_order_detail_btn = document.getElementById('go_order_detail_btn')
   
      go_order_detail_btn.addEventListener('click', function(){
-      alert("이동")
         let oder_code = go_order_detail_btn.getAttribute('data-ordercode');
         let form = document.createElement('form');
       

@@ -33,20 +33,20 @@ public class CinemaAddressEntity {
     private String tell;
 
     @Column
-    private double xAxis;
+    private Double xAxis;
     
     @Column
-    private double yAxis;
+    private Double yAxis;
 
     public static CinemaAddressEntity toCinemaAddressEntity(CinemaAddressDTO cinemaAddressDTO) {
         CinemaAddressEntity cinemaAddressEntity = new CinemaAddressEntity();
-        cinemaAddressEntity.setCinemaCode(cinemaAddressDTO.getCinemaCode());
-        cinemaAddressEntity.setCinemaName(cinemaAddressDTO.getCinemaName());
-        cinemaAddressEntity.setAddress(cinemaAddressDTO.getAddress());
-        cinemaAddressEntity.setTell(cinemaAddressDTO.getTell());
-        cinemaAddressEntity.setXAxis(cinemaAddressDTO.getXAxis());
-        cinemaAddressEntity.setYAxis(cinemaAddressDTO.getYAxis());
-        cinemaAddressEntity.setLocal(cinemaAddressDTO.getLocal());
+        cinemaAddressEntity.setCinemaCode(cinemaAddressDTO.getCinemaCode() != null ? cinemaAddressDTO.getCinemaCode() : "");
+        cinemaAddressEntity.setCinemaName(cinemaAddressDTO.getCinemaName() != null ? cinemaAddressDTO.getCinemaName() : "");
+        cinemaAddressEntity.setAddress(cinemaAddressDTO.getAddress() != null ? cinemaAddressDTO.getAddress() : "");
+        cinemaAddressEntity.setTell(cinemaAddressDTO.getTell() != null ? cinemaAddressDTO.getTell() : "");
+        cinemaAddressEntity.setXAxis(cinemaAddressDTO.getXAxis() != null ? cinemaAddressDTO.getXAxis() : 0);
+        cinemaAddressEntity.setYAxis(cinemaAddressDTO.getYAxis() != null ? cinemaAddressDTO.getYAxis() : 0);
+        cinemaAddressEntity.setLocal(cinemaAddressDTO.getLocal() != null ? cinemaAddressDTO.getLocal() : "");
         return cinemaAddressEntity;
     }
 

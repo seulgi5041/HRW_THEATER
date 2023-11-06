@@ -186,7 +186,7 @@ seatSelectionLink.addEventListener("click", function() {
 });
 
 function go_on_post_mapping() {
-  const scheduleCode = "10010012023110206";
+  const scheduleCode = "11025042023110821";
 
   let form = document.createElement('form');
 

@@ -175,8 +175,8 @@ public class ReservationController {
 		return "reservation/payment";}
 	}
 
-	@PostMapping("/reservation/paymentCheck")
-	public String reservationpaymentCheck(@RequestParam("pay_info") String payInfo, HttpSession session, Model model) {
+	@PostMapping("/reservation/paymentCompleted")
+	public String reservationPaymentCompleted(@RequestParam("pay_info") String payInfo, HttpSession session, Model model) {
 		OrderDTO payInfoDTO = OrderDTO.toPayInfo(payInfo);
 		ScheduleDTO scheduleDTO = (ScheduleDTO) session.getAttribute("scheduleCode");
 		OrderDTO person_count = (OrderDTO) session.getAttribute("countAndPrice");
@@ -201,10 +201,6 @@ public class ReservationController {
 		return nextPage;
 	}
 	
-	@PostMapping("/reservation/paymentCompleted")
-	public String reservationPaymentCompleted() {
-		return "reservation/paymentCompleted";
-	}
 
 
 }

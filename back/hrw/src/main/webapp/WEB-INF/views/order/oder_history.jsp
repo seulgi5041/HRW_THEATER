@@ -26,10 +26,10 @@
         <div class="oder_history_info">
           
           <div class="oder_history_title_cell">
-            <h3>0000.00.00</h3> <!--주문일-->
+            <h3>2023-08-10</h3> <!--주문일-->
             <dl>
               <dt>주문번호</dt>
-              <dd>aaa0120231025001</dd>
+              <dd>20231106022</dd>
             </dl>
           </div>
 
@@ -37,7 +37,7 @@
             <table>
               <tr>
                 <th>영화</th>
-                <td>주문한영화이름</td>
+                <td>30일</td>
               </tr>
 
               <tr>

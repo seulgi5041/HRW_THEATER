@@ -36,7 +36,7 @@ public class OrderEntity {
 
 
     @Column
-    private int num;
+    private int num = 0;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "movie_code", referencedColumnName = "code") // name 및 referencedColumnName 추가
@@ -47,19 +47,19 @@ public class OrderEntity {
     private ScheduleEntity scheduleCode;
     
     @Column
-    private int teenagerCount;
+    private int teenagerCount = 0;
 
     @Column
-    private int adultCount;
+    private int adultCount= 0;
 
     @Column
-    private int disabledCount;
+    private int disabledCount= 0;
 
     @Column
     private Long moviePrice;
 
     @Column
-    private int movieOrderCondition; // 주문안함: 0, 주문함: 1, 수령완료: 2, 취소함: 3
+    private int movieOrderCondition = 0; // 주문안함: 0, 주문함: 1, 수령완료: 2, 취소함: 3
 
     @Column
     private String payMethod;
@@ -70,23 +70,24 @@ public class OrderEntity {
 
     @Transient
     private Long allPrice; // 총결제액
+    
 
 
     public static OrderEntity toOrderEntity(OrderDTO orderDTO){
         OrderEntity orderEntity = new OrderEntity();
-        orderEntity.setOrderCode(orderDTO.getOrderCode());
+        orderEntity.setOrderCode(orderDTO.getOrderCode() != null ? orderDTO.getOrderCode() : "");
         orderEntity.setUserId(orderDTO.getUserId());
-        orderEntity.setOrderDate(orderDTO.getOrderDate());
+        orderEntity.setOrderDate(orderDTO.getOrderDate()!= null ? orderDTO.getOrderDate() : "");
         orderEntity.setNum(orderDTO.getNum());
         orderEntity.setMovieCode(orderDTO.getMovieCode());
         orderEntity.setScheduleCode(orderDTO.getScheduleCode());
         orderEntity.setTeenagerCount(orderDTO.getTeenagerCount());
         orderEntity.setAdultCount(orderDTO.getAdultCount());
         orderEntity.setDisabledCount(orderDTO.getDisabledCount());
-        orderEntity.setMoviePrice(orderDTO.getMoviePrice());
+        orderEntity.setMoviePrice(orderDTO.getMoviePrice()!= null ? orderDTO.getMoviePrice() : 0);
         orderEntity.setMovieOrderCondition(orderDTO.getMovieOrderCondition());
-        orderEntity.setPayMethod(orderDTO.getPayMethod());
-        orderEntity.setPayCompany(orderDTO.getPayCompany());
+        orderEntity.setPayMethod(orderDTO.getPayMethod()!= null ? orderDTO.getPayMethod() : "");
+        orderEntity.setPayCompany(orderDTO.getPayCompany()!= null ? orderDTO.getPayCompany() : "");
         return orderEntity;
         }
 
@@ -96,6 +97,7 @@ public class OrderEntity {
     public void setMovieCode(MovieDTO movieDTO){
         this.movieCode=MovieEntity.toMovieEntity(movieDTO);
     }
+
 
     public void setScheduleCode(ScheduleDTO scheduleDTO){
         this.scheduleCode=ScheduleEntity.toScheduleEntity(scheduleDTO);

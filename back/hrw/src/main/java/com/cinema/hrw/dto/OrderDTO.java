@@ -26,21 +26,21 @@ public class OrderDTO {
 
     private String orderDate;
 
-    private int num;
+    private int num = 0;
 
     private MovieDTO movieCode;
     
     private ScheduleDTO scheduleCode;
     
-    private int teenagerCount;
+    private int teenagerCount = 0;
 
-    private int adultCount;
+    private int adultCount = 0;
 
-    private int disabledCount;
+    private int disabledCount = 0;
 
     private Long moviePrice;
 
-    private int movieOrderCondition; // 주문안함: 0, 주문함: 1, 수령완료: 2, 취소함: 3
+    private int movieOrderCondition = 0; // 주문안함: 0, 주문함: 1, 수령완료: 2, 취소함: 3
 
     private String payMethod;
 
@@ -51,19 +51,19 @@ public class OrderDTO {
 
     public static OrderDTO toOrderDTO(OrderEntity orderEntity){
     OrderDTO orderDTO = new OrderDTO();
-    orderDTO.setOrderCode(orderEntity.getOrderCode());
+    orderDTO.setOrderCode(orderEntity.getOrderCode() != null ? orderEntity.getOrderCode() : "");
     orderDTO.setUserId(orderEntity.getUserId());
-    orderDTO.setOrderDate(orderEntity.getOrderDate());
+    orderDTO.setOrderDate(orderEntity.getOrderDate()!= null ? orderEntity.getOrderDate() : "");
     orderDTO.setNum(orderEntity.getNum());
     orderDTO.setMovieCode(orderEntity.getMovieCode());
     orderDTO.setScheduleCode(orderEntity.getScheduleCode());
     orderDTO.setTeenagerCount(orderEntity.getTeenagerCount());
     orderDTO.setAdultCount(orderEntity.getAdultCount());
     orderDTO.setDisabledCount(orderEntity.getDisabledCount());
-    orderDTO.setMoviePrice(orderEntity.getMoviePrice());
-    orderDTO.setMovieOrderCondition(orderEntity.getMovieOrderCondition());
-    orderDTO.setPayMethod(orderEntity.getPayMethod());
-    orderDTO.setPayCompany(orderEntity.getPayCompany());
+    orderDTO.setMoviePrice(orderEntity.getMoviePrice() != null ? orderEntity.getMoviePrice() :0);
+    orderDTO.setMovieOrderCondition(orderEntity.getMovieOrderCondition() );
+    orderDTO.setPayMethod(orderEntity.getPayMethod()!= null ? orderEntity.getPayMethod() : "");
+    orderDTO.setPayCompany(orderEntity.getPayCompany()!= null ? orderEntity.getPayCompany() : "");
     return orderDTO;
     }
 

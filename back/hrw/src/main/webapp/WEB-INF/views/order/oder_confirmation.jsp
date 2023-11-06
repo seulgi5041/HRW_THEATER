@@ -15,10 +15,10 @@
   <main>
     <section id="oder_confirmation_wrap">
       <div id="oder_confirmation_title">
-        <h1>2023.10.23 주문</h1>
+        <h1>${orderInfo.orderDate} 주문</h1>
          <dl>
           <dt> 주문번호</dt>
-          <dd>aaa0120231025001</dd>
+          <dd>${orderInfo.orderCode}</dd>
          </dl>
         </div>
       
@@ -30,74 +30,33 @@
 
         <div class="oder_movie_info_cell">
 
-          <div class="oder_movie_poster">
-            <img src="../images/poster_rank/20212667.jpg" alt="영화제목" >
-          </div>
-
-          <div class="oder_movie_info">
-            <h3>영화 제목</h3>
-            <h4>12세 연령가</h4>
-            <h4>2D 디지털</h4>
-          </div>
-
-          <div class="oder_cinema_info">
-            <table class="oder_movie_info_table">
-
-              <tr>
-                <th>극장</th>
-                <td>인천부평역점</td>
-              </tr>
-
-              <tr>
-                <th>상영일</th>
-                <td>2023년10월10일 </td>
-              </tr>
-
-              <tr>
-                <th>상영시간</th>
-                <td>00:00~00:00</td>
-              </tr>
-
-            </table>
-          </div>
-
-          <div class="oder_theater_info">
-            <table class="oder_movie_info_table">
-
-              <tr>
-                <th>상영관</th>
-                <td>10관 6층</td>
-              </tr>
-
-              <tr>
-                <th>인원</th>
-                <td>일반석</td>
-              </tr>
-
-              <tr>
-                <th>좌석번호</th>
-                <td>b11, b11, b11, b11</td>
-              </tr>
-
-              
-            </table>
-          </div>
-
-        </div>
-
-        <div class="oder_movie_info_cell hidden">
           <div class="oder_movie_check">
             <button class="oder_movie_check_btn "><img src="../images/oder/check_white.png" class="oder_movie_check_img"></button>
           </div>
 
           <div class="oder_movie_poster">
-            <img src="../images/poster_rank/20197122.jpg" alt="영화제목" >
+            <img src="../images/poster_rank/${orderInfo.movieCode}.jpg" alt="${orderInfo.movieCode}" >
           </div>
 
           <div class="oder_movie_info">
-            <h3>영화 제목</h3>
-            <h4>12세 연령가</h4>
-            <h4>2D 디지털</h4>
+            <h3>${orderInfo.movieTitle}</h3>
+            <h4>
+              <c:choose>
+                <c:when test="${orderInfo.movieRating eq 'gr_all'}">
+                    모든 연령 관람가
+                </c:when>
+                <c:when test="${orderInfo.movieRating eq 'gr_12'}">
+                    12세 관람가
+                </c:when>
+                <c:when test="${orderInfo.movieRating eq 'gr_15'}">
+                    15세 관람가
+                </c:when>
+                <c:when test="${orderInfo.movieRating eq 'gr_18'}">
+                    18세 관람가
+                </c:when>
+              </c:choose>
+          </h4>
+            <h4>${orderInfo.screenType}</h4>
           </div>
 
           <div class="oder_cinema_info">
@@ -105,17 +64,17 @@
 
               <tr>
                 <th>극장</th>
-                <td>인천부평역점</td>
+                <td>${orderInfo.cinemaName}</td>
               </tr>
 
               <tr>
-                <th>일시</th>
-                <td>2023년10월10일 00:00~00:00</td>
+                <th>상영일</th>
+                <td>${orderInfo.takeDate}</td>
               </tr>
 
               <tr>
-                <th>인원</th>
-                <td>일반 2명</td>
+                <th>상영시간</th>
+                <td>${orderInfo.startTime} ~ ${orderInfo.endTime}</td>
               </tr>
 
             </table>
@@ -126,17 +85,25 @@
 
               <tr>
                 <th>상영관</th>
-                <td>10관 6층</td>
+                <td>${orderInfo.auditorium}</td>
               </tr>
 
               <tr>
-                <th>좌석명</th>
-                <td>일반석</td>
+                <th>인원</th>
+                <td>
+                  성인 : ${orderInfo.adultCount} |
+                   청소년 : ${orderInfo.teenagerCount} |
+                   장애인 : ${orderInfo.disabledCount}
+                  </td>
               </tr>
 
               <tr>
                 <th>좌석번호</th>
-                <td>b11, b11, b11, b11</td>
+                <td>
+                  <c:forEach items="${seatList}" var="seat" varStatus="loop">
+                  '${seat.seatName}'<c:if test="${!loop.last}">, </c:if>
+                </c:forEach>
+              </td>
               </tr>
 
               
@@ -145,15 +112,17 @@
 
         </div>
 
-        <div class="oder_movie_info_sum">
+       
+
+        <div class="oder_movie_info_sum" id="oder_movie_info_sum_id">
           <h3>합계</h3>
-          <P>35,000 원</P>
+          <P>${orderInfo.moviePrice} 원</P>
         </div>
 
 
       </article>
 
-      <div class="no_oder_result">
+      <div class="no_oder_result" id="movie_no_order">
         <img src="../images/movie/no_data.png" alt="X"><h2> 주문정보 가 없습니다.</h2>
       </div>
 
@@ -166,84 +135,18 @@
 
         <div id="oder_food_container_info">
 
-          <div class="oder_food_container_cell">
-            <div class="oder_food_container_cell_img">
-              <img src="../images/store/product/double_popcorn.png" alt="더블콤보">
-            </div>
-            <div class="oder_food_info">
-              <p>팝콘(M)2 + 탄산(M)2</p>
-              <div class="oder_food_name">
-                <h4>더블콤보</h4>
-              </div>
-              <div class="oder_food_basket">
-                <div class="oder_food_quantity">
-                  <span>0</span>
-                </div>
-                <div class="oder_food_price">
-                  <span>13,000<em>원</em></span>
-                </div>
-              </div>
-              <div class="oder_food_basket_check ">
-                <div class="oder_food_quantity">
-                  <button class="oder_food_minusbutton">
-                    <img src="../images/store/minus.png" alt="minus">
-                  </button>
-                  <span>0</span>
-                  <button class="oder_food_plusbutton">
-                    <img src="../images/store/plus.png" alt="plus">
-                  </button>
-                </div>
-                <div class="oder_food_price">
-                  <span>10,000<em>원</em></span>
-                </div>
-              </div>
-            </div>
-          </div>
 
 
-          <div class="oder_food_container_cell hidden">
-            <div class="oder_food_container_cell_img">
-              <img src="../images/store/product/coffee_ice.png" alt="팝콘_기본맛">
-            </div>
-            <div class="oder_food_info">
-              <p>팝콘(M)2 + 탄산(M)2</p>
-              <div class="oder_food_name">
-                <h4>더블콤보</h4>
-              </div>
-              <div class="oder_food_basket">
-                <div class="oder_food_quantity">
-                  <span>0</span>
-                </div>
-                <div class="oder_food_price">
-                  <span>13,000<em>원</em></span>
-                </div>
-              </div>
-              <div class="oder_food_basket_check hidden">
-                <div class="oder_food_quantity">
-                  <button class="oder_food_minusbutton">
-                    <img src="../images/store/minus.png" alt="minus">
-                  </button>
-                  <span>0</span>
-                  <button class="oder_food_plusbutton">
-                    <img src="../images/store/plus.png" alt="plus">
-                  </button>
-                </div>
-                <div class="oder_food_price">
-                  <span>10,000<em>원</em></span>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-          <div class="oder_food_price_sum">
+          <div id="oder_food_price_sum" >
             <h3>합계</h3>
-            <P>35,000 원</P>
+            <P>00원</P>
           </div>
 
         
         
 
-        <div class="no_oder_result hidden">
+        <div class="no_oder_result" id="food_no_order">
           <img src="../images/movie/no_data.png" alt="X"><h2> 주문정보 가 없습니다.</h2>
         </div>
 
@@ -256,22 +159,42 @@
 
           <div class="payment_info">
             <table>
-
-              <tr>
-                <th>결제수단</th>
-                <td>카드</td> <!-- 카드, 무통장입금, 간편결제-->
-              </tr>
-
-              <tr>
-                <th>카드사</th><!--  무통장입금시 은행, 간편결제시 결제사-->
-                <td>현대</td>
-              </tr>
+              <c:choose>
+                <c:when test="${orderInfo.payMethod eq '카드'}">
+                  <tr>
+                    <th>결제수단</th>
+                    <td>${orderInfo.payMethod}</td> <!-- 카드, 무통장입금, 간편결제-->
+                  </tr>
+    
+                  <tr>
+                    <th>카드사</th><!--  무통장입금시 은행, 간편결제시 결제사-->
+                    <td>${orderInfo.payCompany}</td>
+                  </tr>
+                </c:when>
+                <c:when test="${orderInfo.payMethod eq '간편결제'}">
+                  <tr>
+                    <th>결제수단</th>
+                    <td>${orderInfo.payMethod}</td> <!-- 카드, 무통장입금, 간편결제-->
+                  </tr>
+    
+                  <tr>
+                    <th>대행사</th><!--  무통장입금시 은행, 간편결제시 결제사-->
+                    <td>${orderInfo.payCompany}</td>
+                  </tr>
+                </c:when>
+                <c:otherwise>
+                  <tr>
+                    <th>결제수단</th>
+                    <td>${orderInfo.payMethod}</td> <!-- 카드, 무통장입금, 간편결제-->
+                  </tr>
+                </c:otherwise>
+            </c:choose>
             </table>
           </div>
 
         <div id="oder_price_content">
           <h3>총 결제금액</h3>
-          <P>35,000 원</P>
+          <P><span>0000</span> 원</P>
         </div>
       </article>
 
@@ -294,7 +217,12 @@
 <!-- 푸터 -->
 <jsp:include page="../include/footer.jsp"/>
 
-
+<script>
+ const movie_order_condition = ${orderInfo.movieOrderCondition};
+ const choice_order_code = ${orderInfo.orderCode};
+ const order_take_date = '${orderInfo.orderDate}';
+ const order_movie_price = '${orderInfo.moviePrice}';
+</script>
   <script src="../js/oder_confirmation.js"></script>
   <script src="../js/common.js"></script>
 </body>

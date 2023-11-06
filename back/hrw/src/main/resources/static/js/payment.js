@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
     form.appendChild(choice_pay_info_input);
   
     form.setAttribute('method', 'post');
-    form.setAttribute('action', '/reservation/paymentCheck');
+    form.setAttribute('action', '/reservation/paymentCompleted');
     
     // 필요한 경우 데이터 유효성 검사 수행
   

@@ -220,7 +220,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /*클릭시 좌석정보 step01에 추가*/
 
-function on_choice_seat_list(){const choice_seats = document.querySelectorAll('.sel.on'); /*배열에 추가 */
+function on_choice_seat_list(){
+  const choice_seats = document.querySelectorAll('.sel.on'); /*배열에 추가 */
 const choice_seat_list = [];
 choice_seats.forEach((seat) => {
   const dataSeat = seat.getAttribute('data-seat');
@@ -286,8 +287,14 @@ function set_go_to_next_info(choice_list, choice_person_count, choice_total_pric
 }
 
 link_rpay_btn.addEventListener("click", () => {
+ /**입력한좌석수와 인원수가안맞으면 안보내기 */
   const { choice_seat_list, choice_person_count, choice_total_price } = set_go_to_next_info();
-  go_on_post_mapping(choice_seat_list, choice_person_count, choice_total_price)
+  let total_choice_count = Object.values(personCounts).reduce((acc, count) => acc + count, 0);
+  if(total_choice_count ===choice_seat_list.length){
+  go_on_post_mapping(choice_seat_list, choice_person_count, choice_total_price)}
+  else{
+    alert("선택한 좌석 수와 인원 수가 일치 해야 합니다.")
+  }
 });
 
 function go_on_post_mapping(choice_seat_list, choice_person_count, choice_total_price) {

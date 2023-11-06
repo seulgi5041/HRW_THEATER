@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (isLoggedIn === "true") {
             //로그인하면 보여질 메뉴들
             loginList.innerHTML = `
-                <li><a href="#">주문 확인</a></li>
+                <li><a href="/order/history">주문 확인</a></li>
                 <li><a href="/member/userInfo">정보 확인</a></li>
                 <li><a href="/question/list">문의 하기</a></li>
                 <li><a href="/member/logout" id="logout_link">로그아웃</a></li>

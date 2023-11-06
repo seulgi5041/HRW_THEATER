@@ -46,7 +46,8 @@ def no_update_movie_delete():
     try:
         conn = pymysql.connect(host='localhost', user='root', password='1234', db='moviepjt', charset='utf8')
         with conn.cursor() as cursor:
-            sql = "DELETE FROM movietbl WHERE update_date != CURDATE();"
+            sql = ("UPDATE movietbl set advance_reservation_rate = -1000, increase_decrease_status = 4, "
+                   "advance_reservation_rate_rank = 1000 WHERE update_date != CURDATE();")
             cursor.execute(sql)
         conn.commit()
         print("업데이트누적분 삭제")
@@ -58,19 +59,41 @@ def no_update_movie_delete():
 
 # advance_reservation_rate_rank 에 순위지정
 def advance_reservation_rate_rank_update():
-    engine = create_engine('mysql+pymysql://root:1234@localhost/moviepjt?charset=utf8')
-    no_update_movie_delete()#랭킹업데이트전 누적분삭제
-    # 데이터베이스에서 영화 정보를 가져옴
-    sql_query = "SELECT * FROM movietbl ORDER BY advance_reservation_rate DESC"
-    data = pd.read_sql(sql_query, engine)
+    try:
+        # 데이터베이스 연결
+        connection = pymysql.connect(
+            host='localhost',
+            user='root',
+            password='1234',
+            db='moviepjt',
+            charset='utf8'
+        )
 
-    # advance_reservation_rate를 기준으로 순위를 매김
-    data['advance_reservation_rate_rank'] = data['advance_reservation_rate'].rank(ascending=False, method='first')
+        no_update_movie_delete()  # 랭킹 업데이트 전 누적 분 삭제
 
-    # 데이터를 다시 데이터베이스 테이블에 업데이트
-    data.to_sql(name='movietbl', con=engine, if_exists='replace', index=False)
+        with connection.cursor() as cursor:
+            # 데이터베이스에서 영화 정보를 가져옴
+            sql_query = "SELECT code FROM movietbl WHERE update_date = CURDATE() ORDER BY advance_reservation_rate DESC LIMIT 30;"
+            cursor.execute(sql_query)
+            result = cursor.fetchall()
+            rank = 1
 
-    print('랭크정보 변경완료')
+            # advance_reservation_rate를 기준으로 순위를 매기고 업데이트
+            for row in result:
+                code = row['code']
+                update_query = f"UPDATE movietbl SET advance_reservation_rate_rank = {rank} WHERE code = {code}"
+                cursor.execute(update_query)
+                rank += 1
+
+        # 변경사항 커밋
+        connection.commit()
+        print('랭크 정보 변경 완료')
+    except Exception as e:
+        print('오류 발생:', str(e))
+    finally:
+        # 연결 닫기
+        connection.close()
+
 
 #순위증감률 변경
 
@@ -118,7 +141,7 @@ def job():
 
     # 수정전 테이블정보 저장
     engine = create_engine('mysql+pymysql://root:1234@localhost/moviepjt?charset=utf8')
-    sql_query = "SELECT code, advance_reservation_rate_rank FROM movietbl"
+    sql_query = "SELECT code, advance_reservation_rate_rank FROM movietbl ORDER BY advance_reservation_rate_rank ASC LIMIT 30;"
     movies_before_update = pd.read_sql(sql_query, engine)
 
     # 팝업 창을 클릭하고 정보 수집
@@ -282,7 +305,7 @@ def job():
 
     # 수정완료후 테이블 가져와서 수정전과 비교
     engine = create_engine('mysql+pymysql://root:1234@localhost/moviepjt?charset=utf8')
-    sql_query = "SELECT code, advance_reservation_rate_rank FROM movietbl"
+    sql_query = "SELECT code, advance_reservation_rate_rank FROM movietbl ORDER BY advance_reservation_rate_rank ASC LIMIT 30;"
     movies_after_update = pd.read_sql(sql_query, engine)
 
     # 수정전후 비교
@@ -299,8 +322,8 @@ def job():
     # 크롬 브라우저 닫기
     driver.quit()
 
-
-schedule.every().day.at("09:00").do(job)
+job()
+schedule.every().day.at("09:54").do(job)
 count = 0
 while True:
     schedule.run_pending()

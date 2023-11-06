@@ -35,7 +35,12 @@ public class FoodOrderDTO {
 
     private int foodOrderCondition;
 
-    private String foodImgName; /*db에들어가지도 조인하지도 않지만 서버에서 이미지 체크위해 넣는 정보*/
+    private String foodImgName;
+    
+    private String foodDescription;
+    
+    private Long foodCost;/*db에들어가지도 조인하지도 않지만 서버에서 이미지 체크위해 넣는 정보*/
+
 
     public static FoodOrderDTO toFoodOrderDTO(FoodOrderEntity foodOrderEntity){
     FoodOrderDTO foodOrderDTO = new FoodOrderDTO();
@@ -52,6 +57,12 @@ public class FoodOrderDTO {
 
     public void setFoodName(FoodEntity foodEntity){
         this.foodName=FoodDTO.toFoodDTO(foodEntity);
+    }
+
+    public void setFoodNameStr(String foodCode){
+        FoodDTO foodDTO = new FoodDTO();
+        foodDTO.setFoodName(foodCode);
+        this.foodName=foodDTO;
     }
 
     public String getFoodNameStr(){

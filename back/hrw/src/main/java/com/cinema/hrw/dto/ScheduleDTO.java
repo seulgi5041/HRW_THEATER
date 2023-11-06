@@ -49,22 +49,22 @@ public class ScheduleDTO {
 
     public static ScheduleDTO toScheduleDTO (ScheduleEntity scheduleEntity){
         ScheduleDTO scheduleDTO = new ScheduleDTO();
-        scheduleDTO.setScheduleCode(scheduleEntity.getScheduleCode());
-        scheduleDTO.setCinemaCode(scheduleEntity.getCinemaCode());
-        scheduleDTO.setCinemaName(scheduleEntity.getCinemaName());
-        scheduleDTO.setAuditorium(scheduleEntity.getAuditorium());
-        scheduleDTO.setTakeDate(scheduleEntity.getTakeDate());
-        scheduleDTO.setTakeDateOfWeek(scheduleEntity.getTakeDateOfWeek());
-        scheduleDTO.setMovieCode(scheduleEntity.getMovieCode());
-        scheduleDTO.setMovieTitle(scheduleEntity.getMovieTitle());
-        scheduleDTO.setMovieRating(scheduleEntity.getMovieRating());
-        scheduleDTO.setStartTime(scheduleEntity.getStartTime());
-        scheduleDTO.setEndTime(scheduleEntity.getEndTime());
-        scheduleDTO.setScreenType(scheduleEntity.getScreenType());
-        scheduleDTO.setAllSeatCount(scheduleEntity.getAllSeatCount());
-        scheduleDTO.setTeenagerPrice(scheduleEntity.getTeenagerPrice());
-        scheduleDTO.setAdultPrice(scheduleEntity.getAdultPrice());
-        scheduleDTO.setDisabledPrice(scheduleEntity.getDisabledPrice());
+        scheduleDTO.setScheduleCode(scheduleEntity.getScheduleCode() != null ? scheduleEntity.getScheduleCode() :"");
+        scheduleDTO.setCinemaCode(scheduleEntity.getCinemaCode() );
+        scheduleDTO.setCinemaName(scheduleEntity.getCinemaName() != null ? scheduleEntity.getCinemaName() :"");
+        scheduleDTO.setAuditorium(scheduleEntity.getAuditorium() != null ? scheduleEntity.getAuditorium() :"");
+        scheduleDTO.setTakeDate(scheduleEntity.getTakeDate() != null ? scheduleEntity.getTakeDate() :"");
+        scheduleDTO.setTakeDateOfWeek(scheduleEntity.getTakeDateOfWeek() != null ? scheduleEntity.getTakeDateOfWeek() :"");
+        scheduleDTO.setMovieCode(scheduleEntity.getMovieCode() );
+        scheduleDTO.setMovieTitle(scheduleEntity.getMovieTitle() != null ? scheduleEntity.getMovieTitle() :"");
+        scheduleDTO.setMovieRating(scheduleEntity.getMovieRating() != null ? scheduleEntity.getMovieRating() :"");
+        scheduleDTO.setStartTime(scheduleEntity.getStartTime() != null ? scheduleEntity.getStartTime() :"");
+        scheduleDTO.setEndTime(scheduleEntity.getEndTime() != null ? scheduleEntity.getEndTime() :"");
+        scheduleDTO.setScreenType(scheduleEntity.getScreenType() != null ? scheduleEntity.getScreenType() :"");
+        scheduleDTO.setAllSeatCount(scheduleEntity.getAllSeatCount() != null ? scheduleEntity.getAllSeatCount() :0);
+        scheduleDTO.setTeenagerPrice(scheduleEntity.getTeenagerPrice() != null ? scheduleEntity.getTeenagerPrice() :0);
+        scheduleDTO.setAdultPrice(scheduleEntity.getAdultPrice() != null ? scheduleEntity.getAdultPrice() :0);
+        scheduleDTO.setDisabledPrice(scheduleEntity.getDisabledPrice() != null ? scheduleEntity.getDisabledPrice() :0);
         return scheduleDTO;
     }
 
