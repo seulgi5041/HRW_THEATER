@@ -121,6 +121,8 @@ public class MemberController {
 	    System.out.println(currentUserId);
 	    if(currentUserId != null) {
 	        MemberDTO currentUserInfo = memberService.getCurrentUserInfo(currentUserId);
+	        currentUserInfo.setUserPassword("");
+	        currentUserInfo.setUserPasswordAgain("");
 	        model.addAttribute("userInfo", currentUserInfo);
 	    }
 	    return "/member/userInfo";

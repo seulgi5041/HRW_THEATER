@@ -123,8 +123,14 @@ public class MemberService {
         
         MemberEntity member = optMember.get();
         // DTO로부터 가져온 정보를 사용하여 Entity의 값을 업데이트합니다.
-        member.setUserPassword(memberDTO.getUserPassword()); // 비밀번호 업데이트
-        member.setUserPasswordAgain(memberDTO.getUserPasswordAgain()); // 비밀번호 업데이트
+        
+        String encryptedPassword = passwordEncoder.encode(memberDTO.getUserPassword());
+	    
+	    String encryptedPasswordAgain = passwordEncoder.encode(memberDTO.getUserPasswordAgain());
+
+	    
+        member.setUserPassword(encryptedPassword); // 비밀번호 업데이트
+        member.setUserPasswordAgain(encryptedPasswordAgain); // 비밀번호 업데이트
         member.setUserName(memberDTO.getUserName());         // 이름 업데이트
         member.setUserGender(memberDTO.getUserGender());     // 성별 업데이트
         member.setUserEmail(memberDTO.getUserEmail());       // 이메일 업데이트
