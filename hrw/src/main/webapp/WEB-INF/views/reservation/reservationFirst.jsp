@@ -640,7 +640,7 @@
     <div class="btn_bottom_wrap" id="stepOnePopupConButton">
       <a href="#none" class="btn_col1 ty5">취소</a>
       <!-- 좌석 선택하는 페이지로 넘어감 -->
-      <a href="/reservation/second" class="btn_col2 ty5">인원/좌석선택</a>
+      <a href="/reservation/second" class="btn_col2 ty5" onclick="go_on_post_mapping()">인원/좌석선택</a>
     </div> 
   </div>
 </div>
@@ -649,6 +649,7 @@
 <!-- 푸터 -->
     <jsp:include page="../include/footer.jsp"/>
     
+    <script></script>
 
     <!-- <script>
       console.log("JavaScript code is running");

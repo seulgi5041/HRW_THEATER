@@ -185,6 +185,31 @@ depth2Select1.click(function() {
                 var clickedMovieCode = $(this).find('.tit').attr('movie-code');
                 selectedMovieCode = clickedMovieCode; 
                 console.log("Movie Code:", selectedMovieCode);
+
+
+
+
+                // 선택된 영화 정보를 업데이트
+                var selectedMovieTitle = movie.title; // 선택한 영화 제목
+                var selectedMovieRating = movie.rating; // 선택한 영화 등급
+                ///////////////////////나중에 변경해야 할 부분
+                // 숨기고자 하는 div 요소
+                var noticeDiv = $(".box_notice");
+                var timeSelectTitle = $(".time_select_title strong");
+                var timeSelectGrade = $(".time_select_title span.ic_grade");
+
+                // 선택된 영화와 극장을 확인하여 숨김 처리
+                if (selectedMovieCode !== null && cinemaCode !== null) {
+                  noticeDiv.hide(); // "box_notice" 숨기기
+                  $(".group_time_select").show(); // "group_time_select" 보이기
+            
+                  // 영화 정보 업데이트
+                  timeSelectTitle.text(selectedMovieTitle);
+                  timeSelectGrade.attr("class", "ic_grade " + selectedMovieRating); // 예상 클래스 이름을 업데이트 (클래스명에 따라 다를 수 있음)
+                } else {
+                  noticeDiv.show(); // "box_notice" 나타내기
+                  $(".group_time_select").hide(); // "group_time_select" 숨기기
+                }
          
               });
 
