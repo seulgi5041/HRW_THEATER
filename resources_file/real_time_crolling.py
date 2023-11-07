@@ -47,7 +47,7 @@ def no_update_movie_delete():
         conn = pymysql.connect(host='localhost', user='root', password='1234', db='moviepjt', charset='utf8')
         with conn.cursor() as cursor:
             sql = ("UPDATE movietbl set advance_reservation_rate = -1000, increase_decrease_status = 4, "
-                   "advance_reservation_rate_rank = 1000 WHERE update_date != CURDATE();")
+                "advance_reservation_rate_rank = 1000 WHERE update_date != CURDATE();")
             cursor.execute(sql)
         conn.commit()
         print("업데이트누적분 삭제")
@@ -73,7 +73,7 @@ def advance_reservation_rate_rank_update():
 
         with connection.cursor() as cursor:
             # 데이터베이스에서 영화 정보를 가져옴
-            sql_query = "SELECT code FROM movietbl WHERE update_date = CURDATE() ORDER BY advance_reservation_rate DESC LIMIT 30;"
+            sql_query = "SELECT code FROM movietbl WHERE update_date = CURDATE() ORDER BY advance_reservation_rate DESC;"
             cursor.execute(sql_query)
             result = cursor.fetchall()
             rank = 1

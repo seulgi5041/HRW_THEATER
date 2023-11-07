@@ -40,6 +40,28 @@ def get_take_date():
 
   return date_list
 
+
+def get_after_take_date(schedule_code):
+  conn, cur = None, None
+
+  try:
+    conn = pymysql.connect(host='localhost', user='root', password='1234', db='moviepjt', charset='utf8')
+    cur = conn.cursor()
+
+    sql = "SELECT  COUNT(schedule_code) FROM scheduletbl WHERE schedule_code = %s"
+    cur.execute(sql, (schedule_code))
+    result = cur.fetchone()
+    print(result)
+  except pymysql.Error as e:
+    print(f"Error: {e}")
+  finally:
+    if cur:
+      cur.close()
+    if conn:
+      conn.close()
+
+  return result[0]
+
 def get_movie_API(movie_code):
   api_key = "c5df5d07dd8a15b2f5d00f6c21e37cc1"
   # API 엔드포인트 URL
@@ -115,6 +137,7 @@ for cinema_code in cinema_codes:
   for theater in range(1, theater_count + 1):
     auditorium=str(theater)+" 관"
     for take_date in take_dates:
+
       for start_time in start_times:
         if idx%30==0:
           random.shuffle(movie_codes)
@@ -150,6 +173,9 @@ for cinema_code in cinema_codes:
           adult_price = 13000
           disabled_price = 5000
         schedule_code = f'{cinema_code}{theater:02d}{take_date.replace("-","")}{start_time.split(":")[0]}'
+        if (get_after_take_date(schedule_code) != 0):
+          print("이미 저장되어 넘어감")
+          continue
         insert_schedule(schedule_code, cinema_code, auditorium,
                     take_date, start_time, movie_code, end_time, screen_type, teenager_price,
                     adult_price, disabled_price)
