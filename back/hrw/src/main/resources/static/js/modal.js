@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     closeButton.addEventListener('click', closeModal);
   }
 
+
   // 모달 창 내의 취소 버튼을 선택
   const cancelButtons = document.querySelectorAll('.btn_col1');
 

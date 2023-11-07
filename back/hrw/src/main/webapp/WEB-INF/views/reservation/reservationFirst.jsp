@@ -637,10 +637,10 @@
       </div>
     </div>
      <!-- 모달 안의 확인 창 -->
-    <div class="btn_bottom_wrap" id="stepOnePopupConButton">
+    <div class="btn_bottom_wrap" >
       <a href="#none" class="btn_col1 ty5">취소</a>
       <!-- 좌석 선택하는 페이지로 넘어감 -->
-      <a href="javascript:void(0)" class="btn_col2 ty5" >인원/좌석선택</a>
+      <a href="javascript:void(0)" class="btn_col2 ty5" id="stepOnePopupConButton">인원/좌석선택</a>
     </div> 
   </div>
 </div>

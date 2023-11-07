@@ -163,9 +163,9 @@
           <!-- 결제완료 페이지 -->
         <div class="container fin_wrap">
           <!-- 회원 이름 출력 -->
-          <div class="top_notice_fin ty1">
+          <div class="top_notice_fin ${orderDTO.payMethod}">
             <strong>
-              <span>user</span> 회원님 결제가 성공적으로 완료되었습니다.
+              <span>${userId}</span> 회원님 결제가 성공적으로 완료되었습니다.
             </strong>
 
           </div>

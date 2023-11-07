@@ -50,8 +50,19 @@
   background-position: center top;
 }
 
-.top_notice_fin.ty1 {
-  background-image: url(../images/ticket/top_notice_ic_01.png);
+.top_notice_fin.카드 {
+  background-image: url(../images/ticket/method_ic_card.png);
+}
+
+.top_notice_fin.간편결제 {
+  background-image: url(../images/ticket/method_ic_simple.png);
+}
+
+.top_notice_fin.무통장 {
+  background-image: url(../images/ticket/method_ic_deposit.svg);
+}
+.top_notice_fin.휴대폰 {
+  background-image: url(../images/ticket/method_ic_phone.png);
 }
 
 .top_notice_fin strong {

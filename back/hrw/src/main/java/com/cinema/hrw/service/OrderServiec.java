@@ -123,7 +123,7 @@ public class OrderServiec {
                 Long foodPrice = row[3] != null ? (Long)row[3] : 0;
                 orderJoinDTO.setTotalPrice((Long)row[5] + foodPrice);
                 orderHistory.add(orderJoinDTO);
-                
+                System.out.println("코드 : " + (String)row[1]);
             }
             
            

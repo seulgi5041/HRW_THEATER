@@ -182,6 +182,7 @@ public class ReservationController {
 		OrderDTO person_count = (OrderDTO) session.getAttribute("countAndPrice");
 		List<SeatDTO> seat_list = (List<SeatDTO>) session.getAttribute("seatList");
 		List<FoodOrderDTO> foodInfoList = (List<FoodOrderDTO>) session.getAttribute("foodInfoList");
+		String userId = (String) session.getAttribute("loginId");
 		
 		String currentUserId = (String) session.getAttribute("loginId");
 
@@ -197,6 +198,7 @@ public class ReservationController {
 			model.addAttribute("orderDTO", orderDTO);
 			model.addAttribute("seatList", seat_list);
 			model.addAttribute("foodInfoList", foodInfoList);
+			model.addAttribute("userId", userId);
 		}else{nextPage= "reservation/payment";}
 		return nextPage;
 	}
