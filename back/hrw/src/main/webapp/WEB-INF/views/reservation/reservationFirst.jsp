@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +16,10 @@
   <!-- jQuery CDN 포함 -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../js/ajax/ticket1.js"></script>
+  <script>
+    // Get the current date
+    var currentDate = new Date();
+  </script>
   
 </head>
 <body>
@@ -49,7 +55,7 @@
         </li>
 
         <!-- 인원,좌석 -->
-        <li class="disabled" id="seatSelectionLink">
+        <li class="disabled">
           <a style="cursor: default;">
             <strong class="tit">
               <span>02</span>
@@ -225,7 +231,7 @@
                 <div id="mCSB_9_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" dir="ltr">
                   <ul id="movie-list-container">
                     <c:forEach var="movie" items="${movies}">
-                      <li>
+                      <li class>
                         <a href="#none">
                           <div class="group_infor">
                             <div class="bx_title">
@@ -263,23 +269,24 @@
                     <!-- 각 li에 들어갈 날짜들 -->
                     <div class="owl-item active" style="width: 52px;">
                       <li class="item">
-                        <strong class="month">10월</strong>
+                        <strong class="month">11월</strong>
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate0">
-                            <input type="radio" id="radioDate0" name="radioDate1" data-displayn="Y" data-playdate="2023-10-18" data-isplaydate="Y" data-playweek="오늘" checked>
-                            <strong>18</strong>
+                            <input type="radio" id="radioDate0" name="radioDate1" data-displayn="Y" data-playdate="2023-11-07" data-isplaydate="Y" data-playweek="오늘" checked>
+                            <strong>07</strong>
                             <em>오늘</em>
                           </label>
                         </a>
                       </li>
                     </div>
-                    <div class="owl-item active" style="width: 52px;">
+
+                     <div class="owl-item active" style="width: 52px;">
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate1">
-                            <input type="radio" id="radioDate1" name="radioDate1" data-displayn="Y" data-playdate="2023-10-19" data-isplaydate="Y" data-playweek="목">
-                            <strong>19</strong>
-                            <em>목</em>
+                            <input type="radio" id="radioDate1" name="radioDate1" data-displayn="Y" data-playdate="2023-11-08" data-isplaydate="Y" data-playweek="수">
+                            <strong>08</strong>
+                            <em>수</em>
                           </label>
                         </a>
                       </li>
@@ -288,9 +295,9 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate2">
-                            <input type="radio" id="radioDate2" name="radioDate1" data-displayn="Y" data-playdate="2023-10-20" data-isplaydate="Y" data-playweek="금">
-                            <strong>20</strong>
-                            <em>금</em>
+                            <input type="radio" id="radioDate2" name="radioDate1" data-displayn="Y" data-playdate="2023-11-09" data-isplaydate="Y" data-playweek="목">
+                            <strong>09</strong>
+                            <em>목</em>
                           </label>
                         </a>
                       </li>
@@ -299,9 +306,9 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate3">
-                            <input type="radio" id="radioDate3" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" data-playweek="토">
-                            <strong>21</strong>
-                            <em>토</em>
+                            <input type="radio" id="radioDate3" name="radioDate1" data-displayn="Y" data-playdate="2023-11-10" data-isplaydate="Y" data-playweek="금">
+                            <strong>10</strong>
+                            <em>금</em>
                           </label>
                         </a>
                       </li>
@@ -310,9 +317,9 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate4">
-                            <input type="radio" id="radioDate4" name="radioDate1" data-displayn="Y" data-playdate="2023-10-22" data-isplaydate="Y" data-playweek="일">
-                            <strong>22</strong>
-                            <em>일</em>
+                            <input type="radio" id="radioDate4" name="radioDate1" data-displayn="Y" data-playdate="2023-11-11" data-isplaydate="Y" data-playweek="토">
+                            <strong>11</strong>
+                            <em>토</em>
                           </label>
                         </a>
                       </li>
@@ -321,9 +328,9 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate5">
-                            <input type="radio" id="radioDate5" name="radioDate1" data-displayn="Y" data-playdate="2023-10-23" data-isplaydate="Y" data-playweek="월">
-                            <strong>23</strong>
-                            <em>월</em>
+                            <input type="radio" id="radioDate5" name="radioDate1" data-displayn="Y" data-playdate="2023-11-12" data-isplaydate="Y" data-playweek="일">
+                            <strong>12</strong>
+                            <em>일</em>
                           </label>
                         </a>
                       </li>
@@ -332,9 +339,9 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate6">
-                            <input type="radio" id="radioDate6" name="radioDate1" data-displayn="Y" data-playdate="2023-10-24" data-isplaydate="Y" data-playwee="화">
-                            <strong>24</strong>
-                            <em>화</em>
+                            <input type="radio" id="radioDate6" name="radioDate1" data-displayn="Y" data-playdate="2023-11-13" data-isplaydate="Y" data-playwee="월">
+                            <strong>13</strong>
+                            <em>월</em>
                           </label>
                         </a>
                       </li>
@@ -343,13 +350,13 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate7">
-                            <input type="radio" id="radioDate7" name="radioDate1" data-displayn="Y" data-playdate="2023-10-25" data-isplaydate="Y" data-playweek="수">
-                            <strong>25</strong>
-                            <em>수</em>
+                            <input type="radio" id="radioDate7" name="radioDate1" data-displayn="Y" data-playdate="2023-11-14" data-isplaydate="Y" data-playweek="화">
+                            <strong>14</strong>
+                            <em>화</em>
                           </label>
                         </a>
                       </li>
-                    </div>
+                    </div> 
                     
                     
                   </div>
@@ -380,6 +387,8 @@
                         <strong>30일</strong>
                       </span>
                     </div>
+
+
                     <div class="time_select_wrap timeSelect">
                       <ul class="list_time">
                         <li class>
@@ -631,7 +640,7 @@
     <div class="btn_bottom_wrap" id="stepOnePopupConButton">
       <a href="#none" class="btn_col1 ty5">취소</a>
       <!-- 좌석 선택하는 페이지로 넘어감 -->
-      <a href="/reservation/second" class="btn_col2 ty5">인원/좌석선택</a>
+      <a href="javascript:void(0)" class="btn_col2 ty5" >인원/좌석선택</a>
     </div> 
   </div>
 </div>
@@ -640,12 +649,74 @@
 <!-- 푸터 -->
     <jsp:include page="../include/footer.jsp"/>
     
+    <script></script>
+
+    <!-- <script>
+      console.log("JavaScript code is running");
+      document.addEventListener('DOMContentLoaded', function() {
+        function getCurrentDate() {
+          const currentDate = new Date();
+          const year = currentDate.getFullYear();
+          const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+          const day = String(currentDate.getDate()).padStart(2, '0');
+          return year + "-" + month + "-" + day;
+        }
+    
+        function clearExistingDates() {
+          const dateContainer = document.querySelector(".owl-stage");
+          dateContainer.innerHTML = ''; // 기존의 날짜를 모두 삭제
+        }
+    
+        function displayWeekDates() {
+          clearExistingDates(); // 기존의 날짜를 삭제
+    
+          const currentDate = getCurrentDate();
+          const days = ["일", "월", "화", "수", "목", "금", "토"];
+          const dateContainer = document.querySelector(".owl-stage");
+    
+          for (let i = 0; i < 7; i++) {
+            const dayDate = new Date(currentDate);
+            dayDate.setDate(dayDate.getDate() + i);
+            const dayMonth = dayDate.getMonth() + 1;
+            const dayNum = String(dayDate.getDate()).padStart(2, '0');
+            const dayIndex = dayDate.getDay();
+            const dayName = i === 0 ? "오늘" : days[dayIndex];
+    
+            const newDateItem = document.createElement("div");
+            newDateItem.className = "owl-item active";
+            newDateItem.style.width = "52px";
+            newDateItem.innerHTML = `
+              <li class="item">
+                <strong class="month">${dayMonth}월</strong>
+                <a href="#none" class="date" tabindex="0">
+                  <label for="radioDate${i}">
+                    <input type="radio" id="radioDate${i}" name="radioDate1" data-displayn="Y" data-playdate="${dayDate.getFullYear()}-${dayMonth}-${dayNum}" data-isplaydate="Y" data-playweek="${dayName}">
+                    <strong>${dayNum}</strong>
+                    <em>${dayName}</em>
+                  </label>
+                </a>
+              </li>
+            `;
+    
+            dateContainer.appendChild(newDateItem);
+          }
+        }
+    
+        // Call the function to display dates
+        displayWeekDates();
+      });
+    </script> -->
+    
     
 <!-- 자바스크립트 영역 -->
 
 <script src="../js/ticket_main.js"></script>
 <script src="../js/modal.js"></script>
 <script src="../js/ticket_reverse.js"></script>
+
+
+
+
 
 </body>
 </html>

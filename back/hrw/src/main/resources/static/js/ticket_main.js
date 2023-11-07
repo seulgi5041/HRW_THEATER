@@ -178,7 +178,7 @@ function updateThirdDdText(event) {
 
 
 /*좌석선택시 포스트 매핑 */
-const seatSelectionLink = document.getElementById("seatSelectionLink");
+const seatSelectionLink = document.getElementById("stepOnePopupConButton");
 
 seatSelectionLink.addEventListener("click", function() {
   

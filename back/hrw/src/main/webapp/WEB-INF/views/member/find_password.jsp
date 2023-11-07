@@ -41,6 +41,10 @@
     </div>
     
     <jsp:include page="../include/footer.jsp"/>
-
+	    <% if (request.getAttribute("errorMessage") != null) { %>
+    <script>
+        alert('<%= request.getAttribute("errorMessage") %>');
+    </script>
+<% } %>
 </body>
 </html>

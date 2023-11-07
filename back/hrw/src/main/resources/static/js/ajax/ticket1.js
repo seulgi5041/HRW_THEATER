@@ -23,6 +23,9 @@ $.ajax({
 });
 });
 
+
+
+
 // DOM 요소를 선택하고 이벤트를 등록하는 함수(기존의 자바스크립트 구현을 가져오는 구간)
 function selectAndRegisterEvents(localData) {
 // 보여줘야 하는 부분
@@ -83,6 +86,9 @@ for (var local in localData) {
       e.preventDefault();  // 기본 앵커 태그 동작 방지
       var cinemaCode = $(this).attr("cinema-code");
 
+      // 중복 내용 지운 영화제목이 들어가는 곳을 지정
+      var SelectTitles = new Set();
+
       // 선택한 영화관의 영화 데이터를 가져오려는 AJAX 요청
       $.ajax({
         url: '/cinema/movies?cinemaCode=' + cinemaCode,
@@ -92,8 +98,28 @@ for (var local in localData) {
             $('#movie-list-container').empty(); // 영화 데이터가 들어갈 요소(여기선 ul임)를 먼저 지움
             $.each(data, function(index, movie) {
                 // 목록에 영화목록을 만들기
-                var movieItem = $("<li><a href='#'><div class='group_infor'><div class='bx_title'><span class='ic_grade " + movie.rating + "'></span><strong class='tit'>" + movie.title + "</strong></div></div></a></li>");
-                $('#movie-list-container').append(movieItem);
+                if (!SelectTitles.has(movie.title)) {
+                  // 중복된 제목이 아니라면 영화 목록에 추가
+                  var movieItem = $("<li><a href='#'><div class='group_infor'><div class='bx_title'><span class='ic_grade " + movie.rating + "'></span><strong class='tit' movie-code='" + movie.movieCode + "'>" + movie.title + "</strong></div></div></a></li>");
+                  $('#movie-list-container').append(movieItem);
+
+                  // 클릭 이벤트 핸들러를 해당 li에 추가
+                  movieItem.click(function() {
+                    console.log("Selected Movie:", movie.title);
+                    movieListContainer.find("li").removeClass("active");
+                    $(this).addClass("active");
+                    // 클릭된 영화의 movieCode 값을 selectedMovieCode에 저장
+                    var clickedMovieCode = $(this).find('.tit').attr('movie-code');
+                    selectedMovieCode = clickedMovieCode; 
+                    console.log("Movie Code:", selectedMovieCode);
+                  });
+
+                  $('#movie-list-container').append(movieItem);
+
+          
+                  // 중복을 제거한 영화 제목을 Set에 추가
+                  SelectTitles.add(movie.title);
+                }
             });
         },
         error: function(xhr, status, error) {
@@ -108,6 +134,14 @@ for (var local in localData) {
   menuContainer.append(localItem);
 }
 
+
+/**
+ * //////////////////////////////
+ */
+
+// 선택한 영화 제목을 저장하는 변수
+var selectedMovieTitle = "";
+var selectedMovieCode = "";
 // depth2를 선택했을때 작동될 이벤트들과 지점코드, 지점명을 다시 나눠 출력해주는 부분
 // 위에서 ul이 새로 생성되었기 때문에 다시 이벤트를 등록한 것이다
 var depth2Select1 = $(".depth2 ul li");
@@ -121,6 +155,10 @@ depth2Select1.click(function() {
   console.log("Cinema Name:", cinemaName);
   console.log("Cinema Code:", cinemaCode);
 
+  // 중복 내용 지운 영화제목이 들어가는 곳을 지정
+  var DistinctTitle = new Set();
+  var movieListContainer = $('#movie-list-container'); 
+  movieListContainer.empty(); //
   // 선택한 영화관의 영화 데이터를 가져오려는 AJAX 요청
   $.ajax({
     url: '/cinema/movies?cinemaCode=' + cinemaCode,
@@ -129,9 +167,61 @@ depth2Select1.click(function() {
         // 영화 데이터의 JSON 배열(data)
         $('#movie-list-container').empty(); // 영화 데이터가 들어갈 요소(여기선 ul임)를 먼저 지움
         $.each(data, function(index, movie) {
+          var movieCode = movie.movieCode;
             // 목록에 영화목록을 만들기
-            var movieItem = $("<li><a href='#'><div class='group_infor'><div class='bx_title'><span class='ic_grade " + movie.rating + "'></span><strong class='tit'>" + movie.title + "</strong></div></div></a></li>");
-            $('#movie-list-container').append(movieItem);
+            if (!DistinctTitle.has(movie.title)) {
+              // 중복된 제목이 아니라면 영화 목록에 추가
+              var movieItem = $("<li><a href='#'><div class='group_infor'><div class='bx_title'><span class='ic_grade " + movie.rating + "'></span><strong class='tit' movie-code='" + movie.movieCode + "'>" + movie.title + "</strong></div></div></a></li>");
+              $('#movie-list-container').append(movieItem);
+      
+
+
+              // 클릭 이벤트 핸들러를 해당 li에 추가
+              movieItem.click(function() {
+                console.log("Selected Movie:", movie.title);
+                movieListContainer.find("li").removeClass("active");
+                $(this).addClass("active");
+                // 클릭된 영화의 movieCode 값을 selectedMovieCode에 저장
+                var clickedMovieCode = $(this).find('.tit').attr('movie-code');
+                selectedMovieCode = clickedMovieCode; 
+                console.log("Movie Code:", selectedMovieCode);
+
+
+
+
+                // 선택된 영화 정보를 업데이트
+                var selectedMovieTitle = movie.title; // 선택한 영화 제목
+                var selectedMovieRating = movie.rating; // 선택한 영화 등급
+                ///////////////////////나중에 변경해야 할 부분
+                // 숨기고자 하는 div 요소
+                var noticeDiv = $(".box_notice");
+                var timeSelectTitle = $(".time_select_title strong");
+                var timeSelectGrade = $(".time_select_title span.ic_grade");
+
+                // 선택된 영화와 극장을 확인하여 숨김 처리
+                if (selectedMovieCode !== null && cinemaCode !== null) {
+                  noticeDiv.hide(); // "box_notice" 숨기기
+                  $(".group_time_select").show(); // "group_time_select" 보이기
+            
+                  // 영화 정보 업데이트
+                  timeSelectTitle.text(selectedMovieTitle);
+                  timeSelectGrade.attr("class", "ic_grade " + selectedMovieRating); // 예상 클래스 이름을 업데이트 (클래스명에 따라 다를 수 있음)
+                } else {
+                  noticeDiv.show(); // "box_notice" 나타내기
+                  $(".group_time_select").hide(); // "group_time_select" 숨기기
+                }
+         
+              });
+
+              $('#movie-list-container').append(movieItem);
+
+
+              // 중복을 제거한 영화 제목을 Set에 추가
+              DistinctTitle.add(movie.title);
+
+              // 사용자가 선택한 영화를 업데이트
+              selectedMovieTitle = movie.title;
+            }
         });
     },
     error: function(xhr, status, error) {
@@ -176,34 +266,4 @@ for (var local in localData) {
 }
 
 return sortedData;
-}
-
-/*좌석선택시 포스트 매핑 */
-const seatSelectionLink = document.getElementById("seatSelectionLink");
-
-seatSelectionLink.addEventListener("click", function() {
-  
-  go_on_post_mapping();  
-});
-
-function go_on_post_mapping() {
-  const scheduleCode = "10010012023110206";
-
-  let form = document.createElement('form');
-
-  // scheduleCode를 숨겨진 입력 필드로 추가
-  let scheduleCodeInput = document.createElement('input');
-  scheduleCodeInput.setAttribute('type', 'hidden');
-  scheduleCodeInput.setAttribute('name', 'scheduleCode');
-  scheduleCodeInput.setAttribute('value', scheduleCode);
-  form.appendChild(scheduleCodeInput);
-
-
-  form.setAttribute('method', 'post');
-  form.setAttribute('action', '/reservation/second');
-  
-  // 필요한 경우 데이터 유효성 검사 수행
-
-  document.body.appendChild(form);
-  form.submit();
 }
