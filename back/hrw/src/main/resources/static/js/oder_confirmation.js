@@ -284,7 +284,9 @@ const oder_movie_check = document.querySelectorAll('.oder_movie_check');
 const oder_food_basket =  document.querySelectorAll('.oder_food_basket');
  let today = new Date();
  let take_date = new Date(order_take_date);
-  if(today<=take_date){/*환불불가 */
+ console.log(order_take_date)
+ console.log(take_date)
+  if(today > take_date){/*환불불가 */
     Array.from(oder_butten_container).forEach((element) => {
       element.classList.add("hidden");
     });

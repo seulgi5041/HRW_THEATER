@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class OderJoinDTO {
+public class OrderJoinDTO {
     private String orderCode;
     private String orderDate;
     private String movieCode;

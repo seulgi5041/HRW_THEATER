@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cinema.hrw.dto.FoodOrderDTO;
-import com.cinema.hrw.dto.OderJoinDTO;
+import com.cinema.hrw.dto.OrderJoinDTO;
 import com.cinema.hrw.dto.OrderDTO;
 import com.cinema.hrw.dto.SeatDTO;
 import com.cinema.hrw.entity.FoodOrderEntity;
@@ -29,11 +29,11 @@ public class OrderController {
     
     @PostMapping("/order/detail")
     public String orderDetail(@RequestParam("orderCode") String orderCode, Model model){
-        OderJoinDTO oderJoinDTO=  orderServiec.selectOrderInfoByOrderCode(orderCode);
+        OrderJoinDTO oderJoinDTO=  orderServiec.selectOrderInfoByOrderCode(orderCode);
         List<SeatDTO> seatDTOList = orderServiec.seletSeatListByOrderCode(orderCode);
         model.addAttribute("orderInfo",oderJoinDTO);
         model.addAttribute("seatList",seatDTOList);
-        return "order/oder_confirmation";
+        return "order/order_confirmation";
     }
 
     @PostMapping("/choiceFoodOrder")
@@ -49,9 +49,9 @@ public class OrderController {
         if(loginId==null){
             return "redirect:/member/login";
         }else{
-        List<OderJoinDTO> OderDTOList = orderServiec.getOrderListByUserId(loginId);
-        model.addAttribute("userId", OderDTOList);
-        return "order/oder_history";
+        List<OrderJoinDTO> OderDTOList = orderServiec.getOrderListByUserId(loginId);
+        model.addAttribute("userOrder", OderDTOList);
+        return "order/order_history";
     
     }
     }

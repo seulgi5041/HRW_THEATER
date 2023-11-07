@@ -220,7 +220,7 @@
 <script>
  const movie_order_condition = ${orderInfo.movieOrderCondition};
  const choice_order_code = ${orderInfo.orderCode};
- const order_take_date = '${orderInfo.orderDate}';
+ const order_take_date = '${orderInfo.takeDate}';
  const order_movie_price = '${orderInfo.moviePrice}';
 </script>
   <script src="../js/oder_confirmation.js"></script>

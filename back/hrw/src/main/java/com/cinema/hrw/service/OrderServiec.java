@@ -3,23 +3,27 @@ package com.cinema.hrw.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.cinema.hrw.dto.CinemaAddressDTO;
 import com.cinema.hrw.dto.FoodOrderDTO;
 import com.cinema.hrw.dto.MovieDTO;
-import com.cinema.hrw.dto.OderJoinDTO;
+import com.cinema.hrw.dto.OrderJoinDTO;
 import com.cinema.hrw.dto.OrderDTO;
 import com.cinema.hrw.dto.ScheduleDTO;
 import com.cinema.hrw.dto.SeatDTO;
 import com.cinema.hrw.entity.CinemaAddressEntity;
+import com.cinema.hrw.entity.FoodEntity;
 import com.cinema.hrw.entity.FoodOrderEntity;
+import com.cinema.hrw.entity.MemberEntity;
 import com.cinema.hrw.entity.MovieEntity;
 import com.cinema.hrw.entity.OrderEntity;
 import com.cinema.hrw.entity.ScheduleEntity;
 import com.cinema.hrw.entity.SeatEntity;
 import com.cinema.hrw.repository.FoodOrderRepository;
+import com.cinema.hrw.repository.MemberRepository;
 import com.cinema.hrw.repository.OrderRepository;
 import com.cinema.hrw.repository.SeatRepository;
 
@@ -31,8 +35,9 @@ public class OrderServiec {
     private final OrderRepository orderRepository;
     private final SeatRepository seatRepository;
     private final FoodOrderRepository foodOrderRepository;
+    private final MemberRepository memberRepository;
     
-    public OderJoinDTO selectOrderInfoByOrderCode(String orderCode) {
+    public OrderJoinDTO selectOrderInfoByOrderCode(String orderCode) {
         
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setOrderCode(orderCode);
@@ -40,7 +45,7 @@ public class OrderServiec {
 
         if (!results.isEmpty()) {
             Object[] result = results.get(0);
-            OderJoinDTO oderJoinDTO = new OderJoinDTO();
+            OrderJoinDTO oderJoinDTO = new OrderJoinDTO();
             oderJoinDTO.setOrderCode(result[0] != null ? (String) result[0] : "");
             oderJoinDTO.setOrderDate(result[1] != null ? (String) result[1] : "");
             oderJoinDTO.setMovieCode(result[2] != null ? (String) result[2] : "");
@@ -102,10 +107,31 @@ public class OrderServiec {
         return FoodOrderListDTO;
     }
 
-    public List<OderJoinDTO> getOrderListByUserId(String loginId) {
+    public List<OrderJoinDTO> getOrderListByUserId(String loginId) {
+        Optional<MemberEntity> memberEntity = memberRepository.findByUserId(loginId);
+        MemberEntity member = memberEntity.orElse(null);
+           List<Object[]> results =orderRepository.getOrdersAndFoodItems(member);
+           List<OrderJoinDTO> orderHistory = new ArrayList<>();
+
+           
+            for(Object[] row : results){
+                OrderJoinDTO orderJoinDTO = new OrderJoinDTO();
+                orderJoinDTO.setOrderDate((String)row[0]);
+                orderJoinDTO.setOrderCode((String)row[1]);
+                orderJoinDTO.setMovieTitle((String)row[2]);
+                orderJoinDTO.setRepresentFoodName(row[4] != null ? ((FoodEntity) row[4]).getFoodName() : "정보없음");
+                Long foodPrice = row[3] != null ? (Long)row[3] : 0;
+                orderJoinDTO.setTotalPrice((Long)row[5] + foodPrice);
+                orderHistory.add(orderJoinDTO);
+                
+            }
+            
+           
+       return orderHistory;
+       
         
 
-        return null;
+        
     }
     
 }
