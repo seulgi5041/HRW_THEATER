@@ -1,5 +1,6 @@
 package com.cinema.hrw.repository;
 
+import com.cinema.hrw.dto.MovieDTO;
 import com.cinema.hrw.entity.ScheduleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +22,5 @@ public interface MovieSelectRepository extends JpaRepository<ScheduleEntity, Str
 
   // cinemaCode 열과 :cinemaCode 매개 변수 값을 비교
   // :cinemaCode는 쿼리를 실행할 때 외부에서 제공되는 매개 변수
+
 }
