@@ -13,29 +13,28 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "member_table")	// �뀒�씠釉� �깮�꽦.
+@Table(name = "member_table")
 
 public class MemberEntity {
-	
-	@Id	// 
 
+	@Id // pk
 	private String userId;
-	
+
 	@Column
 	private String userPassword;
-	
+
 	@Column
 	private String userPasswordAgain;
-	
+
 	@Column
 	private String userName;
-	
+
 	@Column
 	private String userGender;
-	
-	@Column (unique = true)
+
+	@Column(unique = true)
 	private String userEmail;
-	
+
 	@Column
 	private String userPhone;
 
@@ -50,6 +49,5 @@ public class MemberEntity {
 		memberEntity.setUserPhone(memberDTO.getUserPhone());
 		return memberEntity;
 	}
-	
 
 }

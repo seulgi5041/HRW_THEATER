@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-HrwApplication<hrw>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.cinema.hrw.HrwApplication",
+      "projectName": "hrw",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

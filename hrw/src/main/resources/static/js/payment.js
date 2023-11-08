@@ -30,6 +30,4 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('.article_pay_simple').style.display = 'none';
     document.querySelector('.group_item').classList.add('active');
   });
-
-  
 });

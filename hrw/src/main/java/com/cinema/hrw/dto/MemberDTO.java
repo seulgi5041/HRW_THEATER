@@ -1,7 +1,5 @@
 package com.cinema.hrw.dto;
 
-import javax.persistence.Id;
-
 import com.cinema.hrw.entity.MemberEntity;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class MemberDTO {
-	
+
 	private String userId;
 	private String userPassword;
 	private String userPasswordAgain;
@@ -24,7 +22,7 @@ public class MemberDTO {
 	private String userGender;
 	private String userEmail;
 	private String userPhone;
-	
+
 	public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setUserId(memberEntity.getUserId());
@@ -37,6 +35,5 @@ public class MemberDTO {
 		return memberDTO;
 
 	}
-
 
 }

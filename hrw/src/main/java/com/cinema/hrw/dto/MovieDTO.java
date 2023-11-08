@@ -1,6 +1,5 @@
 package com.cinema.hrw.dto;
 
-
 import com.cinema.hrw.entity.MovieEntity;
 
 import lombok.Getter;
@@ -13,39 +12,39 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 
-public class MovieDTO { 
+public class MovieDTO {
     private String code;
-    
+
     private String title;
-    
+
     private String aka;
-    
+
     private String summary;
-    
+
     private String rating;
-    
+
     private String releaseDate;
-    
+
     private String productionYear;
-    
+
     private String productionCondition;
-    
+
     private String crankInUp;
-    
+
     private String filmingCount;
-    
+
     private String screenType;
-    
+
     private String synopsis;
-    
+
     private String director;
-    
+
     private String actor;
-    
+
     private String producer;
-    
+
     private String distributor;
-    
+
     private String importer;
 
     private Float advanceReservationRate;
@@ -62,8 +61,7 @@ public class MovieDTO {
 
     private String updateDate;
 
-
-    public MovieDTO toMovieDTO(MovieEntity movieEntity){
+    public static MovieDTO toMovieDTO(MovieEntity movieEntity) {
         MovieDTO movieDTO = new MovieDTO();
         movieDTO.setCode(movieEntity.getCode());
         movieDTO.setTitle(movieEntity.getTitle());
@@ -90,5 +88,13 @@ public class MovieDTO {
         movieDTO.setUpdateDate(movieEntity.getUpdateDate());
 
         return movieDTO;
+    }
+
+    public String getMovieCode() {
+        return code;
+    }
+
+    public void setMovieCode(String code) {
+        this.code = code;
     }
 }
