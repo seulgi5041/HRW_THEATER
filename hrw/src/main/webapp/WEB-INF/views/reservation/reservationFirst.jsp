@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +12,15 @@
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/ticket.css">
   <link rel="stylesheet" href="../css/modal.css">
+
+  <!-- jQuery CDN 포함 -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-    var allCinemaList = ${allCinemaList}; // 서버에서 받은 JSON 데이터
-</script>
-	
+  <script src="../js/ajax/ticket1.js"></script>
+  <script>
+    // Get the current date
+    var currentDate = new Date();
+  </script>
+  
 </head>
 <body>
 
@@ -27,7 +33,7 @@
       <ul>
         <!-- 상영시간 -->
         <li class="step01 active">
-          <a href="/reservation/first">
+          <a href="#reverseStep01">
             <strong class="tit">
               <span>01</span>
               <br>
@@ -36,15 +42,13 @@
             <div class="box_con">
               <dl>
                 <dt>선택한 영화 정보</dt>
-                <dd>title</dd>
+                <dd></dd>
                 <dt>선택한 상영관</dt>
-                <dd>"지점 " 
-                    "관"</dd>
-                <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
+                <dd></dd>
+                <dt>선택한 날짜</dt>
+                <dd></dd>
                 <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+                <dd></dd>
               </dl>
             </div>
           </a>
@@ -185,155 +189,21 @@
                       지역선택
                     </a>
                   </li>
-  
                   <!-- 지역선택 -->
-                  <li class="depth1">
-                    <a href="#none" name="서울">
-                      서울
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul id="서울">
-                      <c:forEach items="${allCinemaList}" var="cinema">
-				        <c:if test="${cinema.local eq '서울'}">
-				            <li class><a href="#none"> ${cinema.cinemaName}</a></li>
-				        </c:if>
-				    </c:forEach>
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="경기">
-                      경기
-                    </a>
-                    <div class="depth2" style="display: none;">
-                       <ul id="경기CinemaList">
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="인천">
-                      인천
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul id="인천CinemaList">
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="부산">
-                      부산
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul id="부산CinemaList">
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="대구">
-                      대구
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul id="대구CinemaList">
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="광주">
-                      광주
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul id="광주CinemaList">
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="대전">
-                      대전
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul id="대전CinemaList">
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="울산">
-                      울산
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul id="울산CinemaList">
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="세종">
-                      세종
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul id="세종CinemaList">
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="강원">
-                      강원
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul id="강원CinemaList">
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="충청">
-                      충북/충남
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul id="충청CinemaList">
-                      </ul>
-                    </div>
-                  </li>
-                  
-                  <li class="depth1">
-                    <a href="#none" name="전라">
-                      전북/전남
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul id="전라CinemaList">
-                      </ul>
-                    </div>
-                  </li>
-  
-                  <li class="depth1">
-                    <a href="#none" name="경상">
-                      경북/경남
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul id="경상CinemaList">
-                      </ul>
-                    </div>
-                  </li>
-                  
- 
-                  <li class="depth1">
-                    <a href="#none" name="제주">
-                      제주
-                    </a>
-                    <div class="depth2" style="display: none;">
-                      <ul id="제주CinemaList">
-                      </ul>
-                    </div>
-                  </li>
-  
-  
+                  <c:forEach items="${localData}" var="local">
+                    <li class="depth1">
+                      <a href="javascript:void(0);" >${local}</a>
+                        <div class="depth2" style="display: none;">
+                            <ul>
+                                <c:forEach items="${cinemaNames[local]}" var="cinemaName">
+                                    <li class>
+                                        <a href="/cinema/movies?cinemaCode=${cinemaData.cinemaCode}" cinema-code="${cinemaData.cinemaCode}">${cinemaData.cinemaName}</a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </li>
+                  </c:forEach>
                 </ul>
               </div>
 
@@ -359,60 +229,19 @@
             <div class="mCustomScrollbar movieScroll _mCS_9 mCS-autoHide" style="position: relative; overflow: visible;">
               <div id="mCSB_9" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" tabindex="0" style="max-height: none;">
                 <div id="mCSB_9_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" dir="ltr">
-                  <ul>
-                    <li class="disabled">
-                      <a href="#none">
-                        <div class="group_infor">
-                          <div class="bx_title">
-                            <span class="ic_grade gr_all">
-                              "0세 관람가"
-                            </span>
-                            <strong class="tit">30일</strong>
+                  <ul id="movie-list-container">
+                    <c:forEach var="movie" items="${movies}">
+                      <li class>
+                        <a href="#none">
+                          <div class="group_infor">
+                            <div class="bx_title">
+                              <span class="ic_grade ${movie.rating}"></span>
+                              <strong class="tit">${movie.title}</strong>
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="#none">
-                        <div class="group_infor">
-                          <div class="bx_title">
-                            <span class="ic_grade gr_12">
-                              "12세 관람가"
-                            </span>
-                            <strong class="tit">30일</strong>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="#none">
-                        <div class="group_infor">
-                          <div class="bx_title">
-                            <span class="ic_grade gr_15">
-                              "15세 관람가"
-                            </span>
-                            <strong class="tit">30일</strong>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="#none">
-                        <div class="group_infor">
-                          <div class="bx_title">
-                            <span class="ic_grade gr_18">
-                              "18세 관람가"
-                            </span>
-                            <strong class="tit">30일</strong>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    
+                        </a>
+                      </li>
+                    </c:forEach>  
                   </ul>
                 </div>
               </div>
@@ -440,23 +269,24 @@
                     <!-- 각 li에 들어갈 날짜들 -->
                     <div class="owl-item active" style="width: 52px;">
                       <li class="item">
-                        <strong class="month">10월</strong>
+                        <strong class="month">11월</strong>
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate0">
-                            <input type="radio" id="radioDate0" name="radioDate1" data-displayn="Y" data-playdate="2023-10-18" data-isplaydate="Y" ata-playweek="오늘" checked>
-                            <strong>18</strong>
+                            <input type="radio" id="radioDate0" name="radioDate1" data-displayn="Y" data-playdate="2023-11-07" data-isplaydate="Y" data-playweek="오늘" checked>
+                            <strong>07</strong>
                             <em>오늘</em>
                           </label>
                         </a>
                       </li>
                     </div>
-                    <div class="owl-item active" style="width: 52px;">
+
+                     <div class="owl-item active" style="width: 52px;">
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate1">
-                            <input type="radio" id="radioDate1" name="radioDate1" data-displayn="Y" data-playdate="2023-10-19" data-isplaydate="Y" ata-playweek="목">
-                            <strong>19</strong>
-                            <em>목</em>
+                            <input type="radio" id="radioDate1" name="radioDate1" data-displayn="Y" data-playdate="2023-11-08" data-isplaydate="Y" data-playweek="수">
+                            <strong>08</strong>
+                            <em>수</em>
                           </label>
                         </a>
                       </li>
@@ -465,9 +295,9 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate2">
-                            <input type="radio" id="radioDate2" name="radioDate1" data-displayn="Y" data-playdate="2023-10-19" data-isplaydate="Y" ata-playweek="목">
-                            <strong>20</strong>
-                            <em>금</em>
+                            <input type="radio" id="radioDate2" name="radioDate1" data-displayn="Y" data-playdate="2023-11-09" data-isplaydate="Y" data-playweek="목">
+                            <strong>09</strong>
+                            <em>목</em>
                           </label>
                         </a>
                       </li>
@@ -476,9 +306,9 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate3">
-                            <input type="radio" id="radioDate3" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
-                            <strong>21</strong>
-                            <em>토</em>
+                            <input type="radio" id="radioDate3" name="radioDate1" data-displayn="Y" data-playdate="2023-11-10" data-isplaydate="Y" data-playweek="금">
+                            <strong>10</strong>
+                            <em>금</em>
                           </label>
                         </a>
                       </li>
@@ -487,9 +317,9 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate4">
-                            <input type="radio" id="radioDate4" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
-                            <strong>22</strong>
-                            <em>일</em>
+                            <input type="radio" id="radioDate4" name="radioDate1" data-displayn="Y" data-playdate="2023-11-11" data-isplaydate="Y" data-playweek="토">
+                            <strong>11</strong>
+                            <em>토</em>
                           </label>
                         </a>
                       </li>
@@ -498,9 +328,9 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate5">
-                            <input type="radio" id="radioDate5" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
-                            <strong>23</strong>
-                            <em>월</em>
+                            <input type="radio" id="radioDate5" name="radioDate1" data-displayn="Y" data-playdate="2023-11-12" data-isplaydate="Y" data-playweek="일">
+                            <strong>12</strong>
+                            <em>일</em>
                           </label>
                         </a>
                       </li>
@@ -509,9 +339,9 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate6">
-                            <input type="radio" id="radioDate6" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
-                            <strong>24</strong>
-                            <em>화</em>
+                            <input type="radio" id="radioDate6" name="radioDate1" data-displayn="Y" data-playdate="2023-11-13" data-isplaydate="Y" data-playwee="월">
+                            <strong>13</strong>
+                            <em>월</em>
                           </label>
                         </a>
                       </li>
@@ -520,13 +350,13 @@
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
                           <label for="radioDate7">
-                            <input type="radio" id="radioDate7" name="radioDate1" data-displayn="Y" data-playdate="2023-10-21" data-isplaydate="Y" ata-playweek="목">
-                            <strong>25</strong>
-                            <em>수</em>
+                            <input type="radio" id="radioDate7" name="radioDate1" data-displayn="Y" data-playdate="2023-11-14" data-isplaydate="Y" data-playweek="화">
+                            <strong>14</strong>
+                            <em>화</em>
                           </label>
                         </a>
                       </li>
-                    </div>
+                    </div> 
                     
                     
                   </div>
@@ -557,6 +387,8 @@
                         <strong>30일</strong>
                       </span>
                     </div>
+
+
                     <div class="time_select_wrap timeSelect">
                       <ul class="list_time">
                         <li class>
@@ -732,7 +564,7 @@
               </div>
             </div>
           </div>
-        
+
         </div>
       </article>
     </div>
@@ -808,7 +640,7 @@
     <div class="btn_bottom_wrap" id="stepOnePopupConButton">
       <a href="#none" class="btn_col1 ty5">취소</a>
       <!-- 좌석 선택하는 페이지로 넘어감 -->
-      <a href="/reservation/second" class="btn_col2 ty5">인원/좌석선택</a>
+      <a href="#" class="btn_col2 ty5" onclick="go_on_post_mapping()">인원/좌석선택</a>
     </div> 
   </div>
 </div>
@@ -817,13 +649,74 @@
 <!-- 푸터 -->
     <jsp:include page="../include/footer.jsp"/>
     
+    <script></script>
+
+    <!-- <script>
+      console.log("JavaScript code is running");
+      document.addEventListener('DOMContentLoaded', function() {
+        function getCurrentDate() {
+          const currentDate = new Date();
+          const year = currentDate.getFullYear();
+          const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+          const day = String(currentDate.getDate()).padStart(2, '0');
+          return year + "-" + month + "-" + day;
+        }
+    
+        function clearExistingDates() {
+          const dateContainer = document.querySelector(".owl-stage");
+          dateContainer.innerHTML = ''; // 기존의 날짜를 모두 삭제
+        }
+    
+        function displayWeekDates() {
+          clearExistingDates(); // 기존의 날짜를 삭제
+    
+          const currentDate = getCurrentDate();
+          const days = ["일", "월", "화", "수", "목", "금", "토"];
+          const dateContainer = document.querySelector(".owl-stage");
+    
+          for (let i = 0; i < 7; i++) {
+            const dayDate = new Date(currentDate);
+            dayDate.setDate(dayDate.getDate() + i);
+            const dayMonth = dayDate.getMonth() + 1;
+            const dayNum = String(dayDate.getDate()).padStart(2, '0');
+            const dayIndex = dayDate.getDay();
+            const dayName = i === 0 ? "오늘" : days[dayIndex];
+    
+            const newDateItem = document.createElement("div");
+            newDateItem.className = "owl-item active";
+            newDateItem.style.width = "52px";
+            newDateItem.innerHTML = `
+              <li class="item">
+                <strong class="month">${dayMonth}월</strong>
+                <a href="#none" class="date" tabindex="0">
+                  <label for="radioDate${i}">
+                    <input type="radio" id="radioDate${i}" name="radioDate1" data-displayn="Y" data-playdate="${dayDate.getFullYear()}-${dayMonth}-${dayNum}" data-isplaydate="Y" data-playweek="${dayName}">
+                    <strong>${dayNum}</strong>
+                    <em>${dayName}</em>
+                  </label>
+                </a>
+              </li>
+            `;
+    
+            dateContainer.appendChild(newDateItem);
+          }
+        }
+    
+        // Call the function to display dates
+        displayWeekDates();
+      });
+    </script> -->
+    
     
 <!-- 자바스크립트 영역 -->
 
 <script src="../js/ticket_main.js"></script>
-<script src="../js/ticket_reverse.js"></script>
 <script src="../js/modal.js"></script>
-<script src="../js/cinema.js"></script>
+<script src="../js/ticket_reverse.js"></script>
+
+
+
+
 
 </body>
 </html>

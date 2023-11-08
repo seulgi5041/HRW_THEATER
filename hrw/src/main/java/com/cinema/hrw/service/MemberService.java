@@ -173,5 +173,10 @@ public class MemberService {
         // 영문자와 숫자가 혼합되어 6자 이상인 경우 유효하다고 가정
         return password.matches("^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$");
     }
+    
+    public int idDubleCheck(String userId){
+		int dubleCheck = memberRepository.countByUserId(userId);
+		return dubleCheck;
+	}
 }
 

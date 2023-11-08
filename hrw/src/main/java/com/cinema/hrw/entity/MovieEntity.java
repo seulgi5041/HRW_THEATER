@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.cinema.hrw.dto.MovieDTO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -87,5 +88,37 @@ public class MovieEntity {
 
     @Column(name = "update_date")
     private String updateDate;
+
+    public static MovieEntity toMovieEntity(MovieDTO movieDTO) {
+        
+        MovieEntity movieEntity = new MovieEntity();
+        movieEntity.setCode(movieDTO.getCode() != null ? movieDTO.getCode() : "");
+        movieEntity.setTitle(movieDTO.getTitle()!= null ? movieDTO.getTitle() : "");
+        movieEntity.setAka(movieDTO.getAka()!= null ? movieDTO.getAka() : "");
+        movieEntity.setSummary(movieDTO.getSummary()!= null ? movieDTO.getSummary() : "");
+        movieEntity.setRating(movieDTO.getRating()!= null ? movieDTO.getRating() : "");
+        movieEntity.setReleaseDate(movieDTO.getReleaseDate()!= null ? movieDTO.getReleaseDate() : "");
+        movieEntity.setProductionYear(movieDTO.getProductionYear()!= null ? movieDTO.getProductionYear() : "");
+        movieEntity.setProductionCondition(movieDTO.getProductionCondition()!= null ? movieDTO.getProductionCondition() : "");
+        movieEntity.setCrankInUp(movieDTO.getCrankInUp()!= null ? movieDTO.getCrankInUp() : "");
+        movieEntity.setFilmingCount(movieDTO.getFilmingCount()!= null ? movieDTO.getFilmingCount() : "");
+        movieEntity.setScreenType(movieDTO.getScreenType()!= null ? movieDTO.getScreenType() : "");
+        movieEntity.setSynopsis(movieDTO.getSynopsis()!= null ? movieDTO.getSynopsis() : "");
+        movieEntity.setDirector(movieDTO.getDirector()!= null ? movieDTO.getDirector() : "");
+        movieEntity.setActor(movieDTO.getActor()!= null ? movieDTO.getActor() : "");
+        movieEntity.setProducer(movieDTO.getProducer()!= null ? movieDTO.getProducer() : "");
+        movieEntity.setDistributor(movieDTO.getDistributor()!= null ? movieDTO.getDistributor() : "");
+        movieEntity.setImporter(movieDTO.getImporter()!= null ? movieDTO.getImporter() : "");
+        movieEntity.setAdvanceReservationRate(movieDTO.getAdvanceReservationRate()!= null ? movieDTO.getAdvanceReservationRate() : 0);
+        movieEntity.setCumulativeNumberOfAudience(movieDTO.getCumulativeNumberOfAudience()!= null ? movieDTO.getCumulativeNumberOfAudience() : "");
+        movieEntity.setIncreaseDecreaseStatus(movieDTO.getIncreaseDecreaseStatus()!= null ? movieDTO.getIncreaseDecreaseStatus() : 0);
+        movieEntity.setIncreaseDecreaseRate(movieDTO.getIncreaseDecreaseRate()!= null ? movieDTO.getIncreaseDecreaseRate() : 0);
+        movieEntity.setPosterUrl(movieDTO.getPosterUrl()!= null ? movieDTO.getPosterUrl() : "");
+        movieEntity.setUpdateDate(movieDTO.getUpdateDate()!= null ? movieDTO.getUpdateDate() : "");
+    
+            return movieEntity;
+        
+    }
+
     
 }

@@ -4,7 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import com.cinema.hrw.dto.CinemaAddressDTO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "cinema_addressTBL")   
+@Table(name = "cinema_addressTBL")	
 public class CinemaAddressEntity {
     
     @Id
@@ -24,7 +25,7 @@ public class CinemaAddressEntity {
 
     @Column
     private String address;
-    
+
     @Column
     private String local;
 
@@ -32,9 +33,22 @@ public class CinemaAddressEntity {
     private String tell;
 
     @Column
-    private double xAxis;
+    private Double xAxis;
     
     @Column
-    private double yAxis;
+    private Double yAxis;
+
+    public static CinemaAddressEntity toCinemaAddressEntity(CinemaAddressDTO cinemaAddressDTO) {
+        CinemaAddressEntity cinemaAddressEntity = new CinemaAddressEntity();
+        cinemaAddressEntity.setCinemaCode(cinemaAddressDTO.getCinemaCode() != null ? cinemaAddressDTO.getCinemaCode() : "");
+        cinemaAddressEntity.setCinemaName(cinemaAddressDTO.getCinemaName() != null ? cinemaAddressDTO.getCinemaName() : "");
+        cinemaAddressEntity.setAddress(cinemaAddressDTO.getAddress() != null ? cinemaAddressDTO.getAddress() : "");
+        cinemaAddressEntity.setTell(cinemaAddressDTO.getTell() != null ? cinemaAddressDTO.getTell() : "");
+        cinemaAddressEntity.setXAxis(cinemaAddressDTO.getXAxis() != null ? cinemaAddressDTO.getXAxis() : 0);
+        cinemaAddressEntity.setYAxis(cinemaAddressDTO.getYAxis() != null ? cinemaAddressDTO.getYAxis() : 0);
+        cinemaAddressEntity.setLocal(cinemaAddressDTO.getLocal() != null ? cinemaAddressDTO.getLocal() : "");
+        return cinemaAddressEntity;
+    }
+
 
 }

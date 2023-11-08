@@ -63,5 +63,40 @@ document.addEventListener("DOMContentLoaded", function() {
         
         return true; // 모든 검사를 통과했을 때
     }
-});
 
+
+    /*중복 */
+    const double_check_btn = document.getElementById('double_check_btn');
+    double_check_btn.addEventListener("click", function(){
+        let userId = document.getElementById("user_ID").value;
+        var userIdPattern = /^[A-Za-z0-9]{6,20}$/;
+        if (!userIdPattern.test(userId)) {
+            alert("아이디는 영문, 숫자 6~20자여야 합니다.");
+            return false;
+        }
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/idDoubleCheck", true);
+
+    // HTTP 요청 헤더 설정
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            const response = parseInt(xhr.responseText);
+            if (response === 0) {
+                alert("사용 가능한 아이디입니다.")
+            } else {
+                alert("이미 사용 중인 아이디입니다.")
+            }
+        } else {
+            alert("서버 오류가 발생했습니다.")
+        }
+    };
+
+    // 데이터를 JSON 문자열로 변환하여 body에 설정
+    const data = JSON.stringify({ user_Id : userId });
+
+    xhr.send(data);
+    });
+});

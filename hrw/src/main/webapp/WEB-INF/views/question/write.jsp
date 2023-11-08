@@ -55,7 +55,7 @@
 
         <div class="button-group">
             <input type="submit" value="문의 하기">
-            <a href="/member/list"><input type="button" value="글 목록"></a>
+            <a href="/question/list"><input type="button" value="글 목록"></a>
         </div>
     </form>
     </div>

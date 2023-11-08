@@ -94,8 +94,23 @@
   background-color: transparent;
 }
 
+.ic_grade.gr_all:before {
+  background: #46e930 url(../images/ic_grade/gr_all.png) 0 0 no-repeat;
+  background-size: 100%;
+}
+
 .ic_grade.gr_12:before {
-  background: #e9b630 url(../images/ic_grade/grade_12.png) 0 0 no-repeat;
+  background: #e9b630 url(../images/ic_grade/gr_12.png) 0 0 no-repeat;
+  background-size: 100%;
+}
+
+.ic_grade.gr_15:before {
+  background: rgb(233, 91, 8) url(../images/ic_grade/gr_15.png) 0 0 no-repeat;
+  background-size: 100%;
+}
+
+.ic_grade.gr_18:before {
+  background: rgb(224, 2, 2)url(../images/ic_grade/gr_18.png) 0 0 no-repeat;
   background-size: 100%;
 }
 
@@ -273,6 +288,10 @@ img {
 
 button > * {
   position: relative;
+}
+
+[data-paycompany].choice_company {
+  border: 0.2px solid #FB3D28;
 }
 
 

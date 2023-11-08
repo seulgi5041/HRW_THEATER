@@ -3,18 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const depth2Select1 = document.querySelectorAll('.depth2 li');
   const groupTimeSelect = document.querySelectorAll('.group_time_select');
   const boxNotice = document.querySelector('.box_notice');
-
-
-  /*2023-11-01 10:50분 수정 페이지가 로드 될 때 depth1이 자동으로 active되는 것을 방지하고
-   * depth2의 css속성을 none으로 변경
-  */
-  depth1Select1.forEach((element) => {
-    const depth2 = element.querySelector('.depth2');
-    if (depth2) {
-      depth2.style.display = 'none';
-    }
-  });
-
+  // JSP 파일에서 선언한 window.localData를 사용
+  //const localData = window.localData;
 
   function handleDepth1Click(element) {
     // depth1에 active가 없다면 depth2가 나타나지 않음
@@ -65,8 +55,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
      // <dd> 업데이트
-    const ddElement = document.querySelector('li.step01.active dl dd');
-    ddElement.textContent = selectedLocation + " (" + movieHall + ")";
+  const ddElement = document.querySelector('li.step01.active dl dd');
+  ddElement.textContent = selectedLocation + " (" + movieHall + ")";
 }
 
   // depth1Select에 대한 클릭 이벤트 처리
@@ -182,6 +172,37 @@ function updateThirdDdText(event) {
       //모달js에 전달할 함수
       // 모달 열기 함수 호출
       openModal();
+
+
+      /*좌석선택시 포스트 매핑 나중에 변경할것 */
+      const seatSelectionLink = document.getElementById("stepOnePopupConButton");
+
+      seatSelectionLink.addEventListener("click", function() {
+        
+        go_on_post_mapping();  
+      });
+
+      function go_on_post_mapping() {
+        const scheduleCode = "11025042023110821";
+
+        let form = document.createElement('form');
+
+        // scheduleCode를 숨겨진 입력 필드로 추가
+        let scheduleCodeInput = document.createElement('input');
+        scheduleCodeInput.setAttribute('type', 'hidden');
+        scheduleCodeInput.setAttribute('name', 'scheduleCode');
+        scheduleCodeInput.setAttribute('value', scheduleCode);
+        form.appendChild(scheduleCodeInput);
+
+
+        form.setAttribute('method', 'post');
+        form.setAttribute('action', '/reservation/second');
+        
+        // 필요한 경우 데이터 유효성 검사 수행
+
+        document.body.appendChild(form);
+        form.submit();
+      }
 
       // 이벤트 기본 동작 방지 (a 태그의 링크 이동 방지)
       event.preventDefault();

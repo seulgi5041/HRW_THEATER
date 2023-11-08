@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,14 +16,14 @@
 
   <!-- 헤더 영역 -->
     <jsp:include page="../include/header.jsp"/>
-
+    
 <main id="contents" class="contents_full contents_reserve" style="margin-top:30px;">
   <section class="wrap_reserve">
     <div id="reserveStep02" class="section_step_title">
       <ul>
         <!-- 상영시간 -->
         <li class="step01 prev">
-          <a href="/reservation/first">
+          <a href="#reserveStep02">
             <strong class="tit">
               <span>01</span>
               <br>
@@ -31,15 +32,15 @@
             <div class="box_con">
               <dl>
                 <dt>선택한 영화 정보</dt>
-                <dd>title</dd>
+                <dd>${choiceScheduleInfo.movieTitle}</dd>
                 <dt>선택한 상영관</dt>
-                <dd>"지점 " 
-                    "관"</dd>
+                <dd>"${choiceScheduleInfo.cinemaName} " 
+                    "${choiceScheduleInfo.auditorium}"</dd>
                 <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
+                <dd>date(${choiceScheduleInfo.takeDate}(${choiceScheduleInfo.takeDateOfWeek}))</dd>
                 <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+                <dd>"${choiceScheduleInfo.startTime}~" 
+                    "${choiceScheduleInfo.endTime}"</dd>
               </dl>
             </div>
           </a>
@@ -54,16 +55,11 @@
               인원/좌석
             </strong>
             <div class="box_con">
-              <dl>선택한 영화 제목
-                <dt>title</dt>
-                <dd>선택한 상영관</dd>
-                <dd>"지점 " 
-                    "관"</dd>
-                <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
-                <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+              <dl>
+                <dt>선택인원</dt>
+                <dd id="dd_choice_person_count">정보없음</dd><!--예-성인1장애인1 / 성인2 -->
+                <dt>선택한 좌석</dt>
+                <dd id="dd_choice_seats">정보없음</dd><!--예-A2,A3.... -->
               </dl>
             </div>
           </a>
@@ -78,16 +74,14 @@
               음식선택
             </strong>
             <div class="box_con">
-              <dl>선택한 영화 제목
+              <dl>
                 <dt>title</dt>
                 <dd>선택한 상영관</dd>
-                <dd>"지점 " 
-                    "관"</dd>
+                <dd>정보없음</dd>
                 <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
+                <dd>정보없음</dd>
                 <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+                <dd>정보없음</dd>
               </dl>
             </div>
           </a>
@@ -102,16 +96,14 @@
               결제
             </strong>
             <div class="box_con">
-              <dl>선택한 영화 제목
+              <dl>
                 <dt>title</dt>
                 <dd>선택한 상영관</dd>
-                <dd>"지점 " 
-                    "관"</dd>
+                <dd>정보없음</dd>
                 <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
+                <dd>정보없음</dd>
                 <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+                <dd>정보없음</dd>
               </dl>
             </div>
           </a>
@@ -126,16 +118,14 @@
               결제완료
             </strong>
             <div class="box_con">
-              <dl>선택한 영화 제목
+              <dl>
                 <dt>title</dt>
                 <dd>선택한 상영관</dd>
-                <dd>"지점 " 
-                    "관"</dd>
+                <dd>정보없음</dd>
                 <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
+                <dd>정보없음</dd>
                 <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+                <dd>정보없음</dd>
               </dl>
             </div>
           </a>
@@ -158,34 +148,34 @@
             <div class="movie_info">
               <h6 class="hidden">예매정보</h6>
               <span class="thum_movie">
-                <img src="../images/poster_rank/20226798.jpg" alt="20226798">
+                <img src="../images/poster_rank/${choiceScheduleInfo.movieCode.code}.jpg" alt="${choiceScheduleInfo.movieCode.code}">
                 <!-- 이미지부터 아래는 db 혹은 자바스크립트로 가져와야 할 듯... -->
               </span>
               <div class="movie_group_info">
                 <div class="box_tit">
-                  <span class="ic_grade gr_12">
+                  <span class="ic_grade ${choiceScheduleInfo.movieRating}">
                     관람가
                   </span>
                   <strong>
-                    30일
+                  ${choiceScheduleInfo.movieTitle}
                   </strong>
                 </div>
                 <dl>
                   <dt>일시</dt>
                   <dd class="sub_info1">
-                    yymmdd
+                  ${choiceScheduleInfo.takeDate}
                     <em>
-                      요일
+                    ${choiceScheduleInfo.takeDateOfWeek}
                     </em>
                     <span class="time">
-                      시작 ~ 종료
+                    ${choiceScheduleInfo.startTime} ~ ${choiceScheduleInfo.endTime}
                     </span>
                   </dd>
                   <dt>영화관</dt>
                   <dd class="sub_info1">
-                    영화관
+                  ${choiceScheduleInfo.cinemaName}
                     .
-                    1관
+                    ${choiceScheduleInfo.auditorium}
                   </dd>
                 </dl>
               </div>
@@ -315,13 +305,13 @@
               <dl class="total_price">
                 <dt>총 합계</dt>
                 <dd>
-                  <strong>금액</strong>
+                  <strong id="setting_total_Price">금액</strong>
                   원
                 </dd>
               </dl>
             </div>
             <div class="bottom_right">
-              <a href="/reservation/third_combo" class="btn_col" id="link_rpay">결제하기</a>
+              <a href="javascript:void(0)" class="btn_col" id="link_rpay">결제하기</a>
             </div>
           </div>
         </div>
@@ -338,6 +328,22 @@
     
     
 <!-- 자바스크립트 영역 -->
+
+<script>
+  const in_use_seats = [
+    <c:forEach items="${remainingSeats}" var="remainingSeat" varStatus="loop">
+    '${remainingSeat.seatName}'<c:if test="${!loop.last}">, </c:if>
+  </c:forEach>
+
+   ];
+
+  const cost_in_choice_schedule={
+    '성인': ${choiceScheduleInfo.adultPrice},
+    '청소년': ${choiceScheduleInfo.teenagerPrice},
+    '장애인': ${choiceScheduleInfo.disabledPrice},
+  }
+  console.log(cost_in_choice_schedule)
+</script>
 
 <script src="../js/ticket_reverse.js"></script> 
 <script src="../js/seat_select.js"></script>

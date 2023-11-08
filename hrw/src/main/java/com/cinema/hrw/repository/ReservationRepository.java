@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.cinema.hrw.entity.CinemaAddressEntity;
+import com.cinema.hrw.entity.ScheduleEntity;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<CinemaAddressEntity, String> {
@@ -16,4 +17,9 @@ public interface ReservationRepository extends JpaRepository<CinemaAddressEntity
 	@Query("SELECT ca.cinemaName FROM CinemaAddressEntity ca WHERE ca.local = :location")
     List<String> findCinemaNamesByLocation(@Param("location") String location);
     
-}
+	@Query("SELECT s.auditorium, s.startTime, s.endTime, s.takeDate, s.movieCode.title, "+
+			   "s.movieCode.rating, s.cinemaCode.cinemaName, s.adultPrice, s.disabledPrice, s."+
+			   "teenagerPrice FROM ScheduleEntity s JOIN s.movieCode m JOIN s.cinemaCode c WHERE s.scheduleCode = :scheduleCode")
+			    ScheduleEntity findScheduleInfoByScheduleCode(@Param("scheduleCode") String scheduleCode);
+			}
+

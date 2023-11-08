@@ -307,14 +307,16 @@ li.depth1:first-child {
 
 .wrap_reserve .section_step_con .article_layer.article_cinema > .inner .cinema_select_wrap > ul {
   height: 960px;
+  width: 175px;
 }
 
 .wrap_reserve .section_step_con .article_layer.article_cinema .cinema_select_wrap > ul li {
+  width: 170px;
   padding: 2px 0px;
   border-bottom: none;
 }
 
-.wrap_reserve .section_step_con .article_layer.article_cinema .cinema_select_wrap > ul > li.depth1.active > a {
+.wrap_reserve .section_step_con .article_layer.article_cinema .cinema_select_wrap > ul > li.active {
   border: 2px solid #383838;
   background-color: #fff;
 }
@@ -402,13 +404,13 @@ li.depth1:first-child {
   vertical-align: middle;
 }
 
-.wrap_reserve .section_step_con .article_layer.article_cinema .cinema_select_wrap > ul .depth2 ul.active a {
-  color: #383838;
-  font-weight: 600;
+.wrap_reserve .section_step_con .article_layer.article_cinema .cinema_select_wrap > ul .depth2 ul li.active a {
+  color: #FB3D28;
+  font-weight: 800;
   content: "";
   top: 0px;
-  background: url(../images/ticket/check_active.png) no-repeat 100% 8px;
-  background-size: 18px auto;
+  /* background: url(../images/ticket/check_active.png) no-repeat 100% 8px;
+  background-size: 18px auto; */
 }
 
 
@@ -452,6 +454,7 @@ li.depth1:first-child {
 
 .movieSelect {
   overflow-y: scroll; 
+  overflow: hidden;
   max-height: 950px; 
 }
 
@@ -474,18 +477,6 @@ li.depth1:first-child {
   height: 0;
 }
 
-
-/* 
-.mCSB_container {
-  overflow: scroll;
-  width: auto;
-  height: auto;
-} */
-
-/* .wrap_reserve .section_step_con .article_layer.article_movie .inner .mCSB_container {
-  padding-bottom: 30px;
-  height: 100%;
-} */
 
 .movie_select_wrap ul > li {
   box-sizing: border-box;

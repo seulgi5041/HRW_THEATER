@@ -8,17 +8,18 @@ document.addEventListener("DOMContentLoaded", function() {
   // 모달 열기 함수 호출
   window.openModal = openModal;
 
+
+ // 모달 닫기 함수
+  function closeModal() {
+    const modal = document.getElementById("modal");
+    modal.style.display = "none";
+  }
+
   //x버튼을 클릭했을때 모달 창 닫기
   const closeModalButtons = document.getElementsByClassName("btn_close");
 
   for (const closeButton of closeModalButtons) {
     closeButton.addEventListener('click', closeModal);
-  }
-
-  // 모달 닫기 함수
-  function closeModal() {
-    const modal = document.getElementById("modal");
-    modal.style.display = "none";
   }
 
   // 모달 창 내의 취소 버튼을 선택
@@ -33,4 +34,6 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   }
+
+  
 });
