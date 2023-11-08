@@ -81,7 +81,11 @@ document.addEventListener("DOMContentLoaded", function () {
       
 
 async function box_office_info(movieCode){
+<<<<<<< HEAD
   var apiKey = '6c2bad543927107f8334416fc5f2a63b';
+=======
+  var apiKey = 'c5df5d07dd8a15b2f5d00f6c21e37cc1';
+>>>>>>> main
   var url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key='+apiKey+'&movieCd='+movieCode;
   
   try {

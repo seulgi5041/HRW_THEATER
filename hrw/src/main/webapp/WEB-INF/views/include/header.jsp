@@ -42,7 +42,7 @@
     </nav>
 </header>
 <script>
-    var isLoggedIn = "<%= (loggedInUserName != null) ? "true" : "false" %>";
+    var isLoggedIn = "<%= (loggedInUserName != null) ? "true" : "false"  %>";
     var loggedUserName = "<%= loggedInUserName %>";
 </script>
     <script src="../js/include/header.js"></script>

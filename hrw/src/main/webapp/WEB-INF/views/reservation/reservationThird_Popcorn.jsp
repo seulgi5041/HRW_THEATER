@@ -171,7 +171,11 @@
                             <li><a href="/reservation/third_snack">스낵</a></li>
                           </ul>
                           <ul class="add_food">
+<<<<<<< HEAD
                             <li><a href="#">장바구니</a></li>
+=======
+                            <!-- <li><a href="#">장바구니</a></li> -->
+>>>>>>> main
                           </ul>
                         </div>
                       </div>
@@ -370,7 +374,11 @@
     
     
 <!-- 자바스크립트 영역 -->
+<<<<<<< HEAD
 <script src="../js/store_depth.js"></script>
+=======
+<script src="../js/store/store_depth.js"></script>
+>>>>>>> main
 <script src="../js/ticket_main.js"></script>
 <script src="../js/ticket_reverse.js"></script> 
 
