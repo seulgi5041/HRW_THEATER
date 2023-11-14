@@ -117,6 +117,7 @@ public class MovieService {
         for (MovieEntity movieEntity : nowMovieSearchListEntity) {
             MovieDTO movieDTO = new MovieDTO();
             movieDTO.setCode(movieEntity.getCode());
+            movieDTO.setProductionCondition(movieEntity.getProductionCondition());
             nowMovieSearch.add(movieDTO);
         }
 

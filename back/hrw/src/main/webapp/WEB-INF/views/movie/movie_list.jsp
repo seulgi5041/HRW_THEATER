@@ -35,9 +35,6 @@
               <c:param name="code" value="${movie.code}" /> <!--파라미터에 코드추가-->
           </c:url>
 
-          <c:url value="/reservation/first" var="reservationUrl">
-              <c:param name="code" value="${movie.code}" /> <!--파라미터에 코드추가-->
-          </c:url>
 
             <a class="movielist_movieposter_cell" href="${movieInfoUrl}"> <!--포스터쪽 div클릭시 영화 상세정보로 이동-->
                 <img src="../images/poster_rank/${movie.code}.jpg" alt="${movie.title}">
@@ -47,7 +44,7 @@
               </a> 
             <p>${movie.title}</p>
             <div class="ticketing_btn">
-              <a href="${reservationUrl}" class="movie_ticketing">예매하기</a>
+              <a href="javascript:void(0)" class="movie_ticketing" name="${movie.code}" data-orderAble="${movie.productionCondition}">예매하기</a>
             </div>
           </div>
           <c:if test="${status.index % 5 == 4}">

@@ -3,14 +3,17 @@ import random
 import requests
 from datetime import datetime, timedelta
 
+
 def get_movie_code():
   conn, cur = None, None
-  movie_codes = []
+  movie_codes = []  # 빈 리스트를 생성
   conn = pymysql.connect(host='localhost', user='root', password='1234', db='moviepjt', charset='utf8')
   cur = conn.cursor()
-  cur.execute("SELECT code from movietbl")
+  cur.execute("SELECT code, release_date FROM movietbl WHERE update_date = CURDATE();")
   for row in cur.fetchall():
-    movie_codes.append(row[0])
+    movie_code = row[0]
+    release_date = row[1]
+    movie_codes.append((movie_code, release_date))  # 각 행의 code와 release_date를 튜플로 묶어서 리스트에 추가
   conn.commit()
   cur.close()
   conn.close()
@@ -22,7 +25,7 @@ def get_cinema_code():
   cinema_codes = []
   conn = pymysql.connect(host='localhost', user='root', password='1234', db='moviepjt', charset='utf8')
   cur = conn.cursor()
-  cur.execute("SELECT cinema_code from cinema_addresstbl")
+  cur.execute("SELECT cinema_code from cinema_addresstbl ")
   for row in cur.fetchall():
     cinema_codes.append(row[0])
   conn.commit()
@@ -32,9 +35,9 @@ def get_cinema_code():
 
 def get_take_date():
   today = datetime.today()
-  # 5일 후까지의 날짜를 저장할 배열
+  # 7일 후까지의 날짜를 저장할 배열
   date_list = []
-  # 오늘로부터 5일간의 날짜 생성 및 배열에 추가
+  # 오늘로부터 7일간의 날짜 생성 및 배열에 추가
   for i in range(8):
     date_list.append((today + timedelta(days=i)).strftime('%Y-%m-%d'))
 
@@ -81,26 +84,30 @@ def get_movie_API(movie_code):
     print("API 호출에 실패했습니다.")
 
 
-def get_movie_ditail ():
-  movie_codes = get_movie_code()
+def get_movie_ditail (movie_codes):
   movie_details = []
 
   for movie_code in movie_codes:
-    movie_info = get_movie_API(movie_code)
+    movie_info = get_movie_API(movie_code[0])
     if movie_info:
       show_type_tag = movie_info['showTypes']
       screen_types=["2D : 디지털"]
       if show_type_tag:
         screen_types = [f"{show['showTypeGroupNm']} : {show['showTypeNm']}" for show in show_type_tag]
       running_time = movie_info['showTm']
-      movie_details.append([movie_code, screen_types, running_time])
+      movie_details.append([movie_code[0], screen_types, running_time])
 
   return movie_details
 
-def get_select_movie_info(movie_ditails, movie_code):
+def get_select_movie_info(movie_ditails,movie_code):
   for movie_detail in movie_ditails:
     if movie_detail[0] == movie_code:
+      # movie_code가 일치하는 정보를 찾았을 때 처리할 내용
+      print("찾은 정보:", movie_detail)
       return movie_detail
+      break
+  else:
+    print(f"movie_code {movie_code}를 찾을 수 없습니다.")
 
 
 
@@ -128,7 +135,7 @@ cinema_codes = get_cinema_code()
 start_times=['06:00','09:00','12:00','15:00','18:00','21:00','00:00']
 take_dates = get_take_date()
 movie_codes= get_movie_code()
-movie_ditail=get_movie_ditail ()
+movie_ditail=get_movie_ditail (movie_codes)
 idx=0
 
 
@@ -139,10 +146,23 @@ for cinema_code in cinema_codes:
     for take_date in take_dates:
 
       for start_time in start_times:
-        if idx%30==0:
+        if idx%len(movie_codes)==0:
           random.shuffle(movie_codes)
-        movie_code = movie_codes[idx%30]
+        movie_release_date = movie_codes[idx % len(movie_codes)][1]
+        movie_release_date = movie_release_date.replace(" 개봉예정", "")
+        movie_release_date_day = datetime.strptime(movie_release_date, "%Y-%m-%d")
+        take_date_day = datetime.strptime(take_date, "%Y-%m-%d")
+
+        if movie_release_date_day>=take_date_day:
+          while movie_release_date_day >= take_date_day:
+            idx += 1
+            movie_release_date = movie_codes[idx % len(movie_codes)][1]
+            movie_release_date = movie_release_date.replace(" 개봉예정", "")
+            movie_release_date_day = datetime.strptime(movie_release_date, "%Y-%m-%d")
+
+        movie_code = movie_codes[idx%len(movie_codes)][0]
         movie_info= get_select_movie_info(movie_ditail,movie_code)
+
         show_type_tag = movie_info[1]
         screen_type = random.choice(show_type_tag)
         show_time = int(movie_info[2]) if movie_info[2] else 130
@@ -181,35 +201,3 @@ for cinema_code in cinema_codes:
                     adult_price, disabled_price)
         print(f"{idx} DB에 저장")
         idx+=1
-
-
-'''import pymysql
-import csv
-
-# MySQL 데이터베이스에 연결
-conn = pymysql.connect(host='localhost', user='root', password='1234', db='moviepjt', charset='utf8')
-cursor = conn.cursor()
-
-# CSV 파일의 경로
-csv_file_path = 'D:/teamHRW/resources_file/theater_address/address.csv'
-
-# CSV 파일 열기
-with open(csv_file_path, 'r', encoding='utf-8') as csv_file:
-    csv_reader = csv.DictReader(csv_file)
-
-    # 각 행을 반복하며 데이터 읽기
-    for row in csv_reader:
-        query = ("INSERT INTO cinema_addresstbl (cinema_code, address, cinema_name, tell, x_axis, y_axis) "
-                "VALUES (%s, %s, %s, %s, %s, %s)")
-        values = (row['cinema_code'], row['address'], row['cinema_name'],
-                  row['tell'], row['x_axis'], row['y_axis'])
-        cursor.execute(query, values)
-
-# 변경사항 저장
-conn.commit()
-
-# 연결 닫기
-cursor.close()
-conn.close()'''
-
-

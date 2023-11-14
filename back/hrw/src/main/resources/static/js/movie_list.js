@@ -20,6 +20,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  const movie_ticketing = document.querySelectorAll('.movie_ticketing')
+  movie_ticketing.forEach(button => {
+    button.addEventListener("click", function () {
+        var movieCode = this.getAttribute("name");
+        var orderAble = this.getAttribute("data-orderAble");
+        if(orderAble==='개봉'){
+        var movie_ticketing_link = "/reservation/first?code="+movieCode; 
+        window.location.href = movie_ticketing_link;}
+        else{alert("개봉예정작입니다.")}
+    });
+});
+
 
 
 

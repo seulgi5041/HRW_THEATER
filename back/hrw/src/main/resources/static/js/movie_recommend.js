@@ -170,11 +170,15 @@ movie_detail_btn.forEach(button => {
 });
 
 movie_ticketing_btn.forEach(button => {
-    button.addEventListener("click", function () {
-        var movieCode = this.getAttribute("data-movie-code");
-        var movie_ticketing_link = "/예매링크?code="+movieCode;
-        window.location.href = movie_ticketing_link;
-    });
+   
+  button.addEventListener("click", function () {
+    var movieCode = this.getAttribute("name");
+    var orderAble = this.getAttribute("data-orderAble");
+    if(orderAble==='개봉'){
+    var movie_ticketing_link = "/reservation/first?code="+movieCode; 
+    window.location.href = movie_ticketing_link;}
+    else{alert("개봉예정작입니다.")}
+});
 });
 
 /*이전상영작 상세 정보로 보내기 */

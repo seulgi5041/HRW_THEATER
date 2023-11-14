@@ -57,7 +57,7 @@
             <img src="../images/poster_rank/${nowMovie.code}.jpg" alt="${movie.code}">
             <div class="overlay">
                 <button class="show_movie_detail" name="${nowMovie.code}">상세보기</button>
-                <button class="now_theaters_movie_ticketing" name="${nowMovie.code}">예매하기</button> 
+                <button class="now_theaters_movie_ticketing" name="${nowMovie.code}" data-orderAble="${nowMovie.productionCondition}">예매하기</button> 
             </div>
         </div>
         

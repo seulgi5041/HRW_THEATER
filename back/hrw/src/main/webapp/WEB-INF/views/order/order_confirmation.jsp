@@ -192,7 +192,7 @@
             </table>
           </div>
 
-        <div id="oder_price_content">
+        <div id="oder_price_content"> 
           <h3>총 결제금액</h3>
           <P><span>0000</span> 원</P>
         </div>

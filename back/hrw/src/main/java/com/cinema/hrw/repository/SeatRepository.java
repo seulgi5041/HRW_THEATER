@@ -12,6 +12,6 @@ import com.cinema.hrw.entity.SeatEntity;
 public interface SeatRepository extends JpaRepository<SeatEntity,Integer>{
 
     List<SeatEntity> findByOrderCode(OrderEntity oderCode);
-
+    void deleteByOrderCode(String orderCode);
     
 }

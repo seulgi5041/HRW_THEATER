@@ -117,7 +117,7 @@ async function box_office_info(movieCode){
 
 
 //포스터 체인지 되는 부분
-  function changePoster(movieCode) {
+  function changePoster(movieCode, movieproductionCondition) {
     
     const moviePoster = document.getElementById("moviePoster");
     const posterPath = `./images/poster_rank/${movieCode}.jpg`;
@@ -129,16 +129,18 @@ async function box_office_info(movieCode){
     const top10_list_detail_btn = document.getElementById("top10_list_movie_detail");
     const top10_list_ticketing_btn = document.getElementById("top10_list_movie_ticketing");
     top10_list_detail_btn.name=movieCode
-    top10_list_ticketing_btn.name=movieCode
+    top10_list_ticketing_btn.name=movieCode 
+    top10_list_ticketing_btn.setAttribute("data-orderAble",movieproductionCondition);
 
   }
   
   const spanElements = document.querySelectorAll(".ellip");
 spanElements.forEach(function (span) {
   span.addEventListener("click", async function () {
-    const movieCode = span.getAttribute("data-movie-code"); // 영화코드
+    const movieCode = span.getAttribute("data-movie-code");// 영화코드
+    const movieproductionCondition = span.getAttribute("data-orderAble"); 
     const movieTitle = span.textContent; // 영화제목
-    changePoster(movieCode); // 영화 코드를 넘겨주어 포스터를 변경합니다.
+    changePoster(movieCode, movieproductionCondition); // 영화 코드를 넘겨주어 포스터를 변경합니다.
     var movie_data = await  box_office_info(movieCode); // 영화정보
     changeMovieInfo(movie_data, movieTitle); // 영화코드에 맞는 정보로 변경
 
@@ -161,8 +163,11 @@ movie_detail_btn.forEach(button => {
 movie_ticketing_btn.forEach(button => {
     button.addEventListener("click", function () {
         var movieCode = this.getAttribute("name");
+        var orderAble = this.getAttribute("data-orderAble");
+        if(orderAble==='개봉'){
         var movie_ticketing_link = "/reservation/first?code="+movieCode;
-        window.location.href = movie_ticketing_link;
+        window.location.href = movie_ticketing_link;}
+        else{alert("개봉예정작입니다.")}
     });
 });
 

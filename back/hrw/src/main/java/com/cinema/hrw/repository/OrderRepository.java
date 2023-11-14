@@ -29,10 +29,11 @@ public interface OrderRepository extends JpaRepository<OrderEntity,String>{
 
 
        @Query("SELECT o.orderDate, o.orderCode, m.title, o.moviePrice, "+
-       "COALESCE(MAX(f.foodName), '정보없음') AS food_item, COALESCE(SUM(f.foodPrice), 0) AS total_price " +
+       "COALESCE(MAX(d.foodName), '정보없음') AS food_item, COALESCE(SUM(f.foodPrice), 0) AS total_price " +
        "FROM OrderEntity o " +
        "LEFT JOIN MovieEntity m ON o.movieCode = m.code " +
        "LEFT JOIN FoodOrderEntity f ON o.orderCode = f.orderCode " +
+       "LEFT JOIN FoodEntity d ON d.foodName = f.foodName " +
        "WHERE o.userId = :member " +
        "GROUP BY o.orderDate, o.orderCode, m.title, o.moviePrice")
      List<Object[]> getOrdersAndFoodItems(@Param("member") MemberEntity member);

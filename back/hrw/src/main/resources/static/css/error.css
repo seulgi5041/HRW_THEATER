@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+/* 초기화 */
+* { 
+    margin: 0; padding: 0; 
+    font-family: 'DM Sans', Arial, 'sans-serif';
+}
+html {
+    font-size:62.5%;
+    background-color: #F5F4F2;
+    color: #000;
+}
+body {overflow-x: hidden; }
+a { 
+    text-decoration: none !important; 
+    color: #383838;
+}
+img { border: 0; }
+ul { list-style: none; }
+
+
+/* 메인 */
+main {
+  max-width: 1440px;
+  width: 100%;
+  margin-top: 160px;
+  margin: 0 auto;
+}
+
+#error_container{
+    display: flex;
+    margin: 50px 100px;
+    justify-content: space-around;
+}
+
+#error_img{
+    width: 15%;
+    height: auto;
+}
+
+#error_img img{
+    width: 100%;
+    height: auto;
+}
+
+.error_coment{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+}
+
+.error_coment h4{
+font-size: 3.5em;
+color :#383838;
+}
+.error_coment p{
+    font-size: 1.8em;
+    color :#848484;
+    }
+
+#error_detail{
+    margin: 150px 100px;
+}
+#movielist_show_next_button{
+    display: block;
+    width: 100%;
+    margin: 10px;
+    padding: 0;
+    height: 60px;
+    border: 1px solid #b6b3b3;
+    background-color: transparent;
+    color: #666;
+    font-size: 2em;
+}
+.error_messege{
+    padding: 50px;
+    font-size: 1.5em;
+    letter-spacing: 2px;
+    line-height: 200%;
+}
+
+.error_messege dt{
+    color: #383838;
+    margin: 20px 0;
+    font-weight: 900;
+}
+
+.error_messege dd{
+    color :#848484;
+}
+
+.error_messege.hidden{
+    display: none;
+}

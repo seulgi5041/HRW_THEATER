@@ -26,6 +26,9 @@ import com.cinema.hrw.repository.FoodOrderRepository;
 import com.cinema.hrw.repository.MemberRepository;
 import com.cinema.hrw.repository.OrderRepository;
 import com.cinema.hrw.repository.SeatRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -119,7 +122,7 @@ public class OrderServiec {
                 orderJoinDTO.setOrderDate((String)row[0]);
                 orderJoinDTO.setOrderCode((String)row[1]);
                 orderJoinDTO.setMovieTitle((String)row[2]);
-                orderJoinDTO.setRepresentFoodName(row[4] != null ? ((FoodEntity) row[4]).getFoodName() : "정보없음");
+                orderJoinDTO.setRepresentFoodName(row[4] != null ? ((String) row[4]) : "정보없음");
                 Long foodPrice = row[3] != null ? (Long)row[3] : 0;
                 orderJoinDTO.setTotalPrice((Long)row[5] + foodPrice);
                 orderHistory.add(orderJoinDTO);
@@ -132,6 +135,34 @@ public class OrderServiec {
         
 
         
+    }
+
+    public int orderRefund(String update_food_order, int oder_movie_check, String orderCode) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        /*{'foodName': name, 'foodCount': count, 'foodPrice': price 형식의 제이슨} */
+        List<Map<String, Object>> updateFoodOrder;
+        try {
+            updateFoodOrder = objectMapper.readValue(update_food_order, new TypeReference<List<Map<String, Object>>>(){});
+           
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        if(oder_movie_check ==3){
+            OrderEntity orderRefund = orderRepository.findByOrderCode(orderCode);
+            orderRefund.setMovieOrderCondition(oder_movie_check);
+            orderRefund.setMoviePrice((long) 0);
+            orderRefund.setAdultCount(0);
+            orderRefund.setTeenagerCount(0);
+            orderRefund.setDisabledCount(0);
+            orderRepository.save(orderRefund);
+            seatRepository.deleteByOrderCode(orderCode);
+        }
+
+    
+        
+        return 0;
     }
     
 }

@@ -55,4 +55,13 @@ public class OrderController {
     
     }
     }
+
+
+    @PostMapping("/order/refund")
+    public String orderRefund(@RequestParam("update_food_order") String update_food_order,
+    @RequestParam("oder_movie_check") int oder_movie_check, @RequestParam("order_code") String orderCode){
+       int updateCheck = orderServiec.orderRefund(update_food_order, oder_movie_check, orderCode);
+        return "/";
+    }
+    
 }

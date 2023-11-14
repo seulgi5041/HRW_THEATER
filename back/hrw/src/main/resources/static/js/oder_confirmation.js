@@ -11,6 +11,7 @@ function set_food_info(){
   xhr.onload = function() {
     if (xhr.status === 200) {
       const response = JSON.parse(xhr.responseText);
+      
 
       displayFoodOrderInfo(response);
       
@@ -27,11 +28,11 @@ function set_food_info(){
 
 function displayFoodOrderInfo(foodOrderEntityList) {
   const food_no_order = document.getElementById('food_no_order');
-  const oder_food_price_sum = document.querySelectorAll('.oder_food_price_sum');
+  const oder_food_price_sum = document.getElementById('oder_food_price_sum');
  if(foodOrderEntityList.length === 0){
-  oder_food_price_sum.forEach(function(element) {
-    element.classList.add("hidden");
-  });
+    oder_food_price_sum.classList.add("hidden");
+
+   
  }else{
   foodOrderEntityList.forEach(function(foodOrder) {
     food_no_order.classList.add("hidden");
@@ -64,7 +65,7 @@ function displayFoodOrderInfo(foodOrderEntityList) {
 
     const oder_food_info_name = document.createElement("h4");
     oder_food_info_name.innerText = foodOrder.foodNameStr;
-    console.log(foodOrder.foodNameStr)
+    
 
     oder_food_name.appendChild(oder_food_info_name)
     oder_food_info.appendChild(oder_food_name)
@@ -85,7 +86,7 @@ function displayFoodOrderInfo(foodOrderEntityList) {
     oder_food_price.className = "oder_food_price";
 
     const oder_food_food_cost = document.createElement("span");
-    oder_food_food_cost.innerText = foodOrder.foodPrice;
+    oder_food_food_cost.innerText = foodOrder.foodCost;
 
     const oder_food_food_cost_em = document.createElement("em");
     oder_food_food_cost_em.innerText = '원';
@@ -113,6 +114,8 @@ function displayFoodOrderInfo(foodOrderEntityList) {
 
     const oder_food_food_count_check = document.createElement("span");
     oder_food_food_count_check.setAttribute("data-price", foodOrder.foodCost);
+    oder_food_food_count_check.setAttribute("data-count", foodOrder.foodCount);
+    oder_food_food_count_check.setAttribute("name", foodOrder.foodNameStr);
     oder_food_food_count_check.innerText = foodOrder.foodCount;
 
     oder_food_quantity_check.appendChild(oder_food_food_count_check)
@@ -150,11 +153,23 @@ function displayFoodOrderInfo(foodOrderEntityList) {
   }, 0);
   const oder_food_price_sum = document.getElementById('oder_food_price_sum');
   oder_food_price_sum.querySelector('p').innerText = `${totalFoodPrice} 원`
+  
+}
+setTotalPrice()
+chaingeMoviePrice()
+chaingeFoodPrice()
+food_count_buttonOn()
+click_movie_check_button()
+movie_hidden_check()
+refund_able_check_food_and_movie()
+refund_btn_on()
 }
 
 function setTotalPrice() {
   const oderFoodPriceSum = document.getElementById('oder_food_price_sum'); // 'oder_food_price_sum' ID를 가진 요소를 선택
-  const oder_movie_info_sum_id = document.getElementById('oder_food_price_sum');
+  
+  const oder_movie_info_sum_id = document.getElementById('oder_movie_info_sum_id');
+  
   var food_oeder_price ;
   var movie_oeder_price ;
 if (oderFoodPriceSum) { // 요소가 존재하는지 확인
@@ -163,20 +178,22 @@ if (oderFoodPriceSum) { // 요소가 존재하는지 확인
     const totalPriceText = totalPriceElement.innerText; // <P> 요소 내부 텍스트 가져오기
     const totalPriceWithoutCurrency = totalPriceText.replace('원', ''); // "원" 부분 제거
     food_oeder_price = parseInt(totalPriceWithoutCurrency);
+    
   }}
   if (oder_movie_info_sum_id) {
-    const totalPriceElement = oderFoodPriceSum.querySelector('p');
+    const totalPriceElement = oder_movie_info_sum_id.querySelector('p');
     if (totalPriceElement) {
       const totalPriceText = totalPriceElement.innerText; // <P> 요소 내부 텍스트 가져오기
       const totalPriceWithoutCurrency = totalPriceText.replace('원', ''); // "원" 부분 제거
       movie_oeder_price = parseInt(totalPriceWithoutCurrency);
+      
     }
   }
   const totalPrice=food_oeder_price + movie_oeder_price;
   const oder_price_content = document.getElementById('oder_price_content');
   oder_price_content.querySelector('p').innerText = `${totalPrice} 원`;
 }
-setTotalPrice()
+
 function chaingeMoviePrice() {order_movie_price
   const oder_movie_info_sum_id = document.getElementById('oder_movie_info_sum_id');
   const clicked_btn_check = document.querySelectorAll('.clicked')
@@ -202,6 +219,7 @@ function chaingeFoodPrice() {
   setTotalPrice();
 }
 
+function food_count_buttonOn() {
 const food_minusbutton = document.querySelectorAll(".oder_food_minusbutton");
   const food_plusbutton = document.querySelectorAll(".oder_food_plusbutton");
 
@@ -227,17 +245,20 @@ const food_minusbutton = document.querySelectorAll(".oder_food_minusbutton");
     button.addEventListener("click", () => {
       const span = button.previousElementSibling;
       let count = parseInt(span.innerText);
+      const max_count = parseInt(span.getAttribute('data-count'));
+      if(count<max_count){
       count++;
-      span.innerText = count;
+      span.innerText = count;}
 
       button.previousElementSibling.previousElementSibling.disabled = count === 0;
       chaingeFoodPrice(button , span)
     });
   });
+}
 
 
   
-
+function click_movie_check_button() {
   // 결제 체크버튼누를때 마다 색상변환
 const oder_movie_check_buttons = document.querySelectorAll(".oder_movie_check_btn");
 const oder_movie_check_imgs = document.querySelectorAll(".oder_movie_check_img");
@@ -251,7 +272,7 @@ oder_movie_check_buttons.forEach((button, index) => {
 
     chaingeMoviePrice()
   });
-});
+});}
 
 /*영화 주문정보 있으면 no에 히든 주문정보 없으면 그냥정보에 히든 */
 
@@ -274,18 +295,17 @@ function movie_hidden_check() {
     });
   }
 }
-movie_hidden_check()
+
 
 /*takeDate에따라 환불가능여부 체크 */
-function refund_able_check() {
+function refund_able_check_food_and_movie() {
 const oder_butten_container = document.getElementsByClassName('oder_butten_container');
 const oder_food_basket_check = document.querySelectorAll('.oder_food_basket_check');
 const oder_movie_check = document.querySelectorAll('.oder_movie_check');
 const oder_food_basket =  document.querySelectorAll('.oder_food_basket');
  let today = new Date();
  let take_date = new Date(order_take_date);
- console.log(order_take_date)
- console.log(take_date)
+ 
   if(today > take_date){/*환불불가 */
     Array.from(oder_butten_container).forEach((element) => {
       element.classList.add("hidden");
@@ -306,18 +326,70 @@ const oder_food_basket =  document.querySelectorAll('.oder_food_basket');
   }
 }
 
-refund_able_check()
+
+
+
+function refund_btn_on(){
 const oder_page_butten_submit = document.getElementById('oder_page_butten_submit');
-
+var oder_movie_check ;
 oder_page_butten_submit.addEventListener('click', function() {
-    alert('환불완료되었습니다~')
-    const newLocation = '/'; 
-
-    
-    location.href = newLocation;
+  const oder_movie_check_btn = document.querySelectorAll('.oder_movie_check_btn');
+  
+  oder_movie_check_btn.forEach(button => {
+    const hasClickedClass = button.classList.contains('clicked');  
+      oder_movie_check = hasClickedClass ? 2 : 0; /*환불시 3 미환불시 1 */
   });
 
+  const foodCountSpans = document.querySelectorAll('#oder_food_container .oder_food_quantity span[data-count]');
+
+// 주문 정보를 저장할 배열
+const foodOrderInfoArray = [];
+
+// 각 span 요소에서 정보 추출하여 배열에 추가
+foodCountSpans.forEach(span => {
+  const count = parseInt(span.innerText); 
+  const name = span.getAttribute('name'); // name 속성 값 가져오기
+  const price = parseInt(span.getAttribute('data-price'))*count; // data-price 속성 값 가져오기
+
+  // JSON 형식으로 데이터 구성하여 배열에 추가
+  foodOrderInfoArray.push({
+    'foodName': name,
+    'foodCount': count,
+    'foodPrice': price
+  });
+});
+
+const update_food_order = JSON.stringify(foodOrderInfoArray);
+console.log('음식주문정보 '+update_food_order);
+console.log('영화주문정보 '+oder_movie_check)
+
+    alert('환불완료되었습니다~')
+
+    go_on_post_mapping(update_food_order, oder_movie_check)
+  });
+
+
 }
+
+function go_on_post_mapping(update_food_order, oder_movie_check) {
+  let form = document.createElement('form');
+  form.setAttribute('method', 'post');
+  form.setAttribute('action', '/order/refund');
+  
+  let order_refund_input = document.createElement('input');
+  order_refund_input.setAttribute('type', 'hidden');
+  order_refund_input.setAttribute('name', 'update_food_order');
+  order_refund_input.setAttribute('value', update_food_order);
+  order_refund_input.setAttribute('name', 'oder_movie_check');
+  order_refund_input.setAttribute('value', oder_movie_check);
+  order_refund_input.setAttribute('name', 'order_code');
+  order_refund_input.setAttribute('value', choice_order_code);
+  form.appendChild(order_refund_input);
+
+  document.body.appendChild(form);
+  form.submit();
+}
+
 set_food_info()
 
   

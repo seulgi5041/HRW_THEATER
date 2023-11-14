@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+/* 초기화 */
+* { 
+    margin: 0; padding: 0; 
+    font-family: 'DM Sans', Arial, 'sans-serif';
+}
+html {
+    font-size:62.5%;
+    background-color: #F5F4F2;
+    color: #000;
+}
+body {overflow-x: hidden; }
+a { 
+    text-decoration: none !important; 
+    color: #383838;
+}
+img { border: 0; }
+ul { list-style: none; }
+
+
+/* 메인 */
+main {
+  max-width: 1440px;
+  width: 100%;
+  margin-top: 160px;
+  margin: 0 auto;
+}
+
+#error_container{
+    display: flex;
+    margin: 150px 100px;
+    justify-content: space-around;
+}
+
+#error_img{
+    width: 15%;
+    height: auto;
+}
+
+#error_img img{
+    width: 100%;
+    height: auto;
+}
+
+.error_coment{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+}
+
+.error_coment h4{
+font-size: 3.5em;
+color :#383838;
+}
+.error_coment p{
+    font-size: 1.8em;
+    color :#848484;
+    }

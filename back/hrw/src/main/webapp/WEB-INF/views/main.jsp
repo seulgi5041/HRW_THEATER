@@ -31,7 +31,7 @@
                             <img src="../images/poster_rank/${movie.code}.jpg" alt="${movie.code}" class="zoom_image">
                             <div class="overlay">
                                 <button class="movie_detail" name="${movie.code}">상세보기</button>
-                                <button class="movie_ticketing" name="${movie.code}">예매하기</button> 
+                                <button class="movie_ticketing" name="${movie.code}" data-orderAble="${movie.productionCondition}">예매하기</button> 
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
             <img id="moviePoster" src="../images/poster_rank/20228819.jpg" alt="영화코드">
             <div class="overlay">
               <button class="movie_detail" name="영화코드" id="top10_list_movie_detail" >상세보기</button>
-              <button class="movie_ticketing" name="영화코드" id="top10_list_movie_ticketing" >예매하기</button> 
+              <button class="movie_ticketing" name="영화코드" id="top10_list_movie_ticketing" data-orderAble="예매가능여부">예매하기</button> 
             </div>
           </div>
           <!--영화정보 리스트있는부분-->
@@ -120,7 +120,7 @@
                 <tr>
                   <td class="rank" no="0"><c:out value="${status.index + 1}" /></td>
                   <td>
-                    <span class="ellip" data-movie-code="${movie.code}" onclick="changePoster('${movie.code}')">${movie.title}</span>
+                    <span class="ellip" data-movie-code="${movie.code}" data-orderAble="${movie.productionCondition}" onclick="changePoster('${movie.code}')">${movie.title}</span>
                   </td>
                   <td style="cursor: default;">${movie.cumulativeNumberOfAudience} 명</td>
                   <td style="cursor: default;">${movie.advanceReservationRate}%</td>
