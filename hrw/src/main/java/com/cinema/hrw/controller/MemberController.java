@@ -1,5 +1,7 @@
 package com.cinema.hrw.controller;
 
+import java.lang.reflect.Member;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -7,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cinema.hrw.dto.MemberDTO;
@@ -50,22 +54,27 @@ public class MemberController {
 	}
 	
 	// 로그인 처리
-	@PostMapping("/member/login")
-	public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
-	    MemberDTO loginResult = memberService.login(memberDTO);
-	    
-	    // 로그인 성공시, 세션에 ID 저장
-	    if (loginResult != null) {
-	        session.setAttribute("loginId", loginResult.getUserId()); 
-	        return "redirect:/";
-	    } else {
-	        // 로그인 실패
-	    	session.setAttribute("loginError", "아이디 또는 비밀번호가 일치하지 않습니다.");
-	        return "/member/login";
-	    }
-	}
-	
-	// 비밀번호 찾기 폼 요청
+	   @PostMapping("/member/login")
+	   public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+	       MemberDTO loginResult = memberService.login(memberDTO);
+	       
+	       // 로그인 성공시, 세션에 ID 저장
+	       if (loginResult != null) {
+	           session.setAttribute("loginId", loginResult.getUserId()); 
+	           String returnUrl = (String) session.getAttribute("returnUrl");
+	         if (returnUrl != null) {
+	            session.removeAttribute("returnUrl");
+	            return "redirect:" + returnUrl;
+	         } else
+	           return "redirect:/";
+	       } else {
+	           // 로그인 실패
+	          session.setAttribute("loginError", "아이디 또는 비밀번호가 일치하지 않습니다.");
+	           return "/member/login";
+	       }
+	   }
+	   
+	   // 비밀번호 찾기 폼 요청
 	@GetMapping("/member/findPassword")
 	public String findPasswordForm() {
 		return "/member/find_password";
@@ -120,6 +129,8 @@ public class MemberController {
 	    System.out.println(currentUserId);
 	    if(currentUserId != null) {
 	        MemberDTO currentUserInfo = memberService.getCurrentUserInfo(currentUserId);
+	        currentUserInfo.setUserPassword("");
+	        currentUserInfo.setUserPasswordAgain("");
 	        model.addAttribute("userInfo", currentUserInfo);
 	    }
 	    return "/member/userInfo";
@@ -158,6 +169,16 @@ public class MemberController {
 	        model.addAttribute("errorMessage", e.getMessage());
 	        return "/member/find_password";
 	    }
+	}
+	
+	//아이디 중복체크
+		@PostMapping("/idDoubleCheck") 
+		@ResponseBody
+		public int id_duble_check(@RequestBody Map<String, String> requestBody) {
+	    System.out.println("id_duble_check");
+	    String userId = requestBody.get("user_Id");
+	    int check = memberService.idDubleCheck(userId);
+	    return check;
 	}
 	
 }

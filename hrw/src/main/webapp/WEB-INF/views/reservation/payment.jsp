@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,11 @@
 
   <!-- 헤더 영역 -->
     <jsp:include page="../include/header.jsp"/>
-
+    <c:set var="foodPrice" value="0" />
+<c:forEach items="${foodInfoList}" var="foodInfo">
+    <c:set var="foodPrice" value="${foodPrice + foodInfo.foodPrice}" />
+</c:forEach>
+<c:set var="totalPrice" value="${personCount.moviePrice+foodPrice}" />
 <main id="contents" class="contents_full contents_reserve" style="margin-top:30px;">
   <section class="wrap_reserve">
     <div id="reserveStep04" class="section_step_title">
@@ -31,15 +36,15 @@
             <div class="box_con">
               <dl>
                 <dt>선택한 영화 정보</dt>
-                <dd>title</dd>
+                <dd>${choiceScheduleInfo.movieTitle}</dd>
                 <dt>선택한 상영관</dt>
-                <dd>"지점 " 
-                    "관"</dd>
+                <dd>"${choiceScheduleInfo.cinemaName} " 
+                  "${choiceScheduleInfo.auditorium}"</dd>
                 <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
+                <dd>date(${choiceScheduleInfo.takeDate}(${choiceScheduleInfo.takeDateOfWeek}))</dd>
                 <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+                <dd>"${choiceScheduleInfo.startTime}~" 
+                  "${choiceScheduleInfo.endTime}"</dd>
               </dl>
             </div>
           </a>
@@ -57,11 +62,17 @@
               <dl>
                 <dt>선택한 인원</dt>
                 <dd>
-                  <span id="preview_people_info"></span>
+                  <span id="preview_people_info">성인 : ${personCount.adultCount} |
+                    청소년 : ${personCount.teenagerCount} |
+                    장애인 : ${personCount.disabledCount}</span>
                 </dd>
                 <dt>선택한 좌석</dt>
                 <dd>
-                  <span id="preview_seat_info"></span>
+                  <span id="preview_seat_info">
+                    <c:forEach items="${seatList}" var="seat" varStatus="loop">
+                    '${seat.seatName}'<c:if test="${!loop.last}">, </c:if>
+                  </c:forEach>
+                </span>
                 </dd>
               </dl>
             </div>
@@ -79,15 +90,13 @@
             <div class="box_con">
               <dl>
                 <dt>선택한 음식</dt>
+                <c:forEach items="${foodInfoList}" var="foodInfo" varStatus="loop">
+                    
                 <dd>
-                  <span id="preview_store_info"></span>
+                  <span id="preview_store_info">${foodInfo.foodNameStr} , 수량 : ${foodInfo.foodCount} , 가격 : ${foodInfo.foodPrice}</span>
                 </dd>
-                <dd>
-                  <span id="preview_store_info"></span>
-                </dd>
-                <dd>
-                  <span id="preview_store_info"></span>
-                </dd>
+
+                  </c:forEach>
               </dl>
             </div>
           </a>
@@ -103,13 +112,12 @@
             </strong>
             <div class="box_con">
               <dl>
-                <dt>title</dt>
-                <dd>티켓금액</dd>
-                <dd>~~~원</dd>
+                <dt>티켓금액</dt>
+                <dd>Movie : ${personCount.moviePrice}원</dd>
                 <dt>음식합계</dt>
-                <dd>~~~~원</dd>
+                <dd>Food : ${foodPrice}원</dd>
                 <dt>총 합계</dt>
-                <dd>총 ~~~ 원</dd>
+                <dd>총 ${totalPrice} 원</dd>
               </dl>
             </div>
           </a>
@@ -124,16 +132,14 @@
               결제완료
             </strong>
             <div class="box_con">
-              <dl>선택한 영화 제목
-                <dt>title</dt>
-                <dd>선택한 상영관</dd>
-                <dd>"지점 " 
-                    "관"</dd>
-                <dt>선택한 상영 시간</dt>
-                <dd>date(yyyy-mm-dd(요일))</dd>
-                <dt>선택한 시간</dt>
-                <dd>"00:00~" 
-                    "00:00"</dd>
+              <dl>
+                <dt>정보없음</dt>
+                <dd>정보없음</dd>
+                <dd>정보없음</dd>
+                <dt>정보없음</dt>
+                <dd>정보없음</dd>
+                <dt>정보없음</dt>
+                <dd>정보없음</dd>
               </dl>
             </div>
           </a>
@@ -152,40 +158,48 @@
         <!-- 예매한 영화 -->
         <div class="movie_info">
           <span class="thum">
-            <img src="../images/poster_rank/20197122.jpg" alt="선택 영화 포스터">
+            <img src="../images/poster_rank/${choiceScheduleInfo.movieCodeStr}.jpg" alt="${choiceScheduleInfo.movieCodeStr}">
           </span>
           <strong class="tit">
-            <span class="ic_grade gr_12"></span>
-            선택 영화 제목
+            <span class="ic_grade ${choiceScheduleInfo.movieRating}"></span>
+            ${choiceScheduleInfo.movieTitle}
           </strong>
           <dl class="list_info">
             <dt>일시</dt>
-            <dd>선택 날자(요일) 시작시간 ~ 종료시간</dd>
+            <dd>${choiceScheduleInfo.takeDate}(${choiceScheduleInfo.takeDateOfWeek}) ${choiceScheduleInfo.startTime} ~ ${choiceScheduleInfo.endTime}</dd>
             <dt>영화관</dt>
-            <dd>선택 영화관/몇 관</dd>
+            <dd>${choiceScheduleInfo.cinemaName} / ${choiceScheduleInfo.auditorium}</dd>
             <dt>인원</dt>
-            <dd>선택한 인원</dd>
+            <dd>성인 : ${personCount.adultCount} |
+              청소년 : ${personCount.teenagerCount} |
+              장애인 : ${personCount.disabledCount}</dd>
           </dl>
         </div>
         <div class="seat_info">
-          선택한 좌석(좌석 A1)
+          <c:forEach items="${seatList}" var="seat" varStatus="loop">
+          ${seat.seatName}<c:if test="${!loop.last}">, </c:if>
+          </c:forEach>
         </div>  
 
         <!-- 선택한 음식 -->
         <div class="movie_info">
           <span class="thum">
-            <img src="../images/store/product/double_combo.png" alt="선택 음식">
+            <img src="../images/store/product/${foodInfoList[0].foodImgName}.png" alt="${foodInfoList[0].foodNameStr}">
           </span>
           <strong class="tit">
-            선택 음식 (대표 이미지 하나)
+            ${foodInfoList[0].foodNameStr}
           </strong>
           <dl class="list_info">
             <dt>음식</dt>
-            <dd>선택 음식 나열</dd>
+            <dd>
+              <c:forEach items="${foodInfoList}" var="food" varStatus="loop">
+                ${food.foodNameStr}<c:if test="${!loop.last}">, </c:if>
+                </c:forEach>
+            </dd>
             <dt>수량</dt>
-            <dd>선택음식수량</dd>
-            <dd>선택음식수량2</dd>
-            <dd>선택음식수량3</dd>
+            <c:forEach items="${foodInfoList}" var="food" varStatus="loop">
+              <c:if test="${!loop.first}"><dt></dt></c:if> <dd>${food.foodNameStr} : ${food.foodCount}</dd>
+                </c:forEach>            
           </dl>
         </div>
       </div>
@@ -209,16 +223,16 @@
                   <div class="box_case">
                     <ul class="list_pay_item cate6">
                       <li>
-                        <button type="button" class="case1">신용카드</button>
+                        <button type="button" class="case1" data-payment="카드">신용카드</button>
                       </li>
                       <li>
-                        <button type="button" class="case2">간편결제</button>
+                        <button type="button" class="case2" data-payment="간편결제">간편결제</button>
                       </li>
                       <li>
-                        <button type="button" class="case3">무통장입금</button>
+                        <button type="button" class="case3" data-payment="무통장">무통장입금</button>
                       </li>
                       <li>
-                        <button type="button" class="case4">휴대폰</button>
+                        <button type="button" class="case4" data-payment="휴대폰">휴대폰</button>
                       </li>
                     </ul>
                   </div>
@@ -227,7 +241,7 @@
                   <div class="article_pay_card">
                     <ul class="list_pay_item cate5 itemcenter">
                       <li>
-                        <button class>
+                        <button data-paycompany="국민" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_kb.png" alt="국민카드" class="mCS_img_loaed"> 
                           </span>
@@ -235,7 +249,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="삼성" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_samsung.png" alt="상성카드" class="mCS_img_loaed"> 
                           </span>
@@ -243,7 +257,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="현대" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_hyundai.png" alt="현대카드" class="mCS_img_loaed"> 
                           </span>
@@ -251,7 +265,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="롯데" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_lotte.png" alt="롯데카드" class="mCS_img_loaed"> 
                           </span>
@@ -259,7 +273,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="카카오뱅크" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_kakao.png" alt="카카오뱅크" class="mCS_img_loaed"> 
                           </span>
@@ -267,7 +281,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="신한" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_shinhan.png" alt="신한카드" class="mCS_img_loaed"> 
                           </span>
@@ -275,7 +289,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="하나" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_hana.png" alt="하나카드" class="mCS_img_loaed"> 
                           </span>
@@ -283,7 +297,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="외환" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_keb.png" alt="외환카드" class="mCS_img_loaed"> 
                           </span>
@@ -291,7 +305,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="우리" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_woori.png" alt="우리카드" class="mCS_img_loaed"> 
                           </span>
@@ -299,7 +313,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="BC" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_bc.png" alt="롯데카드" class="mCS_img_loaed"> 
                           </span>
@@ -307,7 +321,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="농협" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_nh.png" alt="농협카드" class="mCS_img_loaed"> 
                           </span>
@@ -315,7 +329,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class>
+                        <button data-paycompany="씨티" class>
                           <span class="thum">
                             <img src="../images/ticket/group_payment/card_logo_citi.png" alt="씨티카드" class="mCS_img_loaed"> 
                           </span>
@@ -327,7 +341,7 @@
                   <div class="article_pay_simple">
                     <ul class="list_pay_item cate3">
                       <li>
-                        <button class="pay_simple_box" type="button">
+                        <button class="pay_simple_box" type="button"  data-paycompany="카카오페이">
                           <span class="pay_simple_thum">
                             <img src="../images/ticket/group_payment/payment_simple_kakao.png" alt="카카오페이">
                           </span>
@@ -335,7 +349,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class="pay_simple_box" type="button">
+                        <button class="pay_simple_box" type="button" data-paycompany="네이버페이">
                           <span class="pay_simple_thum">
                             <img src="../images/ticket/group_payment/payment_simple_npay1.png" alt="네이버페이">
                           </span>
@@ -343,7 +357,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class="pay_simple_box" type="button">
+                        <button class="pay_simple_box" type="button" data-paycompany="페이코">
                           <span class="pay_simple_thum">
                             <img src="../images/ticket/group_payment/payment_simple_payco.png" alt="페이코">
                           </span>
@@ -351,7 +365,7 @@
                         </button>
                       </li>
                       <li>
-                        <button class="pay_simple_box" type="button">
+                        <button class="pay_simple_box" type="button" data-paycompany="토스">
                           <span class="pay_simple_thum">
                             <img src="../images/ticket/group_payment/payment_simple_toss.png" alt="토스">
                           </span>
@@ -430,19 +444,19 @@
               금액
             </dt>
             <dd>
-              <strong>선택금액</strong>
-              원
+              <strong>${personCount.moviePrice} + ${foodPrice} </strong>원 
             </dd>
           </dl>
+          
           <dl>
             <dt>결제금액</dt>
             <dd>
               총
-              <strong>결제금액</strong>
+              <strong>${totalPrice}</strong>
               원
             </dd>
           </dl>
-          <a href="/reservation/paymentCompleted" class="btn_col1 btn_confirm">결제하기</a>
+          <a href="javascript:void(0)" class="btn_col1 btn_confirm" id="next_page_btn">결제하기</a>
         </div>
       </div>
 

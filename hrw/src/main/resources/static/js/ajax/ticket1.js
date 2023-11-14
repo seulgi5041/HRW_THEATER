@@ -177,7 +177,9 @@ depth2Select1.click(function() {
 
 
               // 클릭 이벤트 핸들러를 해당 li에 추가
-              movieItem.click(function() {
+              movieItem.click(function(e) {
+                e.preventDefault(); // 기본 앵커 태그 동작 방지
+
                 console.log("Selected Movie:", movie.title);
                 movieListContainer.find("li").removeClass("active");
                 $(this).addClass("active");

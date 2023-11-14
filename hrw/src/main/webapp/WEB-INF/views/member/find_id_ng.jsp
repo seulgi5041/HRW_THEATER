@@ -1,33 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
-    <link rel="stylesheet" href="../css/member/result/find_id_ng.css">
+    <link rel="stylesheet" href="../css/member/form/find_id_form.css">
 </head>
-<body>
+<body> 
 
     <jsp:include page="../include/header.jsp"/>
-    
+
     <div class="container">
     
-        <form>
-    	    <h3 class="title">아이디 찾기</h3>
+    <form method="post" action="/member/findId">
+    	<h3 class="title">아이디 찾기</h3>
     	
-    	    <div class="result">
-    		    <img src="../images/forbidden.png" alt="금지 아이콘">입력하신 정보와 일치하는 회원정보가 없습니다.
-    	    </div>
-    	
-    	    <p>
-                <a href="/member/login"><input type="button" value="로그인 하기" class="#"> </a>
-                <a href="/member/join"><input type="button" value="회원가입" class="#"></a>
-            </p>
-    	
-        </form>
+    	<h4 class="subtitle">본인 확인 이메일 인증</h4>
+    	 
+	    	<div class="form-group">
+	    		<p class="label-text">이름
+	    		<input type="text" id="user_Name" name="userName" maxlength="20" placeholder="이름을 입력하세요.">
+	    	</div>
+	    	
+	    	<div class="form-group">
+		    	<p class="label-text">이메일 주소 <input type="email" id="userEmail" name="userEmail" placeholder="이메일을 입력해 주세요.">
+		    			<input type="submit" value="아이디 찾기" onclick="find_id_ok.jsp">
+		    </div>
+    </form>
     
     </div>
     
     <jsp:include page="../include/footer.jsp"/>
+
 </body>
 </html>

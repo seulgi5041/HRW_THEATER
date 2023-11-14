@@ -1,3 +1,4 @@
+@charset "UTF-8";
 
 /* 푸드스토어 메뉴부분 */
 #store {
@@ -169,15 +170,55 @@
 }
 
 #popcorn_store .food_box .add img {
-    width: 25px;
-    height: 25px;
-    transition: transform 0.3s ease-in-out; 
+  width: 25px;
+  height: 25px;
+  transition: transform 0.3s ease-in-out; 
 }
 
 #popcorn_store .food_box .add img:hover {
-    transform: scale(1.1); 
-    content: url('/images/store/cart_hover.png');
+  transform: scale(1.1); 
+  content: url('/images/store/cart_hover.png');
 }
+
+#cart-table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    width: 70%; /* 테이블 크기를 50%로 축소 */
+    margin-top: 50px;
+}
+
+#cart-table th, #cart-table td {
+    border: 1px solid #dddddd;
+    text-align: center; /* 텍스트 가운데 정렬 */
+    padding: 8px;
+    vertical-align: middle; /* 수직 가운데 정렬 */
+}
+
+#cart-table th {
+    background-color: #f2f2f2;
+    font-size: 16px; /* 테이블 헤더 폰트 크기 증가 */
+    padding: 12px;
+}
+
+#cart-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#cart-table tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+#cart-table img {
+    max-width: 100px; /* 이미지 너비를 100px로 조절 */
+    max-height: 100px; /* 이미지 높이를 100px로 조절 */
+}
+
+#cart-table td {
+    font-size: 16px; /* 테이블 내용 폰트 크기 증가 */
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
 
 
  

@@ -2,6 +2,7 @@ package com.cinema.hrw.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 public class StoreController {
@@ -24,5 +25,11 @@ public class StoreController {
 	public String snack() {
 		return "/foodstore/snack_store";
 	}
+	
+	@GetMapping("/foodstore/orderComplete")
+	public String orderComplete() {
+		return "redirect:/";
+	}
 
+	
 }
