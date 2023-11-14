@@ -48,11 +48,11 @@
         String loginError = (String) session.getAttribute("loginError");
         if (loginError != null) {
             session.removeAttribute("loginError");
-    %>
+        %>
         alert('<%= loginError %>');
-    <%
+        <%
         }
-    %>
+        %>
     </script>
     
     

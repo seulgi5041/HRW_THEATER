@@ -337,11 +337,11 @@
 
    ];
 
-   const cost_in_choice_schedule = {
-  '성인': `${choiceScheduleInfo.adultPrice}`,
-  '청소년': `${choiceScheduleInfo.teenagerPrice}`,
-  '장애인': `${choiceScheduleInfo.disabledPrice}`,
-};
+  const cost_in_choice_schedule={
+    '성인': ${choiceScheduleInfo.adultPrice},
+    '청소년': ${choiceScheduleInfo.teenagerPrice},
+    '장애인': ${choiceScheduleInfo.disabledPrice},
+  }
   console.log(cost_in_choice_schedule)
 </script>
 

@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +42,6 @@
             <div class="box_con">
               <dl>
                 <dt>선택한 영화 정보</dt>
-
                 <dd></dd>
                 <dt>선택한 상영관</dt>
                 <dd></dd>
@@ -51,7 +49,6 @@
                 <dd></dd>
                 <dt>선택한 시간</dt>
                 <dd></dd>
-
               </dl>
             </div>
           </a>
@@ -282,6 +279,7 @@
                         </a>
                       </li>
                     </div>
+
                      <div class="owl-item active" style="width: 52px;">
                       <li class="item">
                         <a href="#none" class="date" tabindex="0">
@@ -389,6 +387,8 @@
                         <strong>30일</strong>
                       </span>
                     </div>
+
+
                     <div class="time_select_wrap timeSelect">
                       <ul class="list_time">
                         <li class>
@@ -637,17 +637,76 @@
       </div>
     </div>
      <!-- 모달 안의 확인 창 -->
-    <div class="btn_bottom_wrap">
+    <div class="btn_bottom_wrap" id="stepOnePopupConButton">
       <a href="#none" class="btn_col1 ty5">취소</a>
       <!-- 좌석 선택하는 페이지로 넘어감 -->
-      <a href="/reservation/second" class="btn_col2 ty5" id="stepOnePopupConButton" onclick="go_on_post_mapping()">인원/좌석선택</a>
+      <a href="#" class="btn_col2 ty5" onclick="go_on_post_mapping()">인원/좌석선택</a>
     </div> 
   </div>
 </div>
 
 
 <!-- 푸터 -->
-  <jsp:include page="../include/footer.jsp"/>
+    <jsp:include page="../include/footer.jsp"/>
+    
+    <script></script>
+
+    <!-- <script>
+      console.log("JavaScript code is running");
+      document.addEventListener('DOMContentLoaded', function() {
+        function getCurrentDate() {
+          const currentDate = new Date();
+          const year = currentDate.getFullYear();
+          const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+          const day = String(currentDate.getDate()).padStart(2, '0');
+          return year + "-" + month + "-" + day;
+        }
+    
+        function clearExistingDates() {
+          const dateContainer = document.querySelector(".owl-stage");
+          dateContainer.innerHTML = ''; // 기존의 날짜를 모두 삭제
+        }
+    
+        function displayWeekDates() {
+          clearExistingDates(); // 기존의 날짜를 삭제
+    
+          const currentDate = getCurrentDate();
+          const days = ["일", "월", "화", "수", "목", "금", "토"];
+          const dateContainer = document.querySelector(".owl-stage");
+    
+          for (let i = 0; i < 7; i++) {
+            const dayDate = new Date(currentDate);
+            dayDate.setDate(dayDate.getDate() + i);
+            const dayMonth = dayDate.getMonth() + 1;
+            const dayNum = String(dayDate.getDate()).padStart(2, '0');
+            const dayIndex = dayDate.getDay();
+            const dayName = i === 0 ? "오늘" : days[dayIndex];
+    
+            const newDateItem = document.createElement("div");
+            newDateItem.className = "owl-item active";
+            newDateItem.style.width = "52px";
+            newDateItem.innerHTML = `
+              <li class="item">
+                <strong class="month">${dayMonth}월</strong>
+                <a href="#none" class="date" tabindex="0">
+                  <label for="radioDate${i}">
+                    <input type="radio" id="radioDate${i}" name="radioDate1" data-displayn="Y" data-playdate="${dayDate.getFullYear()}-${dayMonth}-${dayNum}" data-isplaydate="Y" data-playweek="${dayName}">
+                    <strong>${dayNum}</strong>
+                    <em>${dayName}</em>
+                  </label>
+                </a>
+              </li>
+            `;
+    
+            dateContainer.appendChild(newDateItem);
+          }
+        }
+    
+        // Call the function to display dates
+        displayWeekDates();
+      });
+    </script> -->
+    
     
 <!-- 자바스크립트 영역 -->
 
