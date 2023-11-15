@@ -61,9 +61,16 @@ public class FoodOrderEntity {
     public void setOrderCode(OrderDTO orderDTO){
         this.orderCode=OrderEntity.toOrderEntity(orderDTO);
     }
+     public void setOrderCodeToEntity(OrderEntity orderEntity){
+        this.orderCode=orderEntity;
+    }
 
     public void setFoodName(FoodDTO foodDTO){
         this.foodName=FoodEntity.toFoodEntity(foodDTO);
+    }
+
+    public void setFoodNametoEntity(FoodEntity foodEntity){
+        this.foodName=foodEntity;
     }
 
     public void setFoodNameStr(String foodCode){

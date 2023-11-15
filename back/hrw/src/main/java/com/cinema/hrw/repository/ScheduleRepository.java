@@ -26,4 +26,6 @@ public interface ScheduleRepository extends JpaRepository<ScheduleEntity, String
 
     @Query("SELECT s FROM ScheduleEntity s WHERE s.movieCode.code = :movieCode AND s.cinemaCode.cinemaCode = :cinemaCode AND s.takeDate = :selectedDate")
     List<ScheduleEntity> findSchedulesByCinemaMovieAndDate(@Param("movieCode") String movieCode, @Param("cinemaCode") String cinemaCode, @Param("selectedDate") String selectedDate);
+
+    ScheduleEntity findByScheduleCode(String string);
 }

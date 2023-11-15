@@ -337,10 +337,11 @@ oder_page_butten_submit.addEventListener('click', function() {
   
   oder_movie_check_btn.forEach(button => {
     const hasClickedClass = button.classList.contains('clicked');  
-      oder_movie_check = hasClickedClass ? 2 : 0; /*환불시 3 미환불시 1 */
+      oder_movie_check = hasClickedClass ? 3 : 1; /*환불시 3 미환불시 1 */
+
   });
 
-  const foodCountSpans = document.querySelectorAll('#oder_food_container .oder_food_quantity span[data-count]');
+  const foodCountSpans = document.querySelectorAll('span[data-count]');
 
 // 주문 정보를 저장할 배열
 const foodOrderInfoArray = [];
@@ -360,10 +361,7 @@ foodCountSpans.forEach(span => {
 });
 
 const update_food_order = JSON.stringify(foodOrderInfoArray);
-console.log('음식주문정보 '+update_food_order);
-console.log('영화주문정보 '+oder_movie_check)
 
-    alert('환불완료되었습니다~')
 
     go_on_post_mapping(update_food_order, oder_movie_check)
   });
@@ -372,21 +370,35 @@ console.log('영화주문정보 '+oder_movie_check)
 }
 
 function go_on_post_mapping(update_food_order, oder_movie_check) {
-  let form = document.createElement('form');
+  oder_movie_check = parseInt(oder_movie_check);
+  const form = document.createElement('form');
   form.setAttribute('method', 'post');
   form.setAttribute('action', '/order/refund');
+
+  const food_order_refund_input = document.createElement('input');
+  const movie_order_refund_input = document.createElement('input');
+  const order_code_input = document.createElement('input');
   
-  let order_refund_input = document.createElement('input');
-  order_refund_input.setAttribute('type', 'hidden');
-  order_refund_input.setAttribute('name', 'update_food_order');
-  order_refund_input.setAttribute('value', update_food_order);
-  order_refund_input.setAttribute('name', 'oder_movie_check');
-  order_refund_input.setAttribute('value', oder_movie_check);
-  order_refund_input.setAttribute('name', 'order_code');
-  order_refund_input.setAttribute('value', choice_order_code);
-  form.appendChild(order_refund_input);
+  if (update_food_order) {
+    food_order_refund_input.setAttribute('type', 'hidden');
+    food_order_refund_input.setAttribute('name', 'update_food_order');
+    food_order_refund_input.setAttribute('value', update_food_order);
+    form.appendChild(food_order_refund_input);
+}
+
+if (oder_movie_check) {
+    movie_order_refund_input.setAttribute('type', 'hidden');
+    movie_order_refund_input.setAttribute('name', 'oder_movie_check');
+    movie_order_refund_input.setAttribute('value', oder_movie_check);
+    form.appendChild(movie_order_refund_input);
+}
+  order_code_input.setAttribute('type', 'hidden');
+  order_code_input.setAttribute('name', 'order_code');
+  order_code_input.setAttribute('value', choice_order_code);
+  form.appendChild(order_code_input);
 
   document.body.appendChild(form);
+  alert("주문완료")
   form.submit();
 }
 

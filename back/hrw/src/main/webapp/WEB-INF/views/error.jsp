@@ -44,9 +44,9 @@
       <jsp:include page="./include/footer.jsp" />
 
     <script>
-        setTimeout(function() {
+        /*setTimeout(function() {
           window.location.href = "/";
-        }, 60*60); // 1분(60,000 밀리초) 후에 페이지 이동
+        }, 60*60); // 1분(60,000 밀리초) 후에 페이지 이동*/
 
         const movielist_show_next_button = document.getElementById('movielist_show_next_button');
             movielist_show_next_button.addEventListener("click", function () {

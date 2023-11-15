@@ -97,10 +97,17 @@ public class OrderEntity {
     public void setMovieCode(MovieDTO movieDTO){
         this.movieCode=MovieEntity.toMovieEntity(movieDTO);
     }
+    public void setMovieCodetoEntity(MovieEntity movieEntity){
+        this.movieCode=movieEntity;
+    }
 
 
     public void setScheduleCode(ScheduleDTO scheduleDTO){
         this.scheduleCode=ScheduleEntity.toScheduleEntity(scheduleDTO);
+    }
+
+    public void setScheduleCodetoEntity(ScheduleEntity scheduleEntity){
+        this.scheduleCode = scheduleEntity;
     }
 
 }

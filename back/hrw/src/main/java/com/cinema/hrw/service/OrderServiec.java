@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.cinema.hrw.dto.CinemaAddressDTO;
+import com.cinema.hrw.dto.FoodDTO;
 import com.cinema.hrw.dto.FoodOrderDTO;
 import com.cinema.hrw.dto.MovieDTO;
 import com.cinema.hrw.dto.OrderJoinDTO;
@@ -23,8 +26,11 @@ import com.cinema.hrw.entity.OrderEntity;
 import com.cinema.hrw.entity.ScheduleEntity;
 import com.cinema.hrw.entity.SeatEntity;
 import com.cinema.hrw.repository.FoodOrderRepository;
+import com.cinema.hrw.repository.FoodRepository;
 import com.cinema.hrw.repository.MemberRepository;
+import com.cinema.hrw.repository.MovieRepository;
 import com.cinema.hrw.repository.OrderRepository;
+import com.cinema.hrw.repository.ScheduleRepository;
 import com.cinema.hrw.repository.SeatRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -39,6 +45,9 @@ public class OrderServiec {
     private final SeatRepository seatRepository;
     private final FoodOrderRepository foodOrderRepository;
     private final MemberRepository memberRepository;
+    private final FoodRepository foodRepository;
+    private final MovieRepository movieRepository;
+    private final ScheduleRepository scheduleRepository;
     
     public OrderJoinDTO selectOrderInfoByOrderCode(String orderCode) {
         
@@ -136,33 +145,66 @@ public class OrderServiec {
 
         
     }
-
+    @Transactional
     public int orderRefund(String update_food_order, int oder_movie_check, String orderCode) {
         ObjectMapper objectMapper = new ObjectMapper();
         /*{'foodName': name, 'foodCount': count, 'foodPrice': price 형식의 제이슨} */
-        List<Map<String, Object>> updateFoodOrder;
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setOrderCode(orderCode);
+        OrderEntity orderRefund = orderRepository.findByOrderCode(orderEntity.getOrderCode());
+        
+        List<FoodOrderEntity> foodOrderEntityList = new ArrayList<>();
+        int check = 0;
         try {
-            updateFoodOrder = objectMapper.readValue(update_food_order, new TypeReference<List<Map<String, Object>>>(){});
-           
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            List<Map<String, Object>> updateFoodOrder = objectMapper.readValue(update_food_order, new TypeReference<List<Map<String, Object>>>(){});
+             for (Map<String, Object> foodMap : updateFoodOrder) {
+                String foodName = (String) foodMap.get("foodName");
+                int foodCountInt = (int)foodMap.get("foodCount");
+                Long foodCount = Long.valueOf(foodCountInt);
+                int foodPriceInt = (int) foodMap.get("foodPrice");
+                Long foodPrice = Long.valueOf(foodPriceInt);
+
+        // FoodDTO 객체 생성 및 리스트에 추가    
+                FoodEntity foodEntity = foodRepository.findByFoodName(foodName);
+                FoodOrderEntity foodOrderEntity = foodOrderRepository.findByOrderCodeAndFoodName(orderRefund,foodEntity);
+                foodOrderEntity.setFoodCount(foodCount);
+                foodOrderEntity.setFoodPrice(foodPrice);
+                foodOrderEntityList.add(foodOrderEntity);
         }
+           
+        
 
         if(oder_movie_check ==3){
-            OrderEntity orderRefund = orderRepository.findByOrderCode(orderCode);
+            
             orderRefund.setMovieOrderCondition(oder_movie_check);
+            MovieEntity movieEntity = movieRepository.findByCode("0");
+            ScheduleEntity scheduleEntity = scheduleRepository.findByScheduleCode("0");
             orderRefund.setMoviePrice((long) 0);
             orderRefund.setAdultCount(0);
             orderRefund.setTeenagerCount(0);
             orderRefund.setDisabledCount(0);
+            orderRefund.setMovieCodetoEntity(movieEntity);
+            orderRefund.setScheduleCodetoEntity(scheduleEntity);
+            
             orderRepository.save(orderRefund);
-            seatRepository.deleteByOrderCode(orderCode);
+            seatRepository.deleteByOrderCode(orderRefund);
         }
 
-    
+        for(FoodOrderEntity foodOrderEntity : foodOrderEntityList){
+            if(foodOrderEntity.getFoodCount()==0){
+                foodOrderRepository.deleteByOrderCodeAndFoodName(foodOrderEntity.getOrderCode(), foodOrderEntity.getFoodName());
+            }
+            else{
+                foodOrderRepository.save(foodOrderEntity);
+            }
+        }
+
+        } catch (JsonProcessingException e) {
+                e.printStackTrace();
+                check = 1;
+            }
         
-        return 0;
+        return check;
     }
     
 }

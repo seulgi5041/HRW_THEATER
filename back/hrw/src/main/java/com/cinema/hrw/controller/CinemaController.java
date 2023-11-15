@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.cinema.hrw.dto.CinemaAddressDTO;
 import com.cinema.hrw.dto.MovieDTO;
 import com.cinema.hrw.entity.ScheduleEntity;
 import com.cinema.hrw.repository.MovieSelectRepository;
@@ -67,6 +68,16 @@ public class CinemaController {
 
     return result;
     // Map에 가져온 값을 반환
+  }
+
+
+
+  @GetMapping("/getCinemaNamesToMovie")
+  @ResponseBody // 반환 => JSON으로 변환되어 전송
+  public List<CinemaAddressDTO> getCinemaNamesToMovie(@RequestParam("movieCode") String movieCode) {
+    List<CinemaAddressDTO> cinemaAddressDTOList = cinemaAddressService.getCinemaNamesToMovie(movieCode);
+
+    return null;
   }
 
   // 영화선택부분
