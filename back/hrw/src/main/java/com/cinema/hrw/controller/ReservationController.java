@@ -48,7 +48,7 @@ public class ReservationController {
 		scheduleCodeDTO.setScheduleCode(scheduleCode);
 		ScheduleDTO choiceScheduleInfo= reservationService.getChoiceScheduleInfo(scheduleCodeDTO);
 	  	session.setAttribute("scheduleCode",choiceScheduleInfo);		
-		List<SeatDTO>remainingSeats=reservationService.getRemainingSeats(scheduleCodeDTO);
+		List<SeatDTO>remainingSeats=reservationService.getRemainingSeats(scheduleCode);
 	 	
 	
 

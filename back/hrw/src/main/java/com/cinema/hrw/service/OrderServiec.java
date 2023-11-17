@@ -9,28 +9,23 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.cinema.hrw.dto.CinemaAddressDTO;
-import com.cinema.hrw.dto.FoodDTO;
 import com.cinema.hrw.dto.FoodOrderDTO;
-import com.cinema.hrw.dto.MovieDTO;
+
 import com.cinema.hrw.dto.OrderJoinDTO;
 import com.cinema.hrw.dto.OrderDTO;
-import com.cinema.hrw.dto.ScheduleDTO;
+
 import com.cinema.hrw.dto.SeatDTO;
-import com.cinema.hrw.entity.CinemaAddressEntity;
+
 import com.cinema.hrw.entity.FoodEntity;
 import com.cinema.hrw.entity.FoodOrderEntity;
 import com.cinema.hrw.entity.MemberEntity;
-import com.cinema.hrw.entity.MovieEntity;
+
 import com.cinema.hrw.entity.OrderEntity;
-import com.cinema.hrw.entity.ScheduleEntity;
 import com.cinema.hrw.entity.SeatEntity;
 import com.cinema.hrw.repository.FoodOrderRepository;
 import com.cinema.hrw.repository.FoodRepository;
 import com.cinema.hrw.repository.MemberRepository;
-import com.cinema.hrw.repository.MovieRepository;
 import com.cinema.hrw.repository.OrderRepository;
-import com.cinema.hrw.repository.ScheduleRepository;
 import com.cinema.hrw.repository.SeatRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -46,15 +41,12 @@ public class OrderServiec {
     private final FoodOrderRepository foodOrderRepository;
     private final MemberRepository memberRepository;
     private final FoodRepository foodRepository;
-    private final MovieRepository movieRepository;
-    private final ScheduleRepository scheduleRepository;
+
     
     public OrderJoinDTO selectOrderInfoByOrderCode(String orderCode) {
+        System.out.println("주문번호01 : "+orderCode);
+        List<Object[]> results  = orderRepository.findOrderDetailsByOrderCode(orderCode);
         
-        OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setOrderCode(orderCode);
-        List<Object[]> results  = orderRepository.findOrderDetailsByOrderCode(orderDTO.getOrderCode());
-
         if (!results.isEmpty()) {
             Object[] result = results.get(0);
             OrderJoinDTO oderJoinDTO = new OrderJoinDTO();
@@ -135,7 +127,6 @@ public class OrderServiec {
                 Long foodPrice = row[3] != null ? (Long)row[3] : 0;
                 orderJoinDTO.setTotalPrice((Long)row[5] + foodPrice);
                 orderHistory.add(orderJoinDTO);
-                System.out.println("코드 : " + (String)row[1]);
             }
             
            
@@ -177,14 +168,12 @@ public class OrderServiec {
         if(oder_movie_check ==3){
             
             orderRefund.setMovieOrderCondition(oder_movie_check);
-            MovieEntity movieEntity = movieRepository.findByCode("0");
-            ScheduleEntity scheduleEntity = scheduleRepository.findByScheduleCode("0");
             orderRefund.setMoviePrice((long) 0);
             orderRefund.setAdultCount(0);
             orderRefund.setTeenagerCount(0);
             orderRefund.setDisabledCount(0);
-            orderRefund.setMovieCodetoEntity(movieEntity);
-            orderRefund.setScheduleCodetoEntity(scheduleEntity);
+            orderRefund.setMovieCode(null);
+            orderRefund.setScheduleCode(null);
             
             orderRepository.save(orderRefund);
             seatRepository.deleteByOrderCode(orderRefund);

@@ -22,7 +22,7 @@ function set_food_info(){
 
   // 데이터를 JSON 문자열로 변환하여 body에 설정
   const data = JSON.stringify({ choice_order_code: choice_order_code });
-
+  
   xhr.send(data);
 }
 

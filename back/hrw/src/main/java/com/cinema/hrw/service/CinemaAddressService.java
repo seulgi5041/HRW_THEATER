@@ -40,7 +40,7 @@ public class CinemaAddressService {
   }
 /*선택한 영화에 해당하는 영화관 이름, 코드, 로컬가져오기 */
 public List<CinemaAddressDTO> getCinemaNamesToMovie(String movieCode) {
-  List<CinemaAddressEntity> cinsmaEntityList = cinemaAddressRepository.findCinemaNameCinemaCodeLocalByMovieCode()
+  //List<CinemaAddressEntity> cinsmaEntityList = cinemaAddressRepository.findCinemaNameCinemaCodeLocalByMovieCode(movieCode);
     return null;
 }
 

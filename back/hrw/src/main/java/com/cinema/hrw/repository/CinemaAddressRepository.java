@@ -47,4 +47,6 @@ public interface CinemaAddressRepository extends JpaRepository<CinemaAddressEnti
       "ELSE 15 END")
   List<String> findCinemaNamesByLocal(@Param("local") String local);
 
+  
+
 }

@@ -53,5 +53,35 @@ document.addEventListener("DOMContentLoaded", function() {
       button.previousElementSibling.previousElementSibling.disabled = count === 0;
     });
   });
+  
+const cartButtons = document.querySelectorAll('.add button');
+cartButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const productElement = button.closest('.food_box');
+    const productName = productElement.querySelector('.product_name h4').textContent;
+    const quantity = parseInt(productElement.querySelector('.sum span').textContent);
+    const priceText = productElement.querySelector('.price_wrap span').textContent;
+    const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+
+    // 이미지 URL 가져오기
+    const imageUrl = productElement.querySelector('.food_image img').src;
+
+    const productInfo = {
+      name: productName,
+      quantity: quantity,
+      price: price,
+      image: imageUrl // 이미지 URL 추가
+    };
+    
+    let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+
+    cart.push(productInfo);
+
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+
+    // 장바구니에 상품을 추가한 후 알림 표시
+    alert(`'${productName}' 상품이 장바구니에 추가되었습니다.`);
+  });
+});
 
 });

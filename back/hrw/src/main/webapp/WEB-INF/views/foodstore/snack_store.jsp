@@ -188,7 +188,7 @@
 
     <jsp:include page="../include/footer.jsp"/>
 	
-	  <script src="../js/common.js"></script>
+
 	  <script src="../js/store.js"></script>
 </body>
 </html>

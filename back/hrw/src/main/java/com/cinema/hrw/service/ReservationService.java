@@ -55,15 +55,13 @@ public class ReservationService {
     private final FoodRepository foodRepository;
     
 
-    public List<SeatDTO> getRemainingSeats(ScheduleDTO scheduleCodeDTO) {
-        ScheduleEntity scheduleEntity = new ScheduleEntity();
-        scheduleEntity.setScheduleCode(scheduleCodeDTO.getScheduleCode());
+    public List<SeatDTO> getRemainingSeats(String scheduleCode) {
         String jpql = "SELECT s FROM SeatEntity s " +
                      "INNER JOIN s.orderCode o " +
                      "WHERE o.scheduleCode = :scheduleCode";
     
         TypedQuery<SeatEntity> query = entityManager.createQuery(jpql, SeatEntity.class);
-        query.setParameter("scheduleCode", scheduleEntity);
+        query.setParameter("scheduleCode", scheduleCode);
         
         List<SeatEntity> remainingSeatEntities = query.getResultList();
     
@@ -138,8 +136,8 @@ public class ReservationService {
                 setOrderDTO.setOrderCode(orderCode);
                 setOrderDTO.setUserId(MemberEntity.toMemberEntity(memberDTO));
                 setOrderDTO.setOrderDate(orderDate);
-                setOrderDTO.setMovieCode(MovieEntity.toMovieEntity(scheduleDTO.getMovieCode()));
-                setOrderDTO.setScheduleCode(ScheduleEntity.toScheduleEntity(scheduleDTO));
+                setOrderDTO.setMovieCode(scheduleDTO.getMovieCode().getCode());
+                setOrderDTO.setScheduleCode(scheduleDTO.getScheduleCode());
                 setOrderDTO.setTeenagerCount(person_count.getTeenagerCount());
                 setOrderDTO.setAdultCount(person_count.getAdultCount());
                 setOrderDTO.setDisabledCount(person_count.getDisabledCount());

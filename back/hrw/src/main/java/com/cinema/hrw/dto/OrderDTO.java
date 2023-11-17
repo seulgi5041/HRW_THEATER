@@ -28,9 +28,9 @@ public class OrderDTO {
 
     private int num = 0;
 
-    private MovieDTO movieCode;
+    private String movieCode;
     
-    private ScheduleDTO scheduleCode;
+    private String scheduleCode;
     
     private int teenagerCount = 0;
 
@@ -103,12 +103,6 @@ public class OrderDTO {
     public void setUserId(MemberEntity memberEntity){
         this.userId=MemberDTO.toMemberDTO(memberEntity);
     }
-    public void setMovieCode(MovieEntity movieEntity){
-        this.movieCode=MovieDTO.toMovieDTO(movieEntity);
-    }
-
-    public void setScheduleCode(ScheduleEntity scheduleEntity){
-        this.scheduleCode=ScheduleDTO.toScheduleDTO(scheduleEntity);
-    }
+    
 
 }

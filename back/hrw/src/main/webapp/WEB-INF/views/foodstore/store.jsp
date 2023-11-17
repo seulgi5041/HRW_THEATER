@@ -25,7 +25,7 @@
 	          <li><a href="/foodstore/snack">스낵</a></li>
 	        </ul>
 	        <ul class="add_food">
-	          <li><a href="#">장바구니</a></li>
+	          <li><a href="/foodstore/shopping_basket">장바구니</a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -160,5 +160,6 @@
     <jsp:include page="../include/footer.jsp"/>
 	
 	  <script src="../js/store/store.js"></script>
+
 </body>
 </html>

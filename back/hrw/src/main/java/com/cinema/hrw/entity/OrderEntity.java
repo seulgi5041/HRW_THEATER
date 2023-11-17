@@ -38,13 +38,11 @@ public class OrderEntity {
     @Column
     private int num = 0;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "movie_code", referencedColumnName = "code") // name 및 referencedColumnName 추가
-    private MovieEntity movieCode;
+    @Column
+    private String movieCode;
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "schedule_code", referencedColumnName = "schedule_code")
-    private ScheduleEntity scheduleCode;
+    @Column
+    private String scheduleCode;
     
     @Column
     private int teenagerCount = 0;
@@ -94,20 +92,6 @@ public class OrderEntity {
     public void setUserId(MemberDTO memberDTO){
         this.userId=MemberEntity.toMemberEntity(memberDTO);
     }
-    public void setMovieCode(MovieDTO movieDTO){
-        this.movieCode=MovieEntity.toMovieEntity(movieDTO);
-    }
-    public void setMovieCodetoEntity(MovieEntity movieEntity){
-        this.movieCode=movieEntity;
-    }
-
-
-    public void setScheduleCode(ScheduleDTO scheduleDTO){
-        this.scheduleCode=ScheduleEntity.toScheduleEntity(scheduleDTO);
-    }
-
-    public void setScheduleCodetoEntity(ScheduleEntity scheduleEntity){
-        this.scheduleCode = scheduleEntity;
-    }
+    
 
 }
